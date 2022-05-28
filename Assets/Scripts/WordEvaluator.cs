@@ -10,7 +10,7 @@ public class WordEvaluator : MonoBehaviour
 	
 	private Hashtable letterValues;
 	
-    void Start()
+    void Awake()
     {
         string allWords = dictionary.text;
 		wordList = new Hashtable();
@@ -54,8 +54,49 @@ public class WordEvaluator : MonoBehaviour
 		return wordList.Contains(word.ToUpper());
 	}
 
+	public int SubmitWord(string word)
+	{
+		if (IsValidWord(word))
+		{
+			return ScoreWord(word);
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	private int ScoreWord(string word)
+	{
+		int score = 0;
+		word = word.ToUpper();
+
+		foreach (char letter in word)
+		{
+			score += (int) letterValues[letter];
+		}
+
+		//replace Mathf.Pow with a different multiplier
+		score = (int) (score * 100 * FindMultiplier(word.Length));
+
+		return score;
+	}
+
+	private float FindMultiplier(int length)
+	{
+		//1-2 letters no boost
+		//3-6 1.1 boost
+		//7+ 1.2 boost
+		if (length <= 2)
+			return 1;
+		else if (length <= 6)
+			return Mathf.Pow(1.1f, length - 2);
+		else
+			return 1.4641f + Mathf.Pow(1.2f, length - 6);
+	}
+
     void Update()
     {
-		
+		Debug.Log(ScoreWord("oranges"));
     }
 }
