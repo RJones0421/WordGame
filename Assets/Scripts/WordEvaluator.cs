@@ -97,6 +97,6 @@ public class WordEvaluator : MonoBehaviour
 
     void Update()
     {
-		Debug.Log(ScoreWord("oranges"));
+		
     }
 }
