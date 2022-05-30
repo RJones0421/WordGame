@@ -21,14 +21,14 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(movement);
 
-        if (Input.GetButtonDown("Jump"))
-        {
-        	// Vector3 jump_movement = new Vector3(inputX, 5f, inputY);
-        	// jump_movement *= Time.deltaTime;
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //	// Vector3 jump_movement = new Vector3(inputX, 5f, inputY);
+        //	// jump_movement *= Time.deltaTime;
 
-        	// transform.Translate(jump_movement);
+        //	// transform.Translate(jump_movement);
 
-        	GetComponent<Rigidbody2D>().velocity = Vector2.up * 8;
-        }
+        //	//GetComponent<Rigidbody2D>().velocity = Vector2.up * 8;
+        //}
     }
 }
