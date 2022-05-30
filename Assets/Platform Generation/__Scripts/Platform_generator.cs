@@ -17,6 +17,8 @@ public class Platform_generator : MonoBehaviour
 
     /* height from center to top/bottom border */
     private float screenHeight;
+
+    public float cameraSpeed;
     
     
     // Start is called before the first frame update
@@ -49,13 +51,14 @@ public class Platform_generator : MonoBehaviour
         StartCoroutine(cameraMove()); // WaitForSeconds() requires to work inside StartCoroutine()
         IEnumerator cameraMove(){
 
-            for (int t=0;t<1000;t++){
-                
+            //for (int t=0;t<1000;t++){
+            while(true){    
                 /* movement of camera */
-                Camera.main.transform.position += new Vector3(0f, 0.3f, 0f);
+                Camera.main.transform.position += new Vector3(0f, cameraSpeed * Time.deltaTime, 0f);
 
                 /* Wait for 0.25 seconds */
-                yield return new WaitForSecondsRealtime(0.25f);
+                //yield return new WaitForSecondsRealtime(0.25f);
+                yield return null;
             }   
         }
         
