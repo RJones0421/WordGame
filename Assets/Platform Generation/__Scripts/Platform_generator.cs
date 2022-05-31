@@ -19,6 +19,8 @@ public class Platform_generator : MonoBehaviour
     private float screenHeight;
 
     public float cameraSpeed;
+
+    public float sizeScale = 1.0f;
     
     
     // Start is called before the first frame update
@@ -29,8 +31,8 @@ public class Platform_generator : MonoBehaviour
         /* Initial generation of platforms */
         for (int i=0; i<platform_maxCount; i++){
             /* Position of the new platform */
-            spawnPosition.y+=Random.Range(1.0f,1.5f);
-            spawnPosition.x=Random.Range(-2.0f,2.0f);
+            spawnPosition.y+=Random.Range(sizeScale*1.0f,sizeScale*1.5f);
+            spawnPosition.x=Random.Range(sizeScale*-2.0f,sizeScale*2.0f);
             
             /* Generate a new platform */
             GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);  // Quaternion.identity means no rotation
@@ -73,8 +75,8 @@ public class Platform_generator : MonoBehaviour
             // Debug.Log("Updating platform");        
 
             /* update the position to be the highest platform */
-            spawnPosition.y+=Random.Range(1.0f,1.5f);
-            spawnPosition.x=Random.Range(-2.0f,2.0f);     
+            spawnPosition.y+=Random.Range(sizeScale*1.0f,sizeScale*1.5f);
+            spawnPosition.x=Random.Range(sizeScale*-2.0f,sizeScale*2.0f);     
             platform.transform.position=spawnPosition;
             
             /* update letter value */
