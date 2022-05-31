@@ -30,11 +30,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!jump && !air)
             {
-<<<<<<< HEAD
-                rb.velocity = new Vector2(rb.velocity.x, 50.0f);
-=======
                 rb.velocity = new Vector2(rb.velocity.x, 10.0f);
->>>>>>> fec8a87b3c577b46bd50de52fa2cdc74e120e9ba
             }
 
             jump = true;
