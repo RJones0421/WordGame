@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     private bool jump;
     private bool air;
     private Rigidbody2D rb;
+    // private MeshCollider2D mc;
+    private BoxCollider2D box;
+    private PlatformEffector2D effector;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +17,9 @@ public class PlayerController : MonoBehaviour
         jump = false;
         air = true;
         rb = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
+        effector = GetComponent<PlatformEffector2D>();
+        // mc = GetComponent<MeshCollider>();
     }
 
     // Update is called once per frame
@@ -25,6 +31,7 @@ public class PlayerController : MonoBehaviour
         movement *= Time.deltaTime;
 
         transform.Translate(movement);
+
 
         if (Input.GetButtonDown("Jump"))
         {
