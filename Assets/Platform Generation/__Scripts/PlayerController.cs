@@ -4,21 +4,53 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private bool jump;
+    private bool air;
+    private Rigidbody2D rb;
+    // private MeshCollider2D mc;
+    private BoxCollider2D box;
+    private PlatformEffector2D effector;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        jump = false;
+        air = true;
+        rb = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
+        effector = GetComponent<PlatformEffector2D>();
+        // mc = GetComponent<MeshCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(10 * inputX, 10 * inputY, 0);
+        Vector3 movement = new Vector3(10 * inputX, 0, 0);
         movement *= Time.deltaTime;
 
         transform.Translate(movement);
+
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (!jump && !air)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+            }
+
+            jump = true;
+            air = true;
+        }
+        else
+        {
+            jump = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        air = false;
     }
 }
