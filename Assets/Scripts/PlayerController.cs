@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private bool jump;
     private bool air;
     private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +20,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float inputX = Input.GetAxis("Horizontal");
-        float inputY = 0.0f;
 
-        Vector2 v = GetComponent<Rigidbody2D>().velocity;
-        // Ground check
-        if (v.y == 0.0f)
-        {
-            Debug.Log("ON GROUND");
-            inputY = Input.GetAxis("Vertical");
-        }
-
-        Vector3 movement = new Vector3(10 * inputX, 100 * inputY, 0);
+        Vector3 movement = new Vector3(10 * inputX, 0, 0);
         movement *= Time.deltaTime;
 
         transform.Translate(movement);
@@ -38,21 +30,15 @@ public class PlayerController : MonoBehaviour
         {
             if (!jump && !air)
             {
+<<<<<<< HEAD
                 rb.velocity = new Vector2(rb.velocity.x, 50.0f);
+=======
+                rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+>>>>>>> fec8a87b3c577b46bd50de52fa2cdc74e120e9ba
             }
 
             jump = true;
             air = true;
-
-            Debug.Log("JUMP!!!");
-            Debug.LogFormat("VELOCITY: {0} {1}", v.x, v.y);
-
-            // Vector3 jump_movement = new Vector3(inputX, 5f, inputY);
-            // jump_movement *= Time.deltaTime;
-
-            // transform.Translate(jump_movement);
-
-            //GetComponent<Rigidbody2D>().velocity = Vector2.up * 8;
         }
         else
         {
@@ -60,9 +46,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("COLLISION");
         air = false;
     }
 }
