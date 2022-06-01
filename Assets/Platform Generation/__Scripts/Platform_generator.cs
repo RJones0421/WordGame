@@ -50,7 +50,7 @@ public class Platform_generator : MonoBehaviour
         platform = platformQueue.Dequeue();
 
         /* Simulate the movement of camera */
-        StartCoroutine(cameraMove()); // WaitForSeconds() requires to work inside StartCoroutine()
+        //StartCoroutine(cameraMove()); // WaitForSeconds() requires to work inside StartCoroutine()
         IEnumerator cameraMove(){
 
             //for (int t=0;t<1000;t++){
@@ -69,6 +69,9 @@ public class Platform_generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("HI");
+        Camera.main.transform.position = new Vector3(0.0f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+
         if (Camera.main.transform.position.y - 
             platform.transform.position.y >= 1.2*screenHeight){
 
