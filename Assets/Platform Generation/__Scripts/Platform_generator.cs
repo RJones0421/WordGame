@@ -6,8 +6,11 @@ public class Platform_generator : MonoBehaviour
 {
     public GameObject platformPrefab;
     
+
+    public float cameraSpeed;
+
     /* total number of platforms */
-    public int platform_maxCount=15;
+    public int platformMaxCount=20;
 
     /* all platforms are stored in queue */
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
@@ -15,25 +18,36 @@ public class Platform_generator : MonoBehaviour
 
     private Vector3 spawnPosition = new Vector3();
 
-    /* height from center to top/bottom border */
-    private float screenHeight;
+    private float screenHeight; /* height from center to top/bottom border */
+    private float screenWidth; /* height from center to left/right border */
 
-    public float cameraSpeed;
+    /* updating/killing platforms when distance from a platform to camera bottom exceeds this number */
+    private float DeathzoneHeight; 
+    public float DeathzoneHeightScale=1.0f;
 
-    public float sizeScale = 1.0f;
     
-    
+    public float spawnPositionWidthScale = 0.8f;
+    public float spawnPositionHeightScale = 1.0f;
+
+   
+
+
     // Start is called before the first frame update
     void Start()
     {
         screenHeight = Camera.main.orthographicSize;
+        screenWidth = screenHeight * Camera.main.aspect;
+        DeathzoneHeight = 2*screenHeight;
+
+
+        Debug.Log(screenWidth);   
 
         /* Initial generation of platforms */
-        for (int i=0; i<platform_maxCount; i++){
+        for (int i=0; i<platformMaxCount; i++){
             /* Position of the new platform */
-            spawnPosition.y+=Random.Range(sizeScale*1.0f,sizeScale*1.5f);
-            spawnPosition.x=Random.Range(sizeScale*-2.0f,sizeScale*2.0f);
-            
+            spawnPosition.y+=Random.Range(spawnPositionHeightScale*1.2f,spawnPositionHeightScale*1.4f);
+            spawnPosition.x=Random.Range(-1.0f*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
+
             /* Generate a new platform */
             GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);  // Quaternion.identity means no rotation
             
@@ -70,15 +84,15 @@ public class Platform_generator : MonoBehaviour
     void Update()
     {
         if (Camera.main.transform.position.y - 
-            platform.transform.position.y >= 1.2*screenHeight){
+            platform.transform.position.y >= DeathzoneHeight*DeathzoneHeightScale){
 
             // Debug.Log("Updating platform");        
 
             /* update the position to be the highest platform */
-            spawnPosition.y+=Random.Range(sizeScale*1.0f,sizeScale*1.5f);
-            spawnPosition.x=Random.Range(sizeScale*-2.0f,sizeScale*2.0f);     
+            spawnPosition.y+=Random.Range(spawnPositionHeightScale*1.2f,spawnPositionHeightScale*1.4f);
+            spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);     
             platform.transform.position=spawnPosition;
-            
+
             /* update letter value */
             LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
             int rand = LetterValue(); 
