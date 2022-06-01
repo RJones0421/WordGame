@@ -13,4 +13,6 @@ public class LetterClass : ScriptableObject
 	
 	[SerializeField]
 	private int score;
+
+	public char Letter { get { return letter; }}
 }
