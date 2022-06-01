@@ -23,7 +23,7 @@ public class Platform_generator : MonoBehaviour
 
     /* updating/killing platforms when distance from a platform to camera bottom exceeds this number */
     private float DeathzoneHeight; 
-    public float DeathzoneHeightScale=1.0f;
+    public float DeathzoneHeightScale=1.25f;
 
     
     public float spawnPositionWidthScale = 0.8f;

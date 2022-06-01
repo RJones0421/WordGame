@@ -466,6 +466,10 @@ PrefabInstance:
       propertyPath: platformMaxCount
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 886063472610919503, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+      propertyPath: DeathzoneHeightScale
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4799803925786826860, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
       propertyPath: m_RootOrder
       value: 5
