@@ -21,8 +21,9 @@ public class Platform_generator : MonoBehaviour
     public float cameraSpeed;
 
     public float sizeScale = 1.0f;
-    
-    
+
+    public LetterClass[] letterObjectArray;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,9 +41,10 @@ public class Platform_generator : MonoBehaviour
             /* update letter value */
             LetterPlatform letterPlatform = newPlatform.GetComponent<LetterPlatform>();
             int rand = LetterValue(); 
-            letterPlatform.SpriteRenderer.sprite = letterPlatform.spriteArray[rand];
-            letterPlatform.LetterValue = rand;
-            letterPlatform.LetterObject = letterPlatform.letterObjectArray[rand];
+            LetterClass letterObject = letterObjectArray[rand];
+            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+            letterPlatform.LetterValue = letterObject.Letter;
+            letterPlatform.Score = letterObject.Score;
 			
             platformQueue.Enqueue(newPlatform);
         }
@@ -82,9 +84,11 @@ public class Platform_generator : MonoBehaviour
             
             /* update letter value */
             LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
-            int rand = LetterValue(); 
-            letterPlatform.SpriteRenderer.sprite = letterPlatform.spriteArray[rand];
-            letterPlatform.LetterValue = rand;
+            int rand = LetterValue();
+            LetterClass letterObject = letterObjectArray[rand];
+            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+            letterPlatform.LetterValue = letterObject.Letter;
+            letterPlatform.Score = letterObject.Score;
 
             /* update the platformQueue */
             platformQueue.Enqueue(platform);
@@ -94,5 +98,14 @@ public class Platform_generator : MonoBehaviour
 
     public int LetterValue() {
         return Random.Range(1,26);
+    }
+
+
+    public ScriptableObject[] LetterObjectArray
+    {
+        get
+        {
+            return letterObjectArray;
+        }
     }
 }

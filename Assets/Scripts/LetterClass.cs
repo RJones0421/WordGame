@@ -15,4 +15,8 @@ public class LetterClass : ScriptableObject
 	private int score;
 
 	public char Letter { get { return letter; }}
+
+	public Sprite LetterSprite { get { return letterSprite; } }
+
+	public int Score { get { return score; } }
 }

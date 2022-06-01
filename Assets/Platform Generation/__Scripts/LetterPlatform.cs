@@ -5,11 +5,8 @@ using UnityEngine;
 public class LetterPlatform : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public Sprite[] spriteArray;
     public int letterVal;
-	
-	public ScriptableObject[] letterObjectArray;
-	public ScriptableObject letterObject;
+    public int score;
 
     public SpriteRenderer SpriteRenderer {
         get {
@@ -23,12 +20,6 @@ public class LetterPlatform : MonoBehaviour
         }
     }
 
-    public Sprite[] SpriteArray {
-        get {
-            return spriteArray;
-        }
-    }
-
     /* storing letter value */
     public int LetterValue {
         get {
@@ -38,19 +29,16 @@ public class LetterPlatform : MonoBehaviour
             letterVal = value;
         }
     }
-	
-	public ScriptableObject[] LetterObjectArray {
-        get {
-            return letterObjectArray;
+
+    public int Score
+    {
+        get
+        {
+            return score;
         }
-    }
-	
-	public ScriptableObject LetterObject {
-        get {
-            return letterObject;
-        }
-		set {
-            letterObject = value;
+        set
+        {
+            letterVal = value;
         }
     }
 }
