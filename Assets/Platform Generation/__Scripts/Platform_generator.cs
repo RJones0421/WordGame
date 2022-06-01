@@ -42,7 +42,8 @@ public class Platform_generator : MonoBehaviour
             int rand = LetterValue(); 
             letterPlatform.SpriteRenderer.sprite = letterPlatform.spriteArray[rand];
             letterPlatform.LetterValue = rand;
-
+            letterPlatform.LetterObject = letterPlatform.letterObjectArray[rand];
+			
             platformQueue.Enqueue(newPlatform);
         }
         

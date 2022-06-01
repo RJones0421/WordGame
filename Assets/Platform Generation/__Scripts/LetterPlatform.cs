@@ -7,6 +7,9 @@ public class LetterPlatform : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
     public int letterVal;
+	
+	public ScriptableObject[] letterObjectArray;
+	public ScriptableObject letterObject;
 
     public SpriteRenderer SpriteRenderer {
         get {
@@ -33,6 +36,21 @@ public class LetterPlatform : MonoBehaviour
         }
         set {
             letterVal = value;
+        }
+    }
+	
+	public ScriptableObject[] LetterObjectArray {
+        get {
+            return letterObjectArray;
+        }
+    }
+	
+	public ScriptableObject LetterObject {
+        get {
+            return letterObject;
+        }
+		set {
+            letterObject = value;
         }
     }
 }
