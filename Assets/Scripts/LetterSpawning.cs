@@ -8,7 +8,9 @@ public class LetterSpawning : MonoBehaviour
 	// Scrabble tile letter distribution is as follows: A-9, B-2, C-2, D-4, E-12, F-2, G-3, H-2, I-9, J-1, K-1, L-4, M-2, N-6, O-8, P-2, Q-1, R-6, S-4, T-6, U-4, V-2, W-2, X-1, Y-2, Z-1 and Blanks-2.
 
 	// Constant of letters appearing with same distribution from scrabble
-	private string LETTERS = "AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ";
+	private static string LETTERS = "AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ";
+
+	private static string LETTERS_LOWER = "aaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnoooooooooppqrrrrrrssssttttttuuuuvvwwxyyz";
 
 	private string lettersAvailable;
 
@@ -53,6 +55,12 @@ public class LetterSpawning : MonoBehaviour
 		return lettersAvailable[Random.Range(0,len)];
 	}
 
+	public static int GetLetterStatic()
+	{
+		int len = LETTERS.Length;
+		return LETTERS[Random.Range(0,len)] - 64;
+	}
+
 	// random vowel
 	public char GetVowel()
 	{
@@ -76,6 +84,5 @@ public class LetterSpawning : MonoBehaviour
 
     void Update()
     {
-		
     }
 }
