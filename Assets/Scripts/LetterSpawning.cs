@@ -17,19 +17,16 @@ public class LetterSpawning : MonoBehaviour
 	// In case we want to split between searching for vowels and consonants
 	private string consonants = "BCDFGHJKLMNPQRSTVWXYZ";
     private string vowels = "AEIOU";
-
-    private Random random;
 	
     void Awake()
     {		
-        random = new Random();
 		lettersAvailable = LETTERS;
     }
 
 	// random returns letter with same odds for all letters
     public char GetLetter1()
     {
-        int num = random.Next(0, 26);
+        int num = Random.Range(0, 26);
         char letter = (char)('a' + num);
         return letter;
     }
@@ -42,7 +39,7 @@ public class LetterSpawning : MonoBehaviour
 			len = resetLetters();
 		}
 
-		int index = random.Next(len);
+		int index = Random.Range(0,len);
 		char result = lettersAvailable[index];
 		lettersAvailable = lettersAvailable.Remove(index,1);
 
@@ -53,21 +50,21 @@ public class LetterSpawning : MonoBehaviour
 	public char GetLetter3()
 	{
 		int len = lettersAvailable.Length;
-		return lettersAvailable[random.Next(len)];
+		return lettersAvailable[Random.Range(0,len)];
 	}
 
 	// random vowel
 	public char GetVowel()
 	{
 		int len = vowels.Length;
-		return vowels[random.Next(len)];
+		return vowels[Random.Range(0,len)];
 	}
 
 	// random consonant
 	public char GetConsonant()
 	{
 		int len = consonants.Length;
-		return consonants[random.Next(len)];
+		return consonants[Random.Range(0,len)];
 	}
 
 	// resets string of available letters
