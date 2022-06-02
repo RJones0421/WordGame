@@ -47,31 +47,12 @@ public class Platform_generator : MonoBehaviour
         }
         
         /* reference to the lowest platform */
-        platform = platformQueue.Dequeue();
-
-        /* Simulate the movement of camera */
-        //StartCoroutine(cameraMove()); // WaitForSeconds() requires to work inside StartCoroutine()
-        IEnumerator cameraMove(){
-
-            //for (int t=0;t<1000;t++){
-            while(true){    
-                /* movement of camera */
-                Camera.main.transform.position += new Vector3(0f, cameraSpeed * Time.deltaTime, 0f);
-
-                /* Wait for 0.25 seconds */
-                //yield return new WaitForSecondsRealtime(0.25f);
-                yield return null;
-            }   
-        }
-        
+        platform = platformQueue.Dequeue();        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("HI");
-        Camera.main.transform.position = new Vector3(0.0f, Camera.main.transform.position.y, Camera.main.transform.position.z);
-
         if (Camera.main.transform.position.y - 
             platform.transform.position.y >= 1.2*screenHeight){
 
