@@ -7,11 +7,21 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed;
     public float halfWidth;
     private float wallRotate = 90.0f;
+
+    public bool allowMouseMovement;
+
     private Vector2 down;
     private Rigidbody2D rb;
 
     public GameObject wallPrefab;
     public List<GameObject> walls;
+
+    private bool mouseOnScreen {
+        get {
+            return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
+                Input.mousePosition.y >= 0.0f && Input.mousePosition.y <= Screen.height;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +42,10 @@ public class PlayerController : MonoBehaviour
         // Maintain constant downward velocity to replace gravity
         rb.velocity = down;
 
-        Vector2 mouse = Input.mousePosition;
-
-        Debug.LogFormat("MOUSE: {0} {1}", mouse.x, mouse.y);
-
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
+
+        Debug.LogFormat("X INPUT: {0}", inputX);
 
         // Only allow upward input
         if (inputY < 0.0f)
@@ -49,6 +57,11 @@ public class PlayerController : MonoBehaviour
         movement *= Time.deltaTime * movementSpeed;
 
         transform.Translate(movement);
+
+        if (allowMouseMovement && mouseOnScreen)
+        {
+            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f);
+        }
 
         // Camera and walls follow as long as you go up
         float camHeight = Camera.main.transform.position.y;
