@@ -43,21 +43,27 @@ public class Platform_generator : MonoBehaviour
         Debug.Log(screenWidth);   
 
         /* Initial generation of platforms */
-        for (int i=0; i<platformMaxCount; i++){
+        int i = 0;
+        while (i<platformMaxCount){
             /* Position of the new platform */
-            spawnPosition.y+=Random.Range(spawnPositionHeightScale*1.2f,spawnPositionHeightScale*1.4f);
+            spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
             spawnPosition.x=Random.Range(-1.0f*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
 
-            /* Generate a new platform */
-            GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);  // Quaternion.identity means no rotation
-            
-            /* update letter value */
-            LetterPlatform letterPlatform = newPlatform.GetComponent<LetterPlatform>();
-            int rand = LetterValue(); 
-            letterPlatform.SpriteRenderer.sprite = letterPlatform.spriteArray[rand];
-            letterPlatform.LetterValue = rand;
+            if (ValidSpawn(spawnPosition)) {
+                /* Generate a new platform */
+                GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);  // Quaternion.identity means no rotation
+                
+                /* update letter value */
+                LetterPlatform letterPlatform = newPlatform.GetComponent<LetterPlatform>();
+                int rand = LetterValue(); 
+                letterPlatform.SpriteRenderer.sprite = letterPlatform.spriteArray[rand];
+                letterPlatform.LetterValue = rand;
 
-            platformQueue.Enqueue(newPlatform);
+                platformQueue.Enqueue(newPlatform);
+
+                i++;
+            }
+            
         }
         
         /* reference to the lowest platform */
@@ -89,8 +95,12 @@ public class Platform_generator : MonoBehaviour
             // Debug.Log("Updating platform");        
 
             /* update the position to be the highest platform */
-            spawnPosition.y+=Random.Range(spawnPositionHeightScale*1.2f,spawnPositionHeightScale*1.4f);
+            spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
             spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);     
+            while (!ValidSpawn(spawnPosition)) {
+                spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
+                spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
+            }
             platform.transform.position=spawnPosition;
 
             /* update letter value */
@@ -107,5 +117,16 @@ public class Platform_generator : MonoBehaviour
 
     public int LetterValue() {
         return Random.Range(1,26);
+    }
+
+    public bool ValidSpawn(Vector3 newPosition) {
+        foreach (GameObject platform in platformQueue) {
+            if (newPosition.x+1.0f >= platform.transform.position.x && newPosition.x-1.0f <= platform.transform.position.x) {
+                if (newPosition.y+1.0f >= platform.transform.position.y && newPosition.y-2.0f <= platform.transform.position.y) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
