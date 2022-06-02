@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Word Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 5842006565022344673, guid: 738d82d8bdeb76e4b86e5c2f5b4adb47, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5842006565022344677, guid: 738d82d8bdeb76e4b86e5c2f5b4adb47, type: 3}
       propertyPath: m_RootOrder
       value: 3
