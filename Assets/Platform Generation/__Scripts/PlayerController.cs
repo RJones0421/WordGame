@@ -50,8 +50,14 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(movement);
 
-        Camera.main.transform.position = new Vector3(0.0f, transform.position.y, -1.0f);
-        walls[0].transform.position = new Vector3(-halfWidth, transform.position.y, 0.0f);
-        walls[1].transform.position = new Vector3(halfWidth, transform.position.y, 0.0f);
+        // Camera and walls follow as long as you go up
+        float camHeight = Camera.main.transform.position.y;
+        float currHeight = transform.position.y;
+        if (camHeight < currHeight)
+        {
+            Camera.main.transform.position = new Vector3(0.0f, currHeight, -1.0f);
+            walls[0].transform.position = new Vector3(-halfWidth, currHeight, 0.0f);
+            walls[1].transform.position = new Vector3(halfWidth, currHeight, 0.0f);
+        }
     }
 }
