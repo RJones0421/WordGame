@@ -374,6 +374,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3384bb114ac8a9e4e846daeb7fc789f4, type: 3}
+--- !u!1 &1108979828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4799803925786826861, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+  m_PrefabInstance: {fileID: 1512421377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1108979831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108979828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d7e5eb2768d464e816e899014c0c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformPrefab: {fileID: 334732888}
+  platform_maxCount: 15
+  cameraSpeed: 0
+  sizeScale: 2
 --- !u!1001 &1365478713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -498,7 +519,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform Generator
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 886063472610919503, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
 --- !u!1001 &1580493163
 PrefabInstance:
@@ -562,6 +584,18 @@ PrefabInstance:
     - target: {fileID: 5664284316386886154, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664284316386886156, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: halfWidth
+      value: 11.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664284316386886156, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: wallPrefab
+      value: 
+      objectReference: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
+    - target: {fileID: 5664284316386886156, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: movementSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5664284316386886157, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: m_Name

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform_generator : MonoBehaviour
+public class PlatformGenerator : MonoBehaviour
 {
     public GameObject platformPrefab;
     
@@ -56,12 +56,12 @@ public class Platform_generator : MonoBehaviour
         if (Camera.main.transform.position.y - 
             platform.transform.position.y >= 1.2*screenHeight){
 
-            // Debug.Log("Updating platform");        
+            // Debug.Log("Updating platform");
 
             /* update the position to be the highest platform */
-            spawnPosition.y+=Random.Range(sizeScale*1.0f,sizeScale*1.5f);
-            spawnPosition.x=Random.Range(sizeScale*-2.0f,sizeScale*2.0f);     
-            platform.transform.position=spawnPosition;
+            spawnPosition.y += Random.Range(sizeScale * 1.0f, sizeScale * 1.5f);
+            spawnPosition.x = Random.Range(sizeScale * -2.0f, sizeScale * 2.0f);
+            platform.transform.position = spawnPosition;
             
             /* update letter value */
             LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
