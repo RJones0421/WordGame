@@ -97,7 +97,7 @@ public class Platform_generator : MonoBehaviour
     }
 
     public int LetterValue() {
-        return Random.Range(1,26);
+        return LetterSpawning.GetLetterStatic();
     }
 
 
