@@ -5,10 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Deprecated Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/LetterClassWork.unity
-    guid: 8100c24fd55199a41bc6fc0936cef449
+    path: Assets/Scenes/MainMenu.unity
+    guid: c587390253e8246eea71fc8163c8b700
+  - enabled: 1
+    path: Assets/Scenes/FirstPrototype 1.unity
+    guid: 949a1ee7f70844543bb674f5bae1fb0c
+  - enabled: 1
+    path: Assets/Scenes/RobertPrototype.unity
+    guid: 9587f4a63f6edbd44a6310654a02cc4f
+  - enabled: 1
+    path: Assets/Scenes/Week2CameraAndMouse.unity
+    guid: 4e32f236b47394da8be91d4e9bf9fd73
+  - enabled: 1
+    path: Assets/Week2 Atush Idea/__Scenes/Atush Prototype.unity
+    guid: 6fd2555a5d4e25b4f8b485e3474e1dfe
   m_configObjects: {}
