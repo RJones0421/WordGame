@@ -34,7 +34,7 @@ public class PlayerSpeed : MonoBehaviour
     {
         float inputX = Input.GetAxis("Horizontal");
 
-        Vector3 movement = new Vector3(10 * inputX, speed, 0);
+        Vector3 movement = new Vector3(15 * inputX, speed, 0);
         movement *= Time.deltaTime;
 
         transform.Translate(movement);
@@ -55,7 +55,7 @@ public class PlayerSpeed : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         SetBoost();
     }
