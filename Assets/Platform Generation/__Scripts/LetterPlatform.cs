@@ -5,8 +5,9 @@ using UnityEngine;
 public class LetterPlatform : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public int letterVal;
-    public int score;
+
+    [SerializeField]
+    private LetterClass letterObject;
 
     public SpriteRenderer SpriteRenderer {
         get {
@@ -19,26 +20,15 @@ public class LetterPlatform : MonoBehaviour
             spriteRenderer = value;
         }
     }
-
-    /* storing letter value */
-    public int LetterValue {
-        get {
-            return letterVal;
-        }
-        set {
-            letterVal = value;
-        }
-    }
-
-    public int Score
+    public LetterClass LetterObject
     {
         get
         {
-            return score;
+            return letterObject;
         }
         set
         {
-            letterVal = value;
+            letterObject = value;
         }
     }
 }
