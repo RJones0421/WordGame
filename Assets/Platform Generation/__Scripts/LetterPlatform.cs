@@ -5,8 +5,8 @@ using UnityEngine;
 public class LetterPlatform : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public Sprite[] spriteArray;
     public int letterVal;
+    public int score;
 
     public SpriteRenderer SpriteRenderer {
         get {
@@ -20,18 +20,24 @@ public class LetterPlatform : MonoBehaviour
         }
     }
 
-    public Sprite[] SpriteArray {
-        get {
-            return spriteArray;
-        }
-    }
-
     /* storing letter value */
     public int LetterValue {
         get {
             return letterVal;
         }
         set {
+            letterVal = value;
+        }
+    }
+
+    public int Score
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
             letterVal = value;
         }
     }

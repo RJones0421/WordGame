@@ -24,13 +24,11 @@ public class Platform_generator : MonoBehaviour
     /* updating/killing platforms when distance from a platform to camera bottom exceeds this number */
     private float DeathzoneHeight; 
     public float DeathzoneHeightScale=1.25f;
-
     
     public float spawnPositionWidthScale = 0.8f;
     public float spawnPositionHeightScale = 1.0f;
 
-   
-
+    public LetterClass[] letterObjectArray;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +43,7 @@ public class Platform_generator : MonoBehaviour
         /* Initial generation of platforms */
         for (int i=0; i<platformMaxCount; i++){
             /* Position of the new platform */
-            while(Physics2D.OverlapCircle(spawnPosition, 1.2f, (1 << 3)) != null) {
+            while(Physics2D.OverlapCircle(spawnPosition, 1.2f, (1 << 7)) != null) {
                 spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
                 spawnPosition.x=Random.Range(-1.0f*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }
@@ -56,9 +54,11 @@ public class Platform_generator : MonoBehaviour
             /* update letter value */
             LetterPlatform letterPlatform = newPlatform.GetComponent<LetterPlatform>();
             int rand = LetterValue(); 
-            letterPlatform.SpriteRenderer.sprite = letterPlatform.spriteArray[rand];
-            letterPlatform.LetterValue = rand;
-
+            LetterClass letterObject = letterObjectArray[rand];
+            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+            letterPlatform.LetterValue = letterObject.Letter;
+            letterPlatform.Score = letterObject.Score;
+			
             platformQueue.Enqueue(newPlatform);
         }
         
@@ -91,7 +91,7 @@ public class Platform_generator : MonoBehaviour
             // Debug.Log("Updating platform");        
 
             /* update the position to be the highest platform */
-            while(Physics2D.OverlapCircle(spawnPosition, 1.2f, (1 << 3)) != null) {
+            while(Physics2D.OverlapCircle(spawnPosition, 1.2f, (1 << 7)) != null) {
                 spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
                 spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }     
@@ -99,9 +99,11 @@ public class Platform_generator : MonoBehaviour
 
             /* update letter value */
             LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
-            int rand = LetterValue(); 
-            letterPlatform.SpriteRenderer.sprite = letterPlatform.spriteArray[rand];
-            letterPlatform.LetterValue = rand;
+            int rand = LetterValue();
+            LetterClass letterObject = letterObjectArray[rand];
+            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+            letterPlatform.LetterValue = letterObject.Letter;
+            letterPlatform.Score = letterObject.Score;
 
             /* update the platformQueue */
             platformQueue.Enqueue(platform);
@@ -110,6 +112,15 @@ public class Platform_generator : MonoBehaviour
     }
 
     public int LetterValue() {
-        return Random.Range(1,26);
+        return LetterSpawning.GetLetterStatic();
+    }
+
+
+    public ScriptableObject[] LetterObjectArray
+    {
+        get
+        {
+            return letterObjectArray;
+        }
     }
 }
