@@ -99,6 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b58cc81412e3674c84a20155a652014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 10
+  halfWidth: 11.3
+  allowMouseMovement: 0
+  wallPrefab: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
+  walls: []
 --- !u!61 &5664284316386886152
 BoxCollider2D:
   m_ObjectHideFlags: 0

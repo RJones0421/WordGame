@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlatformGenerator : MonoBehaviour
 {
     public GameObject platformPrefab;
-    
-
+   
     public float cameraSpeed;
 
     /* total number of platforms */

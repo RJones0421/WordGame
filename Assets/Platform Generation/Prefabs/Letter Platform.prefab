@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 618442617939232107}
   - component: {fileID: 8584830263315650137}
   - component: {fileID: -2683797319322242208}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Letter Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,32 +140,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ed234aedde243f6bd6339b831320d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteArray:
-  - {fileID: 21300000, guid: c824a350cbeb644d68986507cdea5108, type: 3}
-  - {fileID: 21300000, guid: 77bc50aad14c446bc8a13f4c4cc3a3cd, type: 3}
-  - {fileID: 21300000, guid: 3cfe40dbfc5674b2291f0436d994bfe7, type: 3}
-  - {fileID: 21300000, guid: 786dcd2a2423d4bc98a7ea48cb4a55c6, type: 3}
-  - {fileID: 21300000, guid: d05d224960a8644baa1ee7958bfa7448, type: 3}
-  - {fileID: 21300000, guid: 850fe5c68196a4ea39363060b5dad5cb, type: 3}
-  - {fileID: 21300000, guid: 78ea3183ad0224a7eb555e49de4ab89c, type: 3}
-  - {fileID: 21300000, guid: 5852c6583e8974dbeb8a6b054817c35c, type: 3}
-  - {fileID: 21300000, guid: 4a2c64af942174342ac776cbe99d5ea5, type: 3}
-  - {fileID: 21300000, guid: 49da0aaf574dd4fa8bf67fe24bdd2da0, type: 3}
-  - {fileID: 21300000, guid: 0fe06a1b55957403ea5d3b40e1bc28f1, type: 3}
-  - {fileID: 21300000, guid: 6baa124f15b4946d2b089f89527e74ea, type: 3}
-  - {fileID: 21300000, guid: 3ba718dbad665418bad66af8aa137be3, type: 3}
-  - {fileID: 21300000, guid: c8d75b98ff58c4bc8bbc77426cac1152, type: 3}
-  - {fileID: 21300000, guid: 25665e819815b44298450657a7e04d31, type: 3}
-  - {fileID: 21300000, guid: 8c98f626df7494b7396acd1b71e7f523, type: 3}
-  - {fileID: 21300000, guid: e3e3853fe73f2461d837c33e3934dc4e, type: 3}
-  - {fileID: 21300000, guid: a3bed452fccaa4f97bf37e2bcb9c1b66, type: 3}
-  - {fileID: 21300000, guid: c4c614868de20438aa6819210644e36d, type: 3}
-  - {fileID: 21300000, guid: 0dfd3d5df9c9f4765920d31dd3fb8364, type: 3}
-  - {fileID: 21300000, guid: 3e444abf65b3c4965abedd96a8428f74, type: 3}
-  - {fileID: 21300000, guid: b5122dbef00344f839954a2090de921f, type: 3}
-  - {fileID: 21300000, guid: 3f3cbd99eb6c743fab6ebb8696b7f934, type: 3}
-  - {fileID: 21300000, guid: 420305f6521814e658d32b73b598cb6b, type: 3}
-  - {fileID: 21300000, guid: 83ecc7a730eee4ad382da64023e40c7b, type: 3}
-  - {fileID: 21300000, guid: 7c5cb461296ec429cb8b353434a09b89, type: 3}
-  - {fileID: 21300000, guid: 0d303e33610da4235aced5ad46404ab0, type: 3}
   letterVal: 0
+  score: 0

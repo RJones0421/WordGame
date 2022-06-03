@@ -64,7 +64,7 @@ public class AtushPlayerController : MonoBehaviour
             }
             if(isGrounded){
                 currJump = jumpValue;
-                rb.velocity = new Vector2(direction * moveSpeed, jumpValue);
+                rb.velocity = new Vector2(-direction * moveSpeed, jumpValue);
                 jumpValue = 0f;
             }
         }
@@ -72,7 +72,7 @@ public class AtushPlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == 3 && !(collision.gameObject.layer == 6)){
+        if(collision.gameObject.layer == 7 && !(collision.gameObject.layer == 6)){
             isGrounded = true;
             Invoke("Resetjump", 0.2f);
         }
