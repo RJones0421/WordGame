@@ -43,12 +43,10 @@ public class Word : MonoBehaviour
         // If valid, clear list
 
         int score = evaluator.SubmitWord(word);
-
-        if (score != 0) {
-            letters.Clear();
-            foreach (SpriteRenderer sr in sprites) sr.sprite = defaultSprite;
-            currentLetterBox = 0;
-        }
+        
+        letters.Clear();
+        foreach (SpriteRenderer sr in sprites) sr.sprite = defaultSprite;
+        currentLetterBox = 0;
 
         return score;
 
