@@ -17,7 +17,8 @@ public class PlayerSpeed : MonoBehaviour
     private float boostTime = 0.5f;
     private float timeRemaining;
     private bool isBoosted = false;
-    
+
+    [SerializeField] private Word wordHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,7 @@ public class PlayerSpeed : MonoBehaviour
     {
         float inputX = Input.GetAxis("Horizontal");
 
-        Vector3 movement = new Vector3(10 * inputX, speed, 0);
+        Vector3 movement = new Vector3(15 * inputX, speed, 0);
         movement *= Time.deltaTime;
 
         transform.Translate(movement);
@@ -47,9 +48,14 @@ public class PlayerSpeed : MonoBehaviour
             speed /= boost;
             isBoosted = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GetLetter();
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         SetBoost();
     }
@@ -62,5 +68,14 @@ public class PlayerSpeed : MonoBehaviour
             speed *= boost;
         }
         timeRemaining = boostTime;
+    }
+
+    private void GetLetter()
+    {
+        var word = Physics2D.OverlapCircle(transform.position, box.size.x / 2, (1 << 7));
+        if (word)
+        {
+            wordHandler.addLetter(word.GetComponent<LetterPlatform>().LetterObject);
+        }
     }
 }
