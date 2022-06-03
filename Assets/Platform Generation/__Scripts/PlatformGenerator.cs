@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform_generator : MonoBehaviour
+public class PlatformGenerator : MonoBehaviour
 {
     public GameObject platformPrefab;
     
@@ -50,23 +50,7 @@ public class Platform_generator : MonoBehaviour
         }
         
         /* reference to the lowest platform */
-        platform = platformQueue.Dequeue();
-
-        /* Simulate the movement of camera */
-        StartCoroutine(cameraMove()); // WaitForSeconds() requires to work inside StartCoroutine()
-        IEnumerator cameraMove(){
-
-            //for (int t=0;t<1000;t++){
-            while(true){    
-                /* movement of camera */
-                Camera.main.transform.position += new Vector3(0f, cameraSpeed * Time.deltaTime, 0f);
-
-                /* Wait for 0.25 seconds */
-                //yield return new WaitForSecondsRealtime(0.25f);
-                yield return null;
-            }   
-        }
-        
+        platform = platformQueue.Dequeue();        
     }
 
     // Update is called once per frame
@@ -75,12 +59,12 @@ public class Platform_generator : MonoBehaviour
         if (Camera.main.transform.position.y - 
             platform.transform.position.y >= 1.2*screenHeight){
 
-            // Debug.Log("Updating platform");        
+            // Debug.Log("Updating platform");
 
             /* update the position to be the highest platform */
-            spawnPosition.y+=Random.Range(sizeScale*1.0f,sizeScale*1.5f);
-            spawnPosition.x=Random.Range(sizeScale*-2.0f,sizeScale*2.0f);     
-            platform.transform.position=spawnPosition;
+            spawnPosition.y += Random.Range(sizeScale * 1.0f, sizeScale * 1.5f);
+            spawnPosition.x = Random.Range(sizeScale * -2.0f, sizeScale * 2.0f);
+            platform.transform.position = spawnPosition;
             
             /* update letter value */
             LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
