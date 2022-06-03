@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a484dfee327f0e84db0f8fbc58197d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformPrefab: {fileID: 6844295156165082423, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+  platform_maxCount: 15
+  cameraSpeed: 1
+  sizeScale: 1
