@@ -31,4 +31,14 @@ public class LetterPlatform : MonoBehaviour
             letterObject = value;
         }
     }
+
+    public void DarkenSprite()
+    {
+        spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f);
+    }
+
+    public void ResetSprite()
+    {
+        spriteRenderer.color = Color.white;
+    }
 }
