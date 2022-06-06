@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
 
         originalPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         originalCameraPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+        Debug.LogFormat("start camera: {0}", originalCameraPosition.ToString());
+
         
     }
 
@@ -107,7 +109,9 @@ public class PlayerController : MonoBehaviour
         {
         	Debug.LogFormat("LOSE, PLAYER HIT THE LOSE FLOOR");
         	// gameObject.transform.position = originalPos;
+        	// Camera.main.transform.position = new Vector3(0.0f, 0.0f, -1.0f);
         	// Camera.main.transform.position = originalCameraPosition;
+
         }
 
         Debug.LogFormat("HIT: {0}", collision.gameObject.name);
