@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private Vector2 originalPos;
+    private Vector3 originalCameraPosition;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +40,12 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         // generation of the bottom border under the camera
-        walls.Add(Instantiate(wallPrefab, Vector3.down * halfWidth, Quaternion.identity));
-        walls[2].transform.Rotate(Vector3.forward, 0f);
-        walls[2].gameObject.name = "L0se Floor";
+        // walls.Add(Instantiate(wallPrefab, Vector3.down * halfWidth, Quaternion.identity));
+        // walls[2].transform.Rotate(Vector3.forward, 0f);
+        // walls[2].gameObject.name = "L0se Floor";
+
+        originalPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        originalCameraPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         
     }
 
@@ -79,7 +86,7 @@ public class PlayerController : MonoBehaviour
             walls[1].transform.position = new Vector3(halfWidth, currHeight, 0.0f);
 
             // readjustment of the height of the bottom border
-            walls[2].transform.position = new Vector3(0, currHeight - 6.5f, 0.0f);
+            // walls[2].transform.position = new Vector3(0, currHeight - 6.5f, 0.0f);
 
         }
     }
@@ -95,10 +102,12 @@ public class PlayerController : MonoBehaviour
 
         // Determines if player has gone past the camera and collided with the bottom border
         // In the event of a bottom border collision, all actions associated with a loss should go here
-        // 1. Player loses a life
-        if (collision.gameObject.name == "L0se") 
+        // 1. Player loses a life 2. camera reset 3. player position reset
+        if (collision.gameObject.name == "Lose Floor") 
         {
         	Debug.LogFormat("LOSE, PLAYER HIT THE LOSE FLOOR");
+        	// gameObject.transform.position = originalPos;
+        	// Camera.main.transform.position = originalCameraPosition;
         }
 
         Debug.LogFormat("HIT: {0}", collision.gameObject.name);
