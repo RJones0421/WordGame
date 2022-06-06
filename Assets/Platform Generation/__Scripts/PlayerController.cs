@@ -35,10 +35,11 @@ public class PlayerController : MonoBehaviour
         walls.Add(Instantiate(wallPrefab, Vector3.right * halfWidth, Quaternion.identity));
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
+        // generation of the bottom border under the camera
         walls.Add(Instantiate(wallPrefab, Vector3.down * halfWidth, Quaternion.identity));
         walls[2].transform.Rotate(Vector3.forward, 0f);
-        walls[2].gameObject.name = "L0se";
-        // walls[2].gameObject.material = None;
+        walls[2].gameObject.name = "L0se Floor";
+        
     }
 
     // Update is called once per frame
@@ -76,6 +77,8 @@ public class PlayerController : MonoBehaviour
             Camera.main.transform.position = new Vector3(0.0f, currHeight, -1.0f);
             walls[0].transform.position = new Vector3(-halfWidth, currHeight, 0.0f);
             walls[1].transform.position = new Vector3(halfWidth, currHeight, 0.0f);
+
+            // readjustment of the height of the bottom border
             walls[2].transform.position = new Vector3(0, currHeight - 6.5f, 0.0f);
 
         }
@@ -89,6 +92,10 @@ public class PlayerController : MonoBehaviour
             platform.DarkenSprite();
         }
 
+
+        // Determines if player has gone past the camera and collided with the bottom border
+        // In the event of a bottom border collision, all actions associated with a loss should go here
+        // 1. Player loses a life
         if (collision.gameObject.name == "L0se") 
         {
         	Debug.LogFormat("LOSE, PLAYER HIT THE LOSE FLOOR");
