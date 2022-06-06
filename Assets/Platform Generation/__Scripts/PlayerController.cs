@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
 
         walls.Add(Instantiate(wallPrefab, Vector3.right * halfWidth, Quaternion.identity));
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
+
+        walls.Add(Instantiate(wallPrefab, Vector3.down * halfWidth, Quaternion.identity));
+        walls[2].transform.Rotate(Vector3.forward, 0f);
+        walls[2].gameObject.name = "L0se";
+        // walls[2].gameObject.material = None;
     }
 
     // Update is called once per frame
@@ -71,6 +76,8 @@ public class PlayerController : MonoBehaviour
             Camera.main.transform.position = new Vector3(0.0f, currHeight, -1.0f);
             walls[0].transform.position = new Vector3(-halfWidth, currHeight, 0.0f);
             walls[1].transform.position = new Vector3(halfWidth, currHeight, 0.0f);
+            walls[2].transform.position = new Vector3(0, currHeight - 6.5f, 0.0f);
+
         }
     }
 
@@ -81,5 +88,13 @@ public class PlayerController : MonoBehaviour
         {
             platform.DarkenSprite();
         }
+
+        if (collision.gameObject.name == "L0se") 
+        {
+        	Debug.LogFormat("LOSE, PLAYER HIT THE LOSE FLOOR");
+        }
+
+        Debug.LogFormat("HIT: {0}", collision.gameObject.name);
+
     }
 }
