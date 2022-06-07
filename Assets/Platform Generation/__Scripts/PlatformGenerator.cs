@@ -91,6 +91,9 @@ public class PlatformGenerator : MonoBehaviour
             /* update the platformQueue */
             platformQueue.Enqueue(platform);
             platform=platformQueue.Dequeue();
+
+            /* reset the color of the sprite */
+            letterPlatform.ResetSprite();
         }
     }
 
