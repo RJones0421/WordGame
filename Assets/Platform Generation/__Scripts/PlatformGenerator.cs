@@ -42,7 +42,7 @@ public class PlatformGenerator : MonoBehaviour
         /* Initial generation of platforms */
         for (int i=0; i<platformMaxCount; i++){
             /* Position of the new platform */
-            while(Physics2D.OverlapCircle(spawnPosition, 1.2f, (1 << 7)) != null) {
+            while(Physics2D.OverlapCapsule(spawnPosition, new Vector2(2.0f,4.0f), CapsuleDirection2D.Vertical, 0, (1 << 7)) != null) {
                 spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
                 spawnPosition.x=Random.Range(-1.0f*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }
@@ -74,7 +74,7 @@ public class PlatformGenerator : MonoBehaviour
             // Debug.Log("Updating platform");
 
             /* update the position to be the highest platform */
-            while(Physics2D.OverlapCircle(spawnPosition, 1.2f, (1 << 7)) != null) {
+            while(Physics2D.OverlapCapsule(spawnPosition, new Vector2(2.0f,4.0f), CapsuleDirection2D.Vertical, 0, (1 << 7)) != null) {
                 spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
                 spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }     
