@@ -18,6 +18,10 @@ public class ScoreUtils : MonoBehaviour
         
     }
 
+    public static void clearCollectedWords(){
+        wordsCollected.Clear();
+    }
+
     public static int updateAndGetHighsScore(int score){
         try{
             int prevHighscore = PlayerPrefs.GetInt(highscore_keyname);
@@ -68,7 +72,7 @@ public class ScoreUtils : MonoBehaviour
         return retVal;
     }
 
-    public static void hideGameObjects(bool toHide){
+    public static void unhideGameObjects(bool toHide){
         try{
             //hide other gameobjects
             GameObject inputFieldGo = GameObject.Find("Player");

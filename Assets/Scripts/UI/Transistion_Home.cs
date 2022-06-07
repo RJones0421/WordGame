@@ -20,7 +20,7 @@ public class Transistion_Home : MonoBehaviour
     public void transistionHome()
     {
         //unhide other gameobjects
-        ScoreUtils.hideGameObjects(true);
+        ScoreUtils.unhideGameObjects(true);
         SceneManager.LoadScene("MainMenu");
     }
 

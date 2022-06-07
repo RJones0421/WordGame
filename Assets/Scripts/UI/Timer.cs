@@ -82,7 +82,10 @@ public class Timer : MonoBehaviour
                         inputFieldCo.text = ScoreUtils.getTopKwordsCollected(5);
 
                         //hide other gameobjects
-                        ScoreUtils.hideGameObjects(false);
+                        ScoreUtils.unhideGameObjects(false);
+
+                        //Clear collected words list
+                        ScoreUtils.clearCollectedWords();
                     }
             }
         } catch(Exception e){
