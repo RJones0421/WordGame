@@ -5076,7 +5076,7 @@ GameObject:
   - component: {fileID: 1562285379}
   - component: {fileID: 1562285378}
   m_Layer: 5
-  m_Name: Highscore (1)
+  m_Name: Highscore_Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7257,7 +7257,7 @@ GameObject:
   - component: {fileID: 1983162996}
   - component: {fileID: 1983162995}
   m_Layer: 5
-  m_Name: CurrentScore (1)
+  m_Name: CurrentScore_Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7672,7 +7672,7 @@ GameObject:
   - component: {fileID: 2083377328}
   - component: {fileID: 2083377327}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Result
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
