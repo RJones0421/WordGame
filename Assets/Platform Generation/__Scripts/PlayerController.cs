@@ -73,13 +73,4 @@ public class PlayerController : MonoBehaviour
             walls[1].transform.position = new Vector3(halfWidth, currHeight, 0.0f);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        LetterPlatform platform = collision.gameObject.GetComponent<LetterPlatform>();
-        if (platform != null)
-        {
-            platform.DarkenSprite();
-        }
-    }
 }

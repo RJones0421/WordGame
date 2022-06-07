@@ -8014,6 +8014,7 @@ GameObject:
   - component: {fileID: 5664284317161548647}
   - component: {fileID: 5664284317161548643}
   - component: {fileID: 5664284317161548642}
+  - component: {fileID: 5664284317161548648}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -8038,6 +8039,18 @@ MonoBehaviour:
   allowMouseMovement: 0
   wallPrefab: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
   walls: []
+--- !u!114 &5664284317161548648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664284317161548646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995898493caa10a4ea461fcc22bb6434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6307361623816832209
 PrefabInstance:
   m_ObjectHideFlags: 0
