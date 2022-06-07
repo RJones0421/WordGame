@@ -46,12 +46,11 @@ public class OldPlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (started) rb.velocity = new Vector2(rb.velocity.x, 10.0f);
-<<<<<<< HEAD
+
 
         /* Darken the color of the sprite.
          * This should probably be moved somewhere else when we change the condition for collecting a letter */
         collision.gameObject.GetComponent<LetterPlatform>().DarkenSprite();
-=======
->>>>>>> parent of 91f25dc (Revert "Merge branch 'main' of https://github.com/RJones0421/WordGame into main")
+
     }
 }
