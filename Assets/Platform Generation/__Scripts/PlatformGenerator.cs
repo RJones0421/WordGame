@@ -98,7 +98,7 @@ public class PlatformGenerator : MonoBehaviour
     }
 
     public int LetterValue() {
-        return LetterSpawning.GetLetterStatic();
+        return LetterSpawning.GetLetterStatic();  
     }
 
 
