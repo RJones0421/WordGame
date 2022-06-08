@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject wallPrefab;
     public List<GameObject> walls;
+    private PlatformEffector2D effector;
 
     private bool mouseOnScreen {
         get {
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
 
-        Debug.LogFormat("X INPUT: {0}", inputX);
+       // Debug.LogFormat("X INPUT: {0}", inputX);
 
         // Only allow upward input
         if (inputY < 0.0f)
@@ -77,8 +78,15 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         LetterPlatform platform = collision.gameObject.GetComponent<LetterPlatform>();
+        effector = collision.gameObject.GetComponent<PlatformEffector2D>();
         if (platform != null)
         {
+            if(effector != null){
+                Debug.Log("hit effector");
+            }
+            else{
+               // Debug.Log("didn't work");
+            }
             platform.DarkenSprite();
         }
     }
