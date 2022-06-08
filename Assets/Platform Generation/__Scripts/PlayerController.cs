@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
 
     public bool allowMouseMovement;
 
-    private Vector2 down;
+    private bool jump;
+    private bool air;
+
     private Rigidbody2D rb;
 
     private bool MouseOnScreen {
@@ -22,30 +24,36 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        jump = false;
+        air = true;
         halfWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - GetComponent<BoxCollider2D>().size.x / 2;
-        down = Vector2.down * 2;
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Maintain constant downward velocity to replace gravity
-        rb.velocity = down;
-
         float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
 
-        // Only allow upward input
-        if (inputY < 0.0f)
-        {
-            inputY = 0.0f;
-        }
-
-        Vector3 movement = new Vector3(inputX, inputY, 0);
+        Vector3 movement = new Vector3(inputX, 0, 0);
         movement *= Time.deltaTime * movementSpeed;
 
         transform.Translate(movement);
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (!jump && !air)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+            }
+
+            jump = true;
+            air = true;
+        }
+        else
+        {
+            jump = false;
+        }
 
         if (allowMouseMovement && MouseOnScreen)
         {
@@ -83,6 +91,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        air = false;
+
         LetterPlatform platform = collision.gameObject.GetComponent<LetterPlatform>();
         if (platform != null)
         {
