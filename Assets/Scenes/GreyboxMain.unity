@@ -5150,18 +5150,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 481691459583725034, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
-      propertyPath: movementSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 481691459583725034, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
-      propertyPath: allowMouseMovement
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5664284316386886153, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 5664284316386886154, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: m_RootOrder
       value: 2

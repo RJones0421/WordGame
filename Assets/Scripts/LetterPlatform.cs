@@ -40,6 +40,7 @@ public class LetterPlatform : MonoBehaviour
     public void ResetSprite()
     {
         spriteRenderer.color = Color.white;
+        isCollected = false;
     }
 
     public void CollectLetter()
