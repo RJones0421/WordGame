@@ -10,7 +10,10 @@ public class LetterSpawning : MonoBehaviour
 	// Constant of letters appearing with same distribution from scrabble
 	private static string LETTERS = "AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ";
 
-	private static string LETTERS_LOWER = "aaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnoooooooooppqrrrrrrssssttttttuuuuvvwwxyyz";
+	// Odds out of 100 for the platform to be without a letter
+	private static int EMPTY_FREQ = 40;
+
+	// private static string LETTERS_LOWER = "aaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnoooooooooppqrrrrrrssssttttttuuuuvvwwxyyz";
 
 	private string lettersAvailable;
 
@@ -57,6 +60,9 @@ public class LetterSpawning : MonoBehaviour
 
 	public static int GetLetterStatic()
 	{
+		if (EMPTY_FREQ >= Random.Range(1,101)) {
+			return 0;
+		}
 		int len = LETTERS.Length;
 		return LETTERS[Random.Range(0,len)] - 64;
 	}
