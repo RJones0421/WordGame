@@ -25,7 +25,10 @@ public class Word : MonoBehaviour
 
         int score = evaluator.SubmitWord(word);
 
-        if (score != 0) letters.Clear();
+        if (score != 0){
+            letters.Clear();
+            ScoreUtils.addWordToCollection(word,score);
+        }
 
         return score;
 
