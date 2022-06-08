@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Deprecated Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/LetterClassWork.unity
-    guid: 8100c24fd55199a41bc6fc0936cef449
+    path: Assets/Scenes/MainMenu.unity
+    guid: c587390253e8246eea71fc8163c8b700
+  - enabled: 1
+    path: Assets/Scenes/GreyboxMain.unity
+    guid: 470217b540ac56744a9204f1b25bb504
   m_configObjects: {}

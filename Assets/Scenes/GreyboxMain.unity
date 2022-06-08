@@ -179,6 +179,10 @@ PrefabInstance:
       value: Platform Generator
       objectReference: {fileID: 0}
     - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+      propertyPath: platformMaxCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
       propertyPath: spawnPositionWidthScale
       value: 0.35
       objectReference: {fileID: 0}
@@ -5152,7 +5156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 481691459583725034, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: allowMouseMovement
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5664284316386886153, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: m_Constraints
