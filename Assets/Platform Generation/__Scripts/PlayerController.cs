@@ -5,18 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed;
-    public float halfWidth;
-    private float wallRotate = 90.0f;
+    private float halfWidth;
 
     public bool allowMouseMovement;
 
     private Vector2 down;
     private Rigidbody2D rb;
 
-    public GameObject wallPrefab;
-    public List<GameObject> walls;
-
-    private bool mouseOnScreen {
+    private bool MouseOnScreen {
         get {
             return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
                 Input.mousePosition.y >= 0.0f && Input.mousePosition.y <= Screen.height;
@@ -26,14 +22,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        halfWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - GetComponent<BoxCollider2D>().size.x / 2;
         down = Vector2.down * 2;
         rb = GetComponent<Rigidbody2D>();
-
-        walls.Add(Instantiate(wallPrefab, Vector3.left * halfWidth, Quaternion.identity));
-        walls[0].transform.Rotate(Vector3.back * wallRotate);
-
-        walls.Add(Instantiate(wallPrefab, Vector3.right * halfWidth, Quaternion.identity));
-        walls[1].transform.Rotate(Vector3.forward, wallRotate);
     }
 
     // Update is called once per frame
@@ -44,8 +35,6 @@ public class PlayerController : MonoBehaviour
 
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
-
-        Debug.LogFormat("X INPUT: {0}", inputX);
 
         // Only allow upward input
         if (inputY < 0.0f)
@@ -58,9 +47,29 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(movement);
 
-        if (allowMouseMovement && mouseOnScreen)
+        if (allowMouseMovement && MouseOnScreen)
         {
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f);
+        }
+
+        if (transform.position.x > halfWidth)
+        {
+            transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+
+            Debug.Log("SUBMIT RIGHT");
+
+            // Submit
+            // Word::SubmitWord("word");
+        }
+
+        if (transform.position.x < -halfWidth)
+        {
+            transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+
+            Debug.Log("SUBMIT LEFT");
+
+            // Submit
+            // Word::SubmitWord("word");
         }
 
         // Camera and walls follow as long as you go up
@@ -69,8 +78,6 @@ public class PlayerController : MonoBehaviour
         if (camHeight < currHeight)
         {
             Camera.main.transform.position = new Vector3(0.0f, currHeight, -1.0f);
-            walls[0].transform.position = new Vector3(-halfWidth, currHeight, 0.0f);
-            walls[1].transform.position = new Vector3(halfWidth, currHeight, 0.0f);
         }
     }
 

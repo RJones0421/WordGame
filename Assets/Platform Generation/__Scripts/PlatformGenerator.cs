@@ -24,7 +24,7 @@ public class PlatformGenerator : MonoBehaviour
     private float DeathzoneHeight; 
     public float DeathzoneHeightScale=1.25f;
     
-    public float spawnPositionWidthScale = 0.8f;
+    public float spawnPositionWidthScale = 0.3f;
     public float spawnPositionHeightScale = 1.0f;
 
     public LetterClass[] letterObjectArray;
@@ -98,7 +98,7 @@ public class PlatformGenerator : MonoBehaviour
     }
 
     public int LetterValue() {
-        return LetterSpawning.GetLetterStatic();
+        return LetterSpawning.GetLetterStatic();  
     }
 
 
