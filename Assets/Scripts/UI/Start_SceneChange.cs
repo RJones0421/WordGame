@@ -19,7 +19,7 @@ public class Start_SceneChange : MonoBehaviour
 
     public void NextScene()
     {
-        SceneManager.LoadScene("FirstPrototype");
+        SceneManager.LoadScene(1);
     }
 
 }
