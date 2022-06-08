@@ -15,6 +15,8 @@ public class Word : MonoBehaviour
 
     private int currentLetterBox = 0;
 
+    public GameObject timer;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return)) submitWord();
@@ -45,13 +47,17 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
+        //Debug.Log("Word: " + word);
+
         int score = evaluator.SubmitWord(word);
 
         letters.Clear();
         foreach (SpriteRenderer sr in sprites) sr.sprite = defaultSprite;
         currentLetterBox = 0;
 
-        return score;
+        timer.GetComponent<Timer>().AddTime(score / 100);
+        Debug.Log("Time Added: " + score / 100);
 
+        return score;
     }
 }

@@ -94,4 +94,9 @@ public class Timer : MonoBehaviour
         }
 
     }
+
+    public void AddTime(float amount)
+    {
+        timeLeft += amount;
+    }
 }

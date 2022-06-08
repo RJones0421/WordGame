@@ -56,6 +56,8 @@ public class WordEvaluator : MonoBehaviour
 
 	public int SubmitWord(string word)
 	{
+		Debug.Log(IsValidWord(word));
+
 		if (IsValidWord(word))
 		{
 			return ScoreWord(word);
@@ -68,6 +70,8 @@ public class WordEvaluator : MonoBehaviour
 
 	private int ScoreWord(string word)
 	{
+		Debug.Log("Word: " + word);
+
 		int score = 0;
 		word = word.ToUpper();
 
