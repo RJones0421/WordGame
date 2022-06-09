@@ -35,6 +35,12 @@ public class Word : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return)) submitWord();
     }
 
+    public void SetSidebars(List<GameObject> walls)
+    {
+        leftSidebar = walls[0].GetComponent<SpriteRenderer>();
+        rightSidebar = walls[1].GetComponent<SpriteRenderer>();
+    }
+
     public bool addLetter(LetterClass newLetter)
     {
         if (newLetter.Letter == '_') return false;
@@ -50,12 +56,12 @@ public class Word : MonoBehaviour
             // Update Sidebars
             bool valid = evaluator.IsValidWord(word);
             if (valid) {
-                //leftSidebar.color = Color.green;
-                //rightSidebar.color = Color.green;
+                leftSidebar.color = Color.green;
+                rightSidebar.color = Color.green;
             }
             else {
-                //leftSidebar.color = Color.red;
-                //rightSidebar.color = Color.red;
+                leftSidebar.color = Color.red;
+                rightSidebar.color = Color.red;
             }
         }
 
