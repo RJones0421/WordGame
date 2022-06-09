@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
         if (allowMouseMovement && MouseOnScreen)
         {
-            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * movementSpeed);
         }
 
         if (transform.position.x > halfWidth)
