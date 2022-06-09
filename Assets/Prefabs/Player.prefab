@@ -146,5 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857988c2cfaeca842824416e72767db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 25
   allowMouseMovement: 1
+  wallPrefab: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
+  walls: []
+  gameOverCanvas: {fileID: 0}
+  timer: {fileID: 0}
