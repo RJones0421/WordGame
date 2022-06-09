@@ -124,7 +124,7 @@ public class OldPlayerController : MonoBehaviour
         {
             Debug.LogFormat("LOSE, PLAYER HIT THE LOSE FLOOR");
             // resets the entire game state to the inital game state(also resets timer)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
