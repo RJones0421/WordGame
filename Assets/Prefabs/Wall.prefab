@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5842006565022344677}
   - component: {fileID: 5842006565022344678}
-  - component: {fileID: 5842006565022344672}
   - component: {fileID: 6991712661119014816}
-  - component: {fileID: 5842006565022344679}
   - component: {fileID: 5798557876112865332}
   m_Layer: 0
   m_Name: Wall
@@ -30,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5842006565022344673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.99, y: 0.67, z: 0}
-  m_LocalScale: {x: 5, y: 0.5, z: 1}
+  m_LocalScale: {x: 10, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5842006565022344672
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5842006565022344673}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.5, y: 2.5}
-  m_EdgeRadius: 0
 --- !u!114 &6991712661119014816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,25 +101,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!251 &5842006565022344679
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5842006565022344673}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 1
-  m_UseSideFriction: 0
-  m_UseSideBounce: 1
-  m_SideArc: 1
 --- !u!114 &5798557876112865332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,5 +113,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ed234aedde243f6bd6339b831320d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterVal: 0
-  score: 0
