@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
         word = GameObject.Find("Word").GetComponent<Word>();
 
-        halfWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - GetComponent<BoxCollider2D>().size.x / 2;
+        halfWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - wallPrefab.GetComponent<Renderer>().bounds.size.y / 2;
         rb = GetComponent<Rigidbody2D>();
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * halfWidth, Quaternion.identity));
@@ -43,6 +43,10 @@ public class PlayerController : MonoBehaviour
 
         walls.Add(Instantiate(wallPrefab, Vector3.right * halfWidth, Quaternion.identity));
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
+
+        word.SetSidebars(walls);
+
+        halfWidth -= wallPrefab.GetComponent<Renderer>().bounds.size.y / 2 + GetComponent<BoxCollider2D>().size.x / 2;
     }
 
     // Update is called once per frame
@@ -99,8 +103,17 @@ public class PlayerController : MonoBehaviour
         if (camHeight < currHeight)
         {
             Camera.main.transform.position = new Vector3(0.0f, currHeight, -1.0f);
-            walls[0].transform.position = new Vector3(-halfWidth, currHeight, 0.0f);
-            walls[1].transform.position = new Vector3(halfWidth, currHeight, 0.0f);
+            walls[0].transform.position = new Vector3(walls[0].transform.position.x, currHeight, 0.0f);
+            walls[1].transform.position = new Vector3(walls[1].transform.position.x, currHeight, 0.0f);
+        }
+
+        // Handle death
+        float screenPos = Camera.main.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
+        if (screenPos < 0.0f)
+        {
+            Debug.Log("YOU DIED");
+
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -108,10 +121,13 @@ public class PlayerController : MonoBehaviour
     {
         air = false;
 
-        LetterPlatform platform = collision.gameObject.GetComponent<LetterPlatform>();
-        if (platform != null)
+        if (rb.velocity.y == 0.0f)
         {
-            platform.DarkenSprite();
+            LetterPlatform platform = collision.gameObject.GetComponent<LetterPlatform>();
+            if (platform != null)
+            {
+                platform.CollectLetter();
+            }
         }
     }
 }
