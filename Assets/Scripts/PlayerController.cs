@@ -6,54 +6,47 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed;
+    private bool started = false;
+    private Rigidbody2D rb;
+    private BoxCollider2D box;
+    private Camera mainCamera;
+
     private float halfWidth;
-    private float wallRotate = 90.0f;
 
     public bool allowMouseMovement;
 
-    private bool jump;
-    private bool air;
-
-    private Rigidbody2D rb;
-
+    private Word word;
+    
+    private float wallRotate = 90.0f;
     public GameObject wallPrefab;
     public List<GameObject> walls;
 
-    private Word word;
+    public GameObject gameOverCanvas;
+    public Timer timer;
+    public GameObject tempTutroial;
 
-    private bool MouseOnScreen {
-        get {
+    private bool MouseOnScreen
+    {
+        get
+        {
             return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
                 Input.mousePosition.y >= 0.0f && Input.mousePosition.y <= Screen.height;
         }
     }
 
-    private Vector2 originalPos;
-    private Vector3 originalCameraPosition;
-
-    private Vector3 players_start_position;
-    Renderer m_Renderer;
-    private bool spawned = false;
-    private PlatformEffector2D effector;
-
-
+    private void Awake()
+    {
+        word = GameObject.Find("Word").GetComponent<Word>();
+        rb = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
+        mainCamera = Camera.main;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        jump = false;
-        air = true;
-
-        word = GameObject.Find("Word").GetComponent<Word>();
-
-        halfWidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - wallPrefab.GetComponent<Renderer>().bounds.size.y / 2;
-        rb = GetComponent<Rigidbody2D>();
-        effector = GetComponent<PlatformEffector2D>();
-        // mc = GetComponent<MeshCollider>();
-        players_start_position = rb.transform.position;
-        m_Renderer = GetComponent<Renderer>();
-        spawned = true;
-
+        gameOverCanvas.SetActive(false);
+        halfWidth = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - wallPrefab.GetComponent<Renderer>().bounds.size.y / 2;
         walls.Add(Instantiate(wallPrefab, Vector3.left * halfWidth, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
 
@@ -61,8 +54,6 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
-
-        halfWidth -= wallPrefab.GetComponent<Renderer>().bounds.size.y / 2 + GetComponent<BoxCollider2D>().size.x / 2;
     }
 
     // Update is called once per frame
@@ -77,17 +68,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (!jump && !air)
+            if (!started)
             {
+                tempTutroial.SetActive(false);
+                timer.StartTimer();
                 rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+                box.isTrigger = true;
+                started = true;
             }
-
-            jump = true;
-            air = true;
-        }
-        else
-        {
-            jump = false;
         }
 
         if (allowMouseMovement && MouseOnScreen)
@@ -95,15 +83,17 @@ public class PlayerController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * movementSpeed);
         }
 
+        // Check for right submission
         if (transform.position.x > halfWidth)
         {
             transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
-
+            
             Debug.Log("SUBMIT RIGHT");
 
             word.submitWord();
         }
 
+        // Check for left submission
         if (transform.position.x < -halfWidth)
         {
             transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
@@ -113,60 +103,38 @@ public class PlayerController : MonoBehaviour
             word.submitWord();
         }
 
-        // checks if the player is visible on camera or not
-        // if (!m_Renderer.isVisible && spawned)
-        // {
-        //     Debug.Log("player is NOT visible");
-        //     // transform.position = players_start_position;
-        //     // Camera.main.transform.position = players_start_position;
-        // }
-
         // Camera and walls follow as long as you go up
-        float camHeight = Camera.main.transform.position.y;
+        float camHeight = mainCamera.transform.position.y;
         float currHeight = transform.position.y;
         if (camHeight < currHeight)
         {
-            Camera.main.transform.position = new Vector3(0.0f, currHeight, -1.0f);
+            mainCamera.transform.position = new Vector3(0.0f, currHeight, -1.0f);
             walls[0].transform.position = new Vector3(walls[0].transform.position.x, currHeight, 0.0f);
             walls[1].transform.position = new Vector3(walls[1].transform.position.x, currHeight, 0.0f);
         }
-
+        
         // Handle death
-        float screenPos = Camera.main.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
+        float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
         if (screenPos < 0.0f)
         {
             Debug.Log("YOU DIED");
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            gameOverCanvas.SetActive(true);
+            timer.StopTimer();
+            timer.SetValues();
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        air = false;
-
-        if (rb.velocity.y == 0.0f)
+        if (started && rb.velocity.y < 0)
         {
-            LetterPlatform platform = collision.gameObject.GetComponent<LetterPlatform>();
-            if (platform != null)
+            rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+            LetterPlatform platform;
+            if (platform = collision.GetComponent<LetterPlatform>())
             {
                 platform.CollectLetter();
             }
         }
-
-
-        // Determines if player has gone past the camera and collided with the bottom border
-        // In the event of a bottom border collision, all actions associated with a loss should go here
-        // 1. Player loses a life 2. camera reset 3. player position reset
-        if (collision.gameObject.name == "Lose Floor")
-        {
-        	Debug.LogFormat("LOSE, PLAYER HIT THE LOSE FLOOR");
-            // resets the entire game state to the inital game state(also resets timer)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-        }
-
-        Debug.LogFormat("HIT: {0}", collision.gameObject.name);
-
     }
 }
