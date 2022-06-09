@@ -18,8 +18,18 @@ public class Word : MonoBehaviour
 
     private int currentLetterBox = 0;
 
+
+    public GameObject timer;
+
+    private Timer timerClass;
+    
     private string word = "";
 
+    private void Awake()
+    {
+        timerClass = timer.GetComponent<Timer>();
+    }
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return)) submitWord();
@@ -63,7 +73,10 @@ public class Word : MonoBehaviour
         foreach (SpriteRenderer sr in sprites) sr.sprite = defaultSprite;
         currentLetterBox = 0;
 
-        return score;
+        float timeGained = Mathf.Clamp(score / 50, 0, timerClass.GetMaxTime() - timerClass.GetTime());
+        timerClass.AddTime(timeGained);
+        Debug.Log("Time gained: " + timeGained);
 
+        return score;
     }
 }
