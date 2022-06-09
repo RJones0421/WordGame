@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OldPlayerController : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class OldPlayerController : MonoBehaviour
         }
     }
 
+    private Vector3 players_start_position;
+    Renderer m_Renderer; 
+    private bool spawned = false; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +40,9 @@ public class OldPlayerController : MonoBehaviour
         box = GetComponent<BoxCollider2D>();
         effector = GetComponent<PlatformEffector2D>();
         // mc = GetComponent<MeshCollider>();
+        players_start_position = rb.transform.position;
+        m_Renderer = GetComponent<Renderer>();
+        spawned = true;
     }
 
     // Update is called once per frame
@@ -82,6 +90,15 @@ public class OldPlayerController : MonoBehaviour
             word.submitWord();
         }
 
+
+        // if (!m_Renderer.isVisible && spawned)
+        // {
+        //     Debug.Log("player is NOT visible");
+        //     // transform.position = players_start_position;
+        //     // Camera.main.transform.position = players_start_position;
+        // }
+
+
         // Camera and walls follow as long as you go up
         float camHeight = Camera.main.transform.position.y;
         float currHeight = transform.position.y;
@@ -101,6 +118,13 @@ public class OldPlayerController : MonoBehaviour
             {
                 platform.CollectLetter();
             }
+        }
+
+        if (collision.gameObject.name == "Lose Floor")
+        {
+            Debug.LogFormat("LOSE, PLAYER HIT THE LOSE FLOOR");
+            // resets the entire game state to the inital game state(also resets timer)
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
