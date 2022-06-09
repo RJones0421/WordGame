@@ -47,8 +47,6 @@ public class WordEvaluator : MonoBehaviour
 		letterValues.Add('X', 8);
 		letterValues.Add('Y', 4);
 		letterValues.Add('Z', 10);
-
-		Debug.Log(wordList.Contains("TEST"));
 	}
 
 	public bool IsValidWord(string word)

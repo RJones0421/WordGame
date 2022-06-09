@@ -99,4 +99,15 @@ public class Timer : MonoBehaviour
     {
         timeLeft += amount;
     }
+
+    public float GetTime()
+    {
+        return timeLeft;
+    }
+
+    public float GetMaxTime()
+    {
+        return maxTime;
+    }
+
 }

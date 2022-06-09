@@ -60,8 +60,9 @@ public class Word : MonoBehaviour
         foreach (SpriteRenderer sr in sprites) sr.sprite = defaultSprite;
         currentLetterBox = 0;
 
-        timerClass.AddTime(score / 100);
-        Debug.Log("Time Added: " + score / 100);
+        float timeGained = Mathf.Clamp(score / 50, 0, timerClass.GetMaxTime() - timerClass.GetTime());
+        timerClass.AddTime(timeGained);
+        Debug.Log("Time gained: " + timeGained);
 
         return score;
     }
