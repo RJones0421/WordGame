@@ -19,7 +19,7 @@ public class WordEvaluator : MonoBehaviour
 		{
 			wordList.Add(word, true);
 		}
-		
+
 		letterValues = new Hashtable();
 		letterValues.Add('A', 1);
 		letterValues.Add('B', 3);
@@ -47,7 +47,9 @@ public class WordEvaluator : MonoBehaviour
 		letterValues.Add('X', 8);
 		letterValues.Add('Y', 4);
 		letterValues.Add('Z', 10);
-    }
+
+		Debug.Log(wordList.Contains("TEST"));
+	}
 
 	public bool IsValidWord(string word)
 	{
@@ -56,8 +58,6 @@ public class WordEvaluator : MonoBehaviour
 
 	public int SubmitWord(string word)
 	{
-		Debug.Log(IsValidWord(word));
-
 		if (IsValidWord(word))
 		{
 			return ScoreWord(word);
@@ -70,8 +70,6 @@ public class WordEvaluator : MonoBehaviour
 
 	private int ScoreWord(string word)
 	{
-		Debug.Log("Word: " + word);
-
 		int score = 0;
 		word = word.ToUpper();
 

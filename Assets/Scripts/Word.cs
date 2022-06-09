@@ -47,8 +47,6 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
-        //Debug.Log("Word: " + word);
-
         int score = evaluator.SubmitWord(word);
 
         letters.Clear();
