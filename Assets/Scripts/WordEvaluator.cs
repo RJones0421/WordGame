@@ -6,20 +6,20 @@ public class WordEvaluator : MonoBehaviour
 {
 	public TextAsset dictionary;
 	
-	private Hashtable wordList;
+	private Dictionary<string, bool> wordList = new Dictionary<string, bool>();
 	
 	private Hashtable letterValues;
 	
     void Awake()
     {
         string allWords = dictionary.text;
-		wordList = new Hashtable();
-		
-		foreach (string word in allWords.Split("\n"[0]))
-		{
-			wordList.Add(word, true);
+
+        foreach (string word in allWords.Split("\n"[0]))
+        {
+	        // wordList[word.Trim()] = true;
+	        wordList.Add(word.Trim(), true);
 		}
-		
+
 		letterValues = new Hashtable();
 		letterValues.Add('A', 1);
 		letterValues.Add('B', 3);
@@ -47,11 +47,11 @@ public class WordEvaluator : MonoBehaviour
 		letterValues.Add('X', 8);
 		letterValues.Add('Y', 4);
 		letterValues.Add('Z', 10);
-    }
+	}
 
 	public bool IsValidWord(string word)
 	{
-		return wordList.Contains(word.ToUpper());
+		return wordList.ContainsKey(word.ToUpper());
 	}
 
 	public int SubmitWord(string word)
