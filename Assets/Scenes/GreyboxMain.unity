@@ -5450,8 +5450,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 481691459583725034, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+--- !u!1 &1580493164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5664284316386886157, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+  m_PrefabInstance: {fileID: 1580493163}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1580493165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580493164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86c60cdbbb0b48a198471be4d4fc2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyMovementSpeed: 10
+  mouseMovementSpeed: 15
+  allowMouseMovement: 0
+  wallPrefab: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
+  walls: []
 --- !u!1 &1588609028
 GameObject:
   m_ObjectHideFlags: 0
