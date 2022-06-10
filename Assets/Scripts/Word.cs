@@ -83,6 +83,9 @@ public class Word : MonoBehaviour
         timerClass.AddTime(timeGained);
         Debug.Log("Time gained: " + timeGained);
 
+        leftSidebar.color = Color.white;
+        rightSidebar.color = Color.white;
+
         return score;
     }
 }
