@@ -86,6 +86,8 @@ public class Word : MonoBehaviour
         Int32.TryParse(scoreText.text, out int currentScore);
         scoreText.text = (currentScore + score).ToString();
 
+        ScoreUtils.addWordToCollection(word, score);
+
         letters.Clear();
         word = "";
         foreach (SpriteRenderer sr in sprites) sr.sprite = defaultSprite;
