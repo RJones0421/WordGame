@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5842006565022344677}
   - component: {fileID: 5842006565022344678}
-  - component: {fileID: 5842006565022344672}
   - component: {fileID: 6991712661119014816}
-  - component: {fileID: 5842006565022344679}
   - component: {fileID: 5798557876112865332}
   m_Layer: 0
   m_Name: Wall
@@ -30,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5842006565022344673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.99, y: 0.67, z: 0}
-  m_LocalScale: {x: 5, y: 0.5, z: 1}
+  m_LocalScale: {x: 10, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,32 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5842006565022344672
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5842006565022344673}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: d0608dbf605f441b3ac9f2026b6c554c, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.5, y: 2.5}
-  m_EdgeRadius: 0
 --- !u!114 &6991712661119014816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,25 +101,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!251 &5842006565022344679
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5842006565022344673}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 1
-  m_UseSideFriction: 0
-  m_UseSideBounce: 1
-  m_SideArc: 1
 --- !u!114 &5798557876112865332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,32 +113,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ed234aedde243f6bd6339b831320d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteArray:
-  - {fileID: 21300000, guid: c824a350cbeb644d68986507cdea5108, type: 3}
-  - {fileID: 21300000, guid: 77bc50aad14c446bc8a13f4c4cc3a3cd, type: 3}
-  - {fileID: 21300000, guid: 3cfe40dbfc5674b2291f0436d994bfe7, type: 3}
-  - {fileID: 21300000, guid: 786dcd2a2423d4bc98a7ea48cb4a55c6, type: 3}
-  - {fileID: 21300000, guid: d05d224960a8644baa1ee7958bfa7448, type: 3}
-  - {fileID: 21300000, guid: 850fe5c68196a4ea39363060b5dad5cb, type: 3}
-  - {fileID: 21300000, guid: 78ea3183ad0224a7eb555e49de4ab89c, type: 3}
-  - {fileID: 21300000, guid: 5852c6583e8974dbeb8a6b054817c35c, type: 3}
-  - {fileID: 21300000, guid: 4a2c64af942174342ac776cbe99d5ea5, type: 3}
-  - {fileID: 21300000, guid: 49da0aaf574dd4fa8bf67fe24bdd2da0, type: 3}
-  - {fileID: 21300000, guid: 0fe06a1b55957403ea5d3b40e1bc28f1, type: 3}
-  - {fileID: 21300000, guid: 6baa124f15b4946d2b089f89527e74ea, type: 3}
-  - {fileID: 21300000, guid: 3ba718dbad665418bad66af8aa137be3, type: 3}
-  - {fileID: 21300000, guid: c8d75b98ff58c4bc8bbc77426cac1152, type: 3}
-  - {fileID: 21300000, guid: 25665e819815b44298450657a7e04d31, type: 3}
-  - {fileID: 21300000, guid: 8c98f626df7494b7396acd1b71e7f523, type: 3}
-  - {fileID: 21300000, guid: e3e3853fe73f2461d837c33e3934dc4e, type: 3}
-  - {fileID: 21300000, guid: a3bed452fccaa4f97bf37e2bcb9c1b66, type: 3}
-  - {fileID: 21300000, guid: c4c614868de20438aa6819210644e36d, type: 3}
-  - {fileID: 21300000, guid: 0dfd3d5df9c9f4765920d31dd3fb8364, type: 3}
-  - {fileID: 21300000, guid: 3e444abf65b3c4965abedd96a8428f74, type: 3}
-  - {fileID: 21300000, guid: b5122dbef00344f839954a2090de921f, type: 3}
-  - {fileID: 21300000, guid: 3f3cbd99eb6c743fab6ebb8696b7f934, type: 3}
-  - {fileID: 21300000, guid: 420305f6521814e658d32b73b598cb6b, type: 3}
-  - {fileID: 21300000, guid: 83ecc7a730eee4ad382da64023e40c7b, type: 3}
-  - {fileID: 21300000, guid: 7c5cb461296ec429cb8b353434a09b89, type: 3}
-  - {fileID: 21300000, guid: 0d303e33610da4235aced5ad46404ab0, type: 3}
-  letterVal: 0
