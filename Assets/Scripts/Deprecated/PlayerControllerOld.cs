@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerControllerOld : MonoBehaviour
 {
-    public float movementSpeed;
+    public float keyMovementSpeed;
+    public float mouseMovementSpeed;
     private float halfWidth;
     private float wallRotate = 90.0f;
 
@@ -98,7 +99,7 @@ public class PlayerControllerOld : MonoBehaviour
                 float inputX = Input.GetAxis("Horizontal");
 
                 Vector3 movement = new Vector3(inputX, 0, 0);
-                movement *= Time.deltaTime * movementSpeed;
+                movement *= Time.deltaTime * keyMovementSpeed;
 
                 transform.Translate(movement);
             }
@@ -106,7 +107,7 @@ public class PlayerControllerOld : MonoBehaviour
             // Mouse
             if (allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * movementSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
         }
 
