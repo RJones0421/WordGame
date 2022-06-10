@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class Word : MonoBehaviour
 {
@@ -25,9 +27,13 @@ public class Word : MonoBehaviour
     
     private string word = "";
 
+    public GameObject scoreHolder;
+    private TMP_Text scoreText;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
+        scoreText = scoreHolder.GetComponent<TMP_Text>();
     }
     
     void Update()
@@ -76,6 +82,9 @@ public class Word : MonoBehaviour
         // If valid, clear list
 
         int score = evaluator.SubmitWord(word);
+
+        Int32.TryParse(scoreText.text, out int currentScore);
+        scoreText.text = (currentScore + score).ToString();
 
         letters.Clear();
         word = "";
