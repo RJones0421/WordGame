@@ -13,6 +13,8 @@ public class LetterSpawning : MonoBehaviour
 	// Odds out of 100 for the platform to be without a letter
 	private static int EMPTY_FREQ = 40;
 
+	private static bool prev_blank = false;
+
 	// private static string LETTERS_LOWER = "aaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnoooooooooppqrrrrrrssssttttttuuuuvvwwxyyz";
 
 	private string lettersAvailable;
@@ -65,6 +67,22 @@ public class LetterSpawning : MonoBehaviour
 		}
 		int len = LETTERS.Length;
 		return LETTERS[Random.Range(0,len)] - 64;
+	}
+
+	public static int GetLetterNoDoubleBlanks()
+	{
+		if (prev_blank) {
+			prev_blank = false;
+			int len = LETTERS.Length;
+			return LETTERS[Random.Range(0,len)] - 64;
+		}
+
+		if (EMPTY_FREQ >= Random.Range(1,101)) {
+			prev_blank = true;
+			return 0;
+		}
+		int leng = LETTERS.Length;
+		return LETTERS[Random.Range(0,leng)] - 64;
 	}
 
 	// random vowel
