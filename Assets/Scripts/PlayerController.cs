@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +28,9 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
     public GameObject tempTutroial;
 
+    private TMP_Text scoreText;
+    private float playerHeight;
+
     private bool MouseOnScreen
     {
         get
@@ -38,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
+        scoreText = word.scoreHolder.GetComponent<TMP_Text>();
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
         mainCamera = Camera.main;
@@ -122,6 +128,15 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("SUBMIT LEFT");
 
                 word.submitWord();
+            }
+        }
+
+        {
+            if (transform.position.y > playerHeight)
+            {
+                int score = Int32.Parse(scoreText.text);
+                scoreText.text = (score + 1).ToString();
+                playerHeight += 2.5f;
             }
         }
 
