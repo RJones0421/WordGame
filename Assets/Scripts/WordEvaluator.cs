@@ -4,23 +4,13 @@ using UnityEngine;
 
 public class WordEvaluator : MonoBehaviour
 {
-	public TextAsset dictionary;
-	
-	private Dictionary<string, bool> wordList = new Dictionary<string, bool>();
-	
+	[SerializeField] private DictionaryObject dictionaries;
+
 	private Hashtable letterValues;
 	
     void Awake()
     {
-        string allWords = dictionary.text;
-
-        foreach (string word in allWords.Split("\n"[0]))
-        {
-	        // wordList[word.Trim()] = true;
-	        wordList.Add(word.Trim(), true);
-		}
-
-		letterValues = new Hashtable();
+	    letterValues = new Hashtable();
 		letterValues.Add('A', 1);
 		letterValues.Add('B', 3);
 		letterValues.Add('C', 3);
@@ -51,7 +41,7 @@ public class WordEvaluator : MonoBehaviour
 
 	public bool IsValidWord(string word)
 	{
-		return wordList.ContainsKey(word.ToUpper());
+		return dictionaries.VerifyWord(word);
 	}
 
 	public int SubmitWord(string word)
@@ -94,9 +84,4 @@ public class WordEvaluator : MonoBehaviour
 		else
 			return 1.4641f + Mathf.Pow(1.2f, length - 6);
 	}
-
-    void Update()
-    {
-		
-    }
 }
