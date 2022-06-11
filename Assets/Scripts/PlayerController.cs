@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
     public GameObject tempTutroial;
 
-    private TMP_Text scoreText;
+    public GameObject scoreManager;
+    private ScoreManager scoreManagerScript;
     private float playerHeight;
 
     private bool MouseOnScreen
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
-        scoreText = word.scoreHolder.GetComponent<TMP_Text>();
+        scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
         mainCamera = Camera.main;
@@ -134,8 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             if (transform.position.y > playerHeight)
             {
-                int score = Int32.Parse(scoreText.text);
-                scoreText.text = (score + 1).ToString();
+                scoreManagerScript.AddScore(1);
                 playerHeight += 2.5f;
             }
         }

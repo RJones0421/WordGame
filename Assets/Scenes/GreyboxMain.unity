@@ -917,6 +917,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196076976}
   m_CullTransparentMesh: 1
+--- !u!1 &200206583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200206585}
+  - component: {fileID: 200206584}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &200206584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200206583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d6c3e0fef0c9543af3fde18f2b7f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreHolder: {fileID: 1069087908}
+--- !u!4 &200206585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200206583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.4064012, y: 0.55546004, z: -0.09321939}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &252216729
 GameObject:
   m_ObjectHideFlags: 0
@@ -4037,7 +4082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Score - '
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4789,6 +4834,7 @@ MonoBehaviour:
   leftSidebar: {fileID: 0}
   rightSidebar: {fileID: 0}
   timer: {fileID: 533044868}
+  scoreManager: {fileID: 200206583}
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
@@ -5462,15 +5508,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 481691459583725034, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+    - target: {fileID: 1580493165, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: timer
       value: 
       objectReference: {fileID: 533044872}
-    - target: {fileID: 481691459583725034, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+    - target: {fileID: 1580493165, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 200206583}
+    - target: {fileID: 1580493165, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: tempTutroial
       value: 
       objectReference: {fileID: 802502651}
-    - target: {fileID: 481691459583725034, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+    - target: {fileID: 1580493165, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 61575929}
@@ -5523,33 +5573,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 481691459583725034, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+    - {fileID: 4609620195061421663, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
---- !u!1 &1580493164 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5664284316386886157, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
-  m_PrefabInstance: {fileID: 1580493163}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1580493165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1580493164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b58cc81412e3674c84a20155a652014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyMovementSpeed: 10
-  mouseMovementSpeed: 15
-  allowMouseMovement: 0
-  wallPrefab: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
-  walls: []
-  gameOverCanvas: {fileID: 61575929}
-  timer: {fileID: 533044872}
-  tempTutroial: {fileID: 802502651}
 --- !u!1 &1588609028
 GameObject:
   m_ObjectHideFlags: 0
