@@ -39,6 +39,9 @@ public class Word : MonoBehaviour
     {
         leftSidebar = walls[0].GetComponent<SpriteRenderer>();
         rightSidebar = walls[1].GetComponent<SpriteRenderer>();
+
+        leftSidebar.color = Color.gray;
+        rightSidebar.color = Color.gray;
     }
 
     public bool addLetter(LetterClass newLetter)
@@ -83,8 +86,8 @@ public class Word : MonoBehaviour
         timerClass.AddTime(timeGained);
         Debug.Log("Time gained: " + timeGained);
 
-        leftSidebar.color = Color.white;
-        rightSidebar.color = Color.white;
+        leftSidebar.color = Color.gray;
+        rightSidebar.color = Color.gray;
 
         return score;
     }

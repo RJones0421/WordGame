@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float movementSpeed;
+    public float keyMovementSpeed;
+    public float mouseMovementSpeed;
     private bool started = false;
     private Rigidbody2D rb;
     private BoxCollider2D box;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         gameOverCanvas.SetActive(false);
         halfWidth = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - wallPrefab.GetComponent<Renderer>().bounds.size.y / 2;
+
         walls.Add(Instantiate(wallPrefab, Vector3.left * halfWidth, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
 
@@ -54,74 +56,98 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
+
+        halfWidth -= wallPrefab.GetComponent<Renderer>().bounds.size.y / 2 + GetComponent<BoxCollider2D>().size.x / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxis("Horizontal");
-
-        Vector3 movement = new Vector3(inputX, 0, 0);
-        movement *= Time.deltaTime * movementSpeed;
-
-        transform.Translate(movement);
-
-        if (Input.GetButtonDown("Jump"))
+        // Toggle Mouse Movement
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            if (!started)
+            allowMouseMovement = !allowMouseMovement;
+        }
+
+        // Jump
+        {
+            if (Input.GetButtonDown("Jump"))
             {
-                tempTutroial.SetActive(false);
-                timer.StartTimer();
-                rb.velocity = new Vector2(rb.velocity.x, 10.0f);
-                box.isTrigger = true;
-                started = true;
+                if (!started)
+                {
+                    tempTutroial.SetActive(false);
+                    timer.StartTimer();
+                    rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+                    box.isTrigger = true;
+                    started = true;
+                }
             }
         }
 
-        if (allowMouseMovement && MouseOnScreen)
+        // Horizontal controls
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * movementSpeed);
+            // Keys
+            if (!allowMouseMovement)
+            {
+                float inputX = Input.GetAxis("Horizontal");
+
+                Vector3 movement = new Vector3(inputX, 0, 0);
+                movement *= Time.deltaTime * keyMovementSpeed;
+
+                transform.Translate(movement);
+            }
+
+            // Mouse
+            if (allowMouseMovement)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+            }
         }
 
-        // Check for right submission
-        if (transform.position.x > halfWidth)
+        // Word submission
         {
-            transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
-            
-            Debug.Log("SUBMIT RIGHT");
+            if (transform.position.x > halfWidth)
+            {
+                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
 
-            word.submitWord();
-        }
+                Debug.Log("SUBMIT RIGHT");
 
-        // Check for left submission
-        if (transform.position.x < -halfWidth)
-        {
-            transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                word.submitWord();
+            }
 
-            Debug.Log("SUBMIT LEFT");
+            if (transform.position.x < -halfWidth)
+            {
+                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
 
-            word.submitWord();
+                Debug.Log("SUBMIT LEFT");
+
+                word.submitWord();
+            }
         }
 
         // Camera and walls follow as long as you go up
-        float camHeight = mainCamera.transform.position.y;
         float currHeight = transform.position.y;
-        if (camHeight < currHeight)
         {
-            mainCamera.transform.position = new Vector3(0.0f, currHeight, -1.0f);
-            walls[0].transform.position = new Vector3(walls[0].transform.position.x, currHeight, 0.0f);
-            walls[1].transform.position = new Vector3(walls[1].transform.position.x, currHeight, 0.0f);
+            float camHeight = mainCamera.transform.position.y;
+            if (camHeight < currHeight)
+            {
+                mainCamera.transform.position = new Vector3(0.0f, currHeight, -1.0f);
+                walls[0].transform.position = new Vector3(walls[0].transform.position.x, currHeight, 0.0f);
+                walls[1].transform.position = new Vector3(walls[1].transform.position.x, currHeight, 0.0f);
+            }
         }
-        
-        // Handle death
-        float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
-        if (screenPos < 0.0f)
-        {
-            Debug.Log("YOU DIED");
 
-            gameOverCanvas.SetActive(true);
-            timer.StopTimer();
-            timer.SetValues();
+        // Handle death
+        {
+            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
+            if (screenPos < 0.0f)
+            {
+                Debug.Log("YOU DIED");
+
+                gameOverCanvas.SetActive(true);
+                timer.StopTimer();
+                timer.SetValues();
+            }
         }
     }
 

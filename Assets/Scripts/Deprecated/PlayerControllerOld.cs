@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerControllerOld : MonoBehaviour
 {
-    public float movementSpeed;
+    public float keyMovementSpeed;
+    public float mouseMovementSpeed;
     private float halfWidth;
     private float wallRotate = 90.0f;
 
@@ -21,6 +22,10 @@ public class PlayerControllerOld : MonoBehaviour
 
     private Word word;
 
+    public GameObject gameOverCanvas;
+    public Timer timer;
+    public GameObject tempTutroial;
+
     private bool MouseOnScreen {
         get {
             return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
@@ -33,7 +38,6 @@ public class PlayerControllerOld : MonoBehaviour
 
     private Vector3 players_start_position;
     Renderer m_Renderer;
-    private bool spawned = false;
     private PlatformEffector2D effector;
 
 
@@ -41,6 +45,8 @@ public class PlayerControllerOld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOverCanvas.SetActive(false);
+
         jump = false;
         air = true;
 
@@ -52,7 +58,6 @@ public class PlayerControllerOld : MonoBehaviour
         // mc = GetComponent<MeshCollider>();
         players_start_position = rb.transform.position;
         m_Renderer = GetComponent<Renderer>();
-        spawned = true;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * halfWidth, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
@@ -68,76 +73,92 @@ public class PlayerControllerOld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxis("Horizontal");
-
-        Vector3 movement = new Vector3(inputX, 0, 0);
-        movement *= Time.deltaTime * movementSpeed;
-
-        transform.Translate(movement);
-
-        if (Input.GetButtonDown("Jump"))
+        // Toggle Mouse Movement
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            if (!jump && !air)
+            allowMouseMovement = !allowMouseMovement;
+        }
+
+        // Jump
+        {
+            if (Input.GetButtonDown("Jump"))
             {
-                rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+                if (!jump && !air)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+                }
+
+                jump = true;
+                air = true;
+            }
+            else
+            {
+                jump = false;
+            }
+        }
+
+        // Horizontal controls
+        {
+            // Keys
+            if (!allowMouseMovement)
+            {
+                float inputX = Input.GetAxis("Horizontal");
+
+                Vector3 movement = new Vector3(inputX, 0, 0);
+                movement *= Time.deltaTime * keyMovementSpeed;
+
+                transform.Translate(movement);
             }
 
-            jump = true;
-            air = true;
+            // Mouse
+            if (allowMouseMovement)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+            }
         }
-        else
+
+        // Word submission
         {
-            jump = false;
+            if (transform.position.x > halfWidth)
+            {
+                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+
+                Debug.Log("SUBMIT RIGHT");
+
+                word.submitWord();
+            }
+
+            if (transform.position.x < -halfWidth)
+            {
+                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+
+                Debug.Log("SUBMIT LEFT");
+
+                word.submitWord();
+            }
         }
-
-        if (allowMouseMovement && MouseOnScreen)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * movementSpeed);
-        }
-
-        if (transform.position.x > halfWidth)
-        {
-            transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
-
-            Debug.Log("SUBMIT RIGHT");
-
-            word.submitWord();
-        }
-
-        if (transform.position.x < -halfWidth)
-        {
-            transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
-
-            Debug.Log("SUBMIT LEFT");
-
-            word.submitWord();
-        }
-
-        // checks if the player is visible on camera or not
-        // if (!m_Renderer.isVisible && spawned)
-        // {
-        //     Debug.Log("player is NOT visible");
-        //     // transform.position = players_start_position;
-        //     // Camera.main.transform.position = players_start_position;
-        // }
 
         // Camera and walls follow as long as you go up
-        float camHeight = Camera.main.transform.position.y;
         float currHeight = transform.position.y;
-        if (camHeight < currHeight)
         {
-            Camera.main.transform.position = new Vector3(0.0f, currHeight, -1.0f);
-            walls[0].transform.position = new Vector3(walls[0].transform.position.x, currHeight, 0.0f);
-            walls[1].transform.position = new Vector3(walls[1].transform.position.x, currHeight, 0.0f);
+            float camHeight = Camera.main.transform.position.y;
+            if (camHeight < currHeight)
+            {
+                Camera.main.transform.position = new Vector3(0.0f, currHeight, -1.0f);
+                walls[0].transform.position = new Vector3(walls[0].transform.position.x, currHeight, 0.0f);
+                walls[1].transform.position = new Vector3(walls[1].transform.position.x, currHeight, 0.0f);
+            }
         }
 
         // Handle death
-        float screenPos = Camera.main.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
-        if (screenPos < 0.0f)
         {
-            Debug.Log("YOU DIED");
+            float screenPos = Camera.main.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
+            if (screenPos < 0.0f)
+            {
+                Debug.Log("YOU DIED");
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 
