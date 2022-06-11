@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class LetterSpawning : MonoBehaviour
 {
+	public TextAsset dictionary;
+
+	public List<string> words;
+
+	public Queue<char> queue1;
+
+	public Queue<char> queue2;
 	
 	// Scrabble tile letter distribution is as follows: A-9, B-2, C-2, D-4, E-12, F-2, G-3, H-2, I-9, J-1, K-1, L-4, M-2, N-6, O-8, P-2, Q-1, R-6, S-4, T-6, U-4, V-2, W-2, X-1, Y-2, Z-1 and Blanks-2.
 
@@ -12,6 +19,7 @@ public class LetterSpawning : MonoBehaviour
 
 	// Odds out of 100 for the platform to be without a letter
 	private static int EMPTY_FREQ = 40;
+	private static int RANDOM_FREQ = 20;
 
 	private static bool prev_blank = false;
 
@@ -28,7 +36,65 @@ public class LetterSpawning : MonoBehaviour
     void Awake()
     {		
 		lettersAvailable = LETTERS;
+
+		string allWords = dictionary.text;
+
+        foreach (string word in allWords.Split("\n"[0]))
+        {
+	        // wordList[word.Trim()] = true;
+	    	words.Add(word.Trim());
+		}
     }
+
+	public void setQueue1() {
+		char[] charArr = words[Random.Range(0,words.Count)].ToCharArray();
+		queue1 = new Queue<char>(charArr);
+	}
+
+	public void setQueue2() {
+		char[] charArr = words[Random.Range(0,words.Count)].ToCharArray();
+		queue1 = new Queue<char>(charArr);
+	}
+
+	public int getLetterQueue1() {
+		if (queue1.Count == 0) {
+			setQueue1();
+		}
+		return queue1.Dequeue() - 64;
+	}
+
+	public int getLetterQueue2() {
+		if (queue2.Count == 0) {
+			setQueue1();
+		}
+		return queue2.Dequeue() - 64;
+	}
+
+	public int getRandomLetter() {
+		int len = LETTERS.Length;
+		return LETTERS[Random.Range(0,len)] - 64;
+	}
+
+	public int getStream1() {
+		if (EMPTY_FREQ >= Random.Range(1,101)) {
+			return 0;
+		}
+		if (RANDOM_FREQ >= Random.Range(1,101)) {
+			return getRandomLetter();
+		}
+		return getLetterQueue1();
+	}
+
+	public int getStream2() {
+		if (EMPTY_FREQ >= Random.Range(1,101)) {
+			return 0;
+		}
+		if (RANDOM_FREQ >= Random.Range(1,101)) {
+			return getRandomLetter();
+		}
+		return getLetterQueue2();
+	}
+
 
 	// random returns letter with same odds for all letters
     public char GetLetter1()
