@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
+    
     public GameObject platformPrefab;
+
+    public LetterSpawning letterSpawner;
    
     public float cameraSpeed;
 
@@ -32,6 +35,7 @@ public class PlatformGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         screenHeight = Camera.main.orthographicSize;
         screenWidth = screenHeight * Camera.main.aspect;
         DeathzoneHeight = 2*screenHeight;
@@ -96,7 +100,7 @@ public class PlatformGenerator : MonoBehaviour
     }
 
     public int LetterValue() {
-        return LetterSpawning.GetLetterStatic();  
+        return letterSpawner.getStream1();
     }
 
 
