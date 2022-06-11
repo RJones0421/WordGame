@@ -121,7 +121,7 @@ public class Word : MonoBehaviour
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
 
-        StartCoroutine(sidebarBounce(0.12f));
+        StartCoroutine(sidebarBounce(0.05f));
 
         return score;
     }

@@ -4831,8 +4831,6 @@ MonoBehaviour:
   - {fileID: 431281989}
   - {fileID: 51696648}
   - {fileID: 1526499131}
-  leftSidebar: {fileID: 0}
-  rightSidebar: {fileID: 0}
   timer: {fileID: 533044868}
   scoreManager: {fileID: 200206583}
 --- !u!4 &1263100688
@@ -5572,8 +5570,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4609620195061421663, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
 --- !u!1 &1588609028
 GameObject:
