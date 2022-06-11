@@ -50,13 +50,10 @@ public class ScoreUtils : MonoBehaviour
     public static string getTopKwordsCollected(int k){
         string retVal = System.Environment.NewLine + "Top words";
         try{
-            if (wordsCollected.Count > 0)
+            wordsCollected.Sort((x, y) => y.Item2.CompareTo(x.Item2));
+            for (var i = 0; i < k; i++)
             {
-                wordsCollected.Sort((x, y) => y.Item2.CompareTo(x.Item2));
-                for (var i = 0; i < k; i++)
-                {
-                    retVal += System.Environment.NewLine + wordsCollected[i].Item1 + " - " + wordsCollected[i].Item2;
-                }
+                retVal += System.Environment.NewLine + wordsCollected[i].Item1 + " - " + wordsCollected[i].Item2;
             }
         } catch(Exception e){
             Debug.Log("Exception occurred in ScoreUtils class's getTopKwordsCollected method: "
@@ -81,5 +78,10 @@ public class ScoreUtils : MonoBehaviour
             Debug.Log("Exception occurred in ScoreUtils class's hideGameObjects method: "
         +e.Message);
         }
+    }
+
+    public static int GetCollectedWordListSize()
+    {
+        return wordsCollected.Count;
     }
 }
