@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class LetterSpawning : MonoBehaviour
 {
-	public TextAsset dictionary;
-
-	public List<string> words;
+	[SerializeField] private DictionaryObject dictionaries;
 
 	public Queue<char> queue1;
 
@@ -37,25 +35,17 @@ public class LetterSpawning : MonoBehaviour
     {		
 		lettersAvailable = LETTERS;
 
-		string allWords = dictionary.text;
-
-        foreach (string word in allWords.Split("\n"[0]))
-        {
-	        // wordList[word.Trim()] = true;
-	    	words.Add(word.Trim());
-		}
-
 		setQueue1();
 		setQueue2();
     }
 
 	public void setQueue1() {
-		char[] charArr = words[Random.Range(0,words.Count)].ToCharArray();
+		char[] charArr = dictionaries.GetRandomFullWord().ToCharArray();
 		queue1 = new Queue<char>(charArr);
 	}
 
 	public void setQueue2() {
-		char[] charArr = words[Random.Range(0,words.Count)].ToCharArray();
+		char[] charArr = dictionaries.GetRandomFullWord().ToCharArray();
 		queue1 = new Queue<char>(charArr);
 	}
 

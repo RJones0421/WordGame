@@ -44,5 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b55a92e87b7e354a8660035f3aa5877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dictionary: {fileID: 4900000, guid: a2b7b6b1ef993b140a0d69085dc9bc0b, type: 3}
-  words: []
+  dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
