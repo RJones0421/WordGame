@@ -44,6 +44,9 @@ public class LetterSpawning : MonoBehaviour
 	        // wordList[word.Trim()] = true;
 	    	words.Add(word.Trim());
 		}
+
+		setQueue1();
+		setQueue2();
     }
 
 	public void setQueue1() {
