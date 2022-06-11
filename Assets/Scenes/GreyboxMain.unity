@@ -183,6 +183,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+      propertyPath: DeathzoneHeightScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
       propertyPath: spawnPositionWidthScale
       value: 0.35
       objectReference: {fileID: 0}
