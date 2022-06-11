@@ -22,6 +22,10 @@ public class PlayerControllerOld : MonoBehaviour
 
     private Word word;
 
+    public GameObject gameOverCanvas;
+    public Timer timer;
+    public GameObject tempTutroial;
+
     private bool MouseOnScreen {
         get {
             return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
@@ -41,6 +45,8 @@ public class PlayerControllerOld : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOverCanvas.SetActive(false);
+
         jump = false;
         air = true;
 
