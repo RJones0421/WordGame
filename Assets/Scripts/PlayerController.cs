@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
 
-            bounceBackSpeed *= 0.98f;
+            bounceBackSpeed *= 0.985f;
 
             if (bounceBackSpeed < 1)
             {
