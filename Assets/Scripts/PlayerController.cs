@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
     private ScoreManager scoreManagerScript;
     private float playerHeight;
 
+    private bool bounceBackToCenter;
+    private Vector3 bounceBackTargetPos;
+    private float bounceBackSpeed = 50f;
+    private float originalBounceBackSpeed = 50f;
+
     private bool MouseOnScreen
     {
         get
@@ -115,7 +120,9 @@ public class PlayerController : MonoBehaviour
         {
             if (transform.position.x > halfWidth)
             {
-                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                bounceBackToCenter = true;
+                bounceBackTargetPos = new Vector3(0, transform.position.y + 10, 0);
 
                 Debug.Log("SUBMIT RIGHT");
 
@@ -124,11 +131,26 @@ public class PlayerController : MonoBehaviour
 
             if (transform.position.x < -halfWidth)
             {
-                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                bounceBackToCenter = true;
+                bounceBackTargetPos = new Vector3(0, transform.position.y + 10f, 0);
 
                 Debug.Log("SUBMIT LEFT");
 
                 word.submitWord();
+            }
+        }
+
+        if(bounceBackToCenter)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
+
+            bounceBackSpeed *= 0.98f;
+
+            if (bounceBackSpeed < 1)
+            {
+                bounceBackToCenter = false;
+                bounceBackSpeed = originalBounceBackSpeed;
             }
         }
 
