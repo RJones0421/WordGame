@@ -5478,7 +5478,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 61575929}
   timer: {fileID: 533044872}
   tempTutroial: {fileID: 802502651}
-  wordBox: {fileID: 1226184219}
+  wordBox: {fileID: 2061923432}
 --- !u!1 &1588609028
 GameObject:
   m_ObjectHideFlags: 0

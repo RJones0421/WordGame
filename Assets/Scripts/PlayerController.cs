@@ -12,8 +12,6 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D box;
     private Camera mainCamera;
 
-    private float halfWidth;
-
     public bool allowMouseMovement;
 
     private Word word;
@@ -50,8 +48,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameOverCanvas.SetActive(false);
-        wallDist = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, wordBox.GetComponent<RectTransform>().rect.width, 0.0f)).y * 0.4f + wallPrefab.GetComponent<Renderer>().bounds.size.y * 0.5f;
-        halfWidth = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, Screen.width, 0.0f)).y - wallPrefab.GetComponent<Renderer>().bounds.size.y * 0.5f;
+        wallDist = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, 770.0f, 0.0f)).y * 0.4f + wallPrefab.GetComponent<Renderer>().bounds.size.y;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
@@ -61,8 +58,7 @@ public class PlayerController : MonoBehaviour
 
         word.SetSidebars(walls);
 
-        wallDist -= (wallPrefab.GetComponent<Renderer>().bounds.size.y + GetComponent<BoxCollider2D>().size.x) * 0.5f;
-        halfWidth -= (wallPrefab.GetComponent<Renderer>().bounds.size.y + GetComponent<BoxCollider2D>().size.x) * 0.5f;
+        wallDist -= wallPrefab.GetComponent<Renderer>().bounds.size.y;
     }
 
     // Update is called once per frame
