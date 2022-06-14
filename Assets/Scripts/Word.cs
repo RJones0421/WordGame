@@ -125,4 +125,7 @@ public class Word : MonoBehaviour
 
         return score;
     }
+    public string getLetter(){
+        return word;
+    }
 }

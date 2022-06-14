@@ -6,6 +6,8 @@ public class DictionaryObject : ScriptableObject
 {
     [SerializeField] private TextAsset fullDictionary;
     [SerializeField] private TextAsset commonDictionary;
+    public Trie wordSearch;
+    public Trie.TrieNode wordSearchRoot;
 
     private List<string> fullList;
     private List<string> commonList;
@@ -14,6 +16,7 @@ public class DictionaryObject : ScriptableObject
     {
         string allWords = fullDictionary.text;
         fullList = new List<string>();
+        wordSearch = new Trie();
 
         foreach (string word in allWords.Split("\n"[0]))
         {
@@ -27,6 +30,7 @@ public class DictionaryObject : ScriptableObject
         {
             commonList.Add(word.Trim());
         }
+        wordSearchRoot = wordSearch.buildTrie(commonList);
     }
 
     public List<string> GetFullDictionary()

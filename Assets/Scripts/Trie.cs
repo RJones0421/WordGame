@@ -24,7 +24,7 @@ public class Trie
         node.isWord = true;
     }
 
-    public TrieNode buildTrie(string[] products){
+    public TrieNode buildTrie(List<string> products){
         TrieNode root = new TrieNode(' ');
         foreach(string product in products){
             insert(product, root);
@@ -41,6 +41,7 @@ public class Trie
         TrieNode node = root;
         foreach (char c in search.ToCharArray())
         {
+        //    Debug.Log(c); 
            if(node.children[c - 'a'] == null){
                 return res;
             }
@@ -105,7 +106,16 @@ public class Trie
         // }
         return res;
     }
-   public List<List<string>> suggestedProducts(string[] products, string searchWord) {
+   public List<List<string>> suggestedWords(string searchWord, TrieNode root){
+       List<List<string>> res = new List<List<string>>();
+        for (int i = 1; i <= searchWord.Length; i++) {
+            res.Add(findTopThree(root,searchWord.Substring(0,i)));
+        }
+
+
+        return res;
+   }
+   public List<List<string>> suggestedProducts(List<string> products, string searchWord) {
          TrieNode root = buildTrie(products);
         List<List<string>> res = new List<List<string>>();
         for (int i = 1; i <= searchWord.Length; i++) {
