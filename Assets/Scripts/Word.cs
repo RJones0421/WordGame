@@ -82,14 +82,14 @@ public class Word : MonoBehaviour
         Vector3 wallScale = leftWall.transform.localScale;
 
         while(leftWall.transform.localScale.y < 3 * wallScale.y) {
-            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y + bounceRate, wallScale.z);
-            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y + bounceRate, wallScale.z);
+            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
+            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
             yield return null;
         }
 
         while(leftWall.transform.localScale.y > wallScale.y) {
-            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y - bounceRate, wallScale.z);
-            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y - bounceRate, wallScale.z);
+            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
+            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
             yield return null;
         }
 
@@ -121,7 +121,7 @@ public class Word : MonoBehaviour
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
 
-        StartCoroutine(sidebarBounce(0.05f));
+        StartCoroutine(sidebarBounce(2f));
 
         return score;
     }
