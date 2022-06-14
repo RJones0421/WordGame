@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         gameOverCanvas.SetActive(false);
         wallDist = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, 770.0f, 0.0f)).y * 0.4f + wallPrefab.GetComponent<Renderer>().bounds.size.y;
+        wallDist = 4.2f;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
