@@ -11,13 +11,12 @@ public class Word : MonoBehaviour
 
     [SerializeField] private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
-    [SerializeField] private SpriteRenderer leftSidebar;
-    [SerializeField] private SpriteRenderer rightSidebar;
+    private SpriteRenderer leftSidebar;
+    private SpriteRenderer rightSidebar;
 
     private List<LetterClass> letters = new List<LetterClass>();
 
     private int currentLetterBox = 0;
-
 
     public GameObject timer;
 
@@ -25,9 +24,13 @@ public class Word : MonoBehaviour
     
     private string word = "";
 
+    public GameObject scoreManager;
+    private ScoreManager scoreManagerScript;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
+        scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
     }
     
     void Update()
@@ -71,11 +74,40 @@ public class Word : MonoBehaviour
         return true;
     }
 
+    private IEnumerator sidebarBounce(float bounceRate)
+    {
+        GameObject leftWall = leftSidebar.gameObject;
+        GameObject rightWall = rightSidebar.gameObject;
+
+        Vector3 wallScale = leftWall.transform.localScale;
+
+        while(leftWall.transform.localScale.y < 3 * wallScale.y) {
+            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
+            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
+            yield return null;
+        }
+
+        while(leftWall.transform.localScale.y > wallScale.y) {
+            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
+            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
+            yield return null;
+        }
+
+        
+    }
+
     public int submitWord() {
         // Check validity and get word score
         // If valid, clear list
 
         int score = evaluator.SubmitWord(word);
+
+        scoreManagerScript.AddScore(score);
+
+        if (score > 0)
+        {
+            ScoreUtils.addWordToCollection(word, score);
+        }
 
         letters.Clear();
         word = "";
@@ -88,6 +120,8 @@ public class Word : MonoBehaviour
 
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
+
+        StartCoroutine(sidebarBounce(2f));
 
         return score;
     }
