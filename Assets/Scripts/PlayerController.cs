@@ -120,28 +120,18 @@ public class PlayerController : MonoBehaviour
 
         // Word submission
         {
-            if (transform.position.x > wallDist)
+            if (started && transform.position.x > wallDist)
             {
-                //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
-                bounceBackToCenter = true;
-                bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
-                isBouncingBack = true;
-                rb.gravityScale = 0;
-                rb.velocity = Vector3.zero;
+                InitiateBounce();
 
                 Debug.Log("SUBMIT RIGHT");
 
                 word.submitWord();
             }
 
-            if (transform.position.x < -wallDist)
+            if (started && transform.position.x < -wallDist)
             {
-                //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
-                bounceBackToCenter = true;
-                bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
-                isBouncingBack = true;
-                rb.gravityScale = 0;
-                rb.velocity = Vector3.zero;
+                InitiateBounce();
 
                 Debug.Log("SUBMIT LEFT");
 
@@ -196,7 +186,14 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    private void InitiateBounce()
+    {
+        bounceBackToCenter = true;
+        bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
+        isBouncingBack = true;
+        rb.gravityScale = 0;
+        rb.velocity = Vector3.zero;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (started && rb.velocity.y < 0.0f)
