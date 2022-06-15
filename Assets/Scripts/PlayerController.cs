@@ -128,11 +128,7 @@ public class PlayerController : MonoBehaviour
 
         // Word submission
         {
-<<<<<<< HEAD
-            if (transform.position.x > wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y)
-=======
-            if (started && transform.position.x > wallDist)
->>>>>>> Robbie
+            if (started && transform.position.x > wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
                 InitiateBounce();
 
@@ -141,11 +137,7 @@ public class PlayerController : MonoBehaviour
                 word.submitWord();
             }
 
-<<<<<<< HEAD
-            if (transform.position.x < -wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y)
-=======
-            if (started && transform.position.x < -wallDist)
->>>>>>> Robbie
+            if (started && transform.position.x < -wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
                 InitiateBounce();
 
