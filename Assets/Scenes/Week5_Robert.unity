@@ -4931,7 +4931,7 @@ MonoBehaviour:
   - {fileID: 1526499131}
   timer: {fileID: 533044868}
   scoreManager: {fileID: 200206583}
-  Arrows: {fileID: 1703645087}
+  arrows: {fileID: 1703645087}
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
