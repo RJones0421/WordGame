@@ -955,6 +955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreHolder: {fileID: 1069087908}
+  highScoreHolder: {fileID: 1769333591}
 --- !u!4 &200206585
 Transform:
   m_ObjectHideFlags: 0
