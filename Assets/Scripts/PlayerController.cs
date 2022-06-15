@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
     private float playerHeight;
+    private Vector2 screenRes;
 
     private bool MouseOnScreen
     {
@@ -53,9 +54,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        screenRes = new Vector2(Screen.width, Screen.height);
         gameOverCanvas.SetActive(false);
-        wallDist = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, 770.0f, 0.0f)).y * 0.4f + wallPrefab.GetComponent<Renderer>().bounds.size.y;
-        wallDist = 4.2f;
+        wallDist = (wordBox.GetComponent<SpriteRenderer>().bounds.size.x + wallPrefab.GetComponent<Renderer>().bounds.size.y) * 0.5f;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
@@ -64,13 +65,20 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
-
-        wallDist -= wallPrefab.GetComponent<Renderer>().bounds.size.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Resolution Changes
+        if (Screen.width != screenRes.x || Screen.height != screenRes.y)
+        {
+            wallDist *= ((screenRes.y * (float)Screen.width) / (screenRes.x * (float)Screen.height));
+            screenRes = new Vector2(Screen.width, Screen.height);
+            walls[0].transform.position = new Vector3(wallDist, walls[0].transform.position.y, 0.0f);
+            walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
+        }
+
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -114,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
         // Word submission
         {
-            if (transform.position.x > wallDist)
+            if (transform.position.x > wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
                 transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
 
@@ -123,7 +131,7 @@ public class PlayerController : MonoBehaviour
                 word.submitWord();
             }
 
-            if (transform.position.x < -wallDist)
+            if (transform.position.x < -wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
                 transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
 
