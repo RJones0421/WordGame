@@ -25,7 +25,7 @@ public class PlatformGenerator : MonoBehaviour
 
     /* updating/killing platforms when distance from a platform to camera bottom exceeds this number */
     private float DeathzoneHeight; 
-    public float DeathzoneHeightScale=1.25f;
+    public float DeathzoneHeightScale=1.0f;
     
     public float spawnPositionWidthScale = 0.35f;
     public float spawnPositionHeightScale = 1.0f;
@@ -38,7 +38,7 @@ public class PlatformGenerator : MonoBehaviour
 
         screenHeight = Camera.main.orthographicSize;
         screenWidth = screenHeight * Camera.main.aspect;
-        DeathzoneHeight = 2*screenHeight;
+        DeathzoneHeight = screenHeight;
 
 
         Debug.Log(screenWidth);   
