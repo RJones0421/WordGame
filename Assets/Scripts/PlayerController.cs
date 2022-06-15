@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 bounceBackTargetPos;
     private float bounceBackSpeed = 50f;
     private float originalBounceBackSpeed = 50f;
+    private bool isBouncingBack;
 
     private bool MouseOnScreen
     {
@@ -99,7 +100,7 @@ public class PlayerController : MonoBehaviour
         // Horizontal controls
         {
             // Keys
-            if (!allowMouseMovement)
+            if (!isBouncingBack && !allowMouseMovement)
             {
                 float inputX = Input.GetAxis("Horizontal");
 
@@ -110,7 +111,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Mouse
-            if (allowMouseMovement)
+            if (!isBouncingBack && allowMouseMovement)
             {
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
@@ -122,7 +123,7 @@ public class PlayerController : MonoBehaviour
             {
                 //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
                 bounceBackToCenter = true;
-                bounceBackTargetPos = new Vector3(0, transform.position.y + 10, 0);
+                bounceBackTargetPos = new Vector3(0, transform.position.y + 10f, 0);
 
                 Debug.Log("SUBMIT RIGHT");
 
@@ -143,12 +144,14 @@ public class PlayerController : MonoBehaviour
 
         if(bounceBackToCenter)
         {
+            isBouncingBack = true;
             transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
 
-            bounceBackSpeed *= 0.98f;
+            bounceBackSpeed *= 0.9f;
 
             if (bounceBackSpeed < 1)
             {
+                isBouncingBack = false;
                 bounceBackToCenter = false;
                 bounceBackSpeed = originalBounceBackSpeed;
             }
