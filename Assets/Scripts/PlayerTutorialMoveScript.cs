@@ -36,7 +36,7 @@ public class PlayerTutorialMoveScript : MonoBehaviour
     }
     
     void Update() {
-        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)){
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ){
 
             moveTutorial.SetActive(false);
             if(!moveTutorialDone){
