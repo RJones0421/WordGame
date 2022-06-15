@@ -33,6 +33,12 @@ public class PlayerController : MonoBehaviour
     private float playerHeight;
     private Vector2 screenRes;
 
+    private bool bounceBackToCenter;
+    private Vector3 bounceBackTargetPos;
+    private float bounceBackSpeed = 15f;
+    private float originalBounceBackSpeed = 15f;
+    private bool isBouncingBack;
+
     private bool MouseOnScreen
     {
         get
@@ -103,7 +109,7 @@ public class PlayerController : MonoBehaviour
         // Horizontal controls
         {
             // Keys
-            if (!allowMouseMovement)
+            if (!isBouncingBack && !allowMouseMovement)
             {
                 float inputX = Input.GetAxis("Horizontal");
 
@@ -114,7 +120,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Mouse
-            if (allowMouseMovement)
+            if (!isBouncingBack && allowMouseMovement)
             {
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
@@ -124,7 +130,12 @@ public class PlayerController : MonoBehaviour
         {
             if (transform.position.x > wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
-                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                bounceBackToCenter = true;
+                bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
+                isBouncingBack = true;
+                rb.gravityScale = 0;
+                rb.velocity = Vector3.zero;
 
                 Debug.Log("SUBMIT RIGHT");
 
@@ -133,11 +144,30 @@ public class PlayerController : MonoBehaviour
 
             if (transform.position.x < -wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
-                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                bounceBackToCenter = true;
+                bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
+                isBouncingBack = true;
+                rb.gravityScale = 0;
+                rb.velocity = Vector3.zero;
 
                 Debug.Log("SUBMIT LEFT");
 
                 word.submitWord();
+            }
+        }
+
+        if(bounceBackToCenter)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
+
+            if (Vector3.Distance(transform.position, bounceBackTargetPos) == 0)
+            {
+                isBouncingBack = false;
+                bounceBackToCenter = false;
+                bounceBackSpeed = originalBounceBackSpeed;
+                rb.gravityScale = 1;
+                rb.velocity = new Vector3(0, 5, 0);
             }
         }
 
