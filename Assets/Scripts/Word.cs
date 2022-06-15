@@ -30,6 +30,8 @@ public class Word : MonoBehaviour
     private bool isCoroutineRunning;
 
     public GameObject arrows;
+    private bool hasSubmitOnce;
+    private bool hasClearedOnce;
 
     private void Awake()
     {
@@ -54,6 +56,8 @@ public class Word : MonoBehaviour
 
     public bool addLetter(LetterClass newLetter)
     {
+        arrows.SetActive(false);
+
         if (newLetter.Letter == '_') return false;
         if (letters.Count >= 8) return false;
 
@@ -70,11 +74,21 @@ public class Word : MonoBehaviour
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
 
-                arrows.SetActive(true);
+                if (!hasSubmitOnce)
+                {
+                    arrows.SetActive(true);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.green);
+                }
             }
             else {
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
+
+                if (!hasClearedOnce && word.Length > 3)
+                {
+                    arrows.SetActive(true);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
+                }
             }
         }
 
@@ -116,6 +130,8 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
+        arrows.SetActive(false);
+
         int score = evaluator.SubmitWord(word);
 
         scoreManagerScript.AddScore(score);
@@ -123,6 +139,12 @@ public class Word : MonoBehaviour
         if (score > 0)
         {
             ScoreUtils.addWordToCollection(word, score);
+            hasSubmitOnce = true;
+        }
+
+        else if (word.Length > 3)
+        {
+            hasClearedOnce = true;
         }
 
         letters.Clear();
