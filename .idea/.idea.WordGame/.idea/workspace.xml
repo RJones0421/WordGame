@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,10 +22,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/UI/Timer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/OldPlayerController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Deprecated/PlayerControllerOld.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LetterSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/WordEvaluator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/DictionaryObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
@@ -51,6 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1654984443221</updated>
       <workItem from="1654984452219" duration="2484000" />
+      <workItem from="1655250030645" duration="483000" />
     </task>
     <servers />
   </component>

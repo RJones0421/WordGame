@@ -14,12 +14,11 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D box;
     private Camera mainCamera;
 
-    private float halfWidth;
-
     public bool allowMouseMovement;
 
     private Word word;
-    
+
+    private float wallDist;
     private float wallRotate = 90.0f;
     public GameObject wallPrefab;
     public List<GameObject> walls;
@@ -28,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
     public GameObject tempTutroial;
 
+    public GameObject wordBox;
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
     private float playerHeight;
@@ -60,17 +60,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameOverCanvas.SetActive(false);
-        halfWidth = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - wallPrefab.GetComponent<Renderer>().bounds.size.y / 2;
+        wallDist = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, 770.0f, 0.0f)).y * 0.4f + wallPrefab.GetComponent<Renderer>().bounds.size.y;
+        wallDist = 4.2f;
 
-        walls.Add(Instantiate(wallPrefab, Vector3.left * halfWidth, Quaternion.identity));
+        walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
 
-        walls.Add(Instantiate(wallPrefab, Vector3.right * halfWidth, Quaternion.identity));
+        walls.Add(Instantiate(wallPrefab, Vector3.right * wallDist, Quaternion.identity));
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
 
-        halfWidth -= wallPrefab.GetComponent<Renderer>().bounds.size.y / 2 + GetComponent<BoxCollider2D>().size.x / 2;
+        wallDist -= wallPrefab.GetComponent<Renderer>().bounds.size.y;
     }
 
     // Update is called once per frame
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
         // Word submission
         {
-            if (transform.position.x > halfWidth)
+            if (transform.position.x > wallDist)
             {
                 //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
                 bounceBackToCenter = true;
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour
                 word.submitWord();
             }
 
-            if (transform.position.x < -halfWidth)
+            if (transform.position.x < -wallDist)
             {
                 //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
                 bounceBackToCenter = true;
@@ -179,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
         // Handle death
         {
-            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
+            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y * 0.5f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
                 Debug.Log("YOU DIED");
@@ -193,7 +194,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (started && rb.velocity.y < 0)
+        if (started && rb.velocity.y < 0.0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
             LetterPlatform platform;
