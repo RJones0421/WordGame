@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LetterSpawning : MonoBehaviour
@@ -10,6 +11,8 @@ public class LetterSpawning : MonoBehaviour
 	private Queue<char> word = new Queue<char>();
 	private string currentWord;
 	private char gap = (char) 96;
+
+	public TMP_Text suggestedWord;
 	
 	public Queue<char> queue1;
 
@@ -58,6 +61,7 @@ public class LetterSpawning : MonoBehaviour
 		word.Enqueue(gap);
 		word.Enqueue(gap);
 		print(currentWord);
+		suggestedWord.text = currentWord.ToUpper();
 		q.Enqueue(dictionaries.GetRandomCommonWord());
 	}
 
