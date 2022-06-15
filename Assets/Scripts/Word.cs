@@ -27,6 +27,7 @@ public class Word : MonoBehaviour
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
 
+    private bool isCoroutineRunning;
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
@@ -76,6 +77,9 @@ public class Word : MonoBehaviour
 
     private IEnumerator sidebarBounce(float bounceRate)
     {
+        if (isCoroutineRunning) yield break;
+        isCoroutineRunning = true;
+
         GameObject leftWall = leftSidebar.gameObject;
         GameObject rightWall = rightSidebar.gameObject;
 
@@ -93,7 +97,13 @@ public class Word : MonoBehaviour
             yield return null;
         }
 
-        
+        if (leftWall.transform.localScale.y < wallScale.y)
+        {
+            leftWall.transform.localScale = wallScale;
+            rightWall.transform.localScale = wallScale;
+        }
+
+        isCoroutineRunning = false;
     }
 
     public int submitWord() {
@@ -121,7 +131,7 @@ public class Word : MonoBehaviour
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
 
-        StartCoroutine(sidebarBounce(2f));
+        StartCoroutine(sidebarBounce(15f));
 
         return score;
     }
