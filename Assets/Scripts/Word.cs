@@ -28,10 +28,14 @@ public class Word : MonoBehaviour
     private ScoreManager scoreManagerScript;
 
     private bool isCoroutineRunning;
+
+    public GameObject arrows;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
+        arrows.SetActive(false); 
     }
     
     void Update()
@@ -65,6 +69,8 @@ public class Word : MonoBehaviour
             if (valid) {
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
+
+                arrows.SetActive(true);
             }
             else {
                 leftSidebar.color = Color.red;
