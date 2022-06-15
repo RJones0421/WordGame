@@ -1044,6 +1044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreHolder: {fileID: 1069087908}
+  highScoreHolder: {fileID: 1769333591}
 --- !u!4 &200206585
 Transform:
   m_ObjectHideFlags: 0
@@ -5623,6 +5624,10 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 533044872}
+    - target: {fileID: 3860524851957964824, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: wordBox
+      value: 
+      objectReference: {fileID: 2061923432}
     - target: {fileID: 3860524851957964824, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: scoreManager
       value: 
