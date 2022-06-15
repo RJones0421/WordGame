@@ -660,6 +660,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3054716655067995678, guid: 665d105c9924e8b4d96528895a47df83, type: 3}
+      propertyPath: currentWord
+      value: 
+      objectReference: {fileID: 1263100687}
     - target: {fileID: 4391377145980554177, guid: 665d105c9924e8b4d96528895a47df83, type: 3}
       propertyPath: m_Name
       value: LetterSpawning
@@ -951,6 +955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreHolder: {fileID: 1069087908}
+  highScoreHolder: {fileID: 1769333591}
 --- !u!4 &200206585
 Transform:
   m_ObjectHideFlags: 0
@@ -5530,6 +5535,10 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 533044872}
+    - target: {fileID: 3860524851957964824, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: wordBox
+      value: 
+      objectReference: {fileID: 2061923432}
     - target: {fileID: 3860524851957964824, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: scoreManager
       value: 
