@@ -50,19 +50,10 @@ public class ScoreUtils : MonoBehaviour
     public static string getTopKwordsCollected(int k){
         string retVal = System.Environment.NewLine + "Top words";
         try{
-            //for testing only - below lines to be removed later
-            if(wordsCollected.Count==0){
-                addWordToCollection("word1",23);
-                addWordToCollection("word2",3);
-                addWordToCollection("word3",9);
-                addWordToCollection("word4",12);
-                addWordToCollection("word5",33);
-                addWordToCollection("word6",32);
-            }
-            //for testing only - above lines to be removed later
             wordsCollected.Sort((x, y) => y.Item2.CompareTo(x.Item2));
-            for (var i = 0; i < k; i++) {
-                retVal+= System.Environment.NewLine + wordsCollected[i].Item1 + " - " + wordsCollected[i].Item2;
+            for (var i = 0; i < k; i++)
+            {
+                retVal += System.Environment.NewLine + wordsCollected[i].Item1 + " - " + wordsCollected[i].Item2;
             }
         } catch(Exception e){
             Debug.Log("Exception occurred in ScoreUtils class's getTopKwordsCollected method: "
@@ -77,8 +68,8 @@ public class ScoreUtils : MonoBehaviour
             //hide other gameobjects
             GameObject inputFieldGo = GameObject.Find("Player");
             inputFieldGo.SetActive(toHide);
-            inputFieldGo = GameObject.Find("Base Floor");
-            inputFieldGo.SetActive(toHide);
+            //inputFieldGo = GameObject.Find("Base Floor");
+            //inputFieldGo.SetActive(toHide);
             inputFieldGo = GameObject.Find("Canvas_Gameplay");
             inputFieldGo.SetActive(toHide);
             inputFieldGo = GameObject.Find("Letter Platform(Clone)");
@@ -87,5 +78,10 @@ public class ScoreUtils : MonoBehaviour
             Debug.Log("Exception occurred in ScoreUtils class's hideGameObjects method: "
         +e.Message);
         }
+    }
+
+    public static int GetCollectedWordListSize()
+    {
+        return wordsCollected.Count;
     }
 }

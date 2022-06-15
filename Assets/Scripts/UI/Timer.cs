@@ -97,7 +97,7 @@ public class Timer : MonoBehaviour
         //Display score breakdowns
         inputFieldGo = GameObject.Find("ScoreBreakdown");
         inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
-        inputFieldCo.text = ScoreUtils.getTopKwordsCollected(5);
+        inputFieldCo.text = ScoreUtils.getTopKwordsCollected(ScoreUtils.GetCollectedWordListSize());
 
         //hide other gameobjects
         ScoreUtils.unhideGameObjects(false);
