@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
 
     private bool bounceBackToCenter;
     private Vector3 bounceBackTargetPos;
-    private float bounceBackSpeed = 50f;
-    private float originalBounceBackSpeed = 50f;
+    private float bounceBackSpeed = 15f;
+    private float originalBounceBackSpeed = 15f;
     private bool isBouncingBack;
 
     private bool MouseOnScreen
@@ -124,7 +124,10 @@ public class PlayerController : MonoBehaviour
             {
                 //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
                 bounceBackToCenter = true;
-                bounceBackTargetPos = new Vector3(0, transform.position.y + 10f, 0);
+                bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
+                isBouncingBack = true;
+                rb.gravityScale = 0;
+                rb.velocity = Vector3.zero;
 
                 Debug.Log("SUBMIT RIGHT");
 
@@ -135,7 +138,10 @@ public class PlayerController : MonoBehaviour
             {
                 //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
                 bounceBackToCenter = true;
-                bounceBackTargetPos = new Vector3(0, transform.position.y + 10f, 0);
+                bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
+                isBouncingBack = true;
+                rb.gravityScale = 0;
+                rb.velocity = Vector3.zero;
 
                 Debug.Log("SUBMIT LEFT");
 
@@ -145,16 +151,15 @@ public class PlayerController : MonoBehaviour
 
         if(bounceBackToCenter)
         {
-            isBouncingBack = true;
             transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
 
-            bounceBackSpeed *= 0.9f;
-
-            if (bounceBackSpeed < 1)
+            if (Vector3.Distance(transform.position, bounceBackTargetPos) == 0)
             {
                 isBouncingBack = false;
                 bounceBackToCenter = false;
                 bounceBackSpeed = originalBounceBackSpeed;
+                rb.gravityScale = 1;
+                rb.velocity = new Vector3(0, 5, 0);
             }
         }
 

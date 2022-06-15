@@ -97,6 +97,12 @@ public class Word : MonoBehaviour
             yield return null;
         }
 
+        if (leftWall.transform.localScale.y < wallScale.y)
+        {
+            leftWall.transform.localScale = wallScale;
+            rightWall.transform.localScale = wallScale;
+        }
+
         isCoroutineRunning = false;
     }
 
@@ -125,7 +131,7 @@ public class Word : MonoBehaviour
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
 
-        StartCoroutine(sidebarBounce(10f));
+        StartCoroutine(sidebarBounce(15f));
 
         return score;
     }
