@@ -183,6 +183,15 @@ public class LetterSpawning : MonoBehaviour
 		return lettersAvailable.Length;
 	}
 
+	public int GetLetter()
+	{
+		if (EMPTY_FREQ >= Random.Range(1,18)) {
+			return 0;
+		}
+		int len = LETTERS.Length;
+		return LETTERS[Random.Range(0,LETTERS.Length)] - 64;
+	}
+
     void Update()
     {
     }

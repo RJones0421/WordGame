@@ -103,8 +103,7 @@ public class PlatformGenerator : MonoBehaviour
 
     public int LetterValue()
     {
-        return 0;
-        //return letterSpawner.getStream1();
+        return letterSpawner.GetLetter();
     }
 
     public int GetNextLetter()
