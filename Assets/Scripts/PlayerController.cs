@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D box;
     private Camera mainCamera;
+    private Renderer renderer;
 
     public bool allowMouseMovement;
 
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
+        renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
     }
 
@@ -114,7 +116,7 @@ public class PlayerController : MonoBehaviour
             // Mouse
             if (!isBouncingBack && allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
         }
 
@@ -172,7 +174,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Camera and walls follow as long as you go up
-        float currHeight = transform.position.y;
+        float currHeight = transform.position.y - 1.0f;
         {
             float camHeight = mainCamera.transform.position.y;
             if (camHeight < currHeight)
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
         // Handle death
         {
-            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y * 0.5f, 0.0f)).y;
+            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
                 Debug.Log("YOU DIED");
