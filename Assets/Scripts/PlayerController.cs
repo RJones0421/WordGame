@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         screenRes = new Vector2(Screen.width, Screen.height);
         gameOverCanvas.SetActive(false);
-        wallDist = (wordBox.GetComponent<SpriteRenderer>().bounds.size.x + wallPrefab.GetComponent<Renderer>().bounds.size.y) * 0.5f;
+        wallDist = wordBox.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f + wallPrefab.GetComponent<Renderer>().bounds.size.y * 1.5f;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
