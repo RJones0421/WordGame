@@ -40,7 +40,7 @@ public class LetterSpawning : MonoBehaviour
 		lettersAvailable = LETTERS;
 
 		setQueue1();
-		setQueue2();
+		//setQueue2();
     }
 
 	public void setQueue1() {
@@ -206,7 +206,11 @@ public class LetterSpawning : MonoBehaviour
 
     void Update()
     {
-		// string currentLetter = currentWord.getLetter();
+		//  string currentLetter = currentWord.getLetter();
+		//  if(currentLetter.Length >= 3){
+		// 	 setQueue1();
+		// 	 //setQueue2();
+		//  }
 		// Debug.Log("current letter is " + currentLetter);
     }
 }

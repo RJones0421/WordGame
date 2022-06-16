@@ -17,10 +17,12 @@ public class DictionaryObject : ScriptableObject
         string allWords = fullDictionary.text;
         fullList = new List<string>();
         wordSearch = new Trie();
+        List<string> fullListLower = new List<string>(); 
 
         foreach (string word in allWords.Split("\n"[0]))
         {
             fullList.Add(word.Trim());
+            fullListLower.Add(word.Trim().ToLower());
         }
         
         string commonWords = commonDictionary.text;
@@ -30,7 +32,7 @@ public class DictionaryObject : ScriptableObject
         {
             commonList.Add(word.Trim());
         }
-        wordSearchRoot = wordSearch.buildTrie(commonList);
+        wordSearchRoot = wordSearch.buildTrie(fullListLower);
     }
 
     public List<string> GetFullDictionary()
