@@ -25,7 +25,7 @@ public class ScoreUtils : MonoBehaviour
     public static int updateAndGetHighsScore(int score){
         try{
             int prevHighscore = PlayerPrefs.GetInt(highscore_keyname);
-            if(prevHighscore == null || prevHighscore < score ){
+            if(prevHighscore == 0 || prevHighscore < score ){
                 PlayerPrefs.SetInt(highscore_keyname,score);
                 prevHighscore = score;
             }

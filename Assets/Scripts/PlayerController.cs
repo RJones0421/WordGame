@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 
@@ -39,14 +38,8 @@ public class PlayerController : MonoBehaviour
     private float originalBounceBackSpeed = 15f;
     private bool isBouncingBack;
 
-    private bool MouseOnScreen
-    {
-        get
-        {
-            return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
-                Input.mousePosition.y >= 0.0f && Input.mousePosition.y <= Screen.height;
-        }
-    }
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
 
     private void Awake()
     {
@@ -55,6 +48,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
         mainCamera = Camera.main;
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
     }
 
     // Start is called before the first frame update
@@ -190,7 +184,16 @@ public class PlayerController : MonoBehaviour
 
                 gameOverCanvas.SetActive(true);
                 timer.StopTimer();
-                timer.SetValues();
+                int score = timer.SetValues();
+
+                #if ENABLE_CLOUD_SERVICES_ANALYTICS
+                analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
+                {
+                    { "deathMethod", "falling" },
+                    { "userScore", score },
+                    { "time", Time.timeAsDouble }
+                });
+                #endif
             }
         }
     }
