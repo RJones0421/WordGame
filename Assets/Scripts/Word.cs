@@ -27,11 +27,15 @@ public class Word : MonoBehaviour
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
 
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
+
     private bool isCoroutineRunning;
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
     }
     
     void Update()
@@ -116,8 +120,20 @@ public class Word : MonoBehaviour
 
         if (score > 0)
         {
+            // Valid word
             ScoreUtils.addWordToCollection(word, score);
         }
+
+        #if ENABLE_CLOUD_SERVICES_ANALYTICS
+        analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
+            {
+                { "validWord", score > 0 },
+                { "word", word },
+                { "userScore", score },
+                { "wordLength", word.Length },
+                { "time", Time.timeAsDouble }
+            });
+        #endif
 
         letters.Clear();
         word = "";

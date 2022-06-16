@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-
 public class Timer : MonoBehaviour
 {
 
@@ -15,6 +14,9 @@ public class Timer : MonoBehaviour
 	public GameObject winCanvas;
     public GameObject canvasGroup;
     private bool timerRunning = false;
+
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,7 @@ public class Timer : MonoBehaviour
         Time.timeScale = 1;
         canvasGroup.GetComponent<CanvasGroup>().interactable = true;
         canvasGroup.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
     }
 
     // Update is called once per frame
@@ -42,7 +44,15 @@ public class Timer : MonoBehaviour
             else {
                 if(Time.timeScale==1)
                 {
-                    SetValues();
+                    int score = SetValues();
+                    #if ENABLE_CLOUD_SERVICES_ANALYTICS
+                    analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
+                    {
+                        { "deathMethod", "time" },
+                        { "userScore", score },
+                        { "time", Time.timeAsDouble }
+                    });
+                    #endif
                 }
             }
         } catch(Exception e){
@@ -52,7 +62,7 @@ public class Timer : MonoBehaviour
 
     }
 
-    public void SetValues()
+    public int SetValues()
     {
         winCanvas.SetActive(true);
         Time.timeScale = 0;
@@ -104,6 +114,8 @@ public class Timer : MonoBehaviour
 
         //Clear collected words list
         ScoreUtils.clearCollectedWords();
+
+        return finalScore;
     }
 
     public void AddTime(float amount)
