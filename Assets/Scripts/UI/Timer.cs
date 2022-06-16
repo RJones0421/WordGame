@@ -19,7 +19,6 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     	winCanvas.SetActive(false);
     	timerBar = GetComponent<Image>();
     	timeLeft = maxTime;
@@ -67,7 +66,9 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            finalScore = UnityEngine.Random.Range(0, 999);
+            //If unable to parse final score, then consider score to be 0 and log the error
+            finalScore = 0;
+            Debug.Log("Unable to parse final score after game completion, considering 0 as final score");
         }
 
         int highScore = ScoreUtils.updateAndGetHighsScore(finalScore);
