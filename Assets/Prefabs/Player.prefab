@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5664284316386886155}
   - component: {fileID: 5664284316386886152}
   - component: {fileID: 5664284316386886153}
-  - component: {fileID: 481691459583725034}
+  - component: {fileID: 3860524851957964824}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &481691459583725034
+--- !u!114 &3860524851957964824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,12 +143,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5664284316386886157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 857988c2cfaeca842824416e72767db3, type: 3}
+  m_Script: {fileID: 11500000, guid: 54bc5850fecb6d243b40b7ce79de184f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 25
-  allowMouseMovement: 1
+  keyMovementSpeed: 10
+  mouseMovementSpeed: 25
+  allowMouseMovement: 0
   wallPrefab: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
   walls: []
   gameOverCanvas: {fileID: 0}
   timer: {fileID: 0}
+  tempTutroial: {fileID: 0}
+  scoreManager: {fileID: 0}
