@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Text;
 
-public class Swap : PowerUp
+public class Swap : Powerup
 {
     // Use this for initialization
     void Start()
@@ -16,8 +16,9 @@ public class Swap : PowerUp
 
     }
 
-    public override void Activate()
+    public override bool Activate()
     {
+        /*
         Word word = transform.GetComponent<PlayerController>().word;
         if (word.currentLetterBox > 1)
         {
@@ -36,5 +37,7 @@ public class Swap : PowerUp
 
             word.UpdateSidebars();
         }
+        */
+        return false;
     }
 }

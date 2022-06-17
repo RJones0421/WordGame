@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TimeStop : PowerUp
+public class TimeStop : Powerup
 {
     private bool paused;
     private Timer timer;
@@ -9,11 +9,12 @@ public class TimeStop : PowerUp
     void Awake()
     {
         paused = false;
-        timer = transform.GetComponent<PlayerController>().timer;
+        //timer = transform.GetComponent<PlayerController>().timer;
     }
 
-    public override void Activate()
+    public override bool Activate()
     {
+        return false;
         if (!paused)
         {
             timer.StopTimer();

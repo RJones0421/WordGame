@@ -54,22 +54,6 @@ public class Word : MonoBehaviour
         rightSidebar.color = Color.gray;
     }
 
-    public void UpdateSidebars()
-    {
-        // Update Sidebars
-        bool valid = evaluator.IsValidWord(word);
-        if (valid)
-        {
-            leftSidebar.color = Color.green;
-            rightSidebar.color = Color.green;
-        }
-        else
-        {
-            leftSidebar.color = Color.red;
-            rightSidebar.color = Color.red;
-        }
-    }
-
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);

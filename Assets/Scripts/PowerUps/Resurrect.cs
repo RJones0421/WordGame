@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Resurrect : PowerUp
+public class Resurrect : Powerup
 {
     // Use this for initialization
     void Start()
@@ -15,8 +15,9 @@ public class Resurrect : PowerUp
 
     }
 
-    public override void Activate()
+    public override bool Activate()
     {
         // Uhhh idk yet lol
+        return false;
     }
 }

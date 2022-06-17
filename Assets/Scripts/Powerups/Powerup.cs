@@ -13,5 +13,5 @@ public abstract class Powerup : ScriptableObject
 
 	public Sprite Icon { get { return icon; } }
 
-    public bool activate() { return false; }
+    public abstract bool Activate();
 }

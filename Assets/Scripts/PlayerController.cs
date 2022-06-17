@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
 
+        /*
         // Test TimeStop
         {
             if (Input.GetKeyDown(KeyCode.T))
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
                 TimeStop timeStop = GetComponent<TimeStop>();
                 if (!timeStop)
                 {
-                    timeStop = gameObject.AddComponent<TimeStop>();
+                    //timeStop = gameObject.AddComponent<TimeStop>();
                     timeStop.Activate();
                 }
             }
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
                 swap.Activate();
             }
         }
+        */
 
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
@@ -249,11 +251,13 @@ public class PlayerController : MonoBehaviour
             if (letterPlatform && letterPlatform.letter.Letter != '_')
             {
                 letterPlatform.Activate();
+                /*
                 TimeStop timeStop = GetComponent<TimeStop>();
-                if (timeStop)
+                if (timeStop != null)
                 {
                     timeStop.Activate();
                 }
+                */
             }
         }
     }
