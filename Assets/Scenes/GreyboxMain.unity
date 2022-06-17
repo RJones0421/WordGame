@@ -178,13 +178,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform Generator
       objectReference: {fileID: 0}
+    - target: {fileID: 3899091899913772877, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
       propertyPath: letterSpawner
       value: 
       objectReference: {fileID: 682799597}
     - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
       propertyPath: platformMaxCount
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
       propertyPath: DeathzoneHeightScale
@@ -192,6 +200,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
       propertyPath: spawnPositionWidthScale
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+      propertyPath: spawnPositionHeightScale
       value: 0.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -660,6 +672,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3054716655067995678, guid: 665d105c9924e8b4d96528895a47df83, type: 3}
+      propertyPath: currentWord
+      value: 
+      objectReference: {fileID: 1263100687}
     - target: {fileID: 4391377145980554177, guid: 665d105c9924e8b4d96528895a47df83, type: 3}
       propertyPath: m_Name
       value: LetterSpawning
