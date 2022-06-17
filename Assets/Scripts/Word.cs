@@ -65,7 +65,7 @@ public class Word : MonoBehaviour
         {
             letters.Add(newLetter);
             word += newLetter.Letter;
-            sprites[currentLetterBox].sprite = newLetter.LetterSprite;
+            sprites[currentLetterBox].sprite = newLetter.image;
             currentLetterBox++;
 
             // Update Sidebars

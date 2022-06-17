@@ -65,7 +65,7 @@ public class PlatformGenerator : MonoBehaviour
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             if (letterPlatform)
             {
-                letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+                letterPlatform.SpriteRenderer.sprite = letterObject.image;
                 letterPlatform.SetLetter(letterObject);
             }
 
@@ -96,7 +96,7 @@ public class PlatformGenerator : MonoBehaviour
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             if (letterPlatform)
             {
-                letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+                letterPlatform.SpriteRenderer.sprite = letterObject.image;
                 letterPlatform.SetLetter(letterObject);
             }
 

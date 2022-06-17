@@ -4,16 +4,9 @@ using System.Text;
 
 public class Swap : Powerup
 {
-    // Use this for initialization
-    void Start()
+    public override bool Collect()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        return Activate();
     }
 
     public override bool Activate()

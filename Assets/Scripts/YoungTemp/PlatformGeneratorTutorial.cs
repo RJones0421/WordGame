@@ -48,17 +48,17 @@ public class PlatformGeneratorTutorial : MonoBehaviour
             /* update letter value */
         LetterPlatform letterPlatformT = platformT.GetComponent<LetterPlatform>();
         LetterClass letterObjectT = letterObjectArray[0];
-        letterPlatformT.SpriteRenderer.sprite = letterObjectT.LetterSprite;
+        letterPlatformT.SpriteRenderer.sprite = letterObjectT.image;
         letterPlatformT.SetLetter(letterObjectT);
 
         LetterPlatform letterPlatformO = platformO.GetComponent<LetterPlatform>();
         LetterClass letterObjectO = letterObjectArray[1];
-        letterPlatformO.SpriteRenderer.sprite = letterObjectO.LetterSprite;
+        letterPlatformO.SpriteRenderer.sprite = letterObjectO.image;
         letterPlatformO.SetLetter(letterObjectO);
 
         LetterPlatform letterPlatformE = platformE.GetComponent<LetterPlatform>();
         LetterClass letterObjectE = letterObjectArray[2];
-        letterPlatformE.SpriteRenderer.sprite = letterObjectE.LetterSprite;
+        letterPlatformE.SpriteRenderer.sprite = letterObjectE.image;
         letterPlatformE.SetLetter(letterObjectE);
 
 
