@@ -42,7 +42,6 @@ public class PlatformGenerator : MonoBehaviour
         screenWidth = screenHeight * mainCamera.aspect;
         DeathzoneHeight = screenHeight;
 
-
         Debug.Log(screenWidth);
 
         /* Initial generation of platforms */
@@ -110,12 +109,11 @@ public class PlatformGenerator : MonoBehaviour
         return letterSpawner.GetNextLetter();
     }
 
-
-    public ScriptableObject[] LetterObjectArray
+    public void UpdateDifficulty(Difficulty difficulty)
     {
-        get
-        {
-            return letterObjectArray;
-        }
+        letterSpawner.blankFrequency = difficulty.GetBlankFreq();
+        spawnPositionHeightScale = difficulty.GetHeightScale();
+        minHeight = difficulty.GetMinSpawnHeight();
+        maxHeight = difficulty.GetMaxSpawnHeight();
     }
 }

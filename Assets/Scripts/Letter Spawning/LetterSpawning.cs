@@ -53,7 +53,7 @@ public class LetterSpawning : Spawner
 			return LETTERS[Random.Range(0,len)] - 64;
 		}
 
-		if (EMPTY_FREQ >= Random.Range(1,101)) {
+		if (EMPTY_FREQ <= Random.Range(1,101)) {
 			prev_blank = true;
 			return 0;
 		}
@@ -63,7 +63,7 @@ public class LetterSpawning : Spawner
 
 	public override int GetNextLetter()
 	{
-		if (EMPTY_FREQ >= Random.Range(1,101)) {
+		if (blankFrequency >= Random.Range(1,101)) {
 			return 0;
 		}
 		int len = LETTERS.Length;
