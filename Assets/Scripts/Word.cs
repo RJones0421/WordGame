@@ -69,7 +69,29 @@ public class Word : MonoBehaviour
             currentLetterBox++;
 
             // Update Sidebars
-            bool valid = evaluator.IsValidWord(word);
+            UpdateSidebars();
+        }
+
+        return true;
+    }
+
+    public void PopLetter() {
+
+        if (word != "") {
+            word = word.Substring(0, word.Length - 1);
+
+            letters.RemoveAt(letters.Count - 1);
+
+            currentLetterBox--;
+            sprites[currentLetterBox].sprite = defaultSprite;
+        }
+
+        UpdateSidebars();
+
+    }
+
+    public void UpdateSidebars() {
+        bool valid = evaluator.IsValidWord(word);
             if (valid) {
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
@@ -90,9 +112,6 @@ public class Word : MonoBehaviour
                     arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
                 }
             }
-        }
-
-        return true;
     }
 
     private IEnumerator sidebarBounce(float bounceRate)
