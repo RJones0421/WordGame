@@ -95,6 +95,16 @@ public class Word : MonoBehaviour
         return true;
     }
 
+    public void popLetter() {
+        word = word.Substring(0, word.Length - 1);
+
+        letters.RemoveAt(letters.Count - 1);
+
+        currentLetterBox--;
+        sprites[currentLetterBox].sprite = defaultSprite;
+
+    }
+
     private IEnumerator sidebarBounce(float bounceRate)
     {
         if (isCoroutineRunning) yield break;
