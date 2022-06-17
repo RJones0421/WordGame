@@ -17,6 +17,11 @@ public class LetterClass : Collectible
 
 	public override bool Collect()
 	{
-		return false;
+		if (letter == '_')
+		{
+			return false;
+		}
+
+		return GlobalVariables.word.addLetter(this);
 	}
 }

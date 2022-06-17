@@ -60,19 +60,16 @@ public class Word : MonoBehaviour
 
         if (newLetter.Letter == '_') return false;
         if (letters.Count >= 8) return false;
+        
+        letters.Add(newLetter);
+        word += newLetter.Letter;
+        sprites[currentLetterBox].sprite = newLetter.image;
+        currentLetterBox++;
 
-        else
-        {
-            letters.Add(newLetter);
-            word += newLetter.Letter;
-            sprites[currentLetterBox].sprite = newLetter.image;
-            currentLetterBox++;
+        // Update Sidebars
+        UpdateSidebars();
 
-            // Update Sidebars
-            UpdateSidebars();
-        }
-
-        return true;
+            return true;
     }
 
     public void PopLetter() {

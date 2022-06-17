@@ -5,18 +5,12 @@ using UnityEngine;
 public class NewLetterPlatform : Platform
 {
     private SpriteRenderer spriteRenderer;
-    public LetterClass letter;
-    private Word word;
+    public Collectible collectible;
     private bool isCollected = false;
 
     public override void Activate()
     {
         CollectLetter();
-    }
-
-    private void OnEnable()
-    {
-        word = GameObject.Find("Word").GetComponent<Word>();
     }
 
     public SpriteRenderer SpriteRenderer {
@@ -33,13 +27,12 @@ public class NewLetterPlatform : Platform
 
     public void SetLetter(LetterClass letter)
     {
-        this.letter = letter;
+        this.collectible = letter;
     }
 
     public void DarkenSprite()
     {
         spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f);
-        isCollected = true;
     }
 
     public void ResetSprite()
@@ -50,11 +43,22 @@ public class NewLetterPlatform : Platform
 
     public void CollectLetter()
     {
-        if (letter.Letter == '_') return;
         if (!isCollected)
         {
-            word.addLetter(letter);
+            isCollected = collectible.Collect();
+        }
+
+        if (isCollected)
+        {
             DarkenSprite();
         }
+        /*
+        if (collectible.Letter == '_') return;
+        if (!isCollected)
+        {
+            word.addLetter(collectible);
+            DarkenSprite();
+        }
+        */
     }
 }

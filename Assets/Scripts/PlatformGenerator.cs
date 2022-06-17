@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    
     public GameObject platformPrefab;
 
-    public LetterSpawning letterSpawner;
+    public Spawner letterSpawner;
 
     /* total number of platforms */
     public int platformMaxCount=20;
@@ -31,7 +30,6 @@ public class PlatformGenerator : MonoBehaviour
     public LetterClass[] letterObjectArray;
 
     private Camera mainCamera;
-    public bool isStream = false;
     public float minHeight = 1.0f;
     public float maxHeight = 1.6f;
 
@@ -60,8 +58,7 @@ public class PlatformGenerator : MonoBehaviour
             
             /* update letter value */
             Platform platform = newPlatform.GetComponent<Platform>();
-            int num = isStream ? GetNextLetter() : LetterValue();
-            LetterClass letterObject = letterObjectArray[num];
+            LetterClass letterObject = letterObjectArray[GetNextLetter()];
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             if (letterPlatform)
             {
@@ -91,8 +88,7 @@ public class PlatformGenerator : MonoBehaviour
 
             /* update letter value */
             Platform platform = bottomPlatform.GetComponent<Platform>();
-            int num = isStream ? GetNextLetter() : LetterValue();
-            LetterClass letterObject = letterObjectArray[num];
+            LetterClass letterObject = letterObjectArray[GetNextLetter()];
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             if (letterPlatform)
             {
@@ -108,15 +104,10 @@ public class PlatformGenerator : MonoBehaviour
             letterPlatform.ResetSprite();
         }
     }
-
-    public int LetterValue()
-    {
-        return letterSpawner.GetLetter();
-    }
-
+    
     public int GetNextLetter()
     {
-        return letterSpawner.getStream1();
+        return letterSpawner.GetNextLetter();
     }
 
 
