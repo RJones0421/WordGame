@@ -1403,7 +1403,7 @@ GameObject:
   - component: {fileID: 410679532}
   - component: {fileID: 410679531}
   m_Layer: 5
-  m_Name: Word
+  m_Name: WordText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5233,7 +5233,10 @@ MonoBehaviour:
   - {fileID: 431281989}
   - {fileID: 51696648}
   - {fileID: 1526499131}
+  letters: []
+  currentLetterBox: 0
   timer: {fileID: 533044868}
+  word: 
   scoreManager: {fileID: 200206583}
   arrows: {fileID: 1516199618}
 --- !u!4 &1263100688
