@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LetterSpawning : MonoBehaviour
 {
 	[SerializeField] private DictionaryObject dictionaries;
 
+	private Queue<string> q = new Queue<string>();
+	private Queue<char> word = new Queue<char>();
+	private string currentWord;
+	private char gap = (char) 96;
+
+	public TMP_Text suggestedWord;
+	
 	public Queue<char> queue1;
 
 	public Queue<char> queue2;
@@ -18,7 +26,7 @@ public class LetterSpawning : MonoBehaviour
 	private static string LETTERS = "AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ";
 
 	// Odds out of 100 for the platform to be without a letter
-	private static int EMPTY_FREQ = 40;
+	private static int EMPTY_FREQ = 15;
 	private static int RANDOM_FREQ = 20;
 
 	private static bool prev_blank = false;
@@ -37,13 +45,24 @@ public class LetterSpawning : MonoBehaviour
     {		
 		lettersAvailable = LETTERS;
 
+		for (int i = 0; i < 4; i++)
+		{
+			q.Enqueue(dictionaries.GetRandomCommonWord());
+		}
+		
 		setQueue1();
-		setQueue2();
+		//setQueue2();
     }
 
-	public void setQueue1() {
-		char[] charArr = dictionaries.GetRandomFullWord().ToCharArray();
-		queue1 = new Queue<char>(charArr);
+	public void setQueue1()
+	{
+		currentWord = q.Dequeue();
+		word = new Queue<char>(currentWord.ToCharArray());
+		word.Enqueue(gap);
+		word.Enqueue(gap);
+		print(currentWord);
+		suggestedWord.text = currentWord.ToUpper();
+		q.Enqueue(dictionaries.GetRandomCommonWord());
 	}
 
 	public void setQueue2() {
@@ -52,10 +71,10 @@ public class LetterSpawning : MonoBehaviour
 	}
 
 	public int getLetterQueue1() {
-		if (queue1.Count == 0) {
+		if (word.Count == 0) {
 			setQueue1();
 		}
-		return queue1.Dequeue() - 64;
+		return word.Dequeue() - 96;
 	}
 
 	public int getLetterQueue2() {
@@ -73,9 +92,6 @@ public class LetterSpawning : MonoBehaviour
 	public int getStream1() {
 		if (EMPTY_FREQ >= Random.Range(1,101)) {
 			return 0;
-		}
-		if (RANDOM_FREQ >= Random.Range(1,101)) {
-			return getRandomLetter();
 		}
 		return getLetterQueue1();
 	}

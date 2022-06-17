@@ -27,15 +27,17 @@ public class Word : MonoBehaviour
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
 
-    public GameObject analyticsManager;
-    private AnalyticsManager analyticsManagerScript;
-
     private bool isCoroutineRunning;
+
+    public GameObject arrows;
+    private bool hasSubmitOnce;
+    private bool hasClearedOnce;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
-        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        arrows.SetActive(false); 
     }
     
     void Update()
@@ -54,6 +56,8 @@ public class Word : MonoBehaviour
 
     public bool addLetter(LetterClass newLetter)
     {
+        arrows.SetActive(false);
+
         if (newLetter.Letter == '_') return false;
         if (letters.Count >= 8) return false;
 
@@ -69,10 +73,22 @@ public class Word : MonoBehaviour
             if (valid) {
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
+
+                if (!hasSubmitOnce)
+                {
+                    arrows.SetActive(true);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.green);
+                }
             }
             else {
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
+
+                if (!hasClearedOnce && word.Length > 3)
+                {
+                    arrows.SetActive(true);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
+                }
             }
         }
 
@@ -114,26 +130,22 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
+        arrows.SetActive(false);
+
         int score = evaluator.SubmitWord(word);
 
         scoreManagerScript.AddScore(score);
 
         if (score > 0)
         {
-            // Valid word
             ScoreUtils.addWordToCollection(word, score);
+            hasSubmitOnce = true;
         }
 
-        #if ENABLE_CLOUD_SERVICES_ANALYTICS
-        analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
-            {
-                { "validWord", score > 0 },
-                { "word", word },
-                { "userScore", score },
-                { "wordLength", word.Length },
-                { "time", Time.timeAsDouble }
-            });
-        #endif
+        else if (word.Length > 3)
+        {
+            hasClearedOnce = true;
+        }
 
         letters.Clear();
         word = "";
@@ -150,5 +162,10 @@ public class Word : MonoBehaviour
         StartCoroutine(sidebarBounce(15f));
 
         return score;
+    }
+
+    public int GetWordLength()
+    {
+        return word.Length;
     }
 }
