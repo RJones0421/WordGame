@@ -163,4 +163,9 @@ public class Word : MonoBehaviour
 
         return score;
     }
+
+    public int GetWordLength()
+    {
+        return word.Length;
+    }
 }
