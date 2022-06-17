@@ -1,9 +1,11 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
     // TODO: maybe game timers observers based off the Timer class
     private float timer;
+    [Range(30, 60)][SerializeField] private int timeBetweenLevels = 45;
 
     [SerializeField] private PlatformGenerator randomPlatforms;
     [SerializeField] private PlatformGenerator commonStream;
@@ -35,13 +37,10 @@ public class DifficultyManager : MonoBehaviour
 
     private void UpdateDifficulty()
     {
-        currentDifficulty = timer switch
-        {
-            < 30f => difficulties[0],
-            < 60f => difficulties[1],
-            < 110f => difficulties[2],
-            _ => difficulties[3]
-        };
+        int temp = Mathf.FloorToInt(timer / timeBetweenLevels);
+        if (temp > difficulties.Length) temp = difficulties.Length;
+
+        currentDifficulty = difficulties[temp];
 
         if (previousDifficulty != currentDifficulty)
         {

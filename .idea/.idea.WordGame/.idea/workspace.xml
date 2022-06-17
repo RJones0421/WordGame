@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/Spawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/Spawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +48,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/Spawner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
