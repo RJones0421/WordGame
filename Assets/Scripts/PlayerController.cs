@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public bool allowMouseMovement;
 
-    private Word word;
+    public Word word;
 
     private float wallDist;
     private float wallRotate = 90.0f;
@@ -86,14 +86,22 @@ public class PlayerController : MonoBehaviour
                 TimeStop timeStop = GetComponent<TimeStop>();
                 if (!timeStop)
                 {
-                    Debug.Log("NONE FOUND");
                     timeStop = gameObject.AddComponent<TimeStop>();
                     timeStop.Activate();
                 }
-                else
+            }
+        }
+
+        // Test Swap
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                Swap swap = GetComponent<Swap>();
+                if (!swap)
                 {
-                    Debug.Log("WTF");
+                    swap = gameObject.AddComponent<Swap>();
                 }
+                swap.Activate();
             }
         }
 
