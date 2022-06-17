@@ -10,7 +10,7 @@ public class DeleteLast : Powerup
 
     public bool activate() {
 
-        word.popLetter();
+        word.PopLetter();
         return true;
 
     }
