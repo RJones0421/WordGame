@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2683797319322242208}
   - component: {fileID: -6419796797407443782}
   - component: {fileID: -4112257785259540300}
+  - component: {fileID: -1459790599468135859}
   m_Layer: 7
   m_Name: Letter Platform
   m_TagString: Untagged
@@ -137,7 +138,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6844295156165082423}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42ed234aedde243f6bd6339b831320d9, type: 3}
   m_Name: 
@@ -183,3 +184,15 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &-1459790599468135859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844295156165082423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f890391836e79411cb8c2d947e09956f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
