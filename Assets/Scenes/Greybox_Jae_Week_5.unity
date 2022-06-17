@@ -1762,6 +1762,7 @@ MonoBehaviour:
   maxTime: 30
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
+  analyticsManager: {fileID: 0}
 --- !u!1 &571306020
 GameObject:
   m_ObjectHideFlags: 0
@@ -4714,9 +4715,9 @@ MonoBehaviour:
   - {fileID: 431281989}
   - {fileID: 51696648}
   - {fileID: 1526499131}
-  leftSidebar: {fileID: 0}
-  rightSidebar: {fileID: 0}
   timer: {fileID: 533044868}
+  scoreManager: {fileID: 0}
+  arrows: {fileID: 0}
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
