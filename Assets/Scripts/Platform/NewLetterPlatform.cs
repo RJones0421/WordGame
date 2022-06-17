@@ -5,7 +5,7 @@ using UnityEngine;
 public class NewLetterPlatform : Platform
 {
     private SpriteRenderer spriteRenderer;
-    private LetterClass letter;
+    public LetterClass letter;
     private Word word;
     private bool isCollected = false;
 

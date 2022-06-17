@@ -79,6 +79,24 @@ public class PlayerController : MonoBehaviour
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
 
+        // Test TimeStop
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                TimeStop timeStop = GetComponent<TimeStop>();
+                if (!timeStop)
+                {
+                    Debug.Log("NONE FOUND");
+                    timeStop = gameObject.AddComponent<TimeStop>();
+                    timeStop.Activate();
+                }
+                else
+                {
+                    Debug.Log("WTF");
+                }
+            }
+        }
+
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -210,10 +228,15 @@ public class PlayerController : MonoBehaviour
         if (started && rb.velocity.y < 0.0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
-            NewLetterPlatform letterPlatform;
-            if (letterPlatform = collision.GetComponent<NewLetterPlatform>())
+            NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
+            if (letterPlatform && letterPlatform.letter.Letter != '_')
             {
                 letterPlatform.Activate();
+                TimeStop timeStop = GetComponent<TimeStop>();
+                if (timeStop)
+                {
+                    timeStop.Activate();
+                }
             }
         }
     }
