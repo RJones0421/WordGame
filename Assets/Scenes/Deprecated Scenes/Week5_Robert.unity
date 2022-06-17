@@ -1970,6 +1970,7 @@ MonoBehaviour:
   maxTime: 30
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
+  analyticsManager: {fileID: 1351463014}
 --- !u!1 &571306020
 GameObject:
   m_ObjectHideFlags: 0
@@ -5172,6 +5173,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1351463014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1351463016}
+  - component: {fileID: 1351463015}
+  m_Layer: 0
+  m_Name: AnalyticsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1351463015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351463014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9268a2c48aba44faa37dc6bc9f3639f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1351463016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351463014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.4064012, y: 0.55546004, z: -0.09321939}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1365478713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5782,6 +5827,10 @@ PrefabInstance:
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 61575929}
+    - target: {fileID: 3860524851957964824, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: analyticsManager
+      value: 
+      objectReference: {fileID: 1351463014}
     - target: {fileID: 5664284316386886154, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6695,7 +6744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41c1666440472b4f8cc6d7b54e07eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementVector: {x: -0.6, y: 0, z: 0}
+  movementVector: {x: -0.5, y: 0, z: 0}
   period: 2
 --- !u!1 &1687756441
 GameObject:
@@ -7728,7 +7777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41c1666440472b4f8cc6d7b54e07eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementVector: {x: 0.6, y: 0, z: 0}
+  movementVector: {x: 0.5, y: 0, z: 0}
   period: 2
 --- !u!1 &1963504221
 GameObject:

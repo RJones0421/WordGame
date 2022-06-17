@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 
@@ -40,14 +39,8 @@ public class PlayerController : MonoBehaviour
     private float originalBounceBackSpeed = 15f;
     private bool isBouncingBack;
 
-    private bool MouseOnScreen
-    {
-        get
-        {
-            return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
-                Input.mousePosition.y >= 0.0f && Input.mousePosition.y <= Screen.height;
-        }
-    }
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
 
     private void Awake()
     {
@@ -57,6 +50,7 @@ public class PlayerController : MonoBehaviour
         box = GetComponent<BoxCollider2D>();
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
     }
 
     // Start is called before the first frame update
@@ -64,7 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         screenRes = new Vector2(Screen.width, Screen.height);
         gameOverCanvas.SetActive(false);
-        wallDist = (wordBox.GetComponent<SpriteRenderer>().bounds.size.x + wallPrefab.GetComponent<Renderer>().bounds.size.y) * 0.5f;
+        wallDist = wordBox.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f + wallPrefab.GetComponent<Renderer>().bounds.size.y * 1.5f;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
@@ -130,38 +124,45 @@ public class PlayerController : MonoBehaviour
 
         // Word submission
         {
-            if (started && transform.position.x > wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y)
+            if (transform.position.x > wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
-                InitiateBounce();
+                if (started && word.GetWordLength() > 0)
+                {
+                    InitiateBounce();
 
-                Debug.Log("SUBMIT RIGHT");
+                    Debug.Log("SUBMIT RIGHT");
 
-                word.submitWord();
+                    word.submitWord();
+                }
+                else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
 
-            if (started && transform.position.x < -wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y)
+            if (transform.position.x < -wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
-                InitiateBounce();
+                if (started && word.GetWordLength() > 0)
+                {
+                    InitiateBounce();
 
-                Debug.Log("SUBMIT LEFT");
+                    Debug.Log("SUBMIT LEFT");
 
-                word.submitWord();
-            }
-        }
-
-        if(bounceBackToCenter)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
-
-            if (Vector3.Distance(transform.position, bounceBackTargetPos) == 0)
-            {
-                isBouncingBack = false;
-                bounceBackToCenter = false;
-                bounceBackSpeed = originalBounceBackSpeed;
-                rb.gravityScale = 1;
-                rb.velocity = new Vector3(0, 5, 0);
+                    word.submitWord();
+                }
+                else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
         }
+            if (bounceBackToCenter)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
+
+                if (Vector3.Distance(transform.position, bounceBackTargetPos) == 0)
+                {
+                    isBouncingBack = false;
+                    bounceBackToCenter = false;
+                    bounceBackSpeed = originalBounceBackSpeed;
+                    rb.gravityScale = 1;
+                    rb.velocity = new Vector3(0, 5, 0);
+                }
+            }
 
         {
             if (transform.position.y > playerHeight)
@@ -192,7 +193,16 @@ public class PlayerController : MonoBehaviour
 
                 gameOverCanvas.SetActive(true);
                 timer.StopTimer();
-                timer.SetValues();
+                int score = timer.SetValues();
+
+                #if ENABLE_CLOUD_SERVICES_ANALYTICS
+                analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
+                {
+                    { "deathMethod", "falling" },
+                    { "userScore", score },
+                    { "time", Time.timeAsDouble }
+                });
+                #endif
             }
         }
     }
