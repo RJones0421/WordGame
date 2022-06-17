@@ -210,10 +210,10 @@ public class PlayerController : MonoBehaviour
         if (started && rb.velocity.y < 0.0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
-            LetterPlatform platform;
-            if (platform = collision.GetComponent<LetterPlatform>())
+            NewLetterPlatform letterPlatform;
+            if (letterPlatform = collision.GetComponent<NewLetterPlatform>())
             {
-                platform.CollectLetter();
+                letterPlatform.Activate();
             }
         }
     }

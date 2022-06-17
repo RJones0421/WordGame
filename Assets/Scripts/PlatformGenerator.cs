@@ -16,7 +16,7 @@ public class PlatformGenerator : MonoBehaviour
 
     /* all platforms are stored in queue */
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
-    GameObject platform;
+    GameObject bottomPlatform;
 
     private Vector3 spawnPosition = new Vector3();
 
@@ -55,24 +55,28 @@ public class PlatformGenerator : MonoBehaviour
             GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);  // Quaternion.identity means no rotation
             
             /* update letter value */
-            LetterPlatform letterPlatform = newPlatform.GetComponent<LetterPlatform>();
+            Platform platform = newPlatform.GetComponent<Platform>();
             int rand = LetterValue(); 
             LetterClass letterObject = letterObjectArray[rand];
-            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
-            letterPlatform.SetLetter(letterObject);
+            NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
+            if (letterPlatform)
+            {
+                letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+                letterPlatform.SetLetter(letterObject);
+            }
 
             platformQueue.Enqueue(newPlatform);
         }
         
         /* reference to the lowest platform */
-        platform = platformQueue.Dequeue();        
+        bottomPlatform = platformQueue.Dequeue();        
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Camera.main.transform.position.y - 
-            platform.transform.position.y >= DeathzoneHeight*DeathzoneHeightScale){
+            bottomPlatform.transform.position.y >= DeathzoneHeight*DeathzoneHeightScale){
 
             // Debug.Log("Updating platform");
 
@@ -81,18 +85,22 @@ public class PlatformGenerator : MonoBehaviour
                 spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
                 spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }     
-            platform.transform.position=spawnPosition;
+            bottomPlatform.transform.position=spawnPosition;
 
             /* update letter value */
-            LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
+            Platform platform = bottomPlatform.GetComponent<Platform>();
             int rand = LetterValue();
             LetterClass letterObject = letterObjectArray[rand];
-            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
-            letterPlatform.SetLetter(letterObject);
+            NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
+            if (letterPlatform)
+            {
+                letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+                letterPlatform.SetLetter(letterObject);
+            }
 
             /* update the platformQueue */
-            platformQueue.Enqueue(platform);
-            platform=platformQueue.Dequeue();
+            platformQueue.Enqueue(bottomPlatform);
+            bottomPlatform=platformQueue.Dequeue();
 
             /* reset the color of the sprite */
             letterPlatform.ResetSprite();
