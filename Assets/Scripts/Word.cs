@@ -9,20 +9,20 @@ public class Word : MonoBehaviour
 
     [SerializeField] private Sprite defaultSprite;
 
-    [SerializeField] private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
+    [SerializeField] public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
     private SpriteRenderer leftSidebar;
     private SpriteRenderer rightSidebar;
 
-    private List<LetterClass> letters = new List<LetterClass>();
+    public List<LetterClass> letters = new List<LetterClass>();
 
-    private int currentLetterBox = 0;
+    public int currentLetterBox = 0;
 
     public GameObject timer;
 
     private Timer timerClass;
     
-    private string word = "";
+    public string word = "";
 
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;

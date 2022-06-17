@@ -14,7 +14,7 @@ public class PlatformGenerator : MonoBehaviour
 
     /* all platforms are stored in queue */
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
-    GameObject platform;
+    GameObject bottomPlatform;
 
     private Vector3 spawnPosition = new Vector3();
 
@@ -59,42 +59,50 @@ public class PlatformGenerator : MonoBehaviour
             GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);  // Quaternion.identity means no rotation
             
             /* update letter value */
-            LetterPlatform letterPlatform = newPlatform.GetComponent<LetterPlatform>();
+            Platform platform = newPlatform.GetComponent<Platform>();
             int num = isStream ? GetNextLetter() : LetterValue();
             LetterClass letterObject = letterObjectArray[num];
-            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
-            letterPlatform.SetLetter(letterObject);
+            NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
+            if (letterPlatform)
+            {
+                letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+                letterPlatform.SetLetter(letterObject);
+            }
 
             platformQueue.Enqueue(newPlatform);
         }
         
         /* reference to the lowest platform */
-        platform = platformQueue.Dequeue();        
+        bottomPlatform = platformQueue.Dequeue();        
     }
 
     // Update is called once per frame
     void Update()
     {
         if (mainCamera.transform.position.y - 
-            platform.transform.position.y >= DeathzoneHeight*DeathzoneHeightScale){
+            bottomPlatform.transform.position.y >= DeathzoneHeight*DeathzoneHeightScale){
 
             /* update the position to be the highest platform */
             while(Physics2D.OverlapCapsule(spawnPosition, new Vector2(2.0f,4.0f), CapsuleDirection2D.Vertical, 0, (1 << 7)) != null) {
                 spawnPosition.y+=Random.Range(spawnPositionHeightScale*minHeight,spawnPositionHeightScale*maxHeight);
                 spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }     
-            platform.transform.position=spawnPosition;
+            bottomPlatform.transform.position=spawnPosition;
 
             /* update letter value */
-            LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
+            Platform platform = bottomPlatform.GetComponent<Platform>();
             int num = isStream ? GetNextLetter() : LetterValue();
             LetterClass letterObject = letterObjectArray[num];
-            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
-            letterPlatform.SetLetter(letterObject);
+            NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
+            if (letterPlatform)
+            {
+                letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
+                letterPlatform.SetLetter(letterObject);
+            }
 
             /* update the platformQueue */
-            platformQueue.Enqueue(platform);
-            platform=platformQueue.Dequeue();
+            platformQueue.Enqueue(bottomPlatform);
+            bottomPlatform=platformQueue.Dequeue();
 
             /* reset the color of the sprite */
             letterPlatform.ResetSprite();

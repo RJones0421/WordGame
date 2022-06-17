@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public bool allowMouseMovement;
 
-    private Word word;
+    public Word word;
 
     private float wallDist;
     private float wallRotate = 90.0f;
@@ -80,6 +80,34 @@ public class PlayerController : MonoBehaviour
             walls[0].transform.position = new Vector3(wallDist, walls[0].transform.position.y, 0.0f);
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
+
+        /*
+        // Test TimeStop
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                TimeStop timeStop = GetComponent<TimeStop>();
+                if (!timeStop)
+                {
+                    //timeStop = gameObject.AddComponent<TimeStop>();
+                    timeStop.Activate();
+                }
+            }
+        }
+
+        // Test Swap
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                Swap swap = GetComponent<Swap>();
+                if (!swap)
+                {
+                    swap = gameObject.AddComponent<Swap>();
+                }
+                swap.Activate();
+            }
+        }
+        */
 
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
@@ -219,10 +247,17 @@ public class PlayerController : MonoBehaviour
         if (started && rb.velocity.y < 0.0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
-            LetterPlatform platform;
-            if (platform = collision.GetComponent<LetterPlatform>())
+            NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
+            if (letterPlatform && letterPlatform.letter.Letter != '_')
             {
-                platform.CollectLetter();
+                letterPlatform.Activate();
+                /*
+                TimeStop timeStop = GetComponent<TimeStop>();
+                if (timeStop != null)
+                {
+                    timeStop.Activate();
+                }
+                */
             }
         }
     }

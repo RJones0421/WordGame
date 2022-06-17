@@ -8,10 +8,9 @@ public class DeleteLast : Powerup
 
     [SerializeField] private Word word;
 
-    public bool activate() {
-
+    public override bool Activate()
+    {
         word.PopLetter();
         return true;
-
     }
 }
