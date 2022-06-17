@@ -5073,7 +5073,7 @@ MonoBehaviour:
   - {fileID: 1526499131}
   timer: {fileID: 533044868}
   scoreManager: {fileID: 200206583}
-  analyticsManager: {fileID: 1351463014}
+  arrows: {fileID: 1703645087}
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
@@ -5827,6 +5827,10 @@ PrefabInstance:
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 61575929}
+    - target: {fileID: 3860524851957964824, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: analyticsManager
+      value: 
+      objectReference: {fileID: 1351463014}
     - target: {fileID: 5664284316386886154, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6740,6 +6744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41c1666440472b4f8cc6d7b54e07eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementVector: {x: -0.5, y: 0, z: 0}
+  period: 2
 --- !u!1 &1687756441
 GameObject:
   m_ObjectHideFlags: 0
@@ -6920,6 +6926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a132791b485b4a49966323331d48f55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftArrow: {fileID: 1904196247}
+  rightArrow: {fileID: 1639244878}
 --- !u!1 &1708419995
 GameObject:
   m_ObjectHideFlags: 0
@@ -7769,6 +7777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41c1666440472b4f8cc6d7b54e07eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementVector: {x: 0.5, y: 0, z: 0}
+  period: 2
 --- !u!1 &1963504221
 GameObject:
   m_ObjectHideFlags: 0
