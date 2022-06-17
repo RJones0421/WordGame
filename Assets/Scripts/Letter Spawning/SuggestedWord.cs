@@ -11,6 +11,6 @@ public class SuggestedWord : MonoBehaviour
 
     private void Update()
     {
-        suggestedWord.text = streamSpawning.currentWord;
+        suggestedWord.text = streamSpawning.currentWord.ToUpper();
     }
 }

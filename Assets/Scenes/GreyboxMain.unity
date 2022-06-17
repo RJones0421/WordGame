@@ -1595,6 +1595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d576289b2a82994fbf7fb83e9ca1b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenLevels: 37
   randomPlatforms: {fileID: 1090223014}
   commonStream: {fileID: 1113444761}
   fullStream: {fileID: 0}
