@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
             NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
-            if (letterPlatform && letterPlatform.letter.Letter != '_')
+            if (letterPlatform)
             {
                 letterPlatform.Activate();
                 /*
