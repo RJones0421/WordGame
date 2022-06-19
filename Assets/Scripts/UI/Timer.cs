@@ -15,6 +15,8 @@ public class Timer : MonoBehaviour
 	public GameObject winCanvas;
     public GameObject canvasGroup;
     private bool timerRunning = false;
+    static string currency_amount_keyname = "currency";
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,7 @@ public class Timer : MonoBehaviour
         Time.timeScale = 1;
         canvasGroup.GetComponent<CanvasGroup>().interactable = true;
         canvasGroup.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        
+
     }
 
     // Update is called once per frame
@@ -71,6 +73,23 @@ public class Timer : MonoBehaviour
         }
 
         int highScore = ScoreUtils.updateAndGetHighsScore(finalScore);
+
+
+        // currency udpate = converts final score to in game currency
+        int current_currency_amount = PlayerPrefs.GetInt(currency_amount_keyname);
+        int new_currency_amount = current_currency_amount + finalScore;
+        PlayerPrefs.SetInt(currency_amount_keyname,new_currency_amount);
+
+        int amount = PlayerPrefs.GetInt(currency_amount_keyname);
+        Debug.Log("this is your current currency amount " + amount);
+        // if(current_currency_amount == null || current_currency_amount < score ){
+        //     PlayerPrefs.SetInt(highscore_keyname,score);
+        //     prevHighscore = score;
+        // }
+
+
+
+
 
         //set current score
         inputFieldGo = GameObject.Find("CurrentScore_Final");
