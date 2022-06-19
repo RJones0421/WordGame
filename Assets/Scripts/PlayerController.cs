@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 
@@ -13,13 +12,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D box;
     private Camera mainCamera;
-
-    private float halfWidth;
+    private Renderer renderer;
 
     public bool allowMouseMovement;
 
     private Word word;
-    
+
+    private float wallDist;
     private float wallRotate = 90.0f;
     public GameObject wallPrefab;
     public List<GameObject> walls;
@@ -28,47 +27,60 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
     public GameObject tempTutroial;
 
-    private TMP_Text scoreText;
+    public GameObject wordBox;
+    public GameObject scoreManager;
+    private ScoreManager scoreManagerScript;
     private float playerHeight;
+    private Vector2 screenRes;
 
-    private bool MouseOnScreen
-    {
-        get
-        {
-            return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
-                Input.mousePosition.y >= 0.0f && Input.mousePosition.y <= Screen.height;
-        }
-    }
+    private bool bounceBackToCenter;
+    private Vector3 bounceBackTargetPos;
+    private float bounceBackSpeed = 15f;
+    private float originalBounceBackSpeed = 15f;
+    private bool isBouncingBack;
+
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
 
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
-        scoreText = word.scoreHolder.GetComponent<TMP_Text>();
+        scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
+        renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        screenRes = new Vector2(Screen.width, Screen.height);
         gameOverCanvas.SetActive(false);
-        halfWidth = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x - wallPrefab.GetComponent<Renderer>().bounds.size.y / 2;
+        wallDist = wordBox.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f + wallPrefab.GetComponent<Renderer>().bounds.size.y * 1.5f;
 
-        walls.Add(Instantiate(wallPrefab, Vector3.left * halfWidth, Quaternion.identity));
+        walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
 
-        walls.Add(Instantiate(wallPrefab, Vector3.right * halfWidth, Quaternion.identity));
+        walls.Add(Instantiate(wallPrefab, Vector3.right * wallDist, Quaternion.identity));
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
-
-        halfWidth -= wallPrefab.GetComponent<Renderer>().bounds.size.y / 2 + GetComponent<BoxCollider2D>().size.x / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Resolution Changes
+        if (Screen.width != screenRes.x || Screen.height != screenRes.y)
+        {
+            wallDist *= ((screenRes.y * (float)Screen.width) / (screenRes.x * (float)Screen.height));
+            screenRes = new Vector2(Screen.width, Screen.height);
+            walls[0].transform.position = new Vector3(wallDist, walls[0].transform.position.y, 0.0f);
+            walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
+        }
+
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -93,7 +105,7 @@ public class PlayerController : MonoBehaviour
         // Horizontal controls
         {
             // Keys
-            if (!allowMouseMovement)
+            if (!isBouncingBack && !allowMouseMovement)
             {
                 float inputX = Input.GetAxis("Horizontal");
 
@@ -104,44 +116,64 @@ public class PlayerController : MonoBehaviour
             }
 
             // Mouse
-            if (allowMouseMovement)
+            if (!isBouncingBack && allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
         }
 
         // Word submission
         {
-            if (transform.position.x > halfWidth)
+            if (transform.position.x > wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
-                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                if (started && word.GetWordLength() > 0)
+                {
+                    InitiateBounce();
 
-                Debug.Log("SUBMIT RIGHT");
+                    Debug.Log("SUBMIT RIGHT");
 
-                word.submitWord();
+                    word.submitWord();
+                }
+                else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
 
-            if (transform.position.x < -halfWidth)
+            if (transform.position.x < -wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
-                transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
+                if (started && word.GetWordLength() > 0)
+                {
+                    InitiateBounce();
 
-                Debug.Log("SUBMIT LEFT");
+                    Debug.Log("SUBMIT LEFT");
 
-                word.submitWord();
+                    word.submitWord();
+                }
+                else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
         }
+            if (bounceBackToCenter)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
+
+                if (Vector3.Distance(transform.position, bounceBackTargetPos) == 0)
+                {
+                    isBouncingBack = false;
+                    bounceBackToCenter = false;
+                    bounceBackSpeed = originalBounceBackSpeed;
+                    rb.gravityScale = 1;
+                    rb.velocity = new Vector3(0, 5, 0);
+                }
+            }
 
         {
             if (transform.position.y > playerHeight)
             {
-                int score = Int32.Parse(scoreText.text);
-                scoreText.text = (score + 1).ToString();
+                scoreManagerScript.AddScore(1);
                 playerHeight += 2.5f;
             }
         }
 
         // Camera and walls follow as long as you go up
-        float currHeight = transform.position.y;
+        float currHeight = transform.position.y - 1.0f;
         {
             float camHeight = mainCamera.transform.position.y;
             if (camHeight < currHeight)
@@ -154,21 +186,37 @@ public class PlayerController : MonoBehaviour
 
         // Handle death
         {
-            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y / 2, 0.0f)).y;
+            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
                 Debug.Log("YOU DIED");
 
                 gameOverCanvas.SetActive(true);
                 timer.StopTimer();
-                timer.SetValues();
+                int score = timer.SetValues();
+
+                #if ENABLE_CLOUD_SERVICES_ANALYTICS
+                analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
+                {
+                    { "deathMethod", "falling" },
+                    { "userScore", score },
+                    { "time", Time.timeAsDouble }
+                });
+                #endif
             }
         }
     }
-
+    private void InitiateBounce()
+    {
+        bounceBackToCenter = true;
+        bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
+        isBouncingBack = true;
+        rb.gravityScale = 0;
+        rb.velocity = Vector3.zero;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (started && rb.velocity.y < 0)
+        if (started && rb.velocity.y < 0.0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
             LetterPlatform platform;

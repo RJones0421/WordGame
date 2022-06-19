@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
+    
     public GameObject platformPrefab;
-   
-    public float cameraSpeed;
+
+    public LetterSpawning letterSpawner;
 
     /* total number of platforms */
     public int platformMaxCount=20;
@@ -22,28 +23,35 @@ public class PlatformGenerator : MonoBehaviour
 
     /* updating/killing platforms when distance from a platform to camera bottom exceeds this number */
     private float DeathzoneHeight; 
-    public float DeathzoneHeightScale=1.25f;
+    public float DeathzoneHeightScale=1.0f;
     
     public float spawnPositionWidthScale = 0.35f;
     public float spawnPositionHeightScale = 1.0f;
 
     public LetterClass[] letterObjectArray;
 
+    private Camera mainCamera;
+    public bool isStream = false;
+    public float minHeight = 1.0f;
+    public float maxHeight = 1.6f;
+
     // Start is called before the first frame update
     void Start()
     {
-        screenHeight = Camera.main.orthographicSize;
-        screenWidth = screenHeight * Camera.main.aspect;
-        DeathzoneHeight = 2*screenHeight;
+        mainCamera = Camera.main;
+
+        screenHeight = mainCamera.orthographicSize;
+        screenWidth = screenHeight * mainCamera.aspect;
+        DeathzoneHeight = screenHeight;
 
 
-        Debug.Log(screenWidth);   
+        Debug.Log(screenWidth);
 
         /* Initial generation of platforms */
         for (int i=0; i<platformMaxCount; i++){
             /* Position of the new platform */
             while(Physics2D.OverlapCapsule(spawnPosition, new Vector2(2.0f,4.0f), CapsuleDirection2D.Vertical, 0, (1 << 7)) != null) {
-                spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
+                spawnPosition.y+=Random.Range(spawnPositionHeightScale*minHeight,spawnPositionHeightScale*maxHeight);
                 spawnPosition.x=Random.Range(-1.0f*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }
             
@@ -52,8 +60,8 @@ public class PlatformGenerator : MonoBehaviour
             
             /* update letter value */
             LetterPlatform letterPlatform = newPlatform.GetComponent<LetterPlatform>();
-            int rand = LetterValue(); 
-            LetterClass letterObject = letterObjectArray[rand];
+            int num = isStream ? GetNextLetter() : LetterValue();
+            LetterClass letterObject = letterObjectArray[num];
             letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
             letterPlatform.SetLetter(letterObject);
 
@@ -67,22 +75,20 @@ public class PlatformGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Camera.main.transform.position.y - 
+        if (mainCamera.transform.position.y - 
             platform.transform.position.y >= DeathzoneHeight*DeathzoneHeightScale){
-
-            // Debug.Log("Updating platform");
 
             /* update the position to be the highest platform */
             while(Physics2D.OverlapCapsule(spawnPosition, new Vector2(2.0f,4.0f), CapsuleDirection2D.Vertical, 0, (1 << 7)) != null) {
-                spawnPosition.y+=Random.Range(spawnPositionHeightScale*0.0f,spawnPositionHeightScale*1.4f);
+                spawnPosition.y+=Random.Range(spawnPositionHeightScale*minHeight,spawnPositionHeightScale*maxHeight);
                 spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }     
             platform.transform.position=spawnPosition;
 
             /* update letter value */
             LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
-            int rand = LetterValue();
-            LetterClass letterObject = letterObjectArray[rand];
+            int num = isStream ? GetNextLetter() : LetterValue();
+            LetterClass letterObject = letterObjectArray[num];
             letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
             letterPlatform.SetLetter(letterObject);
 
@@ -95,8 +101,15 @@ public class PlatformGenerator : MonoBehaviour
         }
     }
 
-    public int LetterValue() {
-        return LetterSpawning.GetLetterStatic();  
+    public int LetterValue()
+    {
+        return 0;
+        //return letterSpawner.getStream1();
+    }
+
+    public int GetNextLetter()
+    {
+        return letterSpawner.getStream1();
     }
 
 

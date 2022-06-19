@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using System;
 
 public class Word : MonoBehaviour
 {
@@ -13,13 +11,12 @@ public class Word : MonoBehaviour
 
     [SerializeField] private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
-    [SerializeField] private SpriteRenderer leftSidebar;
-    [SerializeField] private SpriteRenderer rightSidebar;
+    private SpriteRenderer leftSidebar;
+    private SpriteRenderer rightSidebar;
 
     private List<LetterClass> letters = new List<LetterClass>();
 
     private int currentLetterBox = 0;
-
 
     public GameObject timer;
 
@@ -27,13 +24,20 @@ public class Word : MonoBehaviour
     
     private string word = "";
 
-    public GameObject scoreHolder;
-    private TMP_Text scoreText;
+    public GameObject scoreManager;
+    private ScoreManager scoreManagerScript;
+
+    private bool isCoroutineRunning;
+
+    public GameObject arrows;
+    private bool hasSubmitOnce;
+    private bool hasClearedOnce;
 
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
-        scoreText = scoreHolder.GetComponent<TMP_Text>();
+        scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
+        arrows.SetActive(false); 
     }
     
     void Update()
@@ -52,6 +56,8 @@ public class Word : MonoBehaviour
 
     public bool addLetter(LetterClass newLetter)
     {
+        arrows.SetActive(false);
+
         if (newLetter.Letter == '_') return false;
         if (letters.Count >= 8) return false;
 
@@ -63,32 +69,101 @@ public class Word : MonoBehaviour
             currentLetterBox++;
 
             // Update Sidebars
-            bool valid = evaluator.IsValidWord(word);
+            UpdateSidebars();
+        }
+
+        return true;
+    }
+
+    public void PopLetter() {
+
+        if (word != "") {
+            word = word.Substring(0, word.Length - 1);
+
+            letters.RemoveAt(letters.Count - 1);
+
+            currentLetterBox--;
+            sprites[currentLetterBox].sprite = defaultSprite;
+        }
+
+        UpdateSidebars();
+
+    }
+
+    public void UpdateSidebars() {
+        bool valid = evaluator.IsValidWord(word);
             if (valid) {
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
+
+                if (!hasSubmitOnce)
+                {
+                    arrows.SetActive(true);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.green);
+                }
             }
             else {
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
+
+                if (!hasClearedOnce && word.Length > 3)
+                {
+                    arrows.SetActive(true);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
+                }
             }
+    }
+
+    private IEnumerator sidebarBounce(float bounceRate)
+    {
+        if (isCoroutineRunning) yield break;
+        isCoroutineRunning = true;
+
+        GameObject leftWall = leftSidebar.gameObject;
+        GameObject rightWall = rightSidebar.gameObject;
+
+        Vector3 wallScale = leftWall.transform.localScale;
+
+        while(leftWall.transform.localScale.y < 3 * wallScale.y) {
+            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
+            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
+            yield return null;
         }
 
-        return true;
+        while(leftWall.transform.localScale.y > wallScale.y) {
+            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
+            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
+            yield return null;
+        }
+
+        if (leftWall.transform.localScale.y < wallScale.y)
+        {
+            leftWall.transform.localScale = wallScale;
+            rightWall.transform.localScale = wallScale;
+        }
+
+        isCoroutineRunning = false;
     }
 
     public int submitWord() {
         // Check validity and get word score
         // If valid, clear list
 
+        arrows.SetActive(false);
+
         int score = evaluator.SubmitWord(word);
 
-        Int32.TryParse(scoreText.text, out int currentScore);
-        scoreText.text = (currentScore + score).ToString();
+        scoreManagerScript.AddScore(score);
 
         if (score > 0)
         {
             ScoreUtils.addWordToCollection(word, score);
+            hasSubmitOnce = true;
+        }
+
+        else if (word.Length > 3)
+        {
+            hasClearedOnce = true;
         }
 
         letters.Clear();
@@ -103,6 +178,13 @@ public class Word : MonoBehaviour
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
 
+        StartCoroutine(sidebarBounce(15f));
+
         return score;
+    }
+
+    public int GetWordLength()
+    {
+        return word.Length;
     }
 }
