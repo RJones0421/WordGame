@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,18 +13,43 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Collectible.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DictionaryObject.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/UI/Timer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/OldPlayerController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Deprecated/PlayerControllerOld.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/LetterSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/WordEvaluator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/DictionaryObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Collectible.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Powerups/DeleteLast.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Powerups/Powerup.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Powerups/Resurrect.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Powerups/Swap.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Powerups/TimeStop.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/YoungTemp/PlatformGeneratorWeek4.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/YoungTemp/PlatformGeneratorTutorial.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Yound_temp/PlatformGenerator0611.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/LetterClass.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Platform/NewLetterPlatform.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Spawner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/StreamSpawning.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/LetterSpawning.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/Spawner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
@@ -43,6 +67,28 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -53,6 +99,8 @@
       <updated>1654984443221</updated>
       <workItem from="1654984452219" duration="2484000" />
       <workItem from="1655250030645" duration="483000" />
+      <workItem from="1655268273032" duration="8053000" />
+      <workItem from="1655493825609" duration="409000" />
     </task>
     <servers />
   </component>
@@ -62,6 +110,15 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
