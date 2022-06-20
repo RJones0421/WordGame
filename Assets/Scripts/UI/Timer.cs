@@ -76,7 +76,7 @@ public class Timer : MonoBehaviour
         CurrencyUtils.addCurrency(finalScore);
 
 
-
+        CurrencyUtils.displayCurrency("Currency_test");
         //set current score
         inputFieldGo = GameObject.Find("CurrentScore_Final");
         inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
