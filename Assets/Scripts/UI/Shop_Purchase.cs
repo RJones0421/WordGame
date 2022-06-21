@@ -22,24 +22,27 @@ public class Shop_Purchase : MonoBehaviour
 
     public void onClickButton()
     {
-        
         Debug.Log("Inside onclickButton()");
         var go = EventSystem.current.currentSelectedGameObject;
-        
-        
-        if (go != null){
-            Debug.Log("Clicked on : " + go.name);
-            GameObject inputFieldGo =  GameObject.Find("Button_ShopItem2_Text");
-            TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
-            inputFieldCo.text = go.name;
-        }
-         else{
-            
-            GameObject inputFieldGo =  GameObject.Find("Button_ShopItem2_Text");
-            TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
-            inputFieldCo.text = "Random Button Clicked";
-         }
-
-           
+        var itemSelected = (go.name)[(go.name).Length-1];
+        CurrencyUtils.removeCurrency(itemSelected.ToString());
+        CurrencyUtils.displayQuantity(itemSelected.ToString());
+        displayCurrency();
     }
+
+    public void displayCurrency(){
+        GameObject inputFieldGo = GameObject.Find("Text_Shop_Currency");
+        TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
+        int pointsAvailable = PlayerPrefs.GetInt(CurrencyUtils.currency_amount_keyname);
+
+        inputFieldCo.text = "Points Available: " + pointsAvailable;
+
+        CurrencyUtils.displayQuantity("1");
+        CurrencyUtils.displayQuantity("2");
+        CurrencyUtils.displayQuantity("3");
+        CurrencyUtils.displayQuantity("4");
+        CurrencyUtils.displayQuantity("5");
+        CurrencyUtils.displayQuantity("6");
+    }
+
 }
