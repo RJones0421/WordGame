@@ -9,12 +9,12 @@ using System;
 public class CurrencyUtils : MonoBehaviour
 {
     public static string currency_amount_keyname = "currency";
-    public static string item_1_key = "item_1";
-    public static string item_2_key = "item_2";
-    public static string item_3_key = "item_3";
-    public static string item_4_key = "item_4";
-    public static string item_5_key = "item_5";
-    public static string item_6_key = "item_6";
+    public static string item_1_key = "1";
+    public static string item_2_key = "2";
+    public static string item_3_key = "3";
+    public static string item_4_key = "4";
+    public static string item_5_key = "5";
+    public static string item_6_key = "6";
 
 
     Dictionary<string, int> items_value = new Dictionary<string, int>();
@@ -22,12 +22,12 @@ public class CurrencyUtils : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        items_value.Add("1", 1);
-        items_value.Add("2", 2);
-        items_value.Add("3", 3);
-        items_value.Add("4", 4);
-        items_value.Add("5", 5);
-        items_value.Add("6", 6);
+        // items_value.Add("1", 1);
+        // items_value.Add("2", 2);
+        // items_value.Add("3", 3);
+        // items_value.Add("4", 4);
+        // items_value.Add("5", 5);
+        // items_value.Add("6", 6);
     }
 
     // Update is called once per frame
@@ -36,10 +36,20 @@ public class CurrencyUtils : MonoBehaviour
 
     }
 
+    public static void populateCostMap(){
+        items_value.Add("1", 1);
+        items_value.Add("2", 2);
+        items_value.Add("3", 3);
+        items_value.Add("4", 4);
+        items_value.Add("5", 5);
+        items_value.Add("6", 6);
+    }
+
     public static void addCurrency(int finalScore)
     {
        // currency udpate = converts final score to in game currency (1 to 1)
        // increases your currency balance
+       // get int defaults to 0, if the key does not exist
         int current_currency_amount = PlayerPrefs.GetInt(currency_amount_keyname);
         int new_currency_amount = current_currency_amount + finalScore;
         PlayerPrefs.SetInt(currency_amount_keyname,new_currency_amount);
@@ -53,6 +63,17 @@ public class CurrencyUtils : MonoBehaviour
     {
         try
         {
+            if(items_value.Count == 0){
+                populateCostMap();
+            }
+            // updating players inventory for quantity of item purchased
+            int item_num = Convert.ToInt32(item_name);
+            int item_quantity = PlayerPrefs.GetInt(item_name);
+            int new_item_quantity = item_quantity + 1;
+            PlayerPrefs.SetInt(item_name, new_item_quantity);
+
+
+            // haven't converted the item to cost yet
             int cost = Convert.ToInt32(item_name);
             // used when buying a power up in the shop, deducts the cost from your current balance
             int currency_balance = PlayerPrefs.GetInt(currency_amount_keyname);
@@ -60,6 +81,9 @@ public class CurrencyUtils : MonoBehaviour
             PlayerPrefs.SetInt(currency_amount_keyname,new_currency_balance);
 
             int amount = PlayerPrefs.GetInt(currency_amount_keyname);
+
+
+
         }
         catch (FormatException e)
         {
@@ -91,6 +115,24 @@ public class CurrencyUtils : MonoBehaviour
         catch (System.Exception e)
         {
             Debug.Log("displayCurrency error: " + e.ToString());
+        }
+    }
+
+    public static void displayQuantity(string item_num)
+    {
+        try
+        {
+            // Text_Item1_Quantity
+            int item_quantity = PlayerPrefs.GetInt(item_num);
+            string gameObject_name = "Text_Item" + item_num + "_Quantity";
+            GameObject inputFieldGo = GameObject.Find(gameObject_name);
+            TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
+            // the text that is displayed on screen
+            inputFieldCo.text = "Quantity: " + item_quantity.ToString();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("displayQuantity error: " + e.ToString());
         }
     }
 
