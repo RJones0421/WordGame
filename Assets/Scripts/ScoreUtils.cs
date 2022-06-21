@@ -25,7 +25,7 @@ public class ScoreUtils : MonoBehaviour
     public static int updateAndGetHighsScore(int score){
         try{
             int prevHighscore = PlayerPrefs.GetInt(highscore_keyname);
-            if(prevHighscore == null || prevHighscore < score ){
+            if(prevHighscore == 0 || prevHighscore < score ){
                 PlayerPrefs.SetInt(highscore_keyname,score);
                 prevHighscore = score;
             }
@@ -51,7 +51,7 @@ public class ScoreUtils : MonoBehaviour
         string retVal = System.Environment.NewLine + "Top words";
         try{
             wordsCollected.Sort((x, y) => y.Item2.CompareTo(x.Item2));
-            for (var i = 0; i < k; i++)
+            for (var i = 0; i < Math.Min(k,wordsCollected.Count); i++)
             {
                 retVal += System.Environment.NewLine + wordsCollected[i].Item1 + " - " + wordsCollected[i].Item2;
             }
