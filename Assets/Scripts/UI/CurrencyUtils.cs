@@ -8,7 +8,15 @@ using System;
 
 public class CurrencyUtils : MonoBehaviour
 {
-    static string currency_amount_keyname = "currency";
+    public static string currency_amount_keyname = "currency";
+    public static string item_1_key = "item_1";
+    public static string item_2_key = "item_2";
+    public static string item_3_key = "item_3";
+    public static string item_4_key = "item_4";
+    public static string item_5_key = "item_5";
+    public static string item_6_key = "item_6";
+
+
     Dictionary<string, int> items_value = new Dictionary<string, int>();
 
     // Start is called before the first frame update
@@ -43,13 +51,21 @@ public class CurrencyUtils : MonoBehaviour
 
     public static void removeCurrency(string item_name)
     {
-       // used when buying a power up in the shop, deducts the cost from your current balance
-        int currency_balance = PlayerPrefs.GetInt(currency_amount_keyname);
-        int new_currency_balance = currency_balance - cost;
-        PlayerPrefs.SetInt(currency_amount_keyname,new_currency_balance);
+        try
+        {
+            int cost = Convert.ToInt32(item_name);
+            // used when buying a power up in the shop, deducts the cost from your current balance
+            int currency_balance = PlayerPrefs.GetInt(currency_amount_keyname);
+            int new_currency_balance = currency_balance - cost;
+            PlayerPrefs.SetInt(currency_amount_keyname,new_currency_balance);
 
-        int amount = PlayerPrefs.GetInt(currency_amount_keyname);
-        Debug.Log("this is your new current currency amount " + amount);
+            int amount = PlayerPrefs.GetInt(currency_amount_keyname);
+        }
+        catch (FormatException e)
+        {
+            Debug.Log("remove  Currency error: " + e.Message);
+        }
+
     }
 
     // returns the current currency balance
@@ -64,11 +80,18 @@ public class CurrencyUtils : MonoBehaviour
     // possible use case: currency display in shop
     public static void displayCurrency(string gameObject_name)
     {
-        int currency_balance = PlayerPrefs.GetInt(currency_amount_keyname);
-        GameObject inputFieldGo = GameObject.Find(gameObject_name);
-        TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
-        // the text that is displayed on screen
-        inputFieldCo.text = "Current Balance " + currency_balance.ToString();
+        try
+        {
+            int currency_balance = PlayerPrefs.GetInt(currency_amount_keyname);
+            GameObject inputFieldGo = GameObject.Find(gameObject_name);
+            TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
+            // the text that is displayed on screen
+            inputFieldCo.text = "Current Balance " + currency_balance.ToString();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("displayCurrency error: " + e.ToString());
+        }
     }
 
     public static void resetCurrencyBalance() {

@@ -845,11 +845,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 986c62ad-9276-49dd-8706-33159df9898f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: WordGame
+  organizationId: 11-5-devs
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
