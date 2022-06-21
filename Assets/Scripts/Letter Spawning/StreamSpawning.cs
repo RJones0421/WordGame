@@ -66,10 +66,5 @@ public class StreamSpawning : Spawner
 		
 		return getLetterQueue1();
 	}
-
-	public string GetCurrentWord()
-	{
-		return currentWord;
-	}
 	
 }
