@@ -4,9 +4,6 @@
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Letter Platform.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Letter Platform.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Platform/NewLetterPlatform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Platform/NewLetterPlatform.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +14,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Letter Spawning/GenerateDictionaries.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Collectible.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" root0="FORCE_HIGHLIGHTING" />
@@ -106,7 +104,7 @@
       <workItem from="1655250030645" duration="483000" />
       <workItem from="1655268273032" duration="8053000" />
       <workItem from="1655493825609" duration="409000" />
-      <workItem from="1655770478780" duration="1770000" />
+      <workItem from="1655770478780" duration="2606000" />
     </task>
     <servers />
   </component>
