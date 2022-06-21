@@ -17,7 +17,7 @@ public class CurrencyUtils : MonoBehaviour
     public static string item_6_key = "6";
 
 
-    Dictionary<string, int> items_value = new Dictionary<string, int>();
+    static Dictionary<string, int> items_value = new Dictionary<string, int>();
 
     // Start is called before the first frame update
     void Start()
