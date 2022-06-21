@@ -8,24 +8,27 @@ using System;
 
 public class CurrencyUtils : MonoBehaviour
 {
-    static string currency_amount_keyname = "currency";
-    Dictionary<string, int> items_value = new Dictionary<string, int>();
+    public static string currency_amount_keyname = "currency";
+    static Dictionary<string, int> items_value = new Dictionary<string, int>();
 
     // Start is called before the first frame update
     void Start()
     {
-        items_value.Add("1", 1);
-        items_value.Add("2", 2);
-        items_value.Add("3", 3);
-        items_value.Add("4", 4);
-        items_value.Add("5", 5);
-        items_value.Add("6", 6);
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public static void populateCostMap(){
+        items_value.Add("1", 1);
+        items_value.Add("2", 2);
+        items_value.Add("3", 3);
+        items_value.Add("4", 4);
+        items_value.Add("5", 5);
+        items_value.Add("6", 6);
     }
 
     public static void addCurrency(int finalScore)
@@ -45,9 +48,13 @@ public class CurrencyUtils : MonoBehaviour
     {
        // used when buying a power up in the shop, deducts the cost from your current balance
         int currency_balance = PlayerPrefs.GetInt(currency_amount_keyname);
+
+        if(items_value.Count == 0){
+            populateCostMap();
+        }
+        int cost = items_value[item_name];
         int new_currency_balance = currency_balance - cost;
         PlayerPrefs.SetInt(currency_amount_keyname,new_currency_balance);
-
         int amount = PlayerPrefs.GetInt(currency_amount_keyname);
         Debug.Log("this is your new current currency amount " + amount);
     }
@@ -74,6 +81,5 @@ public class CurrencyUtils : MonoBehaviour
     public static void resetCurrencyBalance() {
         PlayerPrefs.DeleteKey(currency_amount_keyname);
         PlayerPrefs.SetInt(currency_amount_keyname,0);
-
     }
 }
