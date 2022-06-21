@@ -15,7 +15,7 @@ public class PlatformGenerator : MonoBehaviour
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
     GameObject bottomPlatform;
 
-    private Vector3 spawnPosition = new Vector3();
+    [SerializeField] private Vector3 spawnPosition;
 
     private float screenHeight; /* height from center to top/bottom border */
     private float screenWidth; /* height from center to left/right border */
