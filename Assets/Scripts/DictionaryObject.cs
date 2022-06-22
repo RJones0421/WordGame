@@ -12,6 +12,11 @@ public class DictionaryObject : ScriptableObject
     private List<string> fullList;
     private List<string> commonList;
 
+    private void OnEnable()
+    {
+        GenerateDictionaries();
+    }
+
     public void GenerateDictionaries()
     {
         string allWords = fullDictionary.text;
