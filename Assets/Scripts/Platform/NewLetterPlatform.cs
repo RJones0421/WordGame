@@ -10,6 +10,11 @@ public class NewLetterPlatform : Platform
 
     public GameObject letterArrow;
 
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     public override void Activate()
     {
         CollectLetter();

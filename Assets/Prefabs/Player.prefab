@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5664284316386886156}
   - component: {fileID: 5664284316386886152}
   - component: {fileID: 5664284316386886153}
-  - component: {fileID: 5233366305620570181}
+  - component: {fileID: 7884987064063499173}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -146,26 +146,28 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!68 &5233366305620570181
-EdgeCollider2D:
+  m_Constraints: 4
+--- !u!114 &7884987064063499173
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5664284316386886157}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: d0608dbf605f441b3ac9f2026b6c554c, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0.5, y: 0}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54bc5850fecb6d243b40b7ce79de184f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyMovementSpeed: 10
+  mouseMovementSpeed: 25
+  allowMouseMovement: 0
+  word: {fileID: 0}
+  wallPrefab: {fileID: 0}
+  walls: []
+  gameOverCanvas: {fileID: 0}
+  timer: {fileID: 0}
+  tempTutroial: {fileID: 0}
+  wordBox: {fileID: 0}
+  scoreManager: {fileID: 0}
+  analyticsManager: {fileID: 0}
