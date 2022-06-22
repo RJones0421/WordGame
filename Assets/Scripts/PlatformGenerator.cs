@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    
     public GameObject platformPrefab;
 
-    public LetterSpawning letterSpawner;
+    public Spawner letterSpawner;
 
     /* total number of platforms */
     public int platformMaxCount=20;
 
     /* all platforms are stored in queue */
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
-    GameObject platform;
+    GameObject bottomPlatform;
 
-    private Vector3 spawnPosition = new Vector3();
+    [SerializeField] private Vector3 spawnPosition;
 
     private float screenHeight; /* height from center to top/bottom border */
     private float screenWidth; /* height from center to left/right border */
@@ -31,7 +30,6 @@ public class PlatformGenerator : MonoBehaviour
     public LetterClass[] letterObjectArray;
 
     private Camera mainCamera;
-    public bool isStream = false;
     public float minHeight = 1.0f;
     public float maxHeight = 1.6f;
 
@@ -43,7 +41,6 @@ public class PlatformGenerator : MonoBehaviour
         screenHeight = mainCamera.orthographicSize;
         screenWidth = screenHeight * mainCamera.aspect;
         DeathzoneHeight = screenHeight;
-
 
         Debug.Log(screenWidth);
 
@@ -59,65 +56,64 @@ public class PlatformGenerator : MonoBehaviour
             GameObject newPlatform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);  // Quaternion.identity means no rotation
             
             /* update letter value */
-            LetterPlatform letterPlatform = newPlatform.GetComponent<LetterPlatform>();
-            int num = isStream ? GetNextLetter() : LetterValue();
-            LetterClass letterObject = letterObjectArray[num];
-            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
-            letterPlatform.SetLetter(letterObject);
+            Platform platform = newPlatform.GetComponent<Platform>();
+            LetterClass letterObject = letterObjectArray[GetNextLetter()];
+            NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
+            if (letterPlatform)
+            {
+                letterPlatform.SpriteRenderer.sprite = letterObject.image;
+                letterPlatform.SetLetter(letterObject);
+            }
 
             platformQueue.Enqueue(newPlatform);
         }
         
         /* reference to the lowest platform */
-        platform = platformQueue.Dequeue();        
+        bottomPlatform = platformQueue.Dequeue();        
     }
 
     // Update is called once per frame
     void Update()
     {
         if (mainCamera.transform.position.y - 
-            platform.transform.position.y >= DeathzoneHeight*DeathzoneHeightScale){
+            bottomPlatform.transform.position.y >= DeathzoneHeight*DeathzoneHeightScale){
 
             /* update the position to be the highest platform */
             while(Physics2D.OverlapCapsule(spawnPosition, new Vector2(2.0f,4.0f), CapsuleDirection2D.Vertical, 0, (1 << 7)) != null) {
                 spawnPosition.y+=Random.Range(spawnPositionHeightScale*minHeight,spawnPositionHeightScale*maxHeight);
                 spawnPosition.x=Random.Range(-1*spawnPositionWidthScale*screenWidth,spawnPositionWidthScale*screenWidth);
             }     
-            platform.transform.position=spawnPosition;
+            bottomPlatform.transform.position=spawnPosition;
 
             /* update letter value */
-            LetterPlatform letterPlatform = platform.GetComponent<LetterPlatform>();
-            int num = isStream ? GetNextLetter() : LetterValue();
-            LetterClass letterObject = letterObjectArray[num];
-            letterPlatform.SpriteRenderer.sprite = letterObject.LetterSprite;
-            letterPlatform.SetLetter(letterObject);
+            Platform platform = bottomPlatform.GetComponent<Platform>();
+            LetterClass letterObject = letterObjectArray[GetNextLetter()];
+            NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
+            if (letterPlatform)
+            {
+                letterPlatform.SpriteRenderer.sprite = letterObject.image;
+                letterPlatform.SetLetter(letterObject);
+            }
 
             /* update the platformQueue */
-            platformQueue.Enqueue(platform);
-            platform=platformQueue.Dequeue();
+            platformQueue.Enqueue(bottomPlatform);
+            bottomPlatform=platformQueue.Dequeue();
 
             /* reset the color of the sprite */
             letterPlatform.ResetSprite();
         }
     }
-
-    public int LetterValue()
-    {
-        return 0;
-        //return letterSpawner.getStream1();
-    }
-
+    
     public int GetNextLetter()
     {
-        return letterSpawner.getStream1();
+        return letterSpawner.GetNextLetter();
     }
 
-
-    public ScriptableObject[] LetterObjectArray
+    public void UpdateDifficulty(Difficulty difficulty)
     {
-        get
-        {
-            return letterObjectArray;
-        }
+        letterSpawner.blankFrequency = difficulty.GetBlankFreq();
+        spawnPositionHeightScale = difficulty.GetHeightScale();
+        minHeight = difficulty.GetMinSpawnHeight();
+        maxHeight = difficulty.GetMaxSpawnHeight();
     }
 }
