@@ -21,6 +21,8 @@ public class LetterSpawning : Spawner
 	// private static string LETTERS_LOWER = "aaaaaaaaabbccddddeeeeeeeeeeeeffggghhiiiiiiiiijkllllmmnnnnnnoooooooooppqrrrrrrssssttttttuuuuvvwwxyyz";
 
 	private string lettersAvailable;
+
+	[SerializeField] LetterObjectArray letterArray;
 	
 	// In case we want to split between searching for vowels and consonants
 	//private string consonants = "BCDFGHJKLMNPQRSTVWXYZ";
@@ -61,12 +63,12 @@ public class LetterSpawning : Spawner
 		return LETTERS[Random.Range(0,leng)] - 64;
 	}
 
-	public override int GetNextLetter()
+	public override LetterClass GetNextLetter()
 	{
 		if (blankFrequency >= Random.Range(1,101)) {
-			return 0;
+			return letterArray.GetLetter(0);
 		}
 		int len = LETTERS.Length;
-		return LETTERS[Random.Range(0,LETTERS.Length)] - 64;
+		return letterArray.GetLetter(LETTERS[Random.Range(0,LETTERS.Length)] - 64);
 	}
 }

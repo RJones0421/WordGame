@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ef91b7db4aabe408377331d26c76d5, type: 3}
   m_Name: CommonStream
   m_EditorClassIdentifier: 
+  blankFrequency: 0
   dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
-  currentWord: pose
+  letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
+  currentWord: that
   isCommon: 1
   EMPTY_FREQ: 15
