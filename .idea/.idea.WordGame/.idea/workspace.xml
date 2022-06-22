@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Letter Platform.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Letter Platform.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +13,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Letter Spawning/GenerateDictionaries.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Collectible.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" root0="FORCE_HIGHLIGHTING" />
@@ -40,19 +38,18 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LetterClass.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Platform/NewLetterPlatform.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Spawner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/StreamSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LetterSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/Spawner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Platform/NewLetterPlatform.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/EnableAfterTutorial.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
@@ -104,7 +101,6 @@
       <workItem from="1655250030645" duration="483000" />
       <workItem from="1655268273032" duration="8053000" />
       <workItem from="1655493825609" duration="409000" />
-      <workItem from="1655770478780" duration="2606000" />
     </task>
     <servers />
   </component>

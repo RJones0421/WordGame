@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,14 +8,14 @@ public class NewLetterPlatform : Platform
     public Collectible collectible;
     private bool isCollected = false;
 
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    public GameObject letterArrow;
 
     public override void Activate()
     {
         CollectLetter();
+        if (letterArrow){
+            letterArrow.SetActive(false);
+        }
     }
 
     public SpriteRenderer SpriteRenderer {
@@ -66,5 +65,11 @@ public class NewLetterPlatform : Platform
             DarkenSprite();
         }
         */
+    }
+    public void ActivateArrow()
+    {
+        if (letterArrow){
+            letterArrow.SetActive(true);
+        }
     }
 }
