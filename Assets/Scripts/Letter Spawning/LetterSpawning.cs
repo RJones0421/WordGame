@@ -23,6 +23,7 @@ public class LetterSpawning : Spawner
 	private string lettersAvailable;
 
 	[SerializeField] LetterObjectArray letterArray;
+	[SerializeField] PowerupObjectArray powerupArray;
 	
 	// In case we want to split between searching for vowels and consonants
 	//private string consonants = "BCDFGHJKLMNPQRSTVWXYZ";
@@ -70,5 +71,10 @@ public class LetterSpawning : Spawner
 		}
 		int len = LETTERS.Length;
 		return letterArray.GetLetter(LETTERS[Random.Range(0,LETTERS.Length)] - 64);
+	}
+
+	public override Powerup GetNextPowerup()
+	{
+		return powerupArray.GetPowerup(0);
 	}
 }

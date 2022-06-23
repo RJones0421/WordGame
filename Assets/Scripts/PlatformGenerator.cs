@@ -56,6 +56,7 @@ public class PlatformGenerator : MonoBehaviour
             
             /* update letter value */
             Platform platform = newPlatform.GetComponent<Platform>();
+
             LetterClass letterObject = GetNextLetter();
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             if (letterPlatform)
@@ -86,13 +87,23 @@ public class PlatformGenerator : MonoBehaviour
 
             /* update letter value */
             Platform platform = bottomPlatform.GetComponent<Platform>();
-            LetterClass letterObject = GetNextLetter();
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
-            if (letterPlatform)
-            {
-                letterPlatform.SpriteRenderer.sprite = letterObject.image;
-                letterPlatform.SetLetter(letterObject);
+            if (Random.Range(1, 101) > 10) {
+                LetterClass letterObject = GetNextLetter();
+                if (letterPlatform)
+                {
+                    letterPlatform.SpriteRenderer.sprite = letterObject.image;
+                    letterPlatform.SetLetter(letterObject);
+                }
+            } else {
+                Powerup powerupObject = GetNextPowerup();
+                if (letterPlatform)
+                {
+                    letterPlatform.SpriteRenderer.sprite = powerupObject.image;
+                    letterPlatform.SetPowerup(powerupObject);
+                }
             }
+            
 
             /* update the platformQueue */
             platformQueue.Enqueue(bottomPlatform);
@@ -106,6 +117,11 @@ public class PlatformGenerator : MonoBehaviour
     public LetterClass GetNextLetter()
     {
         return letterSpawner.GetNextLetter();
+    }
+
+    public Powerup GetNextPowerup()
+    {
+        return letterSpawner.GetNextPowerup();
     }
 
     public void UpdateDifficulty(Difficulty difficulty)

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blankFrequency: 100
   letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
+  powerupArray: {fileID: 11400000, guid: a1ff6aa994c03445eb09a476e7a8fa26, type: 2}

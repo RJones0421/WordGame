@@ -40,6 +40,11 @@ public class NewLetterPlatform : Platform
         this.collectible = letter;
     }
 
+    public void SetPowerup(Powerup powerup)
+    {
+        this.collectible = powerup;
+    }
+
     public void DarkenSprite()
     {
         spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f);
