@@ -61,6 +61,7 @@ public class CurrencyUtils : MonoBehaviour
             if(items_value.Count == 0){
                 populateCostMap();
             }
+
             // haven't converted the item to cost yet
             // int cost = Convert.ToInt32(item_name);
             int cost = items_value[item_name];
@@ -80,7 +81,7 @@ public class CurrencyUtils : MonoBehaviour
 
             int new_balance = PlayerPrefs.GetInt(currency_amount_keyname);
 
-
+            int amount = PlayerPrefs.GetInt(currency_amount_keyname);
 
         }
         catch (FormatException e)

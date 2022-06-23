@@ -9,29 +9,35 @@ public class Word : MonoBehaviour
 
     [SerializeField] private Sprite defaultSprite;
 
-    [SerializeField] private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
+    [SerializeField] public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
     private SpriteRenderer leftSidebar;
     private SpriteRenderer rightSidebar;
 
-    private List<LetterClass> letters = new List<LetterClass>();
+    public List<LetterClass> letters = new List<LetterClass>();
 
-    private int currentLetterBox = 0;
+    public int currentLetterBox = 0;
 
     public GameObject timer;
 
     private Timer timerClass;
     
-    private string word = "";
+    public string word = "";
 
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
 
     private bool isCoroutineRunning;
+
+    public GameObject arrows;
+    private bool hasSubmitOnce;
+    private bool hasClearedOnce;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
+        arrows.SetActive(false); 
     }
     
     void Update()
@@ -50,29 +56,59 @@ public class Word : MonoBehaviour
 
     public bool addLetter(LetterClass newLetter)
     {
+        arrows.SetActive(false);
+
         if (newLetter.Letter == '_') return false;
         if (letters.Count >= 8) return false;
+        
+        letters.Add(newLetter);
+        word += newLetter.Letter;
+        sprites[currentLetterBox].sprite = newLetter.image;
+        currentLetterBox++;
 
-        else
-        {
-            letters.Add(newLetter);
-            word += newLetter.Letter;
-            sprites[currentLetterBox].sprite = newLetter.LetterSprite;
-            currentLetterBox++;
+        // Update Sidebars
+        UpdateSidebars();
 
-            // Update Sidebars
-            bool valid = evaluator.IsValidWord(word);
+            return true;
+    }
+
+    public void PopLetter() {
+
+        if (word != "") {
+            word = word.Substring(0, word.Length - 1);
+
+            letters.RemoveAt(letters.Count - 1);
+
+            currentLetterBox--;
+            sprites[currentLetterBox].sprite = defaultSprite;
+        }
+
+        UpdateSidebars();
+
+    }
+
+    public void UpdateSidebars() {
+        bool valid = evaluator.IsValidWord(word);
             if (valid) {
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
+
+                if (!hasSubmitOnce)
+                {
+                    arrows.SetActive(true);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.green);
+                }
             }
             else {
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
-            }
-        }
 
-        return true;
+                if (!hasClearedOnce && word.Length > 3)
+                {
+                    arrows.SetActive(true);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
+                }
+            }
     }
 
     private IEnumerator sidebarBounce(float bounceRate)
@@ -110,6 +146,8 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
+        arrows.SetActive(false);
+
         int score = evaluator.SubmitWord(word);
 
         scoreManagerScript.AddScore(score);
@@ -117,6 +155,12 @@ public class Word : MonoBehaviour
         if (score > 0)
         {
             ScoreUtils.addWordToCollection(word, score);
+            hasSubmitOnce = true;
+        }
+
+        else if (word.Length > 3)
+        {
+            hasClearedOnce = true;
         }
 
         letters.Clear();
@@ -134,5 +178,10 @@ public class Word : MonoBehaviour
         StartCoroutine(sidebarBounce(15f));
 
         return score;
+    }
+
+    public int GetWordLength()
+    {
+        return word.Length;
     }
 }

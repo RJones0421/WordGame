@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 
@@ -13,10 +12,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D box;
     private Camera mainCamera;
+    private Renderer renderer;
 
     public bool allowMouseMovement;
 
-    private Word word;
+    public Word word;
 
     private float wallDist;
     private float wallRotate = 90.0f;
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
     private float playerHeight;
+    private Vector2 screenRes;
 
     private bool bounceBackToCenter;
     private Vector3 bounceBackTargetPos;
@@ -38,14 +39,8 @@ public class PlayerController : MonoBehaviour
     private float originalBounceBackSpeed = 15f;
     private bool isBouncingBack;
 
-    private bool MouseOnScreen
-    {
-        get
-        {
-            return Input.mousePosition.x >= 0.0f && Input.mousePosition.x <= Screen.width &&
-                Input.mousePosition.y >= 0.0f && Input.mousePosition.y <= Screen.height;
-        }
-    }
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
 
     private void Awake()
     {
@@ -53,15 +48,17 @@ public class PlayerController : MonoBehaviour
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
+        renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        screenRes = new Vector2(Screen.width, Screen.height);
         gameOverCanvas.SetActive(false);
-        wallDist = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, 770.0f, 0.0f)).y * 0.4f + wallPrefab.GetComponent<Renderer>().bounds.size.y;
-        wallDist = 4.2f;
+        wallDist = wordBox.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f + wallPrefab.GetComponent<Renderer>().bounds.size.y * 1.5f;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
         walls[0].transform.Rotate(Vector3.back * wallRotate);
@@ -70,13 +67,48 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
-
-        wallDist -= wallPrefab.GetComponent<Renderer>().bounds.size.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Resolution Changes
+        if (Screen.width != screenRes.x || Screen.height != screenRes.y)
+        {
+            wallDist *= ((screenRes.y * (float)Screen.width) / (screenRes.x * (float)Screen.height));
+            screenRes = new Vector2(Screen.width, Screen.height);
+            walls[0].transform.position = new Vector3(wallDist, walls[0].transform.position.y, 0.0f);
+            walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
+        }
+
+        /*
+        // Test TimeStop
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                TimeStop timeStop = GetComponent<TimeStop>();
+                if (!timeStop)
+                {
+                    //timeStop = gameObject.AddComponent<TimeStop>();
+                    timeStop.Activate();
+                }
+            }
+        }
+
+        // Test Swap
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                Swap swap = GetComponent<Swap>();
+                if (!swap)
+                {
+                    swap = gameObject.AddComponent<Swap>();
+                }
+                swap.Activate();
+            }
+        }
+        */
+
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -114,54 +146,51 @@ public class PlayerController : MonoBehaviour
             // Mouse
             if (!isBouncingBack && allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
         }
 
         // Word submission
         {
-            if (transform.position.x > wallDist)
+            if (transform.position.x > wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
-                //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
-                bounceBackToCenter = true;
-                bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
-                isBouncingBack = true;
-                rb.gravityScale = 0;
-                rb.velocity = Vector3.zero;
+                if (started && word.GetWordLength() > 0)
+                {
+                    InitiateBounce();
 
-                Debug.Log("SUBMIT RIGHT");
+                    Debug.Log("SUBMIT RIGHT");
 
-                word.submitWord();
+                    word.submitWord();
+                }
+                else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
 
-            if (transform.position.x < -wallDist)
+            if (transform.position.x < -wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y)
             {
-                //transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
-                bounceBackToCenter = true;
-                bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
-                isBouncingBack = true;
-                rb.gravityScale = 0;
-                rb.velocity = Vector3.zero;
+                if (started && word.GetWordLength() > 0)
+                {
+                    InitiateBounce();
 
-                Debug.Log("SUBMIT LEFT");
+                    Debug.Log("SUBMIT LEFT");
 
-                word.submitWord();
+                    word.submitWord();
+                }
+                else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
         }
-
-        if(bounceBackToCenter)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
-
-            if (Vector3.Distance(transform.position, bounceBackTargetPos) == 0)
+            if (bounceBackToCenter)
             {
-                isBouncingBack = false;
-                bounceBackToCenter = false;
-                bounceBackSpeed = originalBounceBackSpeed;
-                rb.gravityScale = 1;
-                rb.velocity = new Vector3(0, 5, 0);
+                transform.position = Vector3.MoveTowards(transform.position, bounceBackTargetPos, Time.deltaTime * bounceBackSpeed);
+
+                if (Vector3.Distance(transform.position, bounceBackTargetPos) == 0)
+                {
+                    isBouncingBack = false;
+                    bounceBackToCenter = false;
+                    bounceBackSpeed = originalBounceBackSpeed;
+                    rb.gravityScale = 1;
+                    rb.velocity = new Vector3(0, 5, 0);
+                }
             }
-        }
 
         {
             if (transform.position.y > playerHeight)
@@ -172,7 +201,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Camera and walls follow as long as you go up
-        float currHeight = transform.position.y;
+        float currHeight = transform.position.y - 1.0f;
         {
             float camHeight = mainCamera.transform.position.y;
             if (camHeight < currHeight)
@@ -185,14 +214,23 @@ public class PlayerController : MonoBehaviour
 
         // Handle death
         {
-            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - GetComponent<Renderer>().bounds.size.y * 0.5f, 0.0f)).y;
+            float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
                 Debug.Log("YOU DIED");
 
                 gameOverCanvas.SetActive(true);
                 timer.StopTimer();
-                timer.SetValues();
+                int score = timer.SetValues();
+
+                #if ENABLE_CLOUD_SERVICES_ANALYTICS
+                analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
+                {
+                    { "deathMethod", "falling" },
+                    { "userScore", score },
+                    { "time", Time.timeAsDouble }
+                });
+                #endif
             }
         }
 
@@ -253,16 +291,30 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    private void InitiateBounce()
+    {
+        bounceBackToCenter = true;
+        bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
+        isBouncingBack = true;
+        rb.gravityScale = 0;
+        rb.velocity = Vector3.zero;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (started && rb.velocity.y < 0.0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
-            LetterPlatform platform;
-            if (platform = collision.GetComponent<LetterPlatform>())
+            NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
+            if (letterPlatform)
             {
-                platform.CollectLetter();
+                letterPlatform.Activate();
+                /*
+                TimeStop timeStop = GetComponent<TimeStop>();
+                if (timeStop != null)
+                {
+                    timeStop.Activate();
+                }
+                */
             }
         }
     }
