@@ -8,9 +8,19 @@ public class NewLetterPlatform : Platform
     public Collectible collectible;
     private bool isCollected = false;
 
+    public GameObject letterArrow;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     public override void Activate()
     {
         CollectLetter();
+        if (letterArrow){
+            letterArrow.SetActive(false);
+        }
     }
 
     public SpriteRenderer SpriteRenderer {
@@ -60,5 +70,11 @@ public class NewLetterPlatform : Platform
             DarkenSprite();
         }
         */
+    }
+    public void ActivateArrow()
+    {
+        if (letterArrow){
+            letterArrow.SetActive(true);
+        }
     }
 }

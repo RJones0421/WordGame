@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b55a92e87b7e354a8660035f3aa5877, type: 3}
   m_Name: RandomLetter
   m_EditorClassIdentifier: 
+  blankFrequency: 100
+  letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
