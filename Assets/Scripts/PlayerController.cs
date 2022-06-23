@@ -195,6 +195,63 @@ public class PlayerController : MonoBehaviour
                 timer.SetValues();
             }
         }
+
+        // shop item activation
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                Debug.Log("Player clicked on 1");
+                if (CurrencyUtils.useShopItem("1"))
+                {
+                    // activate shop item power up in this code block
+                    Debug.Log("player uses item number 1");
+                }
+                else
+                {
+                    Debug.Log("player does not have item 1");
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                Debug.Log("Player clicked on 2");
+                if (CurrencyUtils.useShopItem("1"))
+                {
+                    Debug.Log("player uses item number 2");
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+            {
+                Debug.Log("Player clicked on 3");
+                if (CurrencyUtils.useShopItem("1"))
+                {
+                    Debug.Log("player uses item number 3");
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+            {
+                Debug.Log("Player clicked on 4");
+                if (CurrencyUtils.useShopItem("1"))
+                {
+                    Debug.Log("player uses item number 4");
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+            {
+                Debug.Log("Player clicked on 5");
+                if (CurrencyUtils.useShopItem("5"))
+                {
+                    Debug.Log("player uses item number 1");
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                Debug.Log("Player clicked on 6");
+                if (CurrencyUtils.useShopItem("6"))
+                {
+                    Debug.Log("player uses item number 1");
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -22,12 +22,7 @@ public class CurrencyUtils : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // items_value.Add("1", 1);
-        // items_value.Add("2", 2);
-        // items_value.Add("3", 3);
-        // items_value.Add("4", 4);
-        // items_value.Add("5", 5);
-        // items_value.Add("6", 6);
+
     }
 
     // Update is called once per frame
