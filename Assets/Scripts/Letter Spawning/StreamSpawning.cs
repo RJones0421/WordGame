@@ -8,6 +8,8 @@ public class StreamSpawning : Spawner
 {
     [SerializeField] private DictionaryObject dictionaries;
 
+	[SerializeField] LetterObjectArray letterArray;
+
     private Queue<string> queue = new Queue<string>();
     private Queue<char> word = new Queue<char>();
     public string currentWord;
@@ -57,19 +59,14 @@ public class StreamSpawning : Spawner
 		return word.Dequeue() - 96;
 	}
 	
-	public override int GetNextLetter()
+	public override LetterClass GetNextLetter()
 	{
 		if (EMPTY_FREQ >= Random.Range(1, 101))
 		{
-			return 0;
+			return letterArray.GetLetter(0);
 		}
 		
-		return getLetterQueue1();
-	}
-
-	public string GetCurrentWord()
-	{
-		return currentWord;
+		return letterArray.GetLetter(getLetterQueue1());
 	}
 	
 }

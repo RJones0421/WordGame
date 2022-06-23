@@ -12,7 +12,11 @@ public class AnalyticsManager : MonoBehaviour
     async void Start()
     {
         InitializationOptions options = new InitializationOptions();
+#if !UNITY_WEBGL
         options.SetEnvironmentName("testing");
+#else
+        options.SetEnvironmentName("midterm");
+#endif
         await UnityServices.InitializeAsync(options);
         Debug.Log("LMAO ANAL INIT");
     }
