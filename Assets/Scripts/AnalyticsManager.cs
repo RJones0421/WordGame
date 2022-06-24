@@ -15,11 +15,11 @@ public class AnalyticsManager : MonoBehaviour
     async void Start()
     {
         InitializationOptions options = new InitializationOptions();
-#if !UNITY_WEBGL
+//#if !UNITY_WEBGL
         options.SetEnvironmentName("testing");
-#else
-        options.SetEnvironmentName("midterm");
-#endif
+//#else
+//        options.SetEnvironmentName("midterm");
+//#endif
         await UnityServices.InitializeAsync(options);
         //List<string> consentIdentifiers = await Events.CheckForRequiredConsents();
         List<string> consentIdentifiers = await AnalyticsService.Instance.CheckForRequiredConsents();
