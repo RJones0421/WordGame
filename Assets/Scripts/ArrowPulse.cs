@@ -8,11 +8,11 @@ public class ArrowPulse : MonoBehaviour
     [SerializeField] float period = 2f;
 
     float movementFactor; //0 unmoved, 1 fully moved
-    Vector3 startingPos;
+    float startingXPos;
 
     private void Start()
     {
-        startingPos = transform.position;
+        startingXPos = transform.position.x;
     }
 
     // Update is called once per frame
@@ -26,6 +26,6 @@ public class ArrowPulse : MonoBehaviour
 
         movementFactor = rawSinWave / 2f + 0.5f;
         Vector3 offset = movementVector * movementFactor;
-        transform.position = new Vector3(startingPos.x + offset.x, startingPos.y + offset.y, startingPos.z + offset.z);
+        transform.position = new Vector3(startingXPos + offset.x, transform.position.y, transform.position.z);
     }
 }
