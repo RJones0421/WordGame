@@ -272,6 +272,8 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("player uses item number 3");
                     ScoreMultiplier.Activate();
+                    int item_quantity = PlayerPrefs.GetInt("3");
+                    // Debug.Log("player uses item number 3");
                 }
             }
 

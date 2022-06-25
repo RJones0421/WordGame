@@ -145,6 +145,8 @@ public class CurrencyUtils : MonoBehaviour
     public static bool useShopItem(string item_num)
     {
         int item_quantity = PlayerPrefs.GetInt(item_num);
+        // item_quantity = 11;
+        Debug.Log("player has x items " + item_quantity);
         if (item_quantity > 0)
         {
             item_quantity -= 1;
