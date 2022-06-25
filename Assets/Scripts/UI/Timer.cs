@@ -85,6 +85,11 @@ public class Timer : MonoBehaviour
 
         CurrencyUtils.addCurrency(finalScore);
 
+        // testing for score multiplier
+        int new_score = ScoreMultiplier.DoubleScore(finalScore);
+        Debug.Log("Current final score post Double Score " + new_score);
+
+
 
         CurrencyUtils.displayCurrency("Currency_test");
         //set current score
