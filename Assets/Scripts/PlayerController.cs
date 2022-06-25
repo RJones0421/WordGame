@@ -293,7 +293,20 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 5");
                 if (CurrencyUtils.useShopItem("5"))
                 {
-                    Debug.Log("player uses item number 1");
+                    timer.StopTimer();
+
+                    // float timePassed = 0;
+                    // while (timePassed < 10)
+                    // {
+                    //     timePassed += Time.deltaTime;
+
+                    //     yield return null;
+                    // }
+
+                    StopTime.Activate();
+                    // timer.StartTimer();
+
+                    Debug.Log("player uses item number 5");
                 }
             }
 
