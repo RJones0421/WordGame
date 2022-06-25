@@ -22,12 +22,7 @@ public class CurrencyUtils : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // items_value.Add("1", 1);
-        // items_value.Add("2", 2);
-        // items_value.Add("3", 3);
-        // items_value.Add("4", 4);
-        // items_value.Add("5", 5);
-        // items_value.Add("6", 6);
+
     }
 
     // Update is called once per frame
@@ -66,23 +61,27 @@ public class CurrencyUtils : MonoBehaviour
             if(items_value.Count == 0){
                 populateCostMap();
             }
-            // updating players inventory for quantity of item purchased
-            int item_num = Convert.ToInt32(item_name);
-            int item_quantity = PlayerPrefs.GetInt(item_name);
-            int new_item_quantity = item_quantity + 1;
-            PlayerPrefs.SetInt(item_name, new_item_quantity);
-
 
             // haven't converted the item to cost yet
-            int cost = Convert.ToInt32(item_name);
+            // int cost = Convert.ToInt32(item_name);
+            int cost = items_value[item_name];
             // used when buying a power up in the shop, deducts the cost from your current balance
             int currency_balance = PlayerPrefs.GetInt(currency_amount_keyname);
-            int new_currency_balance = currency_balance - cost;
-            PlayerPrefs.SetInt(currency_amount_keyname,new_currency_balance);
+
+            if (currency_balance >= cost) {
+                int new_currency_balance = currency_balance - cost;
+                PlayerPrefs.SetInt(currency_amount_keyname,new_currency_balance);
+
+                // updating players inventory for quantity of item purchased
+                int item_num = Convert.ToInt32(item_name);
+                int item_quantity = PlayerPrefs.GetInt(item_name);
+                int new_item_quantity = item_quantity + 1;
+                PlayerPrefs.SetInt(item_name, new_item_quantity);
+            }
+
+            int new_balance = PlayerPrefs.GetInt(currency_amount_keyname);
 
             int amount = PlayerPrefs.GetInt(currency_amount_keyname);
-
-
 
         }
         catch (FormatException e)
@@ -139,6 +138,21 @@ public class CurrencyUtils : MonoBehaviour
     public static void resetCurrencyBalance() {
         PlayerPrefs.DeleteKey(currency_amount_keyname);
         PlayerPrefs.SetInt(currency_amount_keyname,0);
+    }
 
+    // returns true or false depending on if player has enough shop items to use
+    // item num should be a string 1-6
+    public static bool useShopItem(string item_num)
+    {
+        int item_quantity = PlayerPrefs.GetInt(item_num);
+        if (item_quantity > 0)
+        {
+            item_quantity -= 1;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -67,6 +67,9 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
+
+        // intialize the shop item objects
+        ScoreMultiplier.reset();
     }
 
     // Update is called once per frame
@@ -231,6 +234,75 @@ public class PlayerController : MonoBehaviour
                     { "time", Time.timeAsDouble }
                 });
                 #endif
+            }
+        }
+
+        // shop item activation
+        {
+            // highlight letter
+            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                Debug.Log("Player clicked on 1");
+                if (CurrencyUtils.useShopItem("1"))
+                {
+                    // activate shop item power up in this code block
+                    Debug.Log("player uses item number 1");
+                }
+                else
+                {
+                    Debug.Log("player does not have item 1");
+                }
+            }
+
+            // extra life
+            if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                Debug.Log("Player clicked on 2");
+                if (CurrencyUtils.useShopItem("2"))
+                {
+                    Debug.Log("player uses item number 2");
+                }
+            }
+
+            // word/score multiplier
+            if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+            {
+                Debug.Log("Player clicked on 3");
+                if (CurrencyUtils.useShopItem("3"))
+                {
+                    Debug.Log("player uses item number 3");
+                    ScoreMultiplier.Activate();
+                }
+            }
+
+            // anagram
+            if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+            {
+                Debug.Log("Player clicked on 4");
+                if (CurrencyUtils.useShopItem("1"))
+                {
+                    Debug.Log("player uses item number 4");
+                }
+            }
+
+            // pause time
+            if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+            {
+                Debug.Log("Player clicked on 5");
+                if (CurrencyUtils.useShopItem("5"))
+                {
+                    Debug.Log("player uses item number 1");
+                }
+            }
+
+            // prefix/suffix
+            if (Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                Debug.Log("Player clicked on 6");
+                if (CurrencyUtils.useShopItem("6"))
+                {
+                    Debug.Log("player uses item number 1");
+                }
             }
         }
     }
