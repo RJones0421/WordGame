@@ -5,5 +5,5 @@ using UnityEngine;
 public abstract class Spawner : ScriptableObject
 {
     [Range(0, 100)] public int blankFrequency;
-    public abstract int GetNextLetter();
+    public abstract LetterClass GetNextLetter();
 }
