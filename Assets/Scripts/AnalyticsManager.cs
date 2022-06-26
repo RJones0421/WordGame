@@ -10,13 +10,13 @@ using UnityEngine.Analytics;
 
 public class AnalyticsManager : MonoBehaviour
 {
-    string consentIdentifier;
-    bool consentRequired;
+    //string consentIdentifier;
+    //bool consentRequired;
 
     // Start is called before the first frame update
     async void Start()
     {
-        InitializationOptions options = new InitializationOptions();
+        InitializationOptions options = new();
 //#if !UNITY_WEBGL
         //options.SetEnvironmentName("testing");
 //#else

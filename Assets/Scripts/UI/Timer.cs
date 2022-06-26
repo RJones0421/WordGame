@@ -44,14 +44,14 @@ public class Timer : MonoBehaviour
                 if(Time.timeScale==1)
                 {
                     int score = SetValues();
-                    #if ENABLE_CLOUD_SERVICES_ANALYTICS
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
                         { "deathMethod", "time" },
                         { "userScore", score },
                         { "time", Time.timeAsDouble }
                     });
-                    #endif
+#endif
                 }
             }
         } catch(Exception e){
