@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-\    }
+    }
 
     private void InitiateBounce()
     {
