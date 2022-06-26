@@ -179,9 +179,11 @@ public class Word : MonoBehaviour
 
         analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
         {
+            { "validWord", score > 0 },
             { "wordScore", score },
             { "wordLength", word.Length },
-            { "word", word }
+            { "word", word },
+            { "time", Time.timeAsDouble }
         });
 
         Debug.Log("length   "+word.Length);
