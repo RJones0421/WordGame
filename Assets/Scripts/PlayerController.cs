@@ -227,8 +227,12 @@ public class PlayerController : MonoBehaviour
                 analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                 {
                     { "deathMethod", "falling" },
+                    { "time", Time.timeAsDouble },
+                    { "totalSubmissions", word.totalSubmissions },
+                    { "totalValidWordLength", word.totalValidWordLength },
+                    { "totalWordLength", word.totalWordLength },
                     { "userScore", score },
-                    { "time", Time.timeAsDouble }
+                    { "validWordCount", word.validWordCount }
                 });
 #endif
             }

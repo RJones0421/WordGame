@@ -45,11 +45,17 @@ public class Timer : MonoBehaviour
                 {
                     int score = SetValues();
 #if ENABLE_CLOUD_SERVICES_ANALYTICS
+                    Word word = GameObject.Find("Word").GetComponent<Word>();
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
                         { "deathMethod", "time" },
+                        { "time", Time.timeAsDouble },
                         { "userScore", score },
-                        { "time", Time.timeAsDouble }
+                        { "totalSubmissions", word.totalSubmissions },
+                        { "totalValidWordLength", word.totalValidWordLength },
+                        { "totalWordLength", word.totalWordLength },
+                        { "userScore", score },
+                        { "validWordCount", word.validWordCount }
                     });
 #endif
                 }

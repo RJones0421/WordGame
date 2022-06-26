@@ -27,17 +27,31 @@ public class Word : MonoBehaviour
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
 
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
+
     private bool isCoroutineRunning;
 
     public GameObject arrows;
     private bool hasSubmitOnce;
     private bool hasClearedOnce;
 
+    public int totalSubmissions;
+    public int totalValidWordLength;
+    public int totalWordLength;
+    public int validWordCount;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
-        arrows.SetActive(false); 
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        arrows.SetActive(false);
+
+        totalSubmissions = 0;
+        totalValidWordLength = 0;
+        totalWordLength = 0;
+        validWordCount = 0;
     }
     
     void Update()
@@ -146,6 +160,9 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
+        totalSubmissions++;
+        totalWordLength += word.Length;
+
         arrows.SetActive(false);
 
         int score = evaluator.SubmitWord(word);
@@ -156,12 +173,26 @@ public class Word : MonoBehaviour
         {
             ScoreUtils.addWordToCollection(word, score);
             hasSubmitOnce = true;
+
+            validWordCount++;
+            totalValidWordLength += word.Length;
         }
 
         else if (word.Length > 3)
         {
             hasClearedOnce = true;
         }
+
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+        analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
+            {
+                { "time", Time.timeAsDouble },
+                { "validWord", score > 0 },
+                { "word", word },
+                { "wordLength", word.Length },
+                { "wordScore", score }
+            });
+#endif
 
         letters.Clear();
         word = "";
