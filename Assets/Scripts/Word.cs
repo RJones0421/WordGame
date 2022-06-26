@@ -33,11 +33,20 @@ public class Word : MonoBehaviour
     private bool hasSubmitOnce;
     private bool hasClearedOnce;
 
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
+
+    public int validCount = 0;
+    public int totalSubmissions = 0;
+    public int totalLength = 0;
+    public int totalValidLength = 0;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
         arrows.SetActive(false); 
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
     }
     
     void Update()
@@ -152,16 +161,30 @@ public class Word : MonoBehaviour
 
         scoreManagerScript.AddScore(score);
 
+        totalSubmissions++;
+        totalLength+=word.Length;
+
         if (score > 0)
         {
             ScoreUtils.addWordToCollection(word, score);
             hasSubmitOnce = true;
+            validCount++;
+            totalValidLength+=word.Length;
         }
 
         else if (word.Length > 3)
         {
             hasClearedOnce = true;
         }
+
+        analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
+        {
+            { "wordScore", score },
+            { "wordLength", word.Length },
+            { "word", word }
+        });
+
+        Debug.Log("length   "+word.Length);
 
         letters.Clear();
         word = "";
