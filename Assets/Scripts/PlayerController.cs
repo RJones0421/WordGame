@@ -312,17 +312,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    // stop timer for 5 seconds
     public IEnumerator StopTime()
     {
-        // timer = transform.GetComponent<PlayerController>().timer;
-        // timer.StopTimer();
-        // float timePassed = 0;
-        // while (timePassed < 10)
-        // {
-        //     timePassed += Time.deltaTime;
-        //     Debug.Log("waited for " + timePassed + " seconds");
-        //     yield return null;
-        // }
+
         if (timer.isTimerRunning()) {
             timer.StopTimer();
         }
@@ -336,8 +329,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        // timer.StartTimer();
-    }
+\    }
 
     private void InitiateBounce()
     {

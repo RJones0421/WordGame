@@ -14,20 +14,9 @@ public class StopTime : MonoBehaviour
 
     public static IEnumerator Activate()
     {
-        // timer = transform.GetComponent<PlayerController>().timer;
-        // timer.StopTimer();
-        // float timePassed = 0;
-        // while (timePassed < 10)
-        // {
-        //     timePassed += Time.deltaTime;
-        //     Debug.Log("waited for " + timePassed + " seconds");
-        //     yield return null;
-        // }
         Debug.Log("StopTime Activated");
         yield return new WaitForSeconds(10);
         Debug.Log("Time Returned");
-
-        // timer.StartTimer();
     }
 
     // input score will be doubled only if the user has activated the shop power up
