@@ -293,17 +293,8 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 5");
                 if (CurrencyUtils.useShopItem("5"))
                 {
-                    timer.StopTimer();
-
-                    // float timePassed = 0;
-                    // while (timePassed < 10)
-                    // {
-                    //     timePassed += Time.deltaTime;
-
-                    //     yield return null;
-                    // }
-
-                    StopTime.Activate();
+                    // timer.StopTimer()
+                    StartCoroutine(StopTime());
                     // timer.StartTimer();
 
                     Debug.Log("player uses item number 5");
@@ -321,6 +312,33 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public IEnumerator StopTime()
+    {
+        // timer = transform.GetComponent<PlayerController>().timer;
+        // timer.StopTimer();
+        // float timePassed = 0;
+        // while (timePassed < 10)
+        // {
+        //     timePassed += Time.deltaTime;
+        //     Debug.Log("waited for " + timePassed + " seconds");
+        //     yield return null;
+        // }
+        if (timer.isTimerRunning()) {
+            timer.StopTimer();
+        }
+        Debug.Log("StopTime Activated, timer paused");
+
+        yield return new WaitForSeconds(5);
+
+        Debug.Log("Time Returned Restarted Timer");
+        if (!timer.isTimerRunning()) {
+            timer.StartTimer();
+        }
+
+
+        // timer.StartTimer();
+    }
+
     private void InitiateBounce()
     {
         bounceBackToCenter = true;

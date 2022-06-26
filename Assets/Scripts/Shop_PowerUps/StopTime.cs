@@ -16,14 +16,16 @@ public class StopTime : MonoBehaviour
     {
         // timer = transform.GetComponent<PlayerController>().timer;
         // timer.StopTimer();
-
-        float timePassed = 0;
-        while (timePassed < 10)
-        {
-            timePassed += Time.deltaTime;
-
-            yield return null;
-        }
+        // float timePassed = 0;
+        // while (timePassed < 10)
+        // {
+        //     timePassed += Time.deltaTime;
+        //     Debug.Log("waited for " + timePassed + " seconds");
+        //     yield return null;
+        // }
+        Debug.Log("StopTime Activated");
+        yield return new WaitForSeconds(10);
+        Debug.Log("Time Returned");
 
         // timer.StartTimer();
     }

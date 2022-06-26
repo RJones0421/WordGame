@@ -156,4 +156,9 @@ public class Timer : MonoBehaviour
         timerRunning = true;
     }
 
+    public bool isTimerRunning()
+    {
+        return timerRunning;
+    }
+
 }
