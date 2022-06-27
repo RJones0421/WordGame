@@ -94,7 +94,7 @@ public class PlatformGenerator : MonoBehaviour
                 letterPlatform.SetLetter(letterObject);
                 if (GlobalVariables.updateWordChangeHeight)
                 {
-                    GlobalVariables.yPosChange = letterPlatform.transform.position.y;
+                    GlobalVariables.yPosChange = letterPlatform.transform.position.y-5f;
                     GlobalVariables.updateWordChangeHeight = false;
                 }
             }
