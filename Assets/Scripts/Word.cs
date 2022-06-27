@@ -36,10 +36,16 @@ public class Word : MonoBehaviour
     private bool hasSubmitOnce;
     private bool hasClearedOnce;
 
-    public int totalSubmissions;
     public int totalValidWordLength;
     public int totalWordLength;
     public int validWordCount;
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
+
+    public int validCount = 0;
+    public int totalSubmissions = 0;
+    public int totalLength = 0;
+    public int totalValidLength = 0;
 
     private void Awake()
     {
@@ -169,6 +175,9 @@ public class Word : MonoBehaviour
 
         scoreManagerScript.AddScore(score);
 
+        totalSubmissions++;
+        totalLength+=word.Length;
+
         if (score > 0)
         {
             ScoreUtils.addWordToCollection(word, score);
@@ -176,6 +185,8 @@ public class Word : MonoBehaviour
 
             validWordCount++;
             totalValidWordLength += word.Length;
+            validCount++;
+            totalValidLength+=word.Length;
         }
 
         else if (word.Length > 3)

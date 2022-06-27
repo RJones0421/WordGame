@@ -18,6 +18,9 @@ public class Timer : MonoBehaviour
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
+    public Word word;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,7 @@ public class Timer : MonoBehaviour
         canvasGroup.GetComponent<CanvasGroup>().interactable = true;
         canvasGroup.GetComponent<CanvasGroup>().blocksRaycasts = true;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        word = GameObject.Find("Word").GetComponent<Word>();
     }
 
     // Update is called once per frame
@@ -55,7 +59,10 @@ public class Timer : MonoBehaviour
                         { "totalValidWordLength", word.totalValidWordLength },
                         { "totalWordLength", word.totalWordLength },
                         { "userScore", score },
-                        { "validWordCount", word.validWordCount }
+                        { "validWordCount", word.validWordCount },
+                        { "validWordCount", word.validCount },
+                        { "totalWordLength", word.totalLength },
+                        { "totalValidWordLength",word.totalValidLength }
                     });
 #endif
                 }
