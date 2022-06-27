@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dictionaries.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dictionaries.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DictionaryObject.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DictionaryObject.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Build/docs.data" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Build/docs.data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Build/docs.framework.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Build/docs.framework.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Build/docs.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Build/docs.wasm" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +24,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DictionaryObject.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -50,6 +56,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Dictionaries/GenerateDictionaries.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
@@ -101,6 +108,7 @@
       <workItem from="1655250030645" duration="483000" />
       <workItem from="1655268273032" duration="8053000" />
       <workItem from="1655493825609" duration="409000" />
+      <workItem from="1656026367952" duration="629000" />
     </task>
     <servers />
   </component>

@@ -2237,6 +2237,7 @@ MonoBehaviour:
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
+  word: {fileID: 0}
 --- !u!1001 &570946561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5595,6 +5596,14 @@ MonoBehaviour:
   word: 
   scoreManager: {fileID: 200206583}
   arrows: {fileID: 1516199618}
+  totalValidWordLength: 0
+  totalWordLength: 0
+  validWordCount: 0
+  analyticsManager: {fileID: 719126423}
+  validCount: 0
+  totalSubmissions: 0
+  totalLength: 0
+  totalValidLength: 0
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
