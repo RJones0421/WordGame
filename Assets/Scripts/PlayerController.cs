@@ -232,7 +232,6 @@ public class PlayerController : MonoBehaviour
                     { "totalValidWordLength", word.totalValidWordLength },
                     { "totalWordLength", word.totalWordLength },
                     { "userScore", score },
-                    { "time", Time.timeAsDouble },
                     { "validWordCount", word.validCount },
                     { "totalSubmissions", word.totalSubmissions },
                     { "totalWordLength", word.totalLength },
