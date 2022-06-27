@@ -55,12 +55,8 @@ public class Timer : MonoBehaviour
                         { "deathMethod", "time" },
                         { "time", Time.timeAsDouble },
                         { "userScore", score },
-                        { "totalSubmissions", word.totalSubmissions },
-                        { "totalValidWordLength", word.totalValidWordLength },
-                        { "totalWordLength", word.totalWordLength },
-                        { "userScore", score },
-                        { "validWordCount", word.validWordCount },
                         { "validWordCount", word.validCount },
+                        { "totalSubmissions", word.totalSubmissions },
                         { "totalWordLength", word.totalLength },
                         { "totalValidWordLength",word.totalValidLength }
                     });

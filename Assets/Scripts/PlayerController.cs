@@ -228,9 +228,6 @@ public class PlayerController : MonoBehaviour
                 {
                     { "deathMethod", "falling" },
                     { "time", Time.timeAsDouble },
-                    { "totalSubmissions", word.totalSubmissions },
-                    { "totalValidWordLength", word.totalValidWordLength },
-                    { "totalWordLength", word.totalWordLength },
                     { "userScore", score },
                     { "validWordCount", word.validCount },
                     { "totalSubmissions", word.totalSubmissions },
