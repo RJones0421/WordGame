@@ -28,11 +28,10 @@ public class AnalyticsManager : MonoBehaviour
 
     public void HandleEvent(string eventName, IDictionary<string, object> eventParams)
     {
-        Debug.Log("EVENT HANDLED");
+        Debug.LogFormat("EVENT HANDLED: {0}", Analytics.CustomEvent(eventName, eventParams));
+        Debug.LogFormat("EVENT FLUSHED: {0}", Analytics.FlushEvents());
         //AnalyticsService.Instance.CustomData(eventName, eventParams);
         //AnalyticsService.Instance.Flush();
-        Analytics.CustomEvent(eventName, eventParams);
-        Analytics.FlushEvents();
     }
 
     // Update is called once per frame
