@@ -27,9 +27,6 @@ public class Word : MonoBehaviour
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
 
-    public GameObject analyticsManager;
-    private AnalyticsManager analyticsManagerScript;
-
     private bool isCoroutineRunning;
 
     public GameObject arrows;
