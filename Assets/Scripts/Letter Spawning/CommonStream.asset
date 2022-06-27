@@ -15,6 +15,6 @@ MonoBehaviour:
   blankFrequency: 0
   dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
   letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
-  currentWord: that
+  currentWord: put
   isCommon: 1
-  EMPTY_FREQ: 15
+  EMPTY_FREQ: 5

@@ -120,7 +120,7 @@ public class Word : MonoBehaviour
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
 
-                if (!hasClearedOnce && word.Length > 3)
+                if (!hasClearedOnce && word.Length > 1)
                 {
                     arrows.SetActive(true);
                     arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);

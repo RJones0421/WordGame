@@ -92,6 +92,11 @@ public class PlatformGenerator : MonoBehaviour
             {
                 letterPlatform.SpriteRenderer.sprite = letterObject.image;
                 letterPlatform.SetLetter(letterObject);
+                if (GlobalVariables.updateWordChangeHeight)
+                {
+                    GlobalVariables.yPosChange = letterPlatform.transform.position.y;
+                    GlobalVariables.updateWordChangeHeight = false;
+                }
             }
 
             /* update the platformQueue */
