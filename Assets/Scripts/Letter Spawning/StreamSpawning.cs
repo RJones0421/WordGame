@@ -15,7 +15,7 @@ public class StreamSpawning : Spawner
     public string currentWord;
     private char gap = (char) 123;
 
-	//private Word guess = GameObject.Find("Word").GetComponent<Word>();
+	// //private Word guess = GameObject.Find("Word").GetComponent<Word>();
 	private Trie trie = new Trie();
 	private Trie.TrieNode root;
 
@@ -52,15 +52,16 @@ public class StreamSpawning : Spawner
 		//this.trie = dictionaries.wordSearch;
     	Word guess = GameObject.Find("Word").GetComponent<Word>();
 		currentWord = queue.Dequeue();
-     	word = new Queue<char>(currentWord.ToCharArray());
+      	word = new Queue<char>(currentWord.ToCharArray());
     	word.Enqueue(gap);
     	currentWord = queue.Dequeue();
         word = new Queue<char>(currentWord.ToCharArray());
     	word.Enqueue(gap);
     	Debug.Log(currentWord);
 		string letters = guess.GetWord();
-		List<List<string>> suggestions = trie.suggestedProducts(dictionaries.GetCommonDictionary(),guess.GetWord());
-		Debug.Log(suggestions[0][0]);
+		List<List<string>> suggestions = trie.suggestedProducts(dictionaries.GetCommonDictionary(),letters.ToLower());
+		//Debug.Log("size of suggestions is " + suggestions.Count);
+		//Debug.Log("trie suggestions " + suggestions[0][0]);
 		//Debug.Log(suggestions[0][0]);
         queue.Enqueue(GetWord());
     }
