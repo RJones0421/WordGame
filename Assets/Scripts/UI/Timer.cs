@@ -48,11 +48,22 @@ public class Timer : MonoBehaviour
                 if(Time.timeScale==1)
                 {
                     int score = SetValues();
-#if ENABLE_CLOUD_SERVICES_ANALYTICS
                     Word word = GameObject.Find("Word").GetComponent<Word>();
+#if true
+                    analyticsManagerScript.HandleEvent("death", new List<object>
+                    {
+                        "time",
+                        Time.timeAsDouble,
+                        score,
+                        word.validCount,
+                        word.totalSubmissions,
+                        word.totalLength,
+                        word.totalValidLength
+                    });
+#else
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
-                        { "deathMethod", "time" },
+                        { "cause", "time" },
                         { "time", Time.timeAsDouble },
                         { "userScore", score },
                         { "validWordCount", word.validCount },
