@@ -10,29 +10,28 @@ using UnityEngine.Analytics;
 
 public class AnalyticsManager : MonoBehaviour
 {
-    string consentIdentifier;
-    bool consentRequired;
+    //string consentIdentifier;
+    //bool consentRequired;
 
     // Start is called before the first frame update
     async void Start()
     {
-        InitializationOptions options = new InitializationOptions();
-//#if !UNITY_WEBGL
-        //options.SetEnvironmentName("testing");
-//#else
+        InitializationOptions options = new();
+#if UNITY_EDITOR
+        options.SetEnvironmentName("testing");
+#else
         options.SetEnvironmentName("midterm");
-//#endif
+#endif
         await UnityServices.InitializeAsync(options);
         Debug.Log("LMAO ANAL INIT");
     }
 
     public void HandleEvent(string eventName, IDictionary<string, object> eventParams)
     {
-        Debug.Log("EVENT HANDLED");
+        Debug.LogFormat("EVENT HANDLED: {0}", Analytics.CustomEvent(eventName, eventParams));
+        Debug.LogFormat("EVENT FLUSHED: {0}", Analytics.FlushEvents());
         //AnalyticsService.Instance.CustomData(eventName, eventParams);
         //AnalyticsService.Instance.Flush();
-        Analytics.CustomEvent(eventName, eventParams);
-        Analytics.FlushEvents();
     }
 
     // Update is called once per frame

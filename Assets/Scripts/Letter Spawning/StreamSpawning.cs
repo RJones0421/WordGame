@@ -13,7 +13,7 @@ public class StreamSpawning : Spawner
     private Queue<string> queue = new Queue<string>();
     private Queue<char> word = new Queue<char>();
     public string currentWord;
-    private char gap = (char) 96;
+    private char gap = (char) 123;
 
 	//private Word guess = GameObject.Find("Word").GetComponent<Word>();
 	private Trie trie = new Trie();
@@ -54,6 +54,8 @@ public class StreamSpawning : Spawner
 		currentWord = queue.Dequeue();
      	word = new Queue<char>(currentWord.ToCharArray());
     	word.Enqueue(gap);
+    	currentWord = queue.Dequeue();
+        word = new Queue<char>(currentWord.ToCharArray());
     	word.Enqueue(gap);
     	Debug.Log(currentWord);
 		string letters = guess.GetWord();
@@ -67,6 +69,7 @@ public class StreamSpawning : Spawner
 	{
 		if (word.Count == 0) {
 			setQueue();
+			GlobalVariables.updateWordChangeHeight = true;
 		}
 		return word.Dequeue() - 96;
 	}
