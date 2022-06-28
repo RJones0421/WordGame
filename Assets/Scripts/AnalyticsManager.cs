@@ -83,6 +83,11 @@ public class AnalyticsManager : MonoBehaviour
             form.AddField(fieldNames[i], eventParams[i - 2].ToString());
         }
 
+        byte[] rawData = form.data;
+        WWW www = new WWW(BASE_URLS[eventName], rawData);
+        yield return www;
+
+        /*
         UnityWebRequest www = UnityWebRequest.Post(BASE_URLS[eventName], form);
         yield return www.SendWebRequest();
 
@@ -94,6 +99,7 @@ public class AnalyticsManager : MonoBehaviour
         {
             Debug.LogFormat("Form upload complete! {0}", eventName);
         }
+        */
     }
 
     public void HandleEvent(string eventName, List<object> eventParams)
