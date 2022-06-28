@@ -33,11 +33,28 @@ public class Word : MonoBehaviour
     private bool hasSubmitOnce;
     private bool hasClearedOnce;
 
+    public int totalValidWordLength;
+    public int totalWordLength;
+    public int validWordCount;
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
+
+    public int validCount = 0;
+    public int totalSubmissions = 0;
+    public int totalLength = 0;
+    public int totalValidLength = 0;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
-        arrows.SetActive(false); 
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        arrows.SetActive(false);
+
+        totalSubmissions = 0;
+        totalValidWordLength = 0;
+        totalWordLength = 0;
+        validWordCount = 0;
     }
     
     void Update()
@@ -103,7 +120,7 @@ public class Word : MonoBehaviour
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
 
-                if (!hasClearedOnce && word.Length > 3)
+                if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
                     arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
@@ -146,22 +163,44 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
+        totalSubmissions++;
+        totalWordLength += word.Length;
+
         arrows.SetActive(false);
 
         int score = evaluator.SubmitWord(word);
 
         scoreManagerScript.AddScore(score);
 
+        totalSubmissions++;
+        totalLength+=word.Length;
+
         if (score > 0)
         {
             ScoreUtils.addWordToCollection(word, score);
             hasSubmitOnce = true;
+
+            validWordCount++;
+            totalValidWordLength += word.Length;
+            validCount++;
+            totalValidLength+=word.Length;
         }
 
         else if (word.Length > 3)
         {
             hasClearedOnce = true;
         }
+
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+        analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
+            {
+                { "time", Time.timeAsDouble },
+                { "validWord", score > 0 },
+                { "word", word },
+                { "wordLength", word.Length },
+                { "wordScore", score }
+            });
+#endif
 
         letters.Clear();
         word = "";
