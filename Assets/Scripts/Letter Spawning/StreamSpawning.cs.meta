@@ -3,7 +3,10 @@ guid: 14ef91b7db4aabe408377331d26c76d5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
+  - letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
+  - guess: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -145,7 +145,7 @@ public class Word : MonoBehaviour
     public int submitWord() {
         // Check validity and get word score
         // If valid, clear list
-
+       // Debug.Log("submitted " + word);
         arrows.SetActive(false);
 
         int score = evaluator.SubmitWord(word);
@@ -183,5 +183,8 @@ public class Word : MonoBehaviour
     public int GetWordLength()
     {
         return word.Length;
+    }
+    public string GetWord(){
+        return word;
     }
 }
