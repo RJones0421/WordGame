@@ -53,7 +53,7 @@ public class Timer : MonoBehaviour
                     analyticsManagerScript.HandleEvent("death", new List<object>
                     {
                         "time",
-                        Time.timeAsDouble,
+                        Time.timeSinceLevelLoadAsDouble,
                         score,
                         word.validCount,
                         word.totalSubmissions,
@@ -64,7 +64,7 @@ public class Timer : MonoBehaviour
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
                         { "cause", "time" },
-                        { "time", Time.timeAsDouble },
+                        { "time", Time.timeSinceLevelLoadAsDouble },
                         { "userScore", score },
                         { "validWordCount", word.validCount },
                         { "totalSubmissions", word.totalSubmissions },

@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour
                 analyticsManagerScript.HandleEvent("death", new List<object>
                 {
                     "falling",
-                    Time.timeAsDouble,
+                    Time.timeSinceLevelLoadAsDouble,
                     score,
                     word.validCount,
                     word.totalSubmissions,
@@ -238,7 +238,7 @@ public class PlayerController : MonoBehaviour
                 analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                 {
                     { "cause", "falling" },
-                    { "time", Time.timeAsDouble },
+                    { "time", Time.timeSinceLevelLoadAsDouble },
                     { "userScore", score },
                     { "validWordCount", word.validCount },
                     { "totalSubmissions", word.totalSubmissions },

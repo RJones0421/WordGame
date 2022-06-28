@@ -194,7 +194,7 @@ public class Word : MonoBehaviour
 #if true
         analyticsManagerScript.HandleEvent("wordSubmitted", new List<object>
         {
-            Time.timeAsDouble,
+            Time.timeSinceLevelLoadAsDouble,
             score > 0,
             word,
             word.Length,
@@ -203,7 +203,7 @@ public class Word : MonoBehaviour
 #else
         analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
         {
-            { "time", Time.timeAsDouble },
+            { "time", Time.timeSinceLevelLoadAsDouble },
             { "validWord", score > 0 },
             { "word", word },
             { "wordLength", word.Length },
