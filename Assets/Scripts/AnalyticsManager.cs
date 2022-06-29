@@ -18,8 +18,6 @@ public class AnalyticsManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     static void Initialize()
     {
-        Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.Full);
-
         deaths = 0;
 
 #if UNITY_EDITOR
