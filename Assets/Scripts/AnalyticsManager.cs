@@ -46,7 +46,7 @@ public class AnalyticsManager : MonoBehaviour
                 "entry.681068843",  // validWordCount
                 "entry.1556221476", // totalSubmissions
                 "entry.433458864",  // totalWordLength
-                "entry.223216808"   // totalValidWordLength
+                "entry.223216808",  // totalValidWordLength
             }
             },
             { "wordSubmitted", new List<string>
@@ -56,8 +56,8 @@ public class AnalyticsManager : MonoBehaviour
                 "entry.404780885",  // time
                 "entry.275868668",  // validWord
                 "entry.268931933",  // word
-                "entry.268931933",  // wordLength
-                "entry.1976654319"  // wordScore
+                "entry.1762195175", // wordLength
+                "entry.1976654319", // wordScore
             }
             }
         };
