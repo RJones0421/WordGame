@@ -38,7 +38,7 @@ public class DifficultyManager : MonoBehaviour
     private void UpdateDifficulty()
     {
         int temp = Mathf.FloorToInt(timer / timeBetweenLevels);
-        if (temp > difficulties.Length) temp = difficulties.Length;
+        if (temp >= difficulties.Length) temp = difficulties.Length-1;
 
         currentDifficulty = difficulties[temp];
 
