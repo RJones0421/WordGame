@@ -223,11 +223,22 @@ public class PlayerController : MonoBehaviour
                 timer.StopTimer();
                 int score = timer.SetValues();
 
-#if ENABLE_CLOUD_SERVICES_ANALYTICS
+#if true
+                analyticsManagerScript.HandleEvent("death", new List<object>
+                {
+                    "falling",
+                    Time.timeSinceLevelLoadAsDouble,
+                    score,
+                    word.validCount,
+                    word.totalSubmissions,
+                    word.totalLength,
+                    word.totalValidLength
+                });
+#else
                 analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                 {
-                    { "deathMethod", "falling" },
-                    { "time", Time.timeAsDouble },
+                    { "cause", "falling" },
+                    { "time", Time.timeSinceLevelLoadAsDouble },
                     { "userScore", score },
                     { "validWordCount", word.validCount },
                     { "totalSubmissions", word.totalSubmissions },

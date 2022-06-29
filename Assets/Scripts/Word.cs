@@ -120,7 +120,7 @@ public class Word : MonoBehaviour
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
 
-                if (!hasClearedOnce && word.Length > 3)
+                if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
                     arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
@@ -173,7 +173,7 @@ public class Word : MonoBehaviour
         scoreManagerScript.AddScore(score);
 
         totalSubmissions++;
-        totalLength+=word.Length;
+        totalLength += word.Length;
 
         if (score > 0)
         {
@@ -183,7 +183,7 @@ public class Word : MonoBehaviour
             validWordCount++;
             totalValidWordLength += word.Length;
             validCount++;
-            totalValidLength+=word.Length;
+            totalValidLength += word.Length;
         }
 
         else if (word.Length > 3)
@@ -191,15 +191,24 @@ public class Word : MonoBehaviour
             hasClearedOnce = true;
         }
 
-#if ENABLE_CLOUD_SERVICES_ANALYTICS
+#if true
+        analyticsManagerScript.HandleEvent("wordSubmitted", new List<object>
+        {
+            Time.timeSinceLevelLoadAsDouble,
+            score > 0,
+            word,
+            word.Length,
+            score
+        });
+#else
         analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
-            {
-                { "time", Time.timeAsDouble },
-                { "validWord", score > 0 },
-                { "word", word },
-                { "wordLength", word.Length },
-                { "wordScore", score }
-            });
+        {
+            { "time", Time.timeSinceLevelLoadAsDouble },
+            { "validWord", score > 0 },
+            { "word", word },
+            { "wordLength", word.Length },
+            { "wordScore", score }
+        });
 #endif
 
         letters.Clear();

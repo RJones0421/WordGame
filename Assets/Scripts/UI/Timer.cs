@@ -9,7 +9,10 @@ public class Timer : MonoBehaviour
 {
 
 	Image timerBar;
-	public float maxTime = 90f;
+
+    [SerializeField]
+	private float maxTime;
+
 	float timeLeft;
 	public GameObject winCanvas;
     public GameObject canvasGroup;
@@ -48,12 +51,23 @@ public class Timer : MonoBehaviour
                 if(Time.timeScale==1)
                 {
                     int score = SetValues();
-#if ENABLE_CLOUD_SERVICES_ANALYTICS
                     Word word = GameObject.Find("Word").GetComponent<Word>();
+#if true
+                    analyticsManagerScript.HandleEvent("death", new List<object>
+                    {
+                        "time",
+                        Time.timeSinceLevelLoadAsDouble,
+                        score,
+                        word.validCount,
+                        word.totalSubmissions,
+                        word.totalLength,
+                        word.totalValidLength
+                    });
+#else
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
-                        { "deathMethod", "time" },
-                        { "time", Time.timeAsDouble },
+                        { "cause", "time" },
+                        { "time", Time.timeSinceLevelLoadAsDouble },
                         { "userScore", score },
                         { "validWordCount", word.validCount },
                         { "totalSubmissions", word.totalSubmissions },
