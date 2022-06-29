@@ -18,6 +18,8 @@ public class AnalyticsManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     static void Initialize()
     {
+        Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.Full);
+
         deaths = 0;
 
 #if UNITY_EDITOR
@@ -72,10 +74,6 @@ public class AnalyticsManager : MonoBehaviour
     {
         WWWForm form = new();
         List<string> fieldNames = FORM_FIELDS[eventName];
-        for (int i = 0; i < fieldNames.Count; i++)
-        {
-            Debug.Log(fieldNames[i]);
-        }
         form.AddField(fieldNames[0], AnalyticsSessionInfo.sessionId.ToString());
         form.AddField(fieldNames[1], deaths);
         for (int i = 2; i < fieldNames.Count; i++)
@@ -83,16 +81,18 @@ public class AnalyticsManager : MonoBehaviour
             form.AddField(fieldNames[i], eventParams[i - 2].ToString());
         }
 
-        UnityWebRequest www = UnityWebRequest.Post(BASE_URLS[eventName], form);
-        yield return www.SendWebRequest();
+        using (UnityWebRequest www = UnityWebRequest.Post(BASE_URLS[eventName], form))
+        {
+            yield return www.SendWebRequest();
 
-        if (www.result == UnityWebRequest.Result.ConnectionError)
-        {
-            Debug.Log(www.error);
-        }
-        else
-        {
-            Debug.LogFormat("Form upload complete! {0}", eventName);
+            if (www.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.LogFormat("Form upload complete! {0}", eventName);
+            }
         }
     }
 
