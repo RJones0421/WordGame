@@ -11,8 +11,7 @@ public class Swap : Powerup
 
     public override bool Activate()
     {
-        /*
-        Word word = transform.GetComponent<PlayerController>().word;
+        Word word = GameObject.Find("Player").GetComponent<PlayerController>().word;
         if (word.currentLetterBox > 1)
         {
             Sprite tempSprite = word.sprites[word.currentLetterBox - 2].sprite;
@@ -30,7 +29,7 @@ public class Swap : Powerup
 
             word.UpdateSidebars();
         }
-        */
-        return false;
+
+        return true;
     }
 }

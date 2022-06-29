@@ -58,21 +58,21 @@ public class Timer : MonoBehaviour
                         "time",
                         Time.timeSinceLevelLoadAsDouble,
                         score,
-                        word.validCount,
+                        word.validWordCount,
                         word.totalSubmissions,
-                        word.totalLength,
-                        word.totalValidLength
+                        word.totalWordLength,
+                        word.totalValidWordLength,
                     });
 #else
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
-                        { "cause", "time" },
-                        { "time", Time.timeSinceLevelLoadAsDouble },
-                        { "userScore", score },
-                        { "validWordCount", word.validCount },
-                        { "totalSubmissions", word.totalSubmissions },
-                        { "totalWordLength", word.totalLength },
-                        { "totalValidWordLength",word.totalValidLength }
+                        { "cause", "time", },
+                        { "time", Time.timeSinceLevelLoadAsDouble, },
+                        { "userScore", score, },
+                        { "validWordCount", word.validCount, },
+                        { "totalSubmissions", word.totalSubmissions, },
+                        { "totalWordLength", word.totalLength, },
+                        { "totalValidWordLength",word.totalValidLength, },
                     });
 #endif
                 }

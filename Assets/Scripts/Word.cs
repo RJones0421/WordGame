@@ -190,16 +190,16 @@ public class Word : MonoBehaviour
             score > 0,
             word,
             word.Length,
-            score
+            score,
         });
 #else
         analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
         {
-            { "time", Time.timeSinceLevelLoadAsDouble },
-            { "validWord", score > 0 },
-            { "word", word },
-            { "wordLength", word.Length },
-            { "wordScore", score }
+            { "time", Time.timeSinceLevelLoadAsDouble, },
+            { "validWord", score > 0, },
+            { "word", word, },
+            { "wordLength", word.Length, },
+            { "wordScore", score, },
         });
 #endif
 
