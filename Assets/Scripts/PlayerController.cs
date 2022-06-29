@@ -81,33 +81,31 @@ public class PlayerController : MonoBehaviour
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
 
-        /*
-        // Test TimeStop
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                TimeStop timeStop = GetComponent<TimeStop>();
-                if (!timeStop)
-                {
-                    //timeStop = gameObject.AddComponent<TimeStop>();
-                    timeStop.Activate();
-                }
-            }
-        }
+        //// Test TimeStop
+        //{
+        //    if (Input.GetKeyDown(KeyCode.T))
+        //    {
+        //        TimeStop timeStop = GetComponent<TimeStop>();
+        //        if (!timeStop)
+        //        {
+        //            //timeStop = gameObject.AddComponent<TimeStop>();
+        //            timeStop.Activate();
+        //        }
+        //    }
+        //}
 
-        // Test Swap
-        {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Swap swap = GetComponent<Swap>();
-                if (!swap)
-                {
-                    swap = gameObject.AddComponent<Swap>();
-                }
-                swap.Activate();
-            }
-        }
-        */
+        //// Test Swap
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Y))
+        //    {
+        //        Swap swap = GetComponent<Swap>();
+        //        if (!swap)
+        //        {
+        //            swap = gameObject.AddComponent<Swap>();
+        //        }
+        //        swap.Activate();
+        //    }
+        //}
 
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
@@ -229,21 +227,21 @@ public class PlayerController : MonoBehaviour
                     "falling",
                     Time.timeSinceLevelLoadAsDouble,
                     score,
-                    word.validCount,
+                    word.validWordCount,
                     word.totalSubmissions,
-                    word.totalLength,
-                    word.totalValidLength
+                    word.totalWordLength,
+                    word.totalValidWordLength,
                 });
 #else
                 analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                 {
-                    { "cause", "falling" },
-                    { "time", Time.timeSinceLevelLoadAsDouble },
-                    { "userScore", score },
-                    { "validWordCount", word.validCount },
-                    { "totalSubmissions", word.totalSubmissions },
-                    { "totalWordLength", word.totalLength },
-                    { "totalValidWordLength",word.totalValidLength }
+                    { "cause", "falling", },
+                    { "time", Time.timeSinceLevelLoadAsDouble, },
+                    { "userScore", score, },
+                    { "validWordCount", word.validCount, },
+                    { "totalSubmissions", word.totalSubmissions, },
+                    { "totalWordLength", word.totalLength, },
+                    { "totalValidWordLength",word.totalValidLength, },
                 });
 #endif
             }
@@ -266,13 +264,12 @@ public class PlayerController : MonoBehaviour
             if (letterPlatform)
             {
                 letterPlatform.Activate();
-                /*
-                TimeStop timeStop = GetComponent<TimeStop>();
-                if (timeStop != null)
-                {
-                    timeStop.Activate();
-                }
-                */
+
+                //TimeStop timeStop = GetComponent<TimeStop>();
+                //if (timeStop != null)
+                //{
+                //    timeStop.Activate();
+                //}
             }
         }
     }
