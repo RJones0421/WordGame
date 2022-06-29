@@ -229,10 +229,10 @@ public class PlayerController : MonoBehaviour
                     "falling",
                     Time.timeSinceLevelLoadAsDouble,
                     score,
-                    word.validCount,
+                    word.validWordCount,
                     word.totalSubmissions,
-                    word.totalLength,
-                    word.totalValidLength
+                    word.totalWordLength,
+                    word.totalValidWordLength
                 });
 #else
                 analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
