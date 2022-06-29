@@ -2234,7 +2234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad2a306e62dc47feacf686b3780dedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 30
+  maxTime: 60
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}

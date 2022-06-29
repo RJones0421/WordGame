@@ -9,7 +9,10 @@ public class Timer : MonoBehaviour
 {
 
 	Image timerBar;
-	public float maxTime = 90f;
+
+    [SerializeField]
+	private float maxTime;
+
 	float timeLeft;
 	public GameObject winCanvas;
     public GameObject canvasGroup;
