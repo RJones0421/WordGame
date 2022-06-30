@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +22,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Timer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnalyticsManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -51,11 +52,11 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Dictionaries/GenerateDictionaries.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
