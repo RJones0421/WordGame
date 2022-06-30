@@ -184,4 +184,9 @@ public class Word : MonoBehaviour
     {
         return word.Length;
     }
+
+    public LetterClass getLetter(int index)
+    {
+        return letters[index];
+    }
 }

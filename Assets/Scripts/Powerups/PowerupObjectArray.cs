@@ -8,5 +8,5 @@ public class PowerupObjectArray : ScriptableObject
     [SerializeField] private List<Powerup> powerupObjects = new List<Powerup>();
 
     public Powerup GetPowerup(int index) { return powerupObjects[index]; }
-    //public int Size() { return powerupObjects.Count; }
+    public int Count() { return powerupObjects.Count; }
 }

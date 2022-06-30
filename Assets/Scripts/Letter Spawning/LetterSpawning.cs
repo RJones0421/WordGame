@@ -75,6 +75,29 @@ public class LetterSpawning : Spawner
 
 	public override Powerup GetNextPowerup()
 	{
-		return powerupArray.GetPowerup(0);
+		// Quasi-Zipfian Distribution for Powerups -- Further down on list == less common
+
+        int selection;
+
+        while(true) {
+
+            // Randomly select number in list
+
+            selection = Random.Range(0, powerupArray.Count());
+
+            // Check Probability: (1 / (2/3)x) for x > 1
+            // x == rank in list starting at 1 
+            //(1, 0.75, 0.5, 0.375, 0.3, 0.25, etc.)
+
+            if (selection == 0) return powerupArray.GetPowerup(selection);
+
+            else {
+                int selectionCheck = selection + 1;
+                int probabilityRole = Random.Range(1, 101);
+
+                if (probabilityRole <= (100 / ((2/3) * selectionCheck))) return powerupArray.GetPowerup(selection);
+            }
+
+        }
 	}
 }
