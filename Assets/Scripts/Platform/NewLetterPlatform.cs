@@ -77,4 +77,9 @@ public class NewLetterPlatform : Platform
             letterArrow.SetActive(true);
         }
     }
+
+    public bool HasBeenCollected()
+    {
+        return isCollected;
+    }
 }

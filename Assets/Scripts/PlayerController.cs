@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
+    public SoundEffectSO bounceSound;
+    public SoundEffectSO letterCollectSound;
+    public SoundEffectSO wallBounceSound;
+    public SoundEffectSO gameEndSound;
+
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
@@ -124,6 +129,9 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = new Vector2(rb.velocity.x, 10.0f);
                     box.isTrigger = true;
                     started = true;
+
+                    bounceSound.Play();
+
                 }
             }
         }
@@ -221,6 +229,13 @@ public class PlayerController : MonoBehaviour
                 timer.StopTimer();
                 int score = timer.SetValues();
 
+
+                foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                {
+                    source.Stop();
+                }
+                gameEndSound.Play();
+
 #if true
                 analyticsManagerScript.HandleEvent("death", new List<object>
                 {
@@ -254,6 +269,8 @@ public class PlayerController : MonoBehaviour
         isBouncingBack = true;
         rb.gravityScale = 0;
         rb.velocity = Vector3.zero;
+
+        wallBounceSound.Play();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -263,6 +280,11 @@ public class PlayerController : MonoBehaviour
             NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
             if (letterPlatform)
             {
+                if (letterPlatform.collectible is LetterClass && ((LetterClass)letterPlatform.collectible).Letter != '_' && !letterPlatform.HasBeenCollected())
+                {
+                    letterCollectSound.Play(null, 0.2f);
+                }
+
                 letterPlatform.Activate();
 
                 //TimeStop timeStop = GetComponent<TimeStop>();
@@ -271,6 +293,8 @@ public class PlayerController : MonoBehaviour
                 //    timeStop.Activate();
                 //}
             }
+
+            bounceSound.Play();
         }
     }
 }
