@@ -1476,7 +1476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   streamSpawning: {fileID: 11400000, guid: 7d725ef2a88989b47855785ea7bea330, type: 2}
   suggestedWord: {fileID: 410679531}
-  player: {fileID: 0}
+  player: {fileID: 827469018}
 --- !u!1 &431281987
 GameObject:
   m_ObjectHideFlags: 0
@@ -3796,6 +3796,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813142183}
   m_CullTransparentMesh: 1
+--- !u!114 &827469018 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+  m_PrefabInstance: {fileID: 1580493163}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54bc5850fecb6d243b40b7ce79de184f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &829627918
 GameObject:
   m_ObjectHideFlags: 0
@@ -5268,14 +5279,11 @@ MonoBehaviour:
   word: 
   scoreManager: {fileID: 200206583}
   arrows: {fileID: 1516199618}
-  totalValidWordLength: 0
-  totalWordLength: 0
-  validWordCount: 0
   analyticsManager: {fileID: 719126423}
-  validCount: 0
+  validWordCount: 0
   totalSubmissions: 0
-  totalLength: 0
-  totalValidLength: 0
+  totalWordLength: 0
+  totalValidWordLength: 0
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
