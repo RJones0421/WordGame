@@ -61,7 +61,7 @@ public class StreamSpawning : Spawner
 		string letters = guess.GetWord();
 		List<List<string>> suggestions = trie.suggestedProducts(dictionaries.GetCommonDictionary(),letters.ToLower());
 		//Debug.Log("size of suggestions is " + suggestions.Count);
-		//Debug.Log("trie suggestions " + suggestions[0][0]);
+		Debug.Log("trie suggestions " + suggestions[0][0]);
 		//Debug.Log(suggestions[0][0]);
         queue.Enqueue(GetWord());
     }
