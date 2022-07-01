@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df26502ccaa24b258a52da04300dafa, type: 3}
   m_Name: DoubleLetter
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 7979388316eef454ea69e93f5d61236f, type: 3}
   power: 

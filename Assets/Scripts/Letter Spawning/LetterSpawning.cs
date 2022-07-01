@@ -84,20 +84,21 @@ public class LetterSpawning : Spawner
             // Randomly select number in list
 
             selection = Random.Range(0, powerupArray.Count());
+			Debug.Log("SELECTION " + selection);
 
             // Check Probability: (1 / (2/3)x) for x > 1
             // x == rank in list starting at 1 
             //(1, 0.75, 0.5, 0.375, 0.3, 0.25, etc.)
 
-            if (selection == 0) return powerupArray.GetPowerup(selection);
-
-            else {
+            if (selection <= 0) {
+				return powerupArray.GetPowerup(0);
+			} else {
                 int selectionCheck = selection + 1;
                 int probabilityRole = Random.Range(1, 101);
 
-                if (probabilityRole <= (100 / ((2/3) * selectionCheck))) return powerupArray.GetPowerup(selection);
+                if (probabilityRole <= (100f / ((float) (2f/3f) * selectionCheck))) return powerupArray.GetPowerup(selection);
             }
-
+			
         }
 	}
 }
