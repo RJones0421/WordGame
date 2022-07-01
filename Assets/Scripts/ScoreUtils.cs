@@ -9,13 +9,13 @@ public class ScoreUtils : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public static void clearCollectedWords(){
@@ -51,7 +51,7 @@ public class ScoreUtils : MonoBehaviour
         string retVal = System.Environment.NewLine + "Top words";
         try{
             wordsCollected.Sort((x, y) => y.Item2.CompareTo(x.Item2));
-            for (var i = 0; i < k; i++)
+            for (var i = 0; i < Math.Min(k,wordsCollected.Count); i++)
             {
                 retVal += System.Environment.NewLine + wordsCollected[i].Item1 + " - " + wordsCollected[i].Item2;
             }

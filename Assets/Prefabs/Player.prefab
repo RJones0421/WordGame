@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5664284316386886155}
   - component: {fileID: 5664284316386886152}
   - component: {fileID: 5664284316386886153}
-  - component: {fileID: 3860524851957964824}
+  - component: {fileID: 7884987064063499173}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3860524851957964824
+--- !u!114 &7884987064063499173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,9 +149,12 @@ MonoBehaviour:
   keyMovementSpeed: 10
   mouseMovementSpeed: 25
   allowMouseMovement: 0
-  wallPrefab: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
+  word: {fileID: 0}
+  wallPrefab: {fileID: 0}
   walls: []
   gameOverCanvas: {fileID: 0}
   timer: {fileID: 0}
   tempTutroial: {fileID: 0}
+  wordBox: {fileID: 0}
   scoreManager: {fileID: 0}
+  analyticsManager: {fileID: 0}

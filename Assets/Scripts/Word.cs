@@ -9,20 +9,20 @@ public class Word : MonoBehaviour
 
     [SerializeField] private Sprite defaultSprite;
 
-    [SerializeField] private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
+    [SerializeField] public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
     private SpriteRenderer leftSidebar;
     private SpriteRenderer rightSidebar;
 
-    private List<LetterClass> letters = new List<LetterClass>();
+    public List<LetterClass> letters = new List<LetterClass>();
 
-    private int currentLetterBox = 0;
+    public int currentLetterBox = 0;
 
     public GameObject timer;
 
     private Timer timerClass;
     
-    private string word = "";
+    public string word = "";
 
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
@@ -33,11 +33,25 @@ public class Word : MonoBehaviour
     private bool hasSubmitOnce;
     private bool hasClearedOnce;
 
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
+
+    public int validWordCount;
+    public int totalSubmissions;
+    public int totalWordLength;
+    public int totalValidWordLength;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
-        arrows.SetActive(false); 
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        arrows.SetActive(false);
+
+        validWordCount = 0;
+        totalSubmissions = 0;
+        totalWordLength = 0;
+        totalValidWordLength = 0;
     }
     
     void Update()
@@ -60,16 +74,35 @@ public class Word : MonoBehaviour
 
         if (newLetter.Letter == '_') return false;
         if (letters.Count >= 8) return false;
+        
+        letters.Add(newLetter);
+        word += newLetter.Letter;
+        sprites[currentLetterBox].sprite = newLetter.image;
+        currentLetterBox++;
 
-        else
-        {
-            letters.Add(newLetter);
-            word += newLetter.Letter;
-            sprites[currentLetterBox].sprite = newLetter.LetterSprite;
-            currentLetterBox++;
+        // Update Sidebars
+        UpdateSidebars();
 
-            // Update Sidebars
-            bool valid = evaluator.IsValidWord(word);
+            return true;
+    }
+
+    public void PopLetter() {
+
+        if (word != "") {
+            word = word.Substring(0, word.Length - 1);
+
+            letters.RemoveAt(letters.Count - 1);
+
+            currentLetterBox--;
+            sprites[currentLetterBox].sprite = defaultSprite;
+        }
+
+        UpdateSidebars();
+
+    }
+
+    public void UpdateSidebars() {
+        bool valid = evaluator.IsValidWord(word);
             if (valid) {
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
@@ -84,15 +117,12 @@ public class Word : MonoBehaviour
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
 
-                if (!hasClearedOnce && word.Length > 3)
+                if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
                     arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
                 }
             }
-        }
-
-        return true;
     }
 
     private IEnumerator sidebarBounce(float bounceRate)
@@ -130,6 +160,9 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
+        totalSubmissions++;
+        totalWordLength += word.Length;
+
         arrows.SetActive(false);
 
         int score = evaluator.SubmitWord(word);
@@ -140,12 +173,35 @@ public class Word : MonoBehaviour
         {
             ScoreUtils.addWordToCollection(word, score);
             hasSubmitOnce = true;
+
+            validWordCount++;
+            totalValidWordLength += word.Length;
         }
 
         else if (word.Length > 3)
         {
             hasClearedOnce = true;
         }
+
+#if true
+        analyticsManagerScript.HandleEvent("wordSubmitted", new List<object>
+        {
+            Time.timeSinceLevelLoadAsDouble,
+            score > 0,
+            word,
+            word.Length,
+            score,
+        });
+#else
+        analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
+        {
+            { "time", Time.timeSinceLevelLoadAsDouble, },
+            { "validWord", score > 0, },
+            { "word", word, },
+            { "wordLength", word.Length, },
+            { "wordScore", score, },
+        });
+#endif
 
         letters.Clear();
         word = "";
