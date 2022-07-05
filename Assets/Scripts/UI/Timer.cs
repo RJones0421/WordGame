@@ -9,7 +9,10 @@ public class Timer : MonoBehaviour
 {
 
 	Image timerBar;
-	public float maxTime = 90f;
+
+    [SerializeField]
+	private float maxTime;
+
 	float timeLeft;
 	public GameObject winCanvas;
     public GameObject canvasGroup;
@@ -17,6 +20,9 @@ public class Timer : MonoBehaviour
 
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
+
+    public Word word;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +34,7 @@ public class Timer : MonoBehaviour
         canvasGroup.GetComponent<CanvasGroup>().interactable = true;
         canvasGroup.GetComponent<CanvasGroup>().blocksRaycasts = true;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        word = GameObject.Find("Word").GetComponent<Word>();
     }
 
     // Update is called once per frame
@@ -44,14 +51,30 @@ public class Timer : MonoBehaviour
                 if(Time.timeScale==1)
                 {
                     int score = SetValues();
-                    #if ENABLE_CLOUD_SERVICES_ANALYTICS
+                    Word word = GameObject.Find("Word").GetComponent<Word>();
+#if true
+                    analyticsManagerScript.HandleEvent("death", new List<object>
+                    {
+                        "time",
+                        Time.timeSinceLevelLoadAsDouble,
+                        score,
+                        word.validWordCount,
+                        word.totalSubmissions,
+                        word.totalWordLength,
+                        word.totalValidWordLength,
+                    });
+#else
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
-                        { "deathMethod", "time" },
-                        { "userScore", score },
-                        { "time", Time.timeAsDouble }
+                        { "cause", "time", },
+                        { "time", Time.timeSinceLevelLoadAsDouble, },
+                        { "userScore", score, },
+                        { "validWordCount", word.validCount, },
+                        { "totalSubmissions", word.totalSubmissions, },
+                        { "totalWordLength", word.totalLength, },
+                        { "totalValidWordLength",word.totalValidLength, },
                     });
-                    #endif
+#endif
                 }
             }
         } catch(Exception e){
