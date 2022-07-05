@@ -41,6 +41,10 @@ public class WordEvaluator : MonoBehaviour
 
 	public bool IsValidWord(string word)
 	{
+		//if anagram powerup is activated check if word matches 
+		if(PlayerPrefs.GetInt(ShopConstants.SHOP_POWERUP_ANAGRAM_ACTIVATED,0)==1){
+			return dictionaries.VerifyWordAnagram(word);
+		}
 		return dictionaries.VerifyWord(word);
 	}
 
