@@ -895,7 +895,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreHolder: {fileID: 1069087908}
   highScoreHolder: {fileID: 1769333591}
-  addScoreAmount: {fileID: 233359513}
 --- !u!4 &200206585
 Transform:
   m_ObjectHideFlags: 0
@@ -5409,6 +5408,7 @@ MonoBehaviour:
   totalSubmissions: 0
   totalWordLength: 0
   totalValidWordLength: 0
+  addScoreAmount: {fileID: 233359513}
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
