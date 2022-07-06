@@ -2239,6 +2239,63 @@ MonoBehaviour:
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
   word: {fileID: 0}
+--- !u!1001 &540959656
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7499377894571553601, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_Name
+      value: MusicPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.2195964
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4857142
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
 --- !u!1001 &570946561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5597,14 +5654,11 @@ MonoBehaviour:
   word: 
   scoreManager: {fileID: 200206583}
   arrows: {fileID: 1516199618}
-  totalValidWordLength: 0
-  totalWordLength: 0
-  validWordCount: 0
   analyticsManager: {fileID: 719126423}
-  validCount: 0
+  validWordCount: 0
   totalSubmissions: 0
-  totalLength: 0
-  totalValidLength: 0
+  totalWordLength: 0
+  totalValidWordLength: 0
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
@@ -6822,6 +6876,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
     - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: bounceSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 88fb34d9207640f49bd900463f3d0919, type: 2}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: gameEndSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 213bc70fd0d05d14889be19d2d915b6f, type: 2}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 200206583}
@@ -6834,9 +6896,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 61575929}
     - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: wallBounceSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 13620d89aeb593b4fa32f703705cfb57, type: 2}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: analyticsManager
       value: 
       objectReference: {fileID: 719126423}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: letterCollectSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 042b1fb2d9dc3f649a5367577d01443b, type: 2}
     m_RemovedComponents:
     - {fileID: 1580493165, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
     - {fileID: 5664284316386886156, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
