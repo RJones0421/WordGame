@@ -21,7 +21,7 @@ public class Word : MonoBehaviour
     public GameObject timer;
 
     private Timer timerClass;
-    
+
     public string word = "";
 
     public GameObject scoreManager;
@@ -37,9 +37,9 @@ public class Word : MonoBehaviour
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
-        arrows.SetActive(false); 
+        arrows.SetActive(false);
     }
-    
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return)) submitWord();
@@ -60,7 +60,7 @@ public class Word : MonoBehaviour
 
         if (newLetter.Letter == '_') return false;
         if (letters.Count >= 8) return false;
-        
+
         letters.Add(newLetter);
         word += newLetter.Letter;
         sprites[currentLetterBox].sprite = newLetter.image;

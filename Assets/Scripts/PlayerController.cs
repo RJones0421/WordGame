@@ -284,6 +284,7 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("1"))
                 {
                     Debug.Log("player uses item number 4");
+
                 }
             }
 
@@ -307,7 +308,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 6");
                 if (CurrencyUtils.useShopItem("6"))
                 {
-                    Debug.Log("player uses item number 1");
+                    Debug.Log("player uses item number 6");
+                    // SuffixPU_score_version temp = new SuffixPU_score_version();
+                    // temp.Activate_function();
+                    SuffixPU_score_version.Activate_function();
                 }
             }
         }
