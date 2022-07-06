@@ -84,7 +84,7 @@ public class LetterSpawning : Spawner
             // Randomly select number in list
 
             selection = Random.Range(0, powerupArray.Count());
-			Debug.Log("SELECTION " + selection);
+			//Debug.Log("SELECTION " + selection);
 
             // Check Probability: (1 / (2/3)x) for x > 1
             // x == rank in list starting at 1 

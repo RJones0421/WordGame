@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 public class Word : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class Word : MonoBehaviour
     private bool hasSubmitOnce;
     private bool hasClearedOnce;
 
+    private int multiplier = 1;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
@@ -59,6 +62,7 @@ public class Word : MonoBehaviour
         arrows.SetActive(false);
 
         if (newLetter.Letter == '_') return false;
+        if (newLetter.Letter == '?' && word.Contains('?')) return false;
         if (letters.Count >= 8) return false;
         
         letters.Add(newLetter);
@@ -88,7 +92,24 @@ public class Word : MonoBehaviour
     }
 
     public void UpdateSidebars() {
-        bool valid = evaluator.IsValidWord(word);
+        int wildcard = word.IndexOf('?');
+        string tempWord = word;
+        while (wildcard != -1) {
+            bool wc = false;
+            char c = 'A';
+            StringBuilder sb = new StringBuilder(word);
+            while (c <= 'Z' && !wc) {
+                sb[wildcard] = c;
+                if (evaluator.IsValidWord(sb.ToString())) {
+                    wc = true;
+                } else {
+                    c++;
+                }
+            }
+            tempWord = sb.ToString();
+            wildcard = tempWord.IndexOf('?');
+        }
+        bool valid = evaluator.IsValidWord(tempWord);
             if (valid) {
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
@@ -147,8 +168,28 @@ public class Word : MonoBehaviour
         // If valid, clear list
 
         arrows.SetActive(false);
+        
+        int wildcard = word.IndexOf('?');
+        while (wildcard != -1) {
+            char bestChar = 'A';
+            int highScore = 0;
+            for (char c = 'A'; c <= 'Z'; c++) {
+                StringBuilder tempSB = new StringBuilder(word);
+                tempSB[wildcard] = c;
+                int tempScore = evaluator.SubmitWord(tempSB.ToString());
+                if (tempScore > highScore) {
+                    bestChar = c;
+                    highScore = tempScore;
+                }
+            }
+            StringBuilder sb = new StringBuilder(word);
+            sb[wildcard] = bestChar;
+            word = sb.ToString();
+            wildcard = word.IndexOf('?');
+        }
 
-        int score = evaluator.SubmitWord(word);
+        int score = evaluator.SubmitWord(word) * multiplier;
+        setMultiplier(1);
 
         scoreManagerScript.AddScore(score);
 
@@ -188,5 +229,10 @@ public class Word : MonoBehaviour
     public LetterClass getLetter(int index)
     {
         return letters[index];
+    }
+
+    public void setMultiplier(int multi) 
+    {
+        multiplier = multi;
     }
 }

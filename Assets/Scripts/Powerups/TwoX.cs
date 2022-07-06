@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName="Powerup/DoubleLetter")]
-public class DoubleLetter : Powerup
+[CreateAssetMenu(menuName="Powerup/TwoX")]
+public class TwoX : Powerup
 {
     public override bool Collect()
     {
@@ -12,8 +12,7 @@ public class DoubleLetter : Powerup
     
     public override bool Activate()
     {
-        Word word = GlobalVariables.word;
-        word.addLetter(word.getLetter(word.GetWordLength()-1));
+        GlobalVariables.word.setMultiplier(2);
         return true;
     }
 }

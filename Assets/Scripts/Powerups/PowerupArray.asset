@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: PowerupArray
   m_EditorClassIdentifier: 
   powerupObjects:
+  - {fileID: 11400000, guid: 727a991dfda924f888dffdc07e851242, type: 2}
+  - {fileID: 11400000, guid: 08aa377fc18f3456ab4e69c98d679e0f, type: 2}
   - {fileID: 11400000, guid: e800fa066acc80846a60797a51bc6c0d, type: 2}
   - {fileID: 11400000, guid: 25836ec38c46f44eca9228185848963b, type: 2}
