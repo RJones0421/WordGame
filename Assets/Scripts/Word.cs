@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Word : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class Word : MonoBehaviour
     public int totalSubmissions;
     public int totalWordLength;
     public int totalValidWordLength;
+
+    public TMP_Text addScoreAmount;
+
 
     private void Awake()
     {
@@ -215,9 +219,21 @@ public class Word : MonoBehaviour
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
 
+        addScoreAmount.text = "+" + score.ToString();
+        addScoreAmount.alpha = 1;
+        StartCoroutine(Fade());
+
         StartCoroutine(sidebarBounce(15f));
 
         return score;
+    }
+    IEnumerator Fade()
+    {
+        while(addScoreAmount.alpha >= 0f )
+        {
+            addScoreAmount.alpha -= 0.1f;
+            yield return new WaitForSeconds(.1f);
+        }
     }
 
     public int GetWordLength()
