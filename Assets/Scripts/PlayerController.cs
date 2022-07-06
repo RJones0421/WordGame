@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
+    public SoundEffectSO bounceSound;
+    public SoundEffectSO letterCollectSound;
+    public SoundEffectSO wallBounceSound;
+    public SoundEffectSO gameEndSound;
+
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
@@ -81,33 +86,31 @@ public class PlayerController : MonoBehaviour
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
 
-        /*
-        // Test TimeStop
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                TimeStop timeStop = GetComponent<TimeStop>();
-                if (!timeStop)
-                {
-                    //timeStop = gameObject.AddComponent<TimeStop>();
-                    timeStop.Activate();
-                }
-            }
-        }
+        //// Test TimeStop
+        //{
+        //    if (Input.GetKeyDown(KeyCode.T))
+        //    {
+        //        TimeStop timeStop = GetComponent<TimeStop>();
+        //        if (!timeStop)
+        //        {
+        //            //timeStop = gameObject.AddComponent<TimeStop>();
+        //            timeStop.Activate();
+        //        }
+        //    }
+        //}
 
-        // Test Swap
-        {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Swap swap = GetComponent<Swap>();
-                if (!swap)
-                {
-                    swap = gameObject.AddComponent<Swap>();
-                }
-                swap.Activate();
-            }
-        }
-        */
+        //// Test Swap
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Y))
+        //    {
+        //        Swap swap = GetComponent<Swap>();
+        //        if (!swap)
+        //        {
+        //            swap = gameObject.AddComponent<Swap>();
+        //        }
+        //        swap.Activate();
+        //    }
+        //}
 
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
@@ -126,6 +129,9 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = new Vector2(rb.velocity.x, 10.0f);
                     box.isTrigger = true;
                     started = true;
+
+                    bounceSound.Play();
+
                 }
             }
         }
@@ -223,14 +229,36 @@ public class PlayerController : MonoBehaviour
                 timer.StopTimer();
                 int score = timer.SetValues();
 
-                #if ENABLE_CLOUD_SERVICES_ANALYTICS
+
+                foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                {
+                    source.Stop();
+                }
+                gameEndSound.Play();
+
+#if true
+                analyticsManagerScript.HandleEvent("death", new List<object>
+                {
+                    "falling",
+                    Time.timeSinceLevelLoadAsDouble,
+                    score,
+                    word.validWordCount,
+                    word.totalSubmissions,
+                    word.totalWordLength,
+                    word.totalValidWordLength,
+                });
+#else
                 analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                 {
-                    { "deathMethod", "falling" },
-                    { "userScore", score },
-                    { "time", Time.timeAsDouble }
+                    { "cause", "falling", },
+                    { "time", Time.timeSinceLevelLoadAsDouble, },
+                    { "userScore", score, },
+                    { "validWordCount", word.validCount, },
+                    { "totalSubmissions", word.totalSubmissions, },
+                    { "totalWordLength", word.totalLength, },
+                    { "totalValidWordLength",word.totalValidLength, },
                 });
-                #endif
+#endif
             }
         }
     }
@@ -241,6 +269,8 @@ public class PlayerController : MonoBehaviour
         isBouncingBack = true;
         rb.gravityScale = 0;
         rb.velocity = Vector3.zero;
+
+        wallBounceSound.Play();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -250,15 +280,21 @@ public class PlayerController : MonoBehaviour
             NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
             if (letterPlatform)
             {
-                letterPlatform.Activate();
-                /*
-                TimeStop timeStop = GetComponent<TimeStop>();
-                if (timeStop != null)
+                if (letterPlatform.collectible is LetterClass && ((LetterClass)letterPlatform.collectible).Letter != '_' && !letterPlatform.HasBeenCollected())
                 {
-                    timeStop.Activate();
+                    letterCollectSound.Play(null, 0.2f);
                 }
-                */
+
+                letterPlatform.Activate();
+
+                //TimeStop timeStop = GetComponent<TimeStop>();
+                //if (timeStop != null)
+                //{
+                //    timeStop.Activate();
+                //}
             }
+
+            bounceSound.Play();
         }
     }
 }

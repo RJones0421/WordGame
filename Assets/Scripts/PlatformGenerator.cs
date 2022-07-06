@@ -88,22 +88,23 @@ public class PlatformGenerator : MonoBehaviour
             /* update letter value */
             Platform platform = bottomPlatform.GetComponent<Platform>();
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
-            if (Random.Range(1, 101) > 10) {
-                LetterClass letterObject = GetNextLetter();
-                if (letterPlatform)
-                {
+            
+            if (letterPlatform) {
+                if (Random.Range(1, 101) > 10) {
+                    LetterClass letterObject = GetNextLetter();
                     letterPlatform.SpriteRenderer.sprite = letterObject.image;
                     letterPlatform.SetLetter(letterObject);
-                }
-            } else {
-                Powerup powerupObject = GetNextPowerup();
-                if (letterPlatform)
-                {
+                } else {
+                    Powerup powerupObject = GetNextPowerup();
                     letterPlatform.SpriteRenderer.sprite = powerupObject.image;
                     letterPlatform.SetPowerup(powerupObject);
                 }
+                
+                if (GlobalVariables.updateWordChangeHeight) {
+                    GlobalVariables.yPosChange = letterPlatform.transform.position.y-5f;
+                    GlobalVariables.updateWordChangeHeight = false;
+                }
             }
-            
 
             /* update the platformQueue */
             platformQueue.Enqueue(bottomPlatform);

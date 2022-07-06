@@ -8,9 +8,13 @@ public class SuggestedWord : MonoBehaviour
 {
     [SerializeField] private StreamSpawning streamSpawning;
     [SerializeField] private TMP_Text suggestedWord;
+    [SerializeField] private PlayerController player;
 
     private void Update()
     {
-        suggestedWord.text = streamSpawning.currentWord.ToUpper();
+        if (player.transform.position.y >= GlobalVariables.yPosChange)
+        {
+            suggestedWord.text = streamSpawning.currentWord.ToUpper();
+        }
     }
 }

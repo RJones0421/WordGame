@@ -14,7 +14,7 @@ public class StreamSpawning : Spawner
     private Queue<string> queue = new Queue<string>();
     private Queue<char> word = new Queue<char>();
     public string currentWord;
-    private char gap = (char) 96;
+    private char gap = (char) 123;
 
     public bool isCommon;
     private TMP_Text text;
@@ -45,8 +45,7 @@ public class StreamSpawning : Spawner
 	public void setQueue()
 	{
     	currentWord = queue.Dequeue();
-    	word = new Queue<char>(currentWord.ToCharArray());
-    	word.Enqueue(gap);
+        word = new Queue<char>(currentWord.ToCharArray());
     	word.Enqueue(gap);
     	Debug.Log(currentWord);
         queue.Enqueue(GetWord());
@@ -56,6 +55,7 @@ public class StreamSpawning : Spawner
 	{
 		if (word.Count == 0) {
 			setQueue();
+			GlobalVariables.updateWordChangeHeight = true;
 		}
 		return word.Dequeue() - 96;
 	}

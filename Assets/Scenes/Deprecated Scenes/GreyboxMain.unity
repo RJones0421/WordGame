@@ -1476,6 +1476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   streamSpawning: {fileID: 11400000, guid: 7d725ef2a88989b47855785ea7bea330, type: 2}
   suggestedWord: {fileID: 410679531}
+  player: {fileID: 0}
 --- !u!1 &431281987
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,6 +2150,7 @@ MonoBehaviour:
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
+  word: {fileID: 0}
 --- !u!1 &571306020
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,6 +5268,11 @@ MonoBehaviour:
   word: 
   scoreManager: {fileID: 200206583}
   arrows: {fileID: 1516199618}
+  analyticsManager: {fileID: 719126423}
+  validWordCount: 0
+  totalSubmissions: 0
+  totalWordLength: 0
+  totalValidWordLength: 0
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
@@ -5765,6 +5772,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftArrow: {fileID: 614694610}
   rightArrow: {fileID: 1364680463}
+  resetText: []
+  submitText: []
 --- !u!114 &1516199621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6163,6 +6172,10 @@ PrefabInstance:
       propertyPath: analyticsManager
       value: 
       objectReference: {fileID: 719126423}
+    - target: {fileID: 5664284316386886153, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5664284316386886154, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6211,6 +6224,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 533044872}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: wordBox
+      value: 
+      objectReference: {fileID: 2061923432}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: wallPrefab
+      value: 
+      objectReference: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 200206583}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: tempTutroial
+      value: 
+      objectReference: {fileID: 802502651}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: gameOverCanvas
+      value: 
+      objectReference: {fileID: 61575929}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: analyticsManager
+      value: 
+      objectReference: {fileID: 719126423}
     m_RemovedComponents:
     - {fileID: 1580493165, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}

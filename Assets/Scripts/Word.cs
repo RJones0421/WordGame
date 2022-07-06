@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Text;
+using UnityEngine;
+using TMPro;
 
 public class Word : MonoBehaviour
 {
@@ -34,13 +35,29 @@ public class Word : MonoBehaviour
     private bool hasSubmitOnce;
     private bool hasClearedOnce;
 
+    public GameObject analyticsManager;
+    private AnalyticsManager analyticsManagerScript;
+
+    public int validWordCount;
+    public int totalSubmissions;
+    public int totalWordLength;
+    public int totalValidWordLength;
+
+    public TMP_Text addScoreAmount;
+    
     private int multiplier = 1;
 
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
         scoreManagerScript = scoreManager.GetComponent<ScoreManager>();
-        arrows.SetActive(false); 
+        analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        arrows.SetActive(false);
+
+        validWordCount = 0;
+        totalSubmissions = 0;
+        totalWordLength = 0;
+        totalValidWordLength = 0;
     }
     
     void Update()
@@ -124,7 +141,7 @@ public class Word : MonoBehaviour
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
 
-                if (!hasClearedOnce && word.Length > 3)
+                if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
                     arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
@@ -167,6 +184,9 @@ public class Word : MonoBehaviour
         // Check validity and get word score
         // If valid, clear list
 
+        totalSubmissions++;
+        totalWordLength += word.Length;
+
         arrows.SetActive(false);
         
         int wildcard = word.IndexOf('?');
@@ -197,12 +217,35 @@ public class Word : MonoBehaviour
         {
             ScoreUtils.addWordToCollection(word, score);
             hasSubmitOnce = true;
+
+            validWordCount++;
+            totalValidWordLength += word.Length;
         }
 
         else if (word.Length > 3)
         {
             hasClearedOnce = true;
         }
+
+#if true
+        analyticsManagerScript.HandleEvent("wordSubmitted", new List<object>
+        {
+            Time.timeSinceLevelLoadAsDouble,
+            score > 0,
+            word,
+            word.Length,
+            score,
+        });
+#else
+        analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
+        {
+            { "time", Time.timeSinceLevelLoadAsDouble, },
+            { "validWord", score > 0, },
+            { "word", word, },
+            { "wordLength", word.Length, },
+            { "wordScore", score, },
+        });
+#endif
 
         letters.Clear();
         word = "";
@@ -216,9 +259,21 @@ public class Word : MonoBehaviour
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
 
+        addScoreAmount.text = "+" + score.ToString();
+        addScoreAmount.alpha = 1;
+        StartCoroutine(Fade());
+
         StartCoroutine(sidebarBounce(15f));
 
         return score;
+    }
+    IEnumerator Fade()
+    {
+        while(addScoreAmount.alpha >= 0f )
+        {
+            addScoreAmount.alpha -= 0.1f;
+            yield return new WaitForSeconds(.1f);
+        }
     }
 
     public int GetWordLength()
