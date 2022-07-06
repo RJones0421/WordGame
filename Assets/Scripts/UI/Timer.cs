@@ -18,6 +18,9 @@ public class Timer : MonoBehaviour
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
+    public Word word;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,7 @@ public class Timer : MonoBehaviour
         canvasGroup.GetComponent<CanvasGroup>().interactable = true;
         canvasGroup.GetComponent<CanvasGroup>().blocksRaycasts = true;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        word = GameObject.Find("Word").GetComponent<Word>();
     }
 
     // Update is called once per frame
@@ -44,14 +48,19 @@ public class Timer : MonoBehaviour
                 if(Time.timeScale==1)
                 {
                     int score = SetValues();
-                    #if ENABLE_CLOUD_SERVICES_ANALYTICS
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+                    Word word = GameObject.Find("Word").GetComponent<Word>();
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
                         { "deathMethod", "time" },
+                        { "time", Time.timeAsDouble },
                         { "userScore", score },
-                        { "time", Time.timeAsDouble }
+                        { "validWordCount", word.validCount },
+                        { "totalSubmissions", word.totalSubmissions },
+                        { "totalWordLength", word.totalLength },
+                        { "totalValidWordLength",word.totalValidLength }
                     });
-                    #endif
+#endif
                 }
             }
         } catch(Exception e){
@@ -81,13 +90,16 @@ public class Timer : MonoBehaviour
             Debug.Log("Unable to parse final score after game completion, considering 0 as final score");
         }
 
+        // testing for score multiplier
+        int new_score = ScoreMultiplier.DoubleScore(finalScore);
+        finalScore = new_score;
+        Debug.Log("Current final score post Double Score " + new_score);
+
         int highScore = ScoreUtils.updateAndGetHighsScore(finalScore);
 
         CurrencyUtils.addCurrency(finalScore);
 
-        // testing for score multiplier
-        int new_score = ScoreMultiplier.DoubleScore(finalScore);
-        Debug.Log("Current final score post Double Score " + new_score);
+
 
 
 
@@ -151,6 +163,11 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         timerRunning = true;
+    }
+
+    public bool isTimerRunning()
+    {
+        return timerRunning;
     }
 
 }

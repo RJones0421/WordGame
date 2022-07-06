@@ -46,7 +46,7 @@ public class Trie
             }
             else{
                 node = node.children[c - 'a'];
-            } 
+            }
         }
         // for (char c: search.toCharArray()
         //      ) {
@@ -64,7 +64,7 @@ public class Trie
         {
             if (child != null){
                 List<string> thisRes = dfs(child, search, new List<string>());
-                
+
                 res.AddRange(thisRes);
                 if(res.Count >= 3){
                     return res.GetRange(0,3);
@@ -93,20 +93,20 @@ public class Trie
         foreach (TrieNode child in root.children)
         {
             if(child != null){
-                dfs(child, word + root.c, res);    
+                dfs(child, word + root.c, res);
             }
         }
         // for (TrieNode child:
         //         root.children) {
         //     if(child != null){
-        //         dfs(child, word + root.c, res);    
+        //         dfs(child, word + root.c, res);
         //     }
-            
+
         // }
         return res;
     }
    public List<List<string>> suggestedProducts(string[] products, string searchWord) {
-         TrieNode root = buildTrie(products);
+        TrieNode root = buildTrie(products);
         List<List<string>> res = new List<List<string>>();
         for (int i = 1; i <= searchWord.Length; i++) {
             res.Add(findTopThree(root,searchWord.Substring(0,i)));
@@ -114,7 +114,48 @@ public class Trie
 
 
         return res;
-        
-    }  
-    
+
+    }
+
+    public TrieNode buildTrie_public(List<string> products){
+        TrieNode root = new TrieNode(' ');
+        foreach(string product in products){
+            insert(product, root);
+        }
+        // for (string product:
+        //         products) {
+        //     insert(product, root);
+        // }
+        return root;
+
+    }
+    public List<string> findTopThree_public(TrieNode root, string search){
+        List<string> res = new List<string>();
+        TrieNode node = root;
+        foreach (char c in search.ToCharArray())
+        {
+           if(node.children[c - 'a'] == null){
+                return res;
+            }
+            else{
+                node = node.children[c - 'a'];
+            }
+        }
+        if(node.isWord){
+            res.Add(search);
+        }
+        foreach (TrieNode child in node.children)
+        {
+            if (child != null){
+                List<string> thisRes = dfs(child, search, new List<string>());
+
+                res.AddRange(thisRes);
+                if(res.Count >= 3){
+                    return res.GetRange(0,3);
+                }
+            }
+        }
+        return  res;
+    }
+
 }

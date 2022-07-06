@@ -226,14 +226,18 @@ public class PlayerController : MonoBehaviour
                 timer.StopTimer();
                 int score = timer.SetValues();
 
-                #if ENABLE_CLOUD_SERVICES_ANALYTICS
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
                 analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                 {
                     { "deathMethod", "falling" },
+                    { "time", Time.timeAsDouble },
                     { "userScore", score },
-                    { "time", Time.timeAsDouble }
+                    { "validWordCount", word.validCount },
+                    { "totalSubmissions", word.totalSubmissions },
+                    { "totalWordLength", word.totalLength },
+                    { "totalValidWordLength",word.totalValidLength }
                 });
-                #endif
+#endif
             }
         }
 
@@ -272,6 +276,8 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("player uses item number 3");
                     ScoreMultiplier.Activate();
+                    int item_quantity = PlayerPrefs.GetInt("3");
+                    // Debug.Log("player uses item number 3");
                 }
             }
 
@@ -282,6 +288,7 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("1"))
                 {
                     Debug.Log("player uses item number 4");
+
                 }
             }
 
@@ -291,7 +298,11 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 5");
                 if (CurrencyUtils.useShopItem("5"))
                 {
-                    Debug.Log("player uses item number 1");
+                    // timer.StopTimer()
+                    StartCoroutine(StopTime());
+                    // timer.StartTimer();
+
+                    Debug.Log("player uses item number 5");
                 }
             }
 
@@ -301,11 +312,33 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 6");
                 if (CurrencyUtils.useShopItem("6"))
                 {
-                    Debug.Log("player uses item number 1");
+                    Debug.Log("player uses item number 6");
+                    // SuffixPU_score_version temp = new SuffixPU_score_version();
+                    // temp.Activate_function();
+                    SuffixPU_score_version.Activate_function();
                 }
             }
         }
     }
+    // stop timer for 5 seconds
+    public IEnumerator StopTime()
+    {
+
+        if (timer.isTimerRunning()) {
+            timer.StopTimer();
+        }
+        Debug.Log("StopTime Activated, timer paused");
+
+        yield return new WaitForSeconds(5);
+
+        Debug.Log("Time Returned Restarted Timer");
+        if (!timer.isTimerRunning()) {
+            timer.StartTimer();
+        }
+
+
+    }
+
     private void InitiateBounce()
     {
         bounceBackToCenter = true;
