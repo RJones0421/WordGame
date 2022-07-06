@@ -10,7 +10,7 @@ public class Resurrect : Powerup
 
     public override bool Activate()
     {
-        // Uhhh idk yet lol
-        return false;
+        GameObject.Find("Player").GetComponent<PlayerController>().extraLives++;
+        return true;
     }
 }

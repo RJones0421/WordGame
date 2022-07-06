@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
+    public int extraLives;
+
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+        extraLives = 0;
     }
 
     // Start is called before the first frame update

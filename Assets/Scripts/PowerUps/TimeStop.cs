@@ -9,7 +9,7 @@ public class TimeStop : Powerup
     void OnEnable()
     {
         paused = false;
-        //timer = transform.GetComponent<PlayerController>().timer;
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
     }
     
     public override bool Collect()
@@ -19,7 +19,6 @@ public class TimeStop : Powerup
 
     public override bool Activate()
     {
-        return false;
         if (!paused)
         {
             timer.StopTimer();
@@ -30,5 +29,7 @@ public class TimeStop : Powerup
             timer.StartTimer();
             Destroy(this);
         }
+
+        return true;
     }
 }
