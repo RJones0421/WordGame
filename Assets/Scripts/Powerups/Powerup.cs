@@ -7,7 +7,7 @@ public abstract class Powerup : Collectible
 {
     [SerializeField] private string name;
 
-    public string Name { get { return name; } }
+    public string Name { get { return name; }}
 
     public abstract bool Activate();
 }
