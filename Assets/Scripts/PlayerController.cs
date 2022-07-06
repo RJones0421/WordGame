@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
     public SoundEffectSO wallBounceSound;
     public SoundEffectSO gameEndSound;
 
+    private Settings settings;
+    private TextMeshProUGUI controlsTutorial;
+
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
@@ -56,6 +59,9 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+
+        // Get Tutorial Text
+        controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     // Start is called before the first frame update
@@ -75,6 +81,20 @@ public class PlayerController : MonoBehaviour
 
         // intialize the shop item objects
         ScoreMultiplier.reset();
+
+        // Get Settings
+        settings = GameObject.Find("Settings").GetComponent<Settings>();
+
+        if(settings) {
+            if(settings.GetControls() == 0) {
+                allowMouseMovement = false;
+                controlsTutorial.text = "A/D to move";
+            }
+            else {
+                allowMouseMovement = true;
+                controlsTutorial.text = "Mouse to move";
+            }
+        }
     }
 
     // Update is called once per frame
@@ -116,10 +136,10 @@ public class PlayerController : MonoBehaviour
         //}
 
         // Toggle Mouse Movement
-        if (Input.GetKeyDown(KeyCode.M))
+        /*if (Input.GetKeyDown(KeyCode.M))
         {
             allowMouseMovement = !allowMouseMovement;
-        }
+        }*/
 
         // Jump
         {
