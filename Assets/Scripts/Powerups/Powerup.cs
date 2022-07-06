@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName="Powerup")]
 public abstract class Powerup : Collectible
 {
-    [SerializeField] private string name;
+    [SerializeField] private string power;
 
-    public string Name { get { return name; }}
+    public string Power { get { return power; }}
 
     public abstract bool Activate();
 }

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b55a92e87b7e354a8660035f3aa5877, type: 3}
-  m_Name: RandomLetter
+  m_Script: {fileID: 11500000, guid: c3cf5ee54edec4f3892b4f326645c7cc, type: 3}
+  m_Name: Wildcard
   m_EditorClassIdentifier: 
-  blankFrequency: 100
-  letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
-  powerupArray: {fileID: 11400000, guid: a1ff6aa994c03445eb09a476e7a8fa26, type: 2}
+  image: {fileID: 21300000, guid: 954185109a6a541c38a680a7182cac40, type: 3}
+  power: 
+  letterClass: {fileID: 11400000, guid: bb2488c483b7f40f890a9bc26416de18, type: 2}
