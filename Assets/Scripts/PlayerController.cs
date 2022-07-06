@@ -298,10 +298,11 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 3");
                 if (CurrencyUtils.useShopItem("3"))
                 {
-                    Debug.Log("player uses item number 3");
-                    ScoreMultiplier.Activate();
-                    int item_quantity = PlayerPrefs.GetInt("3");
                     // Debug.Log("player uses item number 3");
+                    // ScoreMultiplier.Activate();
+                    // int item_quantity = PlayerPrefs.GetInt("3");
+                    // Debug.Log("player uses item number 3");
+                    TwoX.Activate();
                 }
             }
 
