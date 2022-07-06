@@ -150,6 +150,7 @@ public class CurrencyUtils : MonoBehaviour
         if (item_quantity > 0)
         {
             item_quantity -= 1;
+            PlayerPrefs.SetInt(item_num, item_quantity);
             return true;
         }
         else
