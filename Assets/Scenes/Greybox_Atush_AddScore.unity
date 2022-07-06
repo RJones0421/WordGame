@@ -6373,6 +6373,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5842006565022344673, guid: 5c2dc97f9fac24cb39bdacf102268282, type: 3}
     - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: bounceSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 88fb34d9207640f49bd900463f3d0919, type: 2}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: gameEndSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 213bc70fd0d05d14889be19d2d915b6f, type: 2}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 200206583}
@@ -6385,9 +6393,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 61575929}
     - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: wallBounceSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 13620d89aeb593b4fa32f703705cfb57, type: 2}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: analyticsManager
       value: 
       objectReference: {fileID: 719126423}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: letterCollectSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 042b1fb2d9dc3f649a5367577d01443b, type: 2}
     m_RemovedComponents:
     - {fileID: 1580493165, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
