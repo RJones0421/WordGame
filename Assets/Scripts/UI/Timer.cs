@@ -90,9 +90,17 @@ public class Timer : MonoBehaviour
             Debug.Log("Unable to parse final score after game completion, considering 0 as final score");
         }
 
+        // testing for score multiplier
+        int new_score = ScoreMultiplier.DoubleScore(finalScore);
+        finalScore = new_score;
+        Debug.Log("Current final score post Double Score " + new_score);
+
         int highScore = ScoreUtils.updateAndGetHighsScore(finalScore);
 
         CurrencyUtils.addCurrency(finalScore);
+
+
+
 
 
         CurrencyUtils.displayCurrency("Currency_test");
@@ -155,6 +163,11 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         timerRunning = true;
+    }
+
+    public bool isTimerRunning()
+    {
+        return timerRunning;
     }
 
 }
