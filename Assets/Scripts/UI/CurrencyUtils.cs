@@ -151,11 +151,39 @@ public class CurrencyUtils : MonoBehaviour
         {
             item_quantity -= 1;
             PlayerPrefs.SetInt(item_num, item_quantity);
+
+            // change the visablity setting for the corresponding item icon
+            string icon_name = item_num + "_icon";
+            if (item_quantity == 0)
+            {
+                // the string here should be the name of the item's icon on line 160
+                GameObject inputFieldGo = GameObject.Find(icon_name);
+                inputFieldGo.SetActive(false);
+            }
             return true;
         }
         else
         {
             return false;
+        }
+    }
+
+    public static void showShopItemIcon(string item_num)
+    {
+        int item_quantity = PlayerPrefs.GetInt(item_num);
+        string icon_name = item_num + "_icon";
+
+
+        if (item_quantity == 0)
+        {
+            // the string here should be the name of the item's icon on line 160
+            GameObject inputFieldGo = GameObject.Find(icon_name);
+            inputFieldGo.SetActive(false);
+        }
+        else
+        {
+            GameObject inputFieldGo = GameObject.Find(icon_name);
+            inputFieldGo.SetActive(true);
         }
     }
 }
