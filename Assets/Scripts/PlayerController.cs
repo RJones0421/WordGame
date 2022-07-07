@@ -289,6 +289,7 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("2"))
                 {
                     Debug.Log("player uses item number 2");
+                    Shop_Purchase.actiatePowerUpUI("ExtraLife");
                 }
             }
 
@@ -301,6 +302,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("player uses item number 3");
                     ScoreMultiplier.Activate();
                     int item_quantity = PlayerPrefs.GetInt("3");
+                    Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
                     // Debug.Log("player uses item number 3");
                 }
             }
@@ -311,6 +313,8 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 4");
                 if (CurrencyUtils.useShopItem("1"))
                 {
+                    Anagram.Activate();
+                    Shop_Purchase.actiatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
 
                 }
@@ -325,6 +329,7 @@ public class PlayerController : MonoBehaviour
                     // timer.StopTimer()
                     StartCoroutine(StopTime());
                     // timer.StartTimer();
+                    Shop_Purchase.actiatePowerUpUI("PauseTime");
 
                     Debug.Log("player uses item number 5");
                 }
