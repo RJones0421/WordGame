@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
                 float inputX = Input.GetAxis("Horizontal");
 
                 Vector3 movement = new Vector3(inputX, 0, 0);
-                movement *= Time.deltaTime * keyMovementSpeed;
+                movement *= Time.deltaTime * keyMovementSpeed * settings.GetSensitvity();
 
                 transform.Translate(movement);
             }
@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
             // Mouse
             if (!isBouncingBack && allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed * settings.GetSensitvity());
             }
         }
 
