@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     [SerializeField]
 	private float maxTime;
 
-	float timeLeft;
+	public float timeLeft;
 	public GameObject winCanvas;
     public GameObject canvasGroup;
     private bool timerRunning = false;
