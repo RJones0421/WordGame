@@ -23,7 +23,7 @@ public class Word : MonoBehaviour
     public GameObject timer;
 
     private Timer timerClass;
-    
+
     public string word = "";
 
     public GameObject scoreManager;
@@ -47,6 +47,9 @@ public class Word : MonoBehaviour
     
     private int multiplier = 1;
 
+    public SoundEffectSO wordSubmitSound;
+    public SoundEffectSO wordClearSound;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
@@ -59,7 +62,7 @@ public class Word : MonoBehaviour
         totalWordLength = 0;
         totalValidWordLength = 0;
     }
-    
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return)) submitWord();
@@ -81,7 +84,7 @@ public class Word : MonoBehaviour
         if (newLetter.Letter == '_') return false;
         if (newLetter.Letter == '?' && word.Contains('?')) return false;
         if (letters.Count >= 8) return false;
-        
+
         letters.Add(newLetter);
         word += newLetter.Letter;
         sprites[currentLetterBox].sprite = newLetter.image;
@@ -212,9 +215,11 @@ public class Word : MonoBehaviour
         setMultiplier(1);
 
         scoreManagerScript.AddScore(score);
-
         if (score > 0)
         {
+            wordSubmitSound.pitchRange = new Vector2(0.8f + 1/GetWordLength(), 0.8f + 1/GetWordLength());
+            wordSubmitSound.Play(null, 0.1f);
+
             ScoreUtils.addWordToCollection(word, score);
             hasSubmitOnce = true;
 
@@ -222,9 +227,13 @@ public class Word : MonoBehaviour
             totalValidWordLength += word.Length;
         }
 
-        else if (word.Length > 3)
+        else
         {
-            hasClearedOnce = true;
+            wordClearSound.Play(null, 0.15f);
+            if (word.Length > 3)
+            {
+                hasClearedOnce = true;
+            }
         }
 
 #if true
