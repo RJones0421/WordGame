@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     [SerializeField]
 	private float maxTime;
 
-	float timeLeft;
+	public float timeLeft;
 	public GameObject winCanvas;
     public GameObject canvasGroup;
     private bool timerRunning = false;
@@ -28,6 +28,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
     	winCanvas.SetActive(false);
+        Shop_Purchase.resetShopPowerUpUI();
     	timerBar = GetComponent<Image>();
     	timeLeft = maxTime;
         Time.timeScale = 1;
@@ -86,6 +87,8 @@ public class Timer : MonoBehaviour
 
     public int SetValues()
     {
+        Anagram.reset();
+        Shop_Purchase.resetShopPowerUpUI();
         winCanvas.SetActive(true);
         Time.timeScale = 0;
         canvasGroup.GetComponent<CanvasGroup>().interactable = false;

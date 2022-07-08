@@ -74,6 +74,8 @@ public class ScoreUtils : MonoBehaviour
             inputFieldGo.SetActive(toHide);
             inputFieldGo = GameObject.Find("Letter Platform(Clone)");
             inputFieldGo.SetActive(toHide);
+            inputFieldGo = GameObject.Find("PowerUpManager");
+            inputFieldGo.SetActive(toHide);
         } catch(Exception e){
             Debug.Log("Exception occurred in ScoreUtils class's hideGameObjects method: "
         +e.Message);
