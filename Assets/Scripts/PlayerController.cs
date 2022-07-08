@@ -392,6 +392,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         wallBounceSound.Play();
+        letterCollectSound.pitchRange = new Vector2(1, 1);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -404,6 +405,7 @@ public class PlayerController : MonoBehaviour
                 if (letterPlatform.collectible is LetterClass && ((LetterClass)letterPlatform.collectible).Letter != '_' && !letterPlatform.HasBeenCollected())
                 {
                     letterCollectSound.Play(null, 0.2f);
+                    letterCollectSound.pitchRange = new Vector2(letterCollectSound.pitchRange.x + 0.1f, letterCollectSound.pitchRange.y + 0.1f);
                 }
 
                 letterPlatform.Activate();
