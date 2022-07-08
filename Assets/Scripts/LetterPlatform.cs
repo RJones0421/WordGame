@@ -45,6 +45,7 @@ public class LetterPlatform : MonoBehaviour
 
     public void CollectLetter()
     {
+        Debug.Log(letter.Letter);
         if (letter.Letter == '_') return;
         if (!isCollected)
         {

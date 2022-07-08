@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName="Letter")]
-public class LetterClass : ScriptableObject
+public class LetterClass : Collectible
 {
 	[SerializeField]
 	private char letter;
-	
-	[SerializeField]
-	private Sprite letterSprite;
-	
+
 	[SerializeField]
 	private int score;
 
 	public char Letter { get { return letter; }}
 
-	public Sprite LetterSprite { get { return letterSprite; } }
-
 	public int Score { get { return score; } }
+
+	public override bool Collect()
+	{
+		if (letter == '_')
+		{
+			return false;
+		}
+
+		return GlobalVariables.word.addLetter(this);
+	}
 }
