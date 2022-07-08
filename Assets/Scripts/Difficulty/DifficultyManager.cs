@@ -5,7 +5,7 @@ public class DifficultyManager : MonoBehaviour
 {
     // TODO: maybe game timers observers based off the Timer class
     private float timer;
-    [Range(30, 60)][SerializeField] private int timeBetweenLevels = 45;
+    [Range(15, 60)][SerializeField] private int timeBetweenLevels = 45;
 
     [SerializeField] private PlatformGenerator randomPlatforms;
     [SerializeField] private PlatformGenerator commonStream;
@@ -38,7 +38,7 @@ public class DifficultyManager : MonoBehaviour
     private void UpdateDifficulty()
     {
         int temp = Mathf.FloorToInt(timer / timeBetweenLevels);
-        if (temp > difficulties.Length) temp = difficulties.Length;
+        if (temp >= difficulties.Length) temp = difficulties.Length-1;
 
         currentDifficulty = difficulties[temp];
 

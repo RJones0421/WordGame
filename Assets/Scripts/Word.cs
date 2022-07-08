@@ -33,16 +33,13 @@ public class Word : MonoBehaviour
     private bool hasSubmitOnce;
     private bool hasClearedOnce;
 
-    public int totalValidWordLength;
-    public int totalWordLength;
-    public int validWordCount;
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
-    public int validCount = 0;
-    public int totalSubmissions = 0;
-    public int totalLength = 0;
-    public int totalValidLength = 0;
+    public int validWordCount;
+    public int totalSubmissions;
+    public int totalWordLength;
+    public int totalValidWordLength;
 
     private void Awake()
     {
@@ -51,10 +48,10 @@ public class Word : MonoBehaviour
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
         arrows.SetActive(false);
 
-        totalSubmissions = 0;
-        totalValidWordLength = 0;
-        totalWordLength = 0;
         validWordCount = 0;
+        totalSubmissions = 0;
+        totalWordLength = 0;
+        totalValidWordLength = 0;
     }
     
     void Update()
@@ -120,7 +117,7 @@ public class Word : MonoBehaviour
                 leftSidebar.color = Color.red;
                 rightSidebar.color = Color.red;
 
-                if (!hasClearedOnce && word.Length > 3)
+                if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
                     arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
@@ -172,9 +169,6 @@ public class Word : MonoBehaviour
 
         scoreManagerScript.AddScore(score);
 
-        totalSubmissions++;
-        totalLength+=word.Length;
-
         if (score > 0)
         {
             ScoreUtils.addWordToCollection(word, score);
@@ -182,8 +176,6 @@ public class Word : MonoBehaviour
 
             validWordCount++;
             totalValidWordLength += word.Length;
-            validCount++;
-            totalValidLength+=word.Length;
         }
 
         else if (word.Length > 3)
@@ -191,15 +183,24 @@ public class Word : MonoBehaviour
             hasClearedOnce = true;
         }
 
-#if ENABLE_CLOUD_SERVICES_ANALYTICS
+#if true
+        analyticsManagerScript.HandleEvent("wordSubmitted", new List<object>
+        {
+            Time.timeSinceLevelLoadAsDouble,
+            score > 0,
+            word,
+            word.Length,
+            score,
+        });
+#else
         analyticsManagerScript.HandleEvent("wordSubmitted", new Dictionary<string, object>
-            {
-                { "time", Time.timeAsDouble },
-                { "validWord", score > 0 },
-                { "word", word },
-                { "wordLength", word.Length },
-                { "wordScore", score }
-            });
+        {
+            { "time", Time.timeSinceLevelLoadAsDouble, },
+            { "validWord", score > 0, },
+            { "word", word, },
+            { "wordLength", word.Length, },
+            { "wordScore", score, },
+        });
 #endif
 
         letters.Clear();

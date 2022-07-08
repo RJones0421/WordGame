@@ -1476,6 +1476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   streamSpawning: {fileID: 11400000, guid: 7d725ef2a88989b47855785ea7bea330, type: 2}
   suggestedWord: {fileID: 410679531}
+  player: {fileID: 0}
 --- !u!1 &431281987
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,6 +2150,7 @@ MonoBehaviour:
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
+  word: {fileID: 0}
 --- !u!1 &571306020
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,6 +5268,14 @@ MonoBehaviour:
   word: 
   scoreManager: {fileID: 200206583}
   arrows: {fileID: 1516199618}
+  totalValidWordLength: 0
+  totalWordLength: 0
+  validWordCount: 0
+  analyticsManager: {fileID: 719126423}
+  validCount: 0
+  totalSubmissions: 0
+  totalLength: 0
+  totalValidLength: 0
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0

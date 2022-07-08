@@ -9,7 +9,10 @@ public class Timer : MonoBehaviour
 {
 
 	Image timerBar;
-	public float maxTime = 90f;
+
+    [SerializeField]
+	private float maxTime;
+
 	float timeLeft;
 	public GameObject winCanvas;
     public GameObject canvasGroup;
@@ -48,21 +51,28 @@ public class Timer : MonoBehaviour
                 if(Time.timeScale==1)
                 {
                     int score = SetValues();
-#if ENABLE_CLOUD_SERVICES_ANALYTICS
                     Word word = GameObject.Find("Word").GetComponent<Word>();
+#if true
+                    analyticsManagerScript.HandleEvent("death", new List<object>
+                    {
+                        "time",
+                        Time.timeSinceLevelLoadAsDouble,
+                        score,
+                        word.validWordCount,
+                        word.totalSubmissions,
+                        word.totalWordLength,
+                        word.totalValidWordLength,
+                    });
+#else
                     analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                     {
-                        { "deathMethod", "time" },
-                        { "time", Time.timeAsDouble },
-                        { "userScore", score },
-                        { "totalSubmissions", word.totalSubmissions },
-                        { "totalValidWordLength", word.totalValidWordLength },
-                        { "totalWordLength", word.totalWordLength },
-                        { "userScore", score },
-                        { "validWordCount", word.validWordCount },
-                        { "validWordCount", word.validCount },
-                        { "totalWordLength", word.totalLength },
-                        { "totalValidWordLength",word.totalValidLength }
+                        { "cause", "time", },
+                        { "time", Time.timeSinceLevelLoadAsDouble, },
+                        { "userScore", score, },
+                        { "validWordCount", word.validCount, },
+                        { "totalSubmissions", word.totalSubmissions, },
+                        { "totalWordLength", word.totalLength, },
+                        { "totalValidWordLength",word.totalValidLength, },
                     });
 #endif
                 }

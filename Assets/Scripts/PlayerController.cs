@@ -81,33 +81,31 @@ public class PlayerController : MonoBehaviour
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
 
-        /*
-        // Test TimeStop
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                TimeStop timeStop = GetComponent<TimeStop>();
-                if (!timeStop)
-                {
-                    //timeStop = gameObject.AddComponent<TimeStop>();
-                    timeStop.Activate();
-                }
-            }
-        }
+        //// Test TimeStop
+        //{
+        //    if (Input.GetKeyDown(KeyCode.T))
+        //    {
+        //        TimeStop timeStop = GetComponent<TimeStop>();
+        //        if (!timeStop)
+        //        {
+        //            //timeStop = gameObject.AddComponent<TimeStop>();
+        //            timeStop.Activate();
+        //        }
+        //    }
+        //}
 
-        // Test Swap
-        {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Swap swap = GetComponent<Swap>();
-                if (!swap)
-                {
-                    swap = gameObject.AddComponent<Swap>();
-                }
-                swap.Activate();
-            }
-        }
-        */
+        //// Test Swap
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Y))
+        //    {
+        //        Swap swap = GetComponent<Swap>();
+        //        if (!swap)
+        //        {
+        //            swap = gameObject.AddComponent<Swap>();
+        //        }
+        //        swap.Activate();
+        //    }
+        //}
 
         // Toggle Mouse Movement
         if (Input.GetKeyDown(KeyCode.M))
@@ -223,19 +221,27 @@ public class PlayerController : MonoBehaviour
                 timer.StopTimer();
                 int score = timer.SetValues();
 
-#if ENABLE_CLOUD_SERVICES_ANALYTICS
+#if true
+                analyticsManagerScript.HandleEvent("death", new List<object>
+                {
+                    "falling",
+                    Time.timeSinceLevelLoadAsDouble,
+                    score,
+                    word.validWordCount,
+                    word.totalSubmissions,
+                    word.totalWordLength,
+                    word.totalValidWordLength,
+                });
+#else
                 analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
                 {
-                    { "deathMethod", "falling" },
-                    { "time", Time.timeAsDouble },
-                    { "totalSubmissions", word.totalSubmissions },
-                    { "totalValidWordLength", word.totalValidWordLength },
-                    { "totalWordLength", word.totalWordLength },
-                    { "userScore", score },
-                    { "validWordCount", word.validCount },
-                    { "totalSubmissions", word.totalSubmissions },
-                    { "totalWordLength", word.totalLength },
-                    { "totalValidWordLength",word.totalValidLength }
+                    { "cause", "falling", },
+                    { "time", Time.timeSinceLevelLoadAsDouble, },
+                    { "userScore", score, },
+                    { "validWordCount", word.validCount, },
+                    { "totalSubmissions", word.totalSubmissions, },
+                    { "totalWordLength", word.totalLength, },
+                    { "totalValidWordLength",word.totalValidLength, },
                 });
 #endif
             }
@@ -258,13 +264,12 @@ public class PlayerController : MonoBehaviour
             if (letterPlatform)
             {
                 letterPlatform.Activate();
-                /*
-                TimeStop timeStop = GetComponent<TimeStop>();
-                if (timeStop != null)
-                {
-                    timeStop.Activate();
-                }
-                */
+
+                //TimeStop timeStop = GetComponent<TimeStop>();
+                //if (timeStop != null)
+                //{
+                //    timeStop.Activate();
+                //}
             }
         }
     }

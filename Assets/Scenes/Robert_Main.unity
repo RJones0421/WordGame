@@ -1550,6 +1550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   streamSpawning: {fileID: 11400000, guid: 7d725ef2a88989b47855785ea7bea330, type: 2}
   suggestedWord: {fileID: 410679531}
+  player: {fileID: 1411276588}
 --- !u!1 &431281987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,7 +1671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d576289b2a82994fbf7fb83e9ca1b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenLevels: 37
+  timeBetweenLevels: 30
   randomPlatforms: {fileID: 1090223014}
   commonStream: {fileID: 1113444761}
   fullStream: {fileID: 0}
@@ -2233,10 +2234,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad2a306e62dc47feacf686b3780dedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 30
+  maxTime: 60
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
+  word: {fileID: 0}
 --- !u!1001 &570946561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5595,6 +5597,14 @@ MonoBehaviour:
   word: 
   scoreManager: {fileID: 200206583}
   arrows: {fileID: 1516199618}
+  totalValidWordLength: 0
+  totalWordLength: 0
+  validWordCount: 0
+  analyticsManager: {fileID: 719126423}
+  validCount: 0
+  totalSubmissions: 0
+  totalLength: 0
+  totalValidLength: 0
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
