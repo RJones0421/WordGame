@@ -267,14 +267,15 @@ public class PlayerController : MonoBehaviour
 
         // shop item activation
         {
-            // highlight letter
+            // Stop Time
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
             {
                 Debug.Log("Player clicked on 1");
                 if (CurrencyUtils.useShopItem("1"))
                 {
                     // activate shop item power up in this code block
-                    Debug.Log("player uses item number 1");
+                    Debug.Log("player uses item number 1 - Stop Time");
+                    StartCoroutine(StopTime());
                 }
                 else
                 {
@@ -298,11 +299,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 3");
                 if (CurrencyUtils.useShopItem("3"))
                 {
-                    // Debug.Log("player uses item number 3");
-                    // ScoreMultiplier.Activate();
-                    // int item_quantity = PlayerPrefs.GetInt("3");
-                    // Debug.Log("player uses item number 3");
-                    TwoX.Activate();
+                    Debug.Log("player uses item number 3 - word/score multiplier");
+                    // TwoX temp_twoX = new TwoX();
+                    TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
+                    temp_twoX.Activate();
                 }
             }
 
@@ -314,20 +314,6 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("player uses item number 4");
 
-                }
-            }
-
-            // pause time
-            if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
-            {
-                Debug.Log("Player clicked on 5");
-                if (CurrencyUtils.useShopItem("5"))
-                {
-                    // timer.StopTimer()
-                    StartCoroutine(StopTime());
-                    // timer.StartTimer();
-
-                    Debug.Log("player uses item number 5");
                 }
             }
 

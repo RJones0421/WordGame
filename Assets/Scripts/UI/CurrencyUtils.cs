@@ -32,12 +32,12 @@ public class CurrencyUtils : MonoBehaviour
     }
 
     public static void populateCostMap(){
-        items_value.Add("1", 1);
-        items_value.Add("2", 2);
-        items_value.Add("3", 3);
-        items_value.Add("4", 4);
-        items_value.Add("5", 5);
-        items_value.Add("6", 6);
+        items_value.Add("1", 100);
+        items_value.Add("2", 300);
+        items_value.Add("3", 150);
+        items_value.Add("4", 200);
+        // items_value.Add("5", 500);
+        // items_value.Add("6", 600);
     }
 
     public static void addCurrency(int finalScore)
@@ -45,6 +45,12 @@ public class CurrencyUtils : MonoBehaviour
        // currency udpate = converts final score to in game currency (1 to 1)
        // increases your currency balance
        // get int defaults to 0, if the key does not exist
+       int temp_final_currency_amount = finalScore / 100;
+        finalScore = finalScore / 100;
+        Debug.Log("final final currency amount " + finalScore);
+        Debug.Log("final currency amount " + temp_final_currency_amount);
+
+
         int current_currency_amount = PlayerPrefs.GetInt(currency_amount_keyname);
         int new_currency_amount = current_currency_amount + finalScore;
         PlayerPrefs.SetInt(currency_amount_keyname,new_currency_amount);
