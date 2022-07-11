@@ -5268,14 +5268,11 @@ MonoBehaviour:
   word: 
   scoreManager: {fileID: 200206583}
   arrows: {fileID: 1516199618}
-  totalValidWordLength: 0
-  totalWordLength: 0
-  validWordCount: 0
   analyticsManager: {fileID: 719126423}
-  validCount: 0
+  validWordCount: 0
   totalSubmissions: 0
-  totalLength: 0
-  totalValidLength: 0
+  totalWordLength: 0
+  totalValidWordLength: 0
 --- !u!4 &1263100688
 Transform:
   m_ObjectHideFlags: 0
@@ -5775,6 +5772,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftArrow: {fileID: 614694610}
   rightArrow: {fileID: 1364680463}
+  resetText: []
+  submitText: []
 --- !u!114 &1516199621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6173,6 +6172,10 @@ PrefabInstance:
       propertyPath: analyticsManager
       value: 
       objectReference: {fileID: 719126423}
+    - target: {fileID: 5664284316386886153, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5664284316386886154, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: m_RootOrder
       value: 2

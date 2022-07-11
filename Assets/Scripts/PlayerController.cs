@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
+    public SoundEffectSO bounceSound;
+    public SoundEffectSO letterCollectSound;
+    public SoundEffectSO wallBounceSound;
+    public SoundEffectSO gameEndSound;
+
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
@@ -67,6 +72,9 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
+
+        // intialize the shop item objects
+        ScoreMultiplier.reset();
     }
 
     // Update is called once per frame
@@ -124,6 +132,9 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = new Vector2(rb.velocity.x, 10.0f);
                     box.isTrigger = true;
                     started = true;
+
+                    bounceSound.Play();
+
                 }
             }
         }
@@ -221,6 +232,13 @@ public class PlayerController : MonoBehaviour
                 timer.StopTimer();
                 int score = timer.SetValues();
 
+
+                foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                {
+                    source.Stop();
+                }
+                gameEndSound.Play();
+
 #if true
                 analyticsManagerScript.HandleEvent("death", new List<object>
                 {
@@ -246,7 +264,105 @@ public class PlayerController : MonoBehaviour
 #endif
             }
         }
+
+        // shop item activation
+        {
+            // highlight letter
+            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                Debug.Log("Player clicked on 1");
+                if (CurrencyUtils.useShopItem("1"))
+                {
+                    // activate shop item power up in this code block
+                    Debug.Log("player uses item number 1");
+                }
+                else
+                {
+                    Debug.Log("player does not have item 1");
+                }
+            }
+
+            // extra life
+            if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                Debug.Log("Player clicked on 2");
+                if (CurrencyUtils.useShopItem("2"))
+                {
+                    Debug.Log("player uses item number 2");
+                }
+            }
+
+            // word/score multiplier
+            if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+            {
+                Debug.Log("Player clicked on 3");
+                if (CurrencyUtils.useShopItem("3"))
+                {
+                    Debug.Log("player uses item number 3");
+                    ScoreMultiplier.Activate();
+                    int item_quantity = PlayerPrefs.GetInt("3");
+                    // Debug.Log("player uses item number 3");
+                }
+            }
+
+            // anagram
+            if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+            {
+                Debug.Log("Player clicked on 4");
+                if (CurrencyUtils.useShopItem("1"))
+                {
+                    Debug.Log("player uses item number 4");
+
+                }
+            }
+
+            // pause time
+            if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+            {
+                Debug.Log("Player clicked on 5");
+                if (CurrencyUtils.useShopItem("5"))
+                {
+                    // timer.StopTimer()
+                    StartCoroutine(StopTime());
+                    // timer.StartTimer();
+
+                    Debug.Log("player uses item number 5");
+                }
+            }
+
+            // prefix/suffix
+            if (Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                Debug.Log("Player clicked on 6");
+                if (CurrencyUtils.useShopItem("6"))
+                {
+                    Debug.Log("player uses item number 6");
+                    // SuffixPU_score_version temp = new SuffixPU_score_version();
+                    // temp.Activate_function();
+                    SuffixPU_score_version.Activate_function();
+                }
+            }
+        }
     }
+    // stop timer for 5 seconds
+    public IEnumerator StopTime()
+    {
+
+        if (timer.isTimerRunning()) {
+            timer.StopTimer();
+        }
+        Debug.Log("StopTime Activated, timer paused");
+
+        yield return new WaitForSeconds(5);
+
+        Debug.Log("Time Returned Restarted Timer");
+        if (!timer.isTimerRunning()) {
+            timer.StartTimer();
+        }
+
+
+    }
+
     private void InitiateBounce()
     {
         bounceBackToCenter = true;
@@ -254,6 +370,9 @@ public class PlayerController : MonoBehaviour
         isBouncingBack = true;
         rb.gravityScale = 0;
         rb.velocity = Vector3.zero;
+
+        wallBounceSound.Play();
+        letterCollectSound.pitchRange = new Vector2(1, 1);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -263,6 +382,12 @@ public class PlayerController : MonoBehaviour
             NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
             if (letterPlatform)
             {
+                if (letterPlatform.collectible is LetterClass && ((LetterClass)letterPlatform.collectible).Letter != '_' && !letterPlatform.HasBeenCollected())
+                {
+                    letterCollectSound.Play(null, 0.2f);
+                    letterCollectSound.pitchRange = new Vector2(letterCollectSound.pitchRange.x + 0.1f, letterCollectSound.pitchRange.y + 0.1f);
+                }
+
                 letterPlatform.Activate();
 
                 //TimeStop timeStop = GetComponent<TimeStop>();
@@ -271,6 +396,8 @@ public class PlayerController : MonoBehaviour
                 //    timeStop.Activate();
                 //}
             }
+
+            bounceSound.Play();
         }
     }
 }
