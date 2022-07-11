@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90657bd8f3c9ec41a9c9bf054171dd8, type: 3}
   m_Name: Level3
   m_EditorClassIdentifier: 
-  blankFrequency: 65
+  blankFrequency: 80
   heightScale: 1
   widthScale: 1
-  minSpawnHeight: 0.5
-  maxSpawnHeight: 2
+  minSpawnHeight: 0.7
+  maxSpawnHeight: 1.6

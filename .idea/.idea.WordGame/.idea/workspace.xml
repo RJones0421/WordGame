@@ -114,7 +114,7 @@
       <workItem from="1655493825609" duration="409000" />
       <workItem from="1656026367952" duration="629000" />
       <workItem from="1656363730675" duration="1577000" />
-      <workItem from="1656967501990" duration="10902000" />
+      <workItem from="1656967501990" duration="12091000" />
     </task>
     <servers />
   </component>
@@ -137,24 +137,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Letter Spawning/ExtraBlanks.cs</url>
-          <line>73</line>
-          <properties documentPath="D:\Unity\ItBroke\WordGame\Assets\Scripts\Letter Spawning\ExtraBlanks.cs" initialLine="70" containingFunctionPresentation="method 'MovePlatform'">
-            <startOffsets>
-              <option value="2396" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2417" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
