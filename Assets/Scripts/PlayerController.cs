@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
                     Debug.Log("SUBMIT RIGHT");
 
-                    word.submitWord();
+                    word.submitWord("right");
                 }
                 else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
 
                     Debug.Log("SUBMIT LEFT");
 
-                    word.submitWord();
+                    word.submitWord("left");
                 }
                 else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
