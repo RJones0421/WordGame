@@ -108,9 +108,9 @@ public class Timer : MonoBehaviour
         }
 
         // testing for score multiplier
-        int new_score = ScoreMultiplier.DoubleScore(finalScore);
-        finalScore = new_score;
-        Debug.Log("Current final score post Double Score " + new_score);
+        // int new_score = ScoreMultiplier.DoubleScore(finalScore);
+        // finalScore = new_score;
+        // Debug.Log("Current final score post Double Score " + new_score);
 
         int highScore = ScoreUtils.updateAndGetHighsScore(finalScore);
 
