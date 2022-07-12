@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90657bd8f3c9ec41a9c9bf054171dd8, type: 3}
   m_Name: Level11
   m_EditorClassIdentifier: 
-  blankFrequency: 100
-  heightScale: 1
-  widthScale: 1
-  minSpawnHeight: 0.9
-  maxSpawnHeight: 1.5
+  blankFrequency: 30
+  minSpawnHeight: 0.5
+  maxSpawnHeight: 2.5
+  dictionary: {fileID: 11400000, guid: fd56c9b1863e63749ae4afb88c4f6484, type: 2}

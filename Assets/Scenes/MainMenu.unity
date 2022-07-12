@@ -1628,7 +1628,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0815b39f294504a94e2dbcc912ec8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
+  dictionaries:
+  - {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
+  - {fileID: 11400000, guid: ac5a4e937cb790b49b98d3fa6336db62, type: 2}
+  - {fileID: 11400000, guid: e88b0d465abe31549bdb92e55c3b4e07, type: 2}
+  - {fileID: 11400000, guid: fd56c9b1863e63749ae4afb88c4f6484, type: 2}
 --- !u!4 &294880034
 Transform:
   m_ObjectHideFlags: 0

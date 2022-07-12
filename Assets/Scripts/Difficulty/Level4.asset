@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: 
   blankFrequency: 75
-  heightScale: 1
-  widthScale: 1
   minSpawnHeight: 0.7
   maxSpawnHeight: 1.7
+  dictionary: {fileID: 11400000, guid: ac5a4e937cb790b49b98d3fa6336db62, type: 2}

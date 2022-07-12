@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CommonStream
   m_EditorClassIdentifier: 
   blankFrequency: 0
-  dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
+  dictionaries: {fileID: 11400000, guid: ac5a4e937cb790b49b98d3fa6336db62, type: 2}
   letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
   powerupArray: {fileID: 11400000, guid: a1ff6aa994c03445eb09a476e7a8fa26, type: 2}
-  currentWord: wing
+  currentWord: lay
   isCommon: 1
   EMPTY_FREQ: 2

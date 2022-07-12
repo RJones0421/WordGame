@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class GenerateDictionaries : MonoBehaviour
 {
-    [SerializeField] private DictionaryObject dictionaries;
+    [SerializeField] private DictionaryObject[] dictionaries;
 
     private void Awake()
     {
-        dictionaries.GenerateDictionaries();
+        foreach (var dict in dictionaries)
+            dict.GenerateDictionaries();
     }
 }

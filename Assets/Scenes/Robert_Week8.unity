@@ -1673,8 +1673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenLevels: 12
   randomPlatforms: {fileID: 1090223014}
-  commonStream: {fileID: 1113444761}
-  fullStream: {fileID: 0}
+  streamSpawning: {fileID: 11400000, guid: 7d725ef2a88989b47855785ea7bea330, type: 2}
   difficulties:
   - {fileID: 11400000, guid: abd2aae66f70c494795dff74c69e17d3, type: 2}
   - {fileID: 11400000, guid: 35f26a4a09e28d94db5610b6d6574bf8, type: 2}
@@ -1686,6 +1685,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec53ce1d3c4812449b460af2ea16ce4d, type: 2}
   - {fileID: 11400000, guid: b0d56d4cddabca04c88c95986405acae, type: 2}
   - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: e7161aa679d09f540b3f000b1251e3eb, type: 2}
 --- !u!114 &437456165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1725,7 +1729,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0815b39f294504a94e2dbcc912ec8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
+  dictionaries:
+  - {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
+  - {fileID: 11400000, guid: ac5a4e937cb790b49b98d3fa6336db62, type: 2}
+  - {fileID: 11400000, guid: e88b0d465abe31549bdb92e55c3b4e07, type: 2}
+  - {fileID: 11400000, guid: fd56c9b1863e63749ae4afb88c4f6484, type: 2}
 --- !u!1001 &494778815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4946,17 +4954,6 @@ PrefabInstance:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
   m_PrefabInstance: {fileID: 6429281}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23d7e5eb2768d464e816e899014c0c26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1113444761 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
-  m_PrefabInstance: {fileID: 1860936453}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

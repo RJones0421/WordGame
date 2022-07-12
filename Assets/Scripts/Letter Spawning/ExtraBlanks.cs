@@ -73,7 +73,6 @@ public class ExtraBlanks : MonoBehaviour
             drawing = true;
             spawnPosition.y=transform.position.y + Random.Range(-1.0f,transform.localScale.y/2-0.25f);
             spawnPosition.x=Random.Range(-transform.localScale.x/2+0.5f,transform.localScale.x/2-0.5f);
-            print(spawnPosition);
             iters++;
             // if (iters > 5)
             // {

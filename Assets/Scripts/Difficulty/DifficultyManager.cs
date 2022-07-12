@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
@@ -8,8 +7,7 @@ public class DifficultyManager : MonoBehaviour
     [Range(1, 60)][SerializeField] private int timeBetweenLevels = 45;
 
     [SerializeField] private PlatformGenerator randomPlatforms;
-    [SerializeField] private PlatformGenerator commonStream;
-    [SerializeField] private PlatformGenerator fullStream;
+    [SerializeField] private StreamSpawning streamSpawning;
 
     [SerializeField] private Difficulty[] difficulties;
     private Difficulty currentDifficulty;
@@ -44,9 +42,9 @@ public class DifficultyManager : MonoBehaviour
 
         if (previousDifficulty != currentDifficulty)
         {
-            print(currentDifficulty);
             previousDifficulty = currentDifficulty;
             randomPlatforms.UpdateDifficulty(currentDifficulty);
+            streamSpawning.UpdateDictionary(currentDifficulty.GetDictionary());
         }
     }
 }
