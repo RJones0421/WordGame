@@ -31,13 +31,13 @@ public class CurrencyUtils : MonoBehaviour
 
     }
 
+
+    // average word submitted score is about 235, currency awarded will be 2
     public static void populateCostMap(){
-        items_value.Add("1", 100);
-        items_value.Add("2", 300);
-        items_value.Add("3", 150);
-        items_value.Add("4", 200);
-        // items_value.Add("5", 500);
-        // items_value.Add("6", 600);
+        items_value.Add("1", 5);
+        items_value.Add("2", 15);
+        items_value.Add("3", 7);
+        items_value.Add("4", 10);
     }
 
     public static void addCurrency(int finalScore)
@@ -66,6 +66,10 @@ public class CurrencyUtils : MonoBehaviour
         {
             if(items_value.Count == 0){
                 populateCostMap();
+            }
+            else
+            {
+                populateCostMap(); // used to clear the map stored in cache
             }
 
             // haven't converted the item to cost yet
