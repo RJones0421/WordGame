@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     public SoundEffectSO wallBounceSound;
     public SoundEffectSO gameEndSound;
 
+    public Transform height;
+
     private int lives = 0;
 
     private void Awake()
@@ -365,6 +367,19 @@ public class PlayerController : MonoBehaviour
                     SuffixPU_score_version.Activate_function();
                 }
             }
+
+            // toggle half gravity for testing
+            if (Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Keypad7))
+            {
+                if (GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale == 1.0f)
+                {
+                    GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 0.7f;
+                }
+                else
+                {
+                    GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+                }
+            }
         }
     }
     // stop timer for 5 seconds
@@ -401,7 +416,18 @@ public class PlayerController : MonoBehaviour
     {
         if (started && rb.velocity.y < 0.0f)
         {
+            // Squish and Stretch Animation
+            height.GetComponent<Animator>().SetTrigger("Bounce");
+
+            // Reset Gravity
+            if (Platform.activated)
+            {
+                GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+                Platform.activated = false;
+            }
+
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+
             NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
             if (letterPlatform)
             {
@@ -418,6 +444,12 @@ public class PlayerController : MonoBehaviour
                 //{
                 //    timeStop.Activate();
                 //}
+            }
+
+            JumpPlatform jumpPlatform = collision.GetComponent<JumpPlatform>();
+            if (jumpPlatform)
+            {
+                jumpPlatform.Activate();
             }
 
             bounceSound.Play();

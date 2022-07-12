@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class NewLetterPlatform : Platform
 {
-    private SpriteRenderer spriteRenderer;
     public Collectible collectible;
     private bool isCollected = false;
-    public ParticleSystem chalkParticles;
 
     public GameObject letterArrow;
-
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        chalkParticles = GetComponent<ParticleSystem>();
-    }
 
     public override void Activate()
     {
@@ -25,16 +17,11 @@ public class NewLetterPlatform : Platform
         }
     }
 
-    public SpriteRenderer SpriteRenderer {
-        get {
-            if (spriteRenderer == null) {
-                spriteRenderer = GetComponent<SpriteRenderer>();
-            }
-            return spriteRenderer;
-        }
-        set {
-            spriteRenderer = value;
-        }
+    public override void ResetSprite()
+    {
+        base.ResetSprite();
+
+        isCollected = false;
     }
 
     public void SetLetter(LetterClass letter)
@@ -45,17 +32,6 @@ public class NewLetterPlatform : Platform
     public void SetPowerup(Powerup powerup)
     {
         this.collectible = powerup;
-    }
-
-    public void DarkenSprite()
-    {
-        spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f);
-    }
-
-    public void ResetSprite()
-    {
-        spriteRenderer.color = Color.white;
-        isCollected = false;
     }
 
     public void CollectLetter()
