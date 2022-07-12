@@ -4,23 +4,13 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
-
-    // 0 - Keyboard, 1 - Mouse
-    private int controls = 0;
-
-    // Sensitivity 0.5 - 1.5, Default - 1.0
-    private float sensitivity = 1.0f;
-
     void Awake() 
     {
-        DontDestroyOnLoad(transform.gameObject);
+        PlayerPrefs.SetInt("controls", 0);
+        PlayerPrefs.SetFloat("sensitivity", 1.0f);
     }
 
-    public int GetControls() { return controls; }
+    public void SetControls(float setting) { PlayerPrefs.SetInt("controls", (int)setting); }
 
-    public void SetControls(float setting) { controls = (int)setting; }
-
-    public float GetSensitvity() { return sensitivity; }
-
-    public void SetSensitivity(float setting) { sensitivity = setting; }
+    public void SetSensitivity(float setting) { PlayerPrefs.SetFloat("sensitivity", setting); }
 }

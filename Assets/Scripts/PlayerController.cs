@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
     public SoundEffectSO wallBounceSound;
     public SoundEffectSO gameEndSound;
 
-    private Settings settings;
     private TextMeshProUGUI controlsTutorial;
     private int lives = 0;
 
@@ -84,11 +83,8 @@ public class PlayerController : MonoBehaviour
         // intialize the shop item objects
         ScoreMultiplier.reset();
 
-        // Get Settings
-        settings = GameObject.Find("Settings").GetComponent<Settings>();
-
-        if(settings) {
-            if(settings.GetControls() == 0) {
+        if(PlayerPrefs.HasKey("controls")) {
+            if(PlayerPrefs.GetInt("controls") == 0) {
                 allowMouseMovement = false;
                 controlsTutorial.text = "A/D to move";
             }
@@ -96,6 +92,10 @@ public class PlayerController : MonoBehaviour
                 allowMouseMovement = true;
                 controlsTutorial.text = "Mouse to move";
             }
+        }
+        else {
+            allowMouseMovement = false;
+            controlsTutorial.text = "A/D to move";
         }
     }
 
@@ -169,7 +169,8 @@ public class PlayerController : MonoBehaviour
                 float inputX = Input.GetAxis("Horizontal");
 
                 Vector3 movement = new Vector3(inputX, 0, 0);
-                movement *= Time.deltaTime * keyMovementSpeed * settings.GetSensitvity();
+                movement *= Time.deltaTime * keyMovementSpeed;
+                if (PlayerPrefs.HasKey("sensitivity")) movement *= PlayerPrefs.GetFloat("sensitivity");
 
                 transform.Translate(movement);
             }
@@ -177,7 +178,10 @@ public class PlayerController : MonoBehaviour
             // Mouse
             if (!isBouncingBack && allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed * settings.GetSensitvity());
+                if(PlayerPrefs.HasKey("sensitivity")) {
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed * PlayerPrefs.GetFloat("sensitivity"));
+                }
+                else transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
         }
 
