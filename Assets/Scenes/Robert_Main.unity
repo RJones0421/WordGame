@@ -612,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.3, y: 70.3}
+  m_AnchoredPosition: {x: -304.30005, y: 70.29999}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63624879
@@ -2063,15 +2063,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d576289b2a82994fbf7fb83e9ca1b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenLevels: 30
+  timeBetweenLevels: 12
   randomPlatforms: {fileID: 1090223014}
-  commonStream: {fileID: 1113444761}
-  fullStream: {fileID: 0}
+  streamSpawning: {fileID: 11400000, guid: 7d725ef2a88989b47855785ea7bea330, type: 2}
   difficulties:
   - {fileID: 11400000, guid: abd2aae66f70c494795dff74c69e17d3, type: 2}
   - {fileID: 11400000, guid: 35f26a4a09e28d94db5610b6d6574bf8, type: 2}
   - {fileID: 11400000, guid: 61b8ab7bd2a9235478b8700abd610ff5, type: 2}
   - {fileID: 11400000, guid: 397b3b463fd9cae49b0e6c67cd79ac5e, type: 2}
+  - {fileID: 11400000, guid: 9da4cdc559482d94fbb3afea7cf42502, type: 2}
+  - {fileID: 11400000, guid: ad0571ee6b6ca7a4e9e1d4b281c7d10e, type: 2}
+  - {fileID: 11400000, guid: b18674581d625034dbd972a37ea06032, type: 2}
+  - {fileID: 11400000, guid: ec53ce1d3c4812449b460af2ea16ce4d, type: 2}
+  - {fileID: 11400000, guid: b0d56d4cddabca04c88c95986405acae, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: b6cd4f8795d0268458c6d4169edda93a, type: 2}
+  - {fileID: 11400000, guid: e7161aa679d09f540b3f000b1251e3eb, type: 2}
 --- !u!114 &437456165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2111,7 +2121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0815b39f294504a94e2dbcc912ec8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
+  dictionaries:
+  - {fileID: 11400000, guid: ac5a4e937cb790b49b98d3fa6336db62, type: 2}
+  - {fileID: 11400000, guid: e88b0d465abe31549bdb92e55c3b4e07, type: 2}
+  - {fileID: 11400000, guid: fd56c9b1863e63749ae4afb88c4f6484, type: 2}
+  - {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
 --- !u!1001 &494778815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2627,6 +2641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTime: 60
+  timeLeft: 0
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
@@ -2653,6 +2668,10 @@ PrefabInstance:
     - target: {fileID: 7499377894571553601, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
       propertyPath: m_Name
       value: MusicPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7499377894571553601, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7499377894571553607, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
       propertyPath: m_RootOrder
@@ -6354,17 +6373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d7e5eb2768d464e816e899014c0c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1113444761 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
-  m_PrefabInstance: {fileID: 1860936453}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23d7e5eb2768d464e816e899014c0c26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1175687567
 GameObject:
   m_ObjectHideFlags: 0
@@ -7105,7 +7113,6 @@ MonoBehaviour:
   - {fileID: 431281989}
   - {fileID: 51696648}
   - {fileID: 1526499131}
-  chalkParticles: {fileID: 0}
   letters: []
   currentLetterBox: 0
   timer: {fileID: 533044868}
@@ -7990,7 +7997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.29993, y: 121.29997}
+  m_AnchoredPosition: {x: -304.29993, y: 121.29999}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1476898123
@@ -10608,7 +10615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -371.09998, y: 121.29997}
+  m_AnchoredPosition: {x: -371.09998, y: 121.29999}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903825689
@@ -11192,7 +11199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -371.1, y: 70.3}
+  m_AnchoredPosition: {x: -371.09998, y: 70.29999}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027767381
