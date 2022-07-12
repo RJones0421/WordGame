@@ -5,7 +5,7 @@ public class DifficultyManager : MonoBehaviour
 {
     // TODO: maybe game timers observers based off the Timer class
     private float timer;
-    [Range(15, 60)][SerializeField] private int timeBetweenLevels = 45;
+    [Range(1, 60)][SerializeField] private int timeBetweenLevels = 45;
 
     [SerializeField] private PlatformGenerator randomPlatforms;
     [SerializeField] private PlatformGenerator commonStream;
