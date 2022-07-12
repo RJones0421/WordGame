@@ -31,13 +31,13 @@ public class CurrencyUtils : MonoBehaviour
 
     }
 
-
-    // average word submitted score is about 235, currency awarded will be 2
     public static void populateCostMap(){
-        items_value.Add("1", 5);
-        items_value.Add("2", 15);
-        items_value.Add("3", 7);
-        items_value.Add("4", 10);
+        items_value.Add("1", 1);
+        items_value.Add("2", 2);
+        items_value.Add("3", 3);
+        items_value.Add("4", 4);
+        items_value.Add("5", 5);
+        items_value.Add("6", 6);
     }
 
     public static void addCurrency(int finalScore)
@@ -45,12 +45,6 @@ public class CurrencyUtils : MonoBehaviour
        // currency udpate = converts final score to in game currency (1 to 1)
        // increases your currency balance
        // get int defaults to 0, if the key does not exist
-       int temp_final_currency_amount = finalScore / 100;
-        finalScore = finalScore / 100;
-        Debug.Log("final final currency amount " + finalScore);
-        Debug.Log("final currency amount " + temp_final_currency_amount);
-
-
         int current_currency_amount = PlayerPrefs.GetInt(currency_amount_keyname);
         int new_currency_amount = current_currency_amount + finalScore;
         PlayerPrefs.SetInt(currency_amount_keyname,new_currency_amount);
@@ -66,10 +60,6 @@ public class CurrencyUtils : MonoBehaviour
         {
             if(items_value.Count == 0){
                 populateCostMap();
-            }
-            else
-            {
-                populateCostMap(); // used to clear the map stored in cache
             }
 
             // haven't converted the item to cost yet
@@ -160,40 +150,11 @@ public class CurrencyUtils : MonoBehaviour
         if (item_quantity > 0)
         {
             item_quantity -= 1;
-            PlayerPrefs.SetInt(item_num, item_quantity);
-
-            // change the visablity setting for the corresponding item icon
-            string icon_name = item_num + "_icon";
-            if (item_quantity == 0)
-            {
-                // the string here should be the name of the item's icon on line 160
-                GameObject inputFieldGo = GameObject.Find(icon_name);
-                inputFieldGo.SetActive(false);
-            }
             return true;
         }
         else
         {
             return false;
-        }
-    }
-
-    public static void showShopItemIcon(string item_num)
-    {
-        int item_quantity = PlayerPrefs.GetInt(item_num);
-        string icon_name = item_num + "_icon";
-
-
-        if (item_quantity == 0)
-        {
-            // the string here should be the name of the item's icon on line 160
-            GameObject inputFieldGo = GameObject.Find(icon_name);
-            inputFieldGo.SetActive(false);
-        }
-        else
-        {
-            GameObject inputFieldGo = GameObject.Find(icon_name);
-            inputFieldGo.SetActive(true);
         }
     }
 }

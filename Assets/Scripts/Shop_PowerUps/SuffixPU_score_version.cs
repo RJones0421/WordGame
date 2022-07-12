@@ -151,7 +151,7 @@ public class SuffixPU_score_version : MonoBehaviour
         int current_word_score = getWordScore(current_word_string);
         Debug.Log("pre activate current word " + current_word_string + " with score " + current_word_score);
 
-        // how do you clear the letter bank
+
         string new_word = "lol";
         updateCurrentWord(new_word, current_word);
         int new_word_score = getWordScore(current_word.word);
