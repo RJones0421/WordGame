@@ -13,7 +13,9 @@ public class DoubleLetter : Powerup
     public override bool Activate()
     {
         Word word = GlobalVariables.word;
-        word.addLetter(word.getLetter(word.GetWordLength()-1));
+        if (word.GetWordLength() > 0) {
+            word.addLetter(word.getLetter(word.GetWordLength()-1));
+        }
         return true;
     }
 }

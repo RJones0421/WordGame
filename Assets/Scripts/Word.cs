@@ -266,6 +266,7 @@ public class Word : MonoBehaviour
         float timeGained = Mathf.Clamp(score / 50, 0, timerClass.GetMaxTime() - timerClass.GetTime());
         timerClass.AddTime(timeGained);
         Debug.Log("Time gained: " + timeGained);
+        Debug.Log("Word score: " + score);
 
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;

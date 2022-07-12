@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     public SoundEffectSO wallBounceSound;
     public SoundEffectSO gameEndSound;
 
+    private int lives = 0;
+
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
@@ -226,42 +228,55 @@ public class PlayerController : MonoBehaviour
             float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
-                Debug.Log("YOU DIED");
-
-                gameOverCanvas.SetActive(true);
-                timer.StopTimer();
-                int score = timer.SetValues();
-
-
-                foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                if (lives > 0)
                 {
-                    source.Stop();
+                    Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
+
+                    timer.StopTimer();
+                    timer.timeLeft = timer.GetMaxTime();
+                    timer.StartTimer();
+
+                    transform.position = new Vector3(0.0f, mainCamera.transform.position.y, 0.0f);
                 }
-                gameEndSound.Play();
+                else
+                {
+                    Debug.Log("YOU DIED");
+
+                    gameOverCanvas.SetActive(true);
+                    timer.StopTimer();
+                    int score = timer.SetValues();
+
+
+                    foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                    {
+                        source.Stop();
+                    }
+                    gameEndSound.Play();
 
 #if true
-                analyticsManagerScript.HandleEvent("death", new List<object>
-                {
-                    "falling",
-                    Time.timeSinceLevelLoadAsDouble,
-                    score,
-                    word.validWordCount,
-                    word.totalSubmissions,
-                    word.totalWordLength,
-                    word.totalValidWordLength,
-                });
+                    analyticsManagerScript.HandleEvent("death", new List<object>
+                    {
+                        "falling",
+                        Time.timeSinceLevelLoadAsDouble,
+                        score,
+                        word.validWordCount,
+                        word.totalSubmissions,
+                        word.totalWordLength,
+                        word.totalValidWordLength,
+                    });
 #else
-                analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
-                {
-                    { "cause", "falling", },
-                    { "time", Time.timeSinceLevelLoadAsDouble, },
-                    { "userScore", score, },
-                    { "validWordCount", word.validCount, },
-                    { "totalSubmissions", word.totalSubmissions, },
-                    { "totalWordLength", word.totalLength, },
-                    { "totalValidWordLength",word.totalValidLength, },
-                });
+                    analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
+                    {
+                        { "cause", "falling", },
+                        { "time", Time.timeSinceLevelLoadAsDouble, },
+                        { "userScore", score, },
+                        { "validWordCount", word.validCount, },
+                        { "totalSubmissions", word.totalSubmissions, },
+                        { "totalWordLength", word.totalLength, },
+                        { "totalValidWordLength",word.totalValidLength, },
+                    });
 #endif
+                }
             }
         }
 
@@ -289,6 +304,8 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("2"))
                 {
                     Debug.Log("player uses item number 2");
+                    lives++;
+                    Shop_Purchase.actiatePowerUpUI("ExtraLife");
                 }
             }
 
@@ -301,6 +318,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("player uses item number 3");
                     ScoreMultiplier.Activate();
                     int item_quantity = PlayerPrefs.GetInt("3");
+                    Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
                     // Debug.Log("player uses item number 3");
                 }
             }
@@ -311,6 +329,8 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 4");
                 if (CurrencyUtils.useShopItem("1"))
                 {
+                    Anagram.Activate();
+                    Shop_Purchase.actiatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
 
                 }
@@ -325,6 +345,7 @@ public class PlayerController : MonoBehaviour
                     // timer.StopTimer()
                     StartCoroutine(StopTime());
                     // timer.StartTimer();
+                    Shop_Purchase.actiatePowerUpUI("PauseTime");
 
                     Debug.Log("player uses item number 5");
                 }
