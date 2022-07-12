@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform height;
 
+    private TextMeshProUGUI controlsTutorial;
+
     private int lives = 0;
 
     private void Awake()
@@ -61,6 +63,9 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+
+        // Get Tutorial Text
+        controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     // Start is called before the first frame update
@@ -80,6 +85,21 @@ public class PlayerController : MonoBehaviour
 
         // intialize the shop item objects
         ScoreMultiplier.reset();
+
+        if(PlayerPrefs.HasKey("controls")) {
+            if(PlayerPrefs.GetInt("controls") == 0) {
+                allowMouseMovement = false;
+                controlsTutorial.text = "A/D to move";
+            }
+            else {
+                allowMouseMovement = true;
+                controlsTutorial.text = "Mouse to move";
+            }
+        }
+        else {
+            allowMouseMovement = false;
+            controlsTutorial.text = "A/D to move";
+        }
     }
 
     // Update is called once per frame
@@ -121,10 +141,10 @@ public class PlayerController : MonoBehaviour
         //}
 
         // Toggle Mouse Movement
-        if (Input.GetKeyDown(KeyCode.M))
+        /*if (Input.GetKeyDown(KeyCode.M))
         {
             allowMouseMovement = !allowMouseMovement;
-        }
+        }*/
 
         // Jump
         {
@@ -153,6 +173,7 @@ public class PlayerController : MonoBehaviour
 
                 Vector3 movement = new Vector3(inputX, 0, 0);
                 movement *= Time.deltaTime * keyMovementSpeed;
+                if (PlayerPrefs.HasKey("sensitivity")) movement *= PlayerPrefs.GetFloat("sensitivity");
 
                 transform.Translate(movement);
             }
@@ -160,7 +181,10 @@ public class PlayerController : MonoBehaviour
             // Mouse
             if (!isBouncingBack && allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+                if(PlayerPrefs.HasKey("sensitivity")) {
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed * PlayerPrefs.GetFloat("sensitivity"));
+                }
+                else transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
         }
 
