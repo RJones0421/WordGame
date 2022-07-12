@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e90657bd8f3c9ec41a9c9bf054171dd8, type: 3}
-  m_Name: Level3
+  m_Name: Level10
   m_EditorClassIdentifier: 
-  blankFrequency: 80
-  minSpawnHeight: 0.7
-  maxSpawnHeight: 1.6
-  dictionary: {fileID: 11400000, guid: ac5a4e937cb790b49b98d3fa6336db62, type: 2}
+  blankFrequency: 30
+  minSpawnHeight: 0.5
+  maxSpawnHeight: 2.5
+  dictionary: {fileID: 11400000, guid: e88b0d465abe31549bdb92e55c3b4e07, type: 2}

@@ -6,24 +6,13 @@ using UnityEngine;
 public class Difficulty : ScriptableObject
 {
     [Range(0, 100)] [SerializeField] private int blankFrequency;
-    [SerializeField] private float heightScale;
-    [SerializeField] private float widthScale;
     [SerializeField] private float minSpawnHeight;
     [SerializeField] private float maxSpawnHeight;
+    [SerializeField] private DictionaryObject dictionary;
 
     public int GetBlankFreq()
     {
         return blankFrequency;
-    }
-
-    public float GetHeightScale()
-    {
-        return heightScale;
-    }
-
-    public float GetWidthScale()
-    {
-        return widthScale;
     }
 
     public float GetMinSpawnHeight()
@@ -34,5 +23,10 @@ public class Difficulty : ScriptableObject
     public float GetMaxSpawnHeight()
     {
         return maxSpawnHeight;
+    }
+
+    public DictionaryObject GetDictionary()
+    {
+        return dictionary;
     }
 }
