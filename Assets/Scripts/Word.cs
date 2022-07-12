@@ -80,6 +80,7 @@ public class Word : MonoBehaviour
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);
+        
 
         if (newLetter.Letter == '_') return false;
         if (newLetter.Letter == '?' && word.Contains('?')) return false;

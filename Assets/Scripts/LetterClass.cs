@@ -33,6 +33,7 @@ public class LetterClass : Collectible
 			return false;
 		}
 
+
 		return GlobalVariables.word.addLetter(this);
 	}
 }

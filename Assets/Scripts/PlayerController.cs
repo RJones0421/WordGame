@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private Renderer renderer;
 
+
     public bool allowMouseMovement;
 
     public Word word;
@@ -165,6 +166,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (started && word.GetWordLength() > 0)
                 {
+                    // chalkParticles.Emit(100);
                     InitiateBounce();
 
                     Debug.Log("SUBMIT RIGHT");
