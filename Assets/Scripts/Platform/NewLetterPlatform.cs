@@ -7,12 +7,14 @@ public class NewLetterPlatform : Platform
     private SpriteRenderer spriteRenderer;
     public Collectible collectible;
     private bool isCollected = false;
+    public ParticleSystem chalkParticles;
 
     public GameObject letterArrow;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        chalkParticles = GetComponent<ParticleSystem>();
     }
 
     public override void Activate()
@@ -58,6 +60,7 @@ public class NewLetterPlatform : Platform
 
     public void CollectLetter()
     {
+        chalkParticles.Play();
         if (!isCollected)
         {
             isCollected = collectible.Collect();

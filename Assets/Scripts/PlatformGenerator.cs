@@ -128,7 +128,6 @@ public class PlatformGenerator : MonoBehaviour
     public void UpdateDifficulty(Difficulty difficulty)
     {
         letterSpawner.blankFrequency = difficulty.GetBlankFreq();
-        spawnPositionHeightScale = difficulty.GetHeightScale();
         minHeight = difficulty.GetMinSpawnHeight();
         maxHeight = difficulty.GetMaxSpawnHeight();
     }
