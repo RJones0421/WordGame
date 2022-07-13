@@ -41,8 +41,6 @@ public class Shop_Purchase : MonoBehaviour
         CurrencyUtils.displayQuantity("2");
         CurrencyUtils.displayQuantity("3");
         CurrencyUtils.displayQuantity("4");
-        CurrencyUtils.displayQuantity("5");
-        CurrencyUtils.displayQuantity("6");
     }
 
     public static void actiatePowerUpUI(String powerupName) {
