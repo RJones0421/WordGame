@@ -67,10 +67,6 @@ public class CurrencyUtils : MonoBehaviour
             if(items_value.Count == 0){
                 populateCostMap();
             }
-            else
-            {
-                populateCostMap(); // used to clear the map stored in cache
-            }
 
             // haven't converted the item to cost yet
             // int cost = Convert.ToInt32(item_name);
