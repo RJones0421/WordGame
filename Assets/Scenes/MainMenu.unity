@@ -3732,6 +3732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45583d8f7a3824a4aa523754920d0044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlsSlider: {fileID: 1052912982}
+  sensitivitySlider: {fileID: 683398578}
 --- !u!4 &815199137
 Transform:
   m_ObjectHideFlags: 0
@@ -6635,7 +6637,7 @@ GameObject:
   - component: {fileID: 1611366575}
   - component: {fileID: 1611366574}
   m_Layer: 0
-  m_Name: Sensitivity Slider
+  m_Name: Sensitivity Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
