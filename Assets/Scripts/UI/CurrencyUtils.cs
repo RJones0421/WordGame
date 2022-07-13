@@ -67,7 +67,10 @@ public class CurrencyUtils : MonoBehaviour
             if(items_value.Count == 0){
                 populateCostMap();
             }
-            
+            else
+            {
+                populateCostMap(); // used to clear the map stored in cache
+            }
 
             // haven't converted the item to cost yet
             // int cost = Convert.ToInt32(item_name);
@@ -135,6 +138,23 @@ public class CurrencyUtils : MonoBehaviour
             TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
             // the text that is displayed on screen
             inputFieldCo.text = "Quantity: " + item_quantity.ToString();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("displayQuantity error: " + e.ToString());
+        }
+    }
+
+    public static void displayQuantityDynamic(string item_num, string gameObject_name, string display_text)
+    {
+        try
+        {
+            // Text_Item1_Quantity
+            int item_quantity = PlayerPrefs.GetInt(item_num);
+            GameObject inputFieldGo = GameObject.Find(gameObject_name);
+            TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
+            // the text that is displayed on screen
+            inputFieldCo.text = display_text  + item_quantity.ToString();
         }
         catch (System.Exception e)
         {
