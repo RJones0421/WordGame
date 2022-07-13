@@ -8,10 +8,13 @@ public class StreamSpawning : Spawner
 {
     [SerializeField] private DictionaryObject dictionaries;
 
+	[SerializeField] LetterObjectArray letterArray;
+	[SerializeField] PowerupObjectArray powerupArray;
+
     private Queue<string> queue = new Queue<string>();
     private Queue<char> word = new Queue<char>();
     public string currentWord;
-    private char gap = (char) 96;
+    private char gap = (char) 123;
 
     public bool isCommon;
     private TMP_Text text;
@@ -29,21 +32,13 @@ public class StreamSpawning : Spawner
 
 	private string GetWord()
 	{
-		if (isCommon)
-		{
-			return dictionaries.GetRandomCommonWord();
-		}
-		else
-		{
-			return dictionaries.GetRandomFullWord();
-		}
+		return dictionaries.GetRandomWord();
 	}
 	
 	public void setQueue()
 	{
     	currentWord = queue.Dequeue();
-    	word = new Queue<char>(currentWord.ToCharArray());
-    	word.Enqueue(gap);
+        word = new Queue<char>(currentWord.ToCharArray());
     	word.Enqueue(gap);
     	Debug.Log(currentWord);
         queue.Enqueue(GetWord());
@@ -53,23 +48,28 @@ public class StreamSpawning : Spawner
 	{
 		if (word.Count == 0) {
 			setQueue();
+			GlobalVariables.updateWordChangeHeight = true;
 		}
 		return word.Dequeue() - 96;
 	}
 	
-	public override int GetNextLetter()
+	public override LetterClass GetNextLetter()
 	{
 		if (EMPTY_FREQ >= Random.Range(1, 101))
 		{
-			return 0;
+			return letterArray.GetLetter(0);
 		}
 		
-		return getLetterQueue1();
+		return letterArray.GetLetter(getLetterQueue1());
 	}
 
-	public string GetCurrentWord()
+	public override Powerup GetNextPowerup()
 	{
-		return currentWord;
+		return powerupArray.GetPowerup(0);
 	}
-	
+
+	public void UpdateDictionary(DictionaryObject dict)
+	{
+		dictionaries = dict;
+	}
 }

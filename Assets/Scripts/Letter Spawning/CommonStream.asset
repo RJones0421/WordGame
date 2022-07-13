@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ef91b7db4aabe408377331d26c76d5, type: 3}
   m_Name: CommonStream
   m_EditorClassIdentifier: 
-  dictionaries: {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
-  currentWord: pose
+  blankFrequency: 0
+  dictionaries: {fileID: 11400000, guid: ac5a4e937cb790b49b98d3fa6336db62, type: 2}
+  letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
+  powerupArray: {fileID: 11400000, guid: a1ff6aa994c03445eb09a476e7a8fa26, type: 2}
+  currentWord: lay
   isCommon: 1
-  EMPTY_FREQ: 15
+  EMPTY_FREQ: 2

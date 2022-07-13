@@ -7,6 +7,9 @@ public class GlobalVariables : MonoBehaviour
     public static Word word;
     public static PlayerController player;
 
+    public static float yPosChange = 0f;
+    public static bool updateWordChangeHeight;
+
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();

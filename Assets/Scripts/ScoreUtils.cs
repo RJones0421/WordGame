@@ -9,13 +9,13 @@ public class ScoreUtils : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public static void clearCollectedWords(){
@@ -73,6 +73,8 @@ public class ScoreUtils : MonoBehaviour
             inputFieldGo = GameObject.Find("Canvas_Gameplay");
             inputFieldGo.SetActive(toHide);
             inputFieldGo = GameObject.Find("Letter Platform(Clone)");
+            inputFieldGo.SetActive(toHide);
+            inputFieldGo = GameObject.Find("PowerUpManager");
             inputFieldGo.SetActive(toHide);
         } catch(Exception e){
             Debug.Log("Exception occurred in ScoreUtils class's hideGameObjects method: "

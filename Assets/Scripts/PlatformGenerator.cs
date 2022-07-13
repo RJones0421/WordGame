@@ -15,7 +15,8 @@ public class PlatformGenerator : MonoBehaviour
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
     GameObject bottomPlatform;
 
-    [SerializeField] private Vector3 spawnPosition;
+    [SerializeField]
+    private Vector3 spawnPosition;
 
     private float screenHeight; /* height from center to top/bottom border */
     private float screenWidth; /* height from center to left/right border */
@@ -26,8 +27,6 @@ public class PlatformGenerator : MonoBehaviour
     
     public float spawnPositionWidthScale = 0.35f;
     public float spawnPositionHeightScale = 1.0f;
-
-    public LetterClass[] letterObjectArray;
 
     private Camera mainCamera;
     public float minHeight = 1.0f;
@@ -57,7 +56,8 @@ public class PlatformGenerator : MonoBehaviour
             
             /* update letter value */
             Platform platform = newPlatform.GetComponent<Platform>();
-            LetterClass letterObject = letterObjectArray[GetNextLetter()];
+
+            LetterClass letterObject = GetNextLetter();
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             if (letterPlatform)
             {
@@ -87,12 +87,23 @@ public class PlatformGenerator : MonoBehaviour
 
             /* update letter value */
             Platform platform = bottomPlatform.GetComponent<Platform>();
-            LetterClass letterObject = letterObjectArray[GetNextLetter()];
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
-            if (letterPlatform)
-            {
-                letterPlatform.SpriteRenderer.sprite = letterObject.image;
-                letterPlatform.SetLetter(letterObject);
+            
+            if (letterPlatform) {
+                if (Random.Range(1, 101) > 10) {
+                    LetterClass letterObject = GetNextLetter();
+                    letterPlatform.SpriteRenderer.sprite = letterObject.image;
+                    letterPlatform.SetLetter(letterObject);
+                } else {
+                    Powerup powerupObject = GetNextPowerup();
+                    letterPlatform.SpriteRenderer.sprite = powerupObject.image;
+                    letterPlatform.SetPowerup(powerupObject);
+                }
+                
+                if (GlobalVariables.updateWordChangeHeight) {
+                    GlobalVariables.yPosChange = letterPlatform.transform.position.y-5f;
+                    GlobalVariables.updateWordChangeHeight = false;
+                }
             }
 
             /* update the platformQueue */
@@ -104,15 +115,19 @@ public class PlatformGenerator : MonoBehaviour
         }
     }
     
-    public int GetNextLetter()
+    public LetterClass GetNextLetter()
     {
         return letterSpawner.GetNextLetter();
+    }
+
+    public Powerup GetNextPowerup()
+    {
+        return letterSpawner.GetNextPowerup();
     }
 
     public void UpdateDifficulty(Difficulty difficulty)
     {
         letterSpawner.blankFrequency = difficulty.GetBlankFreq();
-        spawnPositionHeightScale = difficulty.GetHeightScale();
         minHeight = difficulty.GetMinSpawnHeight();
         maxHeight = difficulty.GetMaxSpawnHeight();
     }

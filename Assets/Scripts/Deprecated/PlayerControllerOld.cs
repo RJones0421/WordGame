@@ -125,7 +125,7 @@ public class PlayerControllerOld : MonoBehaviour
 
                 Debug.Log("SUBMIT RIGHT");
 
-                word.submitWord();
+                word.submitWord("right");
             }
 
             if (transform.position.x < -halfWidth)
@@ -134,7 +134,7 @@ public class PlayerControllerOld : MonoBehaviour
 
                 Debug.Log("SUBMIT LEFT");
 
-                word.submitWord();
+                word.submitWord("left");
             }
         }
 
