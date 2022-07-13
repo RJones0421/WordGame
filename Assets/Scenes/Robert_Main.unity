@@ -612,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.3, y: 70.3}
+  m_AnchoredPosition: {x: -304.29996, y: 70.3}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63624879
@@ -1376,7 +1376,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 785a80d33f43f4b2daf83867202c1eb2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -8134,7 +8134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.3, y: 121.3}
+  m_AnchoredPosition: {x: -304.29996, y: 121.3}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1476898123
@@ -11349,7 +11349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -371.09998, y: 70.29999}
+  m_AnchoredPosition: {x: -371.1, y: 70.29999}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027767381
