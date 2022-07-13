@@ -23,6 +23,7 @@ public class Timer : MonoBehaviour
 
     public Word word;
 
+    public SoundEffectSO gameEndSound;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,12 @@ public class Timer : MonoBehaviour
             else {
                 if(Time.timeScale==1)
                 {
+                    foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                    {
+                        source.Stop();
+                    }
+                    gameEndSound.Play();
+
                     int score = SetValues();
                     Word word = GameObject.Find("Word").GetComponent<Word>();
 #if true
