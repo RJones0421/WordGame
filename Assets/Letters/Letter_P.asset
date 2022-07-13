@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249a9714181da624dbbc53c8e30d3c6a, type: 3}
   m_Name: Letter_P
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: e3e3853fe73f2461d837c33e3934dc4e, type: 3}
+  image: {fileID: 21300000, guid: 90381fea445214581bb1f2d076be9a2c, type: 3}
   letter: 80
   score: 3

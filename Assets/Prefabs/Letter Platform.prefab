@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ed234aedde243f6bd6339b831320d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chalkParticles: {fileID: 0}
 --- !u!68 &-6419796797407443782
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -199,8 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f890391836e79411cb8c2d947e09956f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectible: {fileID: 0}
   chalkParticles: {fileID: 0}
+  collectible: {fileID: 0}
   letterArrow: {fileID: 0}
 --- !u!198 &-6688132923285137882
 ParticleSystem:
