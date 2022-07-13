@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     [SerializeField]
 	private float maxTime;
 
-	float timeLeft;
+	public float timeLeft;
 	public GameObject winCanvas;
     public GameObject canvasGroup;
     private bool timerRunning = false;
@@ -28,6 +28,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
     	winCanvas.SetActive(false);
+        Shop_Purchase.resetShopPowerUpUI();
     	timerBar = GetComponent<Image>();
     	timeLeft = maxTime;
         Time.timeScale = 1;
@@ -86,6 +87,8 @@ public class Timer : MonoBehaviour
 
     public int SetValues()
     {
+        Anagram.reset();
+        Shop_Purchase.resetShopPowerUpUI();
         winCanvas.SetActive(true);
         Time.timeScale = 0;
         canvasGroup.GetComponent<CanvasGroup>().interactable = false;
@@ -104,9 +107,17 @@ public class Timer : MonoBehaviour
             Debug.Log("Unable to parse final score after game completion, considering 0 as final score");
         }
 
+        // testing for score multiplier
+        // int new_score = ScoreMultiplier.DoubleScore(finalScore);
+        // finalScore = new_score;
+        // Debug.Log("Current final score post Double Score " + new_score);
+
         int highScore = ScoreUtils.updateAndGetHighsScore(finalScore);
 
         CurrencyUtils.addCurrency(finalScore);
+
+
+
 
 
         CurrencyUtils.displayCurrency("Currency_test");
@@ -169,6 +180,11 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         timerRunning = true;
+    }
+
+    public bool isTimerRunning()
+    {
+        return timerRunning;
     }
 
 }

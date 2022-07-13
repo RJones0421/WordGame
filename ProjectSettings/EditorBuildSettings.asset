@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Robert_Main.unity
     guid: 9c3a63c1ebfc0e74787f396d5c610769
-  - enabled: 0
-    path: Assets/Scenes/GreyboxMain.unity
-    guid: 470217b540ac56744a9204f1b25bb504
   m_configObjects: {}

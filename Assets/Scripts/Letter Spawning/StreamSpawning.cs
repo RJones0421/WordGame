@@ -9,6 +9,7 @@ public class StreamSpawning : Spawner
     [SerializeField] private DictionaryObject dictionaries;
 
 	[SerializeField] LetterObjectArray letterArray;
+	[SerializeField] PowerupObjectArray powerupArray;
 
     private Queue<string> queue = new Queue<string>();
     private Queue<char> word = new Queue<char>();
@@ -31,14 +32,7 @@ public class StreamSpawning : Spawner
 
 	private string GetWord()
 	{
-		if (isCommon)
-		{
-			return dictionaries.GetRandomCommonWord();
-		}
-		else
-		{
-			return dictionaries.GetRandomFullWord();
-		}
+		return dictionaries.GetRandomWord();
 	}
 	
 	public void setQueue()
@@ -68,5 +62,14 @@ public class StreamSpawning : Spawner
 		
 		return letterArray.GetLetter(getLetterQueue1());
 	}
-	
+
+	public override Powerup GetNextPowerup()
+	{
+		return powerupArray.GetPowerup(0);
+	}
+
+	public void UpdateDictionary(DictionaryObject dict)
+	{
+		dictionaries = dict;
+	}
 }
