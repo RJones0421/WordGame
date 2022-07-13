@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     public SoundEffectSO wallBounceSound;
     public SoundEffectSO gameEndSound;
 
+    private int lives = 0;
+
     private void Awake()
     {
         word = GameObject.Find("Word").GetComponent<Word>();
@@ -226,42 +228,55 @@ public class PlayerController : MonoBehaviour
             float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
-                Debug.Log("YOU DIED");
-
-                gameOverCanvas.SetActive(true);
-                timer.StopTimer();
-                int score = timer.SetValues();
-
-
-                foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                if (lives > 0)
                 {
-                    source.Stop();
+                    Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
+
+                    timer.StopTimer();
+                    timer.timeLeft = timer.GetMaxTime();
+                    timer.StartTimer();
+
+                    transform.position = new Vector3(0.0f, mainCamera.transform.position.y, 0.0f);
                 }
-                gameEndSound.Play();
+                else
+                {
+                    Debug.Log("YOU DIED");
+
+                    gameOverCanvas.SetActive(true);
+                    timer.StopTimer();
+                    int score = timer.SetValues();
+
+
+                    foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                    {
+                        source.Stop();
+                    }
+                    gameEndSound.Play();
 
 #if true
-                analyticsManagerScript.HandleEvent("death", new List<object>
-                {
-                    "falling",
-                    Time.timeSinceLevelLoadAsDouble,
-                    score,
-                    word.validWordCount,
-                    word.totalSubmissions,
-                    word.totalWordLength,
-                    word.totalValidWordLength,
-                });
+                    analyticsManagerScript.HandleEvent("death", new List<object>
+                    {
+                        "falling",
+                        Time.timeSinceLevelLoadAsDouble,
+                        score,
+                        word.validWordCount,
+                        word.totalSubmissions,
+                        word.totalWordLength,
+                        word.totalValidWordLength,
+                    });
 #else
-                analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
-                {
-                    { "cause", "falling", },
-                    { "time", Time.timeSinceLevelLoadAsDouble, },
-                    { "userScore", score, },
-                    { "validWordCount", word.validCount, },
-                    { "totalSubmissions", word.totalSubmissions, },
-                    { "totalWordLength", word.totalLength, },
-                    { "totalValidWordLength",word.totalValidLength, },
-                });
+                    analyticsManagerScript.HandleEvent("death", new Dictionary<string, object>
+                    {
+                        { "cause", "falling", },
+                        { "time", Time.timeSinceLevelLoadAsDouble, },
+                        { "userScore", score, },
+                        { "validWordCount", word.validCount, },
+                        { "totalSubmissions", word.totalSubmissions, },
+                        { "totalWordLength", word.totalLength, },
+                        { "totalValidWordLength",word.totalValidLength, },
+                    });
 #endif
+                }
             }
         }
 
@@ -290,6 +305,8 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("2"))
                 {
                     Debug.Log("player uses item number 2");
+                    lives++;
+                    Shop_Purchase.actiatePowerUpUI("ExtraLife");
                 }
             }
 
@@ -303,6 +320,7 @@ public class PlayerController : MonoBehaviour
                     // TwoX temp_twoX = new TwoX();
                     TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
                     temp_twoX.Activate();
+                    Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
                 }
             }
 
@@ -312,23 +330,14 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 4");
                 if (CurrencyUtils.useShopItem("1"))
                 {
+                    Anagram.Activate();
+                    Shop_Purchase.actiatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
 
                 }
             }
 
-            // prefix/suffix
-            if (Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6))
-            {
-                Debug.Log("Player clicked on 6");
-                if (CurrencyUtils.useShopItem("6"))
-                {
-                    Debug.Log("player uses item number 6");
-                    // SuffixPU_score_version temp = new SuffixPU_score_version();
-                    // temp.Activate_function();
-                    SuffixPU_score_version.Activate_function();
-                }
-            }
+
         }
     }
     // stop timer for 5 seconds
@@ -359,6 +368,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         wallBounceSound.Play();
+        letterCollectSound.pitchRange = new Vector2(1, 1);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -371,6 +381,7 @@ public class PlayerController : MonoBehaviour
                 if (letterPlatform.collectible is LetterClass && ((LetterClass)letterPlatform.collectible).Letter != '_' && !letterPlatform.HasBeenCollected())
                 {
                     letterCollectSound.Play(null, 0.2f);
+                    letterCollectSound.pitchRange = new Vector2(letterCollectSound.pitchRange.x + 0.1f, letterCollectSound.pitchRange.y + 0.1f);
                 }
 
                 letterPlatform.Activate();
