@@ -43,7 +43,9 @@ public class Word : MonoBehaviour
     public int totalWordLength;
     public int totalValidWordLength;
 
-    public TMP_Text addScoreAmount;
+    public TMP_Text addScoreAmountLeft;
+    public TMP_Text addScoreAmountRight;
+    private TMP_Text addScoreAmount;
     
     private int multiplier = 1;
 
@@ -65,7 +67,7 @@ public class Word : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) submitWord();
+        if (Input.GetKeyDown(KeyCode.Return)) submitWord("");
     }
 
     public void SetSidebars(List<GameObject> walls)
@@ -80,6 +82,7 @@ public class Word : MonoBehaviour
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);
+        
 
         if (newLetter.Letter == '_') return false;
         if (newLetter.Letter == '?' && word.Contains('?')) return false;
@@ -93,7 +96,7 @@ public class Word : MonoBehaviour
         // Update Sidebars
         UpdateSidebars();
 
-            return true;
+        return true;
     }
 
     public void PopLetter() {
@@ -183,7 +186,7 @@ public class Word : MonoBehaviour
         isCoroutineRunning = false;
     }
 
-    public int submitWord() {
+    public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
 
@@ -268,11 +271,17 @@ public class Word : MonoBehaviour
 
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
-
-        addScoreAmount.text = "+" + score.ToString();
-        addScoreAmount.alpha = 1;
-        StartCoroutine(Fade());
-
+        if(score != 0){
+            if(wallSide == "left"){
+                addScoreAmount = addScoreAmountLeft;
+            }
+            else{
+                addScoreAmount = addScoreAmountRight;
+            }
+            addScoreAmount.text = "+" + score.ToString();
+            addScoreAmount.alpha = 1;
+            StartCoroutine(Fade());
+        }
         StartCoroutine(sidebarBounce(15f));
 
         return score;

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private Renderer renderer;
 
+
     public bool allowMouseMovement;
 
     public Word word;
@@ -47,6 +48,10 @@ public class PlayerController : MonoBehaviour
     public SoundEffectSO wallBounceSound;
     public SoundEffectSO gameEndSound;
 
+    public Transform height;
+
+    private TextMeshProUGUI controlsTutorial;
+
     private int lives = 0;
 
     private void Awake()
@@ -58,6 +63,9 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+
+        // Get Tutorial Text
+        controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     // Start is called before the first frame update
@@ -77,6 +85,21 @@ public class PlayerController : MonoBehaviour
 
         // intialize the shop item objects
         ScoreMultiplier.reset();
+
+        if(PlayerPrefs.HasKey("controls")) {
+            if(PlayerPrefs.GetInt("controls") == 0) {
+                allowMouseMovement = false;
+                controlsTutorial.text = "A/D to move";
+            }
+            else {
+                allowMouseMovement = true;
+                controlsTutorial.text = "Mouse to move";
+            }
+        }
+        else {
+            allowMouseMovement = false;
+            controlsTutorial.text = "A/D to move";
+        }
     }
 
     // Update is called once per frame
@@ -118,10 +141,10 @@ public class PlayerController : MonoBehaviour
         //}
 
         // Toggle Mouse Movement
-        if (Input.GetKeyDown(KeyCode.M))
+        /*if (Input.GetKeyDown(KeyCode.M))
         {
             allowMouseMovement = !allowMouseMovement;
-        }
+        }*/
 
         // Jump
         {
@@ -150,6 +173,7 @@ public class PlayerController : MonoBehaviour
 
                 Vector3 movement = new Vector3(inputX, 0, 0);
                 movement *= Time.deltaTime * keyMovementSpeed;
+                if (PlayerPrefs.HasKey("sensitivity")) movement *= PlayerPrefs.GetFloat("sensitivity");
 
                 transform.Translate(movement);
             }
@@ -157,7 +181,10 @@ public class PlayerController : MonoBehaviour
             // Mouse
             if (!isBouncingBack && allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+                if(PlayerPrefs.HasKey("sensitivity")) {
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed * PlayerPrefs.GetFloat("sensitivity"));
+                }
+                else transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
         }
 
@@ -167,11 +194,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (started && word.GetWordLength() > 0)
                 {
+                    // chalkParticles.Emit(100);
                     InitiateBounce();
 
                     Debug.Log("SUBMIT RIGHT");
 
-                    word.submitWord();
+                    word.submitWord("right");
                 }
                 else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -184,7 +212,7 @@ public class PlayerController : MonoBehaviour
 
                     Debug.Log("SUBMIT LEFT");
 
-                    word.submitWord();
+                    word.submitWord("left");
                 }
                 else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -282,7 +310,7 @@ public class PlayerController : MonoBehaviour
 
         // shop item activation
         {
-            // Stop Time
+            // highlight letter
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
             {
                 Debug.Log("Player clicked on 1");
@@ -342,7 +370,46 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            // pause time
+            if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+            {
+                Debug.Log("Player clicked on 5");
+                if (CurrencyUtils.useShopItem("5"))
+                {
+                    // timer.StopTimer()
+                    StartCoroutine(StopTime());
+                    // timer.StartTimer();
+                    Shop_Purchase.actiatePowerUpUI("PauseTime");
 
+                    Debug.Log("player uses item number 5");
+                }
+            }
+
+            // prefix/suffix
+            if (Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                Debug.Log("Player clicked on 6");
+                if (CurrencyUtils.useShopItem("6"))
+                {
+                    Debug.Log("player uses item number 6");
+                    // SuffixPU_score_version temp = new SuffixPU_score_version();
+                    // temp.Activate_function();
+                    SuffixPU_score_version.Activate_function();
+                }
+            }
+
+            // toggle half gravity for testing
+            if (Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Keypad7))
+            {
+                if (GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale == 1.0f)
+                {
+                    GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 0.7f;
+                }
+                else
+                {
+                    GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+                }
+            }
         }
     }
     // stop timer for 5 seconds
@@ -379,7 +446,18 @@ public class PlayerController : MonoBehaviour
     {
         if (started && rb.velocity.y < 0.0f)
         {
+            // Squish and Stretch Animation
+            height.GetComponent<Animator>().SetTrigger("Bounce");
+
+            // Reset Gravity
+            if (Platform.activated)
+            {
+                GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+                Platform.activated = false;
+            }
+
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+
             NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
             if (letterPlatform)
             {
@@ -396,6 +474,12 @@ public class PlayerController : MonoBehaviour
                 //{
                 //    timeStop.Activate();
                 //}
+            }
+
+            JumpPlatform jumpPlatform = collision.GetComponent<JumpPlatform>();
+            if (jumpPlatform)
+            {
+                jumpPlatform.Activate();
             }
 
             bounceSound.Play();
