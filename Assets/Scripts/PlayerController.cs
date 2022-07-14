@@ -100,6 +100,9 @@ public class PlayerController : MonoBehaviour
             allowMouseMovement = false;
             controlsTutorial.text = "A/D to move";
         }
+
+        // updating shop item quantity for the left hand panel
+        UpdateShopItemCount();
     }
 
     // Update is called once per frame
@@ -360,7 +363,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
             {
                 Debug.Log("Player clicked on 4");
-                if (CurrencyUtils.useShopItem("1"))
+                if (CurrencyUtils.useShopItem("4"))
                 {
                     Anagram.Activate();
                     Shop_Purchase.actiatePowerUpUI("Anagram");
@@ -412,6 +415,17 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    // initialization of the item count in the left hand panel
+    public void UpdateShopItemCount() {
+        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+        return;
+    }
+
+
     // stop timer for 5 seconds
     public IEnumerator StopTime()
     {
