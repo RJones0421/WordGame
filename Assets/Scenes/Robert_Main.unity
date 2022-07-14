@@ -1002,12 +1002,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c824a350cbeb644d68986507cdea5108, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a3a1de74a3da26f43a609c965dc11aa0, type: 2}
     - target: {fileID: 6844295156165082423, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_Name
       value: Blank3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844295156165082440, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_RootOrder
@@ -2876,6 +2884,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d05d224960a8644baa1ee7958bfa7448, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: be888edad6697c54aaf18a8c0880600b, type: 2}
@@ -2887,6 +2899,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d05d224960a8644baa1ee7958bfa7448, type: 3}
+    - target: {fileID: 6844295156165082440, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6446,12 +6462,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c824a350cbeb644d68986507cdea5108, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a3a1de74a3da26f43a609c965dc11aa0, type: 2}
     - target: {fileID: 6844295156165082423, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_Name
       value: Blank4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844295156165082440, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_RootOrder
@@ -6839,6 +6863,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c824a350cbeb644d68986507cdea5108, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a3a1de74a3da26f43a609c965dc11aa0, type: 2}
@@ -6846,9 +6874,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blank1
       objectReference: {fileID: 0}
+    - target: {fileID: 6844295156165082440, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.446281
       objectReference: {fileID: 0}
     - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7703,6 +7739,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5852c6583e8974dbeb8a6b054817c35c, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a677a33ef9c9b6e46812d272fd429cf7, type: 2}
@@ -7714,6 +7754,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 5852c6583e8974dbeb8a6b054817c35c, type: 3}
+    - target: {fileID: 6844295156165082440, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -7870,12 +7914,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c824a350cbeb644d68986507cdea5108, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a3a1de74a3da26f43a609c965dc11aa0, type: 2}
     - target: {fileID: 6844295156165082423, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_Name
       value: Blank2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844295156165082440, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_RootOrder
@@ -8032,6 +8084,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8c98f626df7494b7396acd1b71e7f523, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: 4729d2afaa5c1c841915141730743d64, type: 2}
@@ -8043,6 +8099,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8c98f626df7494b7396acd1b71e7f523, type: 3}
+    - target: {fileID: 6844295156165082440, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6844295156165082441, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: m_RootOrder
       value: 3

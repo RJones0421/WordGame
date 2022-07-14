@@ -442,6 +442,11 @@ public class PlayerController : MonoBehaviour
         {
             // Squish and Stretch Animation
             height.GetComponent<Animator>().SetTrigger("Bounce");
+            Transform transform = collision.transform;
+            if (transform.childCount > 0)
+            {
+                transform.GetChild(0).GetComponent<Animator>().SetTrigger("Bounce");
+            }
 
             // Reset Gravity
             if (Platform.activated)
