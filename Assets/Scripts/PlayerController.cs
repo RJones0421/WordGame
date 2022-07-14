@@ -427,8 +427,7 @@ public class PlayerController : MonoBehaviour
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
         }
-
-
+        Shop_Purchase.deActiatePowerUpUI("PauseTime");
     }
 
     private void InitiateBounce()
