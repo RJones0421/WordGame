@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-1317632423057790715
+--- !u!21 &-7342276747304254964
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -33,7 +33,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 1084917583777427839}
+        m_Texture: {fileID: 8023131096813047858}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OutlineTex:
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: Chalk-Regular SDF
   m_EditorClassIdentifier: 
   hashCode: 967032139
-  material: {fileID: -1317632423057790715}
+  material: {fileID: -7342276747304254964}
   materialHashCode: -1091252853
   m_Version: 1.1.0
   m_SourceFontFileGUID: 141e18d826ba44a759a8c5c546c9eda1
@@ -1139,7 +1139,7 @@ MonoBehaviour:
     m_GlyphIndex: 58
     m_Scale: 1
   m_AtlasTextures:
-  - {fileID: 1084917583777427839}
+  - {fileID: 8023131096813047858}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
   m_ClearDynamicDataOnBuild: 0
@@ -1624,7 +1624,7 @@ MonoBehaviour:
   boldSpacing: 7
   italicStyle: 35
   tabSize: 10
---- !u!28 &1084917583777427839
+--- !u!28 &8023131096813047858
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
