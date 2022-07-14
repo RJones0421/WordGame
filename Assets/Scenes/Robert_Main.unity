@@ -462,7 +462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &61575930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1712,7 +1712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 102.04006, y: 60}
+  m_AnchoredPosition: {x: 102.04006, y: 80}
   m_SizeDelta: {x: 195.58, y: 55.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &410679531
@@ -1737,8 +1737,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TEXT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4da343ce781154397a82f9e3cf3ee2cd, type: 2}
-  m_sharedMaterial: {fileID: -7342276747304254964, guid: 4da343ce781154397a82f9e3cf3ee2cd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 45e9fcf728e154dd980f8f431fb93382, type: 2}
+  m_sharedMaterial: {fileID: 3095508398951077677, guid: 45e9fcf728e154dd980f8f431fb93382, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1762,8 +1762,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 96
+  m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4437,7 +4437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &802502652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11742,15 +11742,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Suggested Word:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4da343ce781154397a82f9e3cf3ee2cd, type: 2}
-  m_sharedMaterial: {fileID: -7342276747304254964, guid: 4da343ce781154397a82f9e3cf3ee2cd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 45e9fcf728e154dd980f8f431fb93382, type: 2}
+  m_sharedMaterial: {fileID: 3095508398951077677, guid: 45e9fcf728e154dd980f8f431fb93382, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11767,8 +11767,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

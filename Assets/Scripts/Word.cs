@@ -75,8 +75,8 @@ public class Word : MonoBehaviour
         leftSidebar = walls[0].GetComponent<SpriteRenderer>();
         rightSidebar = walls[1].GetComponent<SpriteRenderer>();
 
-        leftSidebar.color = Color.gray;
-        rightSidebar.color = Color.gray;
+        leftSidebar.color = Color.white;
+        rightSidebar.color = Color.white;
     }
 
     public bool addLetter(LetterClass newLetter)
