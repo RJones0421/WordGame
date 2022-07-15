@@ -6,6 +6,10 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    public SpriteRenderer currSprite;
+    public Sprite playerGround;
+    public Sprite playerJump;
+    public Sprite playerSubmit;
     public float keyMovementSpeed;
     public float mouseMovementSpeed;
     private bool started = false;
@@ -198,7 +202,7 @@ public class PlayerController : MonoBehaviour
                 if (started && word.GetWordLength() > 0)
                 {
                     // chalkParticles.Emit(100);
-                    InitiateBounce();
+                    InitiateBounce("right");
 
                     Debug.Log("SUBMIT RIGHT");
 
@@ -211,7 +215,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (started && word.GetWordLength() > 0)
                 {
-                    InitiateBounce();
+                    InitiateBounce("left");
 
                     Debug.Log("SUBMIT LEFT");
 
@@ -428,8 +432,15 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void InitiateBounce()
+    private void InitiateBounce(string side)
     {
+        if(side == "left"){
+            StartCoroutine("BounceLeft");
+        }
+        else{
+            currSprite.flipX = true;
+            StartCoroutine("BounceRight");
+        }
         bounceBackToCenter = true;
         bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
         isBouncingBack = true;
@@ -443,6 +454,9 @@ public class PlayerController : MonoBehaviour
     {
         if (started && rb.velocity.y < 0.0f)
         {
+            StartCoroutine(AnimateJump());
+            //currSprite.sprite = playerGround;
+            //Invoke("AnimateJump", 0.1f);
             // Squish and Stretch Animation
             height.GetComponent<Animator>().SetTrigger("Bounce");
 
@@ -481,5 +495,24 @@ public class PlayerController : MonoBehaviour
 
             bounceSound.Play();
         }
+    }
+
+    IEnumerator AnimateJump(){
+        currSprite.sprite = playerGround;
+        yield return new WaitForSeconds(0.3f);
+        currSprite.sprite = playerJump;
+    }
+
+    IEnumerator BounceLeft(){
+        currSprite.sprite = playerSubmit;
+        yield return new WaitForSeconds(0.3f);
+        currSprite.sprite = playerJump;
+    }
+
+    IEnumerator BounceRight(){
+        currSprite.sprite = playerSubmit;
+        yield return new WaitForSeconds(0.3f);
+        currSprite.sprite = playerJump;
+        currSprite.flipX = false;
     }
 }
