@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35cdba716d0797d40bb7c4ffad19ed3b, type: 3}
-  m_Name: Time Low Sound
+  m_Name: Button Click Sound
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 03cdc6c95b776d840bad6edbf3004992, type: 3}
+  clip: {fileID: 8300000, guid: 29c2409f75153764699cc2dc9196e94c, type: 3}
   volumeRange: {x: 1, y: 1}
   pitchRange: {x: 1, y: 1}

@@ -2530,6 +2530,7 @@ MonoBehaviour:
   analyticsManager: {fileID: 719126423}
   word: {fileID: 0}
   gameEndSound: {fileID: 11400000, guid: 213bc70fd0d05d14889be19d2d915b6f, type: 2}
+  timeLowSound: {fileID: 11400000, guid: 0e3c891f45a15e847aaf787948281a75, type: 2}
 --- !u!1001 &540959656
 PrefabInstance:
   m_ObjectHideFlags: 0
