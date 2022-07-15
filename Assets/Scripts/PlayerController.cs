@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private Renderer renderer;
 
+    public bool faceLeft;
+    public bool onGround;
+    public bool onWall;
 
     public bool allowMouseMovement;
 
