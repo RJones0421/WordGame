@@ -2529,6 +2529,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
   word: {fileID: 0}
+  gameEndSound: {fileID: 0}
 --- !u!1001 &540959656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2621,6 +2622,10 @@ PrefabInstance:
       propertyPath: ShapeModule.randomDirectionAmount
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 35fd8a5e5c4e44b6594ccd3dd6d38e5c, type: 3}
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
@@ -7420,6 +7425,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d3b4df5034e204c769ab921a5d943456, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a677a33ef9c9b6e46812d272fd429cf7, type: 2}
@@ -7751,6 +7760,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc1a80ff8d91e494e87dc2a101e500f6, type: 3}
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
