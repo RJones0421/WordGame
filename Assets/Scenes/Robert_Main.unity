@@ -612,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.3001, y: 70.30002}
+  m_AnchoredPosition: {x: -304.30005, y: 70.30002}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63624879
@@ -2529,7 +2529,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
   word: {fileID: 0}
-  gameEndSound: {fileID: 0}
+  gameEndSound: {fileID: 11400000, guid: 213bc70fd0d05d14889be19d2d915b6f, type: 2}
 --- !u!1001 &540959656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7951,7 +7951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.3001, y: 121.30002}
+  m_AnchoredPosition: {x: -304.30005, y: 121.30002}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1476898123
@@ -10502,7 +10502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -371.10016, y: 121.30002}
+  m_AnchoredPosition: {x: -371.1001, y: 121.30002}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903825689
@@ -11086,7 +11086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -371.10016, y: 70.29999}
+  m_AnchoredPosition: {x: -371.1001, y: 70.29999}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027767381
