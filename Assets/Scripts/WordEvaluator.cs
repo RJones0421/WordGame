@@ -7,6 +7,7 @@ public class WordEvaluator : MonoBehaviour
 	[SerializeField] private DictionaryObject dictionaries;
 
 	private Hashtable letterValues;
+	private Word word1;
 	
     void Awake()
     {
@@ -43,6 +44,10 @@ public class WordEvaluator : MonoBehaviour
 	{
 		//if anagram powerup is activated check if word matches 
 		if(Anagram.isActivated()){
+		    word1 = GameObject.Find("Word").GetComponent<Word>();
+            Debug.Log("isValidWord " +  word1.getWord());
+			Debug.Log("anagram is " + dictionaries.getAnagram(word));
+			word1.setWord(dictionaries.getAnagram(word));
 			return dictionaries.VerifyWordAnagram(word);
 		}
 		return dictionaries.VerifyWord(word);

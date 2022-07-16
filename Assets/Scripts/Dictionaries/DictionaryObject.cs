@@ -11,6 +11,7 @@ public class DictionaryObject : ScriptableObject
     //List with each word sorted in alphabetical order - for matching anagrams
     private List<string> fullListWithSortedChars;
     [SerializeField] private bool isWordCheck = false;
+    private Dictionary<string,List<string>> Anagrams; 
 
     private void OnEnable()
     {
@@ -21,6 +22,7 @@ public class DictionaryObject : ScriptableObject
     {
         string allWords = wordList.text;
         fullList = new List<string>();
+        Anagrams = new Dictionary<string, List<string>>();
 
         if (isWordCheck)
         {
@@ -28,7 +30,15 @@ public class DictionaryObject : ScriptableObject
             fullListWithSortedChars = new List<string>();
             foreach (string word in allWords.Split("\n"[0]))
             {
+                string anagram = GetWordWithSortedChars(word.Trim());
                 fullList.Add(word.Trim());
+                if(Anagrams.ContainsKey(anagram)){
+                    
+                    Anagrams[anagram].Add(word.Trim());
+                }
+                else{
+                    Anagrams.Add(anagram,new List<string>{word.Trim()});
+                }
                 fullListWithSortedChars.Add(GetWordWithSortedChars(word.Trim()));
             }
         }
@@ -36,7 +46,15 @@ public class DictionaryObject : ScriptableObject
         {
             foreach (string word in allWords.Split("\n"[0]))
             {
+                string anagram = GetWordWithSortedChars(word.Trim());
                 fullList.Add(word.Trim());
+                if(Anagrams.ContainsKey(anagram)){
+                    
+                     Anagrams[anagram].Add(word.Trim());
+                }
+                else{
+                    Anagrams.Add(anagram,new List<string>{word.Trim()});
+                }
                 fullListWithSortedChars.Add(GetWordWithSortedChars(word.Trim()));
             }
         }
@@ -68,5 +86,12 @@ public class DictionaryObject : ScriptableObject
         char[] characters = input.ToCharArray();
         System.Array.Sort(characters);
         return new string(characters);
+    }
+    public string getAnagram(string input){
+        char[] characters = input.ToCharArray();
+        System.Array.Sort(characters);
+        string anagram = new string(characters);
+        List<string> anagramWords = Anagrams.GetValueOrDefault(anagram, new List<string>{""});
+        return anagramWords[0];
     }
 }

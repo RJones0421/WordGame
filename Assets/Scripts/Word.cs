@@ -309,4 +309,11 @@ public class Word : MonoBehaviour
     {
         multiplier = multi;
     }
+    
+    public void setWord(string newWord){
+        word = newWord;
+    }
+    public string getWord(){
+        return word;
+    }
 }
