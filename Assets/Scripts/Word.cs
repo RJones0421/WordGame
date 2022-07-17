@@ -319,9 +319,13 @@ public class Word : MonoBehaviour
     }
     public void changeWord(string newWord){
         word = newWord;
+        string newWordLower = newWord.ToLower();
         letters.Clear();
         currentLetterBox = 0;
-        foreach(char c in newWord){
+        foreach(char c in newWordLower){
+            Debug.Log("char of anagram is " + c);
+            int index = c - 'a' + 1;
+            Debug.Log(index);
             LetterClass newLetter = letterArray.GetLetter(c - 'a' + 1);
             sprites[currentLetterBox].sprite = newLetter.image;
             currentLetterBox++;
