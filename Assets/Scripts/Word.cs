@@ -10,6 +10,7 @@ public class Word : MonoBehaviour
     [SerializeField] private WordEvaluator evaluator;
 
     [SerializeField] private Sprite defaultSprite;
+    [SerializeField] LetterObjectArray letterArray;
 
     [SerializeField] public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
@@ -321,8 +322,7 @@ public class Word : MonoBehaviour
         letters.Clear();
         currentLetterBox = 0;
         foreach(char c in newWord){
-            LetterClass newLetter = new LetterClass();
-            newLetter.setLetter(c);
+            LetterClass newLetter = letterArray.GetLetter(c - 'a' + 1);
             sprites[currentLetterBox].sprite = newLetter.image;
             currentLetterBox++;
         }
