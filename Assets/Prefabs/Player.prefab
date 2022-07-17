@@ -150,7 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyMovementSpeed: 10
   mouseMovementSpeed: 25
-  chalkParticles: {fileID: 0}
   allowMouseMovement: 0
   word: {fileID: 0}
   wallPrefab: {fileID: 0}
@@ -165,6 +164,7 @@ MonoBehaviour:
   letterCollectSound: {fileID: 0}
   wallBounceSound: {fileID: 0}
   gameEndSound: {fileID: 0}
+  height: {fileID: 0}
 --- !u!198 &8753259243062902603
 ParticleSystem:
   m_ObjectHideFlags: 0

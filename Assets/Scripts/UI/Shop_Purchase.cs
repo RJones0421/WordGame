@@ -48,6 +48,11 @@ public class Shop_Purchase : MonoBehaviour
         actiatePowerUpUIWithColor(powerupName,color);
     }
 
+    public static void deActiatePowerUpUI(String powerupName) {
+        Color color = new Color(242, 140, 128);
+        actiatePowerUpUIWithColor(powerupName,color);
+    }
+
     public static void actiatePowerUpUIWithColor(String powerupName, Color newColor) {
         GameObject inputFieldGo = GameObject.Find("Button_" + powerupName);
         Button inputFieldCo2 = inputFieldGo.GetComponent<Button>();

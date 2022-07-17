@@ -10,6 +10,8 @@ public class SoundEffectSO : ScriptableObject
     public Vector2 volumeRange = new Vector2(0.5f, 0.5f);
     public Vector2 pitchRange = new Vector2(1, 1);
 
+    private GameObject storedObject;
+
     public AudioSource Play(AudioSource audioSourceParam = null, float delay = 0)
     {
         if (clip == null)
@@ -33,6 +35,16 @@ public class SoundEffectSO : ScriptableObject
 
         Destroy(source.gameObject, source.clip.length / source.pitch);
 
+        storedObject = source.gameObject;
+
         return source;
+    }
+
+    public void Stop()
+    {
+        if (storedObject)
+        {
+            Destroy(storedObject);
+        }
     }
 }
