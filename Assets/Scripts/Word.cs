@@ -316,4 +316,15 @@ public class Word : MonoBehaviour
     public string getWord(){
         return word;
     }
+    public void changeWord(string newWord){
+        word = newWord;
+        letters.Clear();
+        currentLetterBox = 0;
+        foreach(char c in newWord){
+            LetterClass newLetter = new LetterClass();
+            newLetter.setLetter(c);
+            sprites[currentLetterBox].sprite = newLetter.image;
+            currentLetterBox++;
+        }
+    }
 }

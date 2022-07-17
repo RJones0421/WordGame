@@ -3,7 +3,18 @@ guid: afb8356c32890634d9fab4e7f9ade398
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - evaluator: {instanceID: 0}
+  - defaultSprite: {instanceID: 0}
+  - letterArray: {fileID: 11400000, guid: ef5719dd68ea5664f9107c00c3aeb3a5, type: 2}
+  - timer: {instanceID: 0}
+  - scoreManager: {instanceID: 0}
+  - arrows: {instanceID: 0}
+  - analyticsManager: {instanceID: 0}
+  - addScoreAmountLeft: {instanceID: 0}
+  - addScoreAmountRight: {instanceID: 0}
+  - wordSubmitSound: {instanceID: 0}
+  - wordClearSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

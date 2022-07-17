@@ -47,7 +47,11 @@ public class WordEvaluator : MonoBehaviour
 		    word1 = GameObject.Find("Word").GetComponent<Word>();
             Debug.Log("isValidWord " +  word1.getWord());
 			Debug.Log("anagram is " + dictionaries.getAnagram(word));
-			word1.setWord(dictionaries.getAnagram(word));
+			// word1.setWord(dictionaries.getAnagram(word));
+			if(dictionaries.VerifyWordAnagram(word)){
+				word1.changeWord(dictionaries.getAnagram(word));
+			}
+			
 			return dictionaries.VerifyWordAnagram(word);
 		}
 		return dictionaries.VerifyWord(word);
