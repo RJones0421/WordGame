@@ -6,17 +6,6 @@ public class ScoreUtils : MonoBehaviour
 {
     static string highscore_keyname = "highscore";
     static List<Tuple<string,int>> wordsCollected = new List<Tuple<string,int>>();
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public static void clearCollectedWords(){
         wordsCollected.Clear();

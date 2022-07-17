@@ -20,12 +20,6 @@ public class ScoreManager : MonoBehaviour
         highScoreText.text = "Highscore: " + PlayerPrefs.GetInt("highscore");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void AddScore(int score)
     {
         Int32.TryParse(scoreText.text, out int currentScore);

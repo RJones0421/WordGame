@@ -46,14 +46,6 @@ public class NewLetterPlatform : Platform
         {
             DarkenSprite();
         }
-        /*
-        if (collectible.Letter == '_') return;
-        if (!isCollected)
-        {
-            word.addLetter(collectible);
-            DarkenSprite();
-        }
-        */
     }
     public void ActivateArrow()
     {

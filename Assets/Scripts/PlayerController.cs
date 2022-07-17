@@ -117,38 +117,6 @@ public class PlayerController : MonoBehaviour
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
 
-        //// Test TimeStop
-        //{
-        //    if (Input.GetKeyDown(KeyCode.T))
-        //    {
-        //        TimeStop timeStop = GetComponent<TimeStop>();
-        //        if (!timeStop)
-        //        {
-        //            //timeStop = gameObject.AddComponent<TimeStop>();
-        //            timeStop.Activate();
-        //        }
-        //    }
-        //}
-
-        //// Test Swap
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Y))
-        //    {
-        //        Swap swap = GetComponent<Swap>();
-        //        if (!swap)
-        //        {
-        //            swap = gameObject.AddComponent<Swap>();
-        //        }
-        //        swap.Activate();
-        //    }
-        //}
-
-        // Toggle Mouse Movement
-        /*if (Input.GetKeyDown(KeyCode.M))
-        {
-            allowMouseMovement = !allowMouseMovement;
-        }*/
-
         // Jump
         {
             if (Input.GetButtonDown("Jump"))
@@ -486,12 +454,6 @@ public class PlayerController : MonoBehaviour
                 }
 
                 letterPlatform.Activate();
-
-                //TimeStop timeStop = GetComponent<TimeStop>();
-                //if (timeStop != null)
-                //{
-                //    timeStop.Activate();
-                //}
             }
 
             JumpPlatform jumpPlatform = collision.GetComponent<JumpPlatform>();
