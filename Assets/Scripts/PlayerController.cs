@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     public GameObject wallPrefab;
     public List<GameObject> walls;
 
+    public ParticleSystem scoreParticles;
+    public ParticleSystem leftParticles;
+    public ParticleSystem rightParticles;
+
     public GameObject gameOverCanvas;
     public Timer timer;
     public GameObject tempTutroial;
@@ -82,6 +86,9 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
+
+        leftParticles = walls[0].GetComponent<ParticleSystem>();
+        rightParticles = walls[1].GetComponent<ParticleSystem>();
 
         // intialize the shop item objects
         ScoreMultiplier.reset();
@@ -197,12 +204,15 @@ public class PlayerController : MonoBehaviour
             {
                 if (started && word.GetWordLength() > 0)
                 {
-                    // chalkParticles.Emit(100);
                     InitiateBounce();
+                    rightParticles.Play();
 
                     Debug.Log("SUBMIT RIGHT");
 
-                    word.submitWord("right");
+                    if (word.submitWord("right") > 0)
+                    {
+                        scoreParticles.Play();
+                    }
                 }
                 else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -212,10 +222,14 @@ public class PlayerController : MonoBehaviour
                 if (started && word.GetWordLength() > 0)
                 {
                     InitiateBounce();
+                    leftParticles.Play();
 
                     Debug.Log("SUBMIT LEFT");
 
-                    word.submitWord("left");
+                    if (word.submitWord("left") > 0)
+                    {
+                        scoreParticles.Play();
+                    }
                 }
                 else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
