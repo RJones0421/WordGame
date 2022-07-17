@@ -27,6 +27,13 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem scoreParticles;
     public ParticleSystem leftParticles;
     public ParticleSystem rightParticles;
+    public ParticleSystemForceField forceField;
+
+    // private var rightMain;
+    // private var rightExternal;
+    // private var leftMain;
+    // private var leftExternal;
+
 
     public GameObject gameOverCanvas;
     public Timer timer;
@@ -89,6 +96,17 @@ public class PlayerController : MonoBehaviour
 
         leftParticles = walls[0].GetComponent<ParticleSystem>();
         rightParticles = walls[1].GetComponent<ParticleSystem>();
+
+        // rightParticles.externalForces.enabled = true;
+        // leftParticles.externalForces.enabled = true;
+
+        rightParticles.externalForces.AddInfluence(forceField);
+        leftParticles.externalForces.AddInfluence(forceField);
+
+        // rightMain = rightParticles.main;
+        // rightExternal = rightParticles.externalForces;
+        // leftMain = leftParticles.main;
+        // leftExternal = leftParticles.externalForces;
 
         // intialize the shop item objects
         ScoreMultiplier.reset();
@@ -205,13 +223,23 @@ public class PlayerController : MonoBehaviour
                 if (started && word.GetWordLength() > 0)
                 {
                     InitiateBounce();
-                    rightParticles.Play();
+                    var rightMain = rightParticles.main;
+                    var rightExternal = rightParticles.externalForces;
+                    
 
                     Debug.Log("SUBMIT RIGHT");
 
                     if (word.submitWord("right") > 0)
                     {
-                        scoreParticles.Play();
+                        rightMain.gravityModifier = 0;
+                        rightExternal.enabled = true;
+                        rightParticles.Play();
+                        scoreParticles.Play(); 
+                    }
+                    else {
+                        rightMain.gravityModifier = 5;
+                        rightExternal.enabled = false;
+                        rightParticles.Play();
                     }
                 }
                 else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
@@ -222,13 +250,22 @@ public class PlayerController : MonoBehaviour
                 if (started && word.GetWordLength() > 0)
                 {
                     InitiateBounce();
-                    leftParticles.Play();
+                    var leftMain = leftParticles.main;
+                    var leftExternal = leftParticles.externalForces;
 
                     Debug.Log("SUBMIT LEFT");
 
                     if (word.submitWord("left") > 0)
                     {
+                        leftMain.gravityModifier = 0;
+                        leftExternal.enabled = true;
+                        leftParticles.Play();
                         scoreParticles.Play();
+                    }
+                    else {
+                        leftMain.gravityModifier = 5;
+                        leftExternal.enabled = false;
+                        leftParticles.Play();
                     }
                 }
                 else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
