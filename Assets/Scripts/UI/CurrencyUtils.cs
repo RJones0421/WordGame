@@ -19,19 +19,6 @@ public class CurrencyUtils : MonoBehaviour
 
     static Dictionary<string, int> items_value = new Dictionary<string, int>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
     // average word submitted score is about 235, currency awarded will be 2
     public static void populateCostMap(){
         items_value.Add("1", 5);
