@@ -192,7 +192,7 @@ public class Word : MonoBehaviour
         // If valid, clear list
         if(Anagram.isActivated()){
             Anagram.reset();
-            Shop_Purchase.deActiatePowerUpUI("Anagram");
+            Shop_Purchase.deactivatePowerUpUI("Anagram");
             Debug.Log("Anagram reset");
         }
         totalSubmissions++;
