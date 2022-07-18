@@ -317,18 +317,26 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
             {
                 Debug.Log("Player clicked on 1");
-                if (CurrencyUtils.useShopItem("1"))
+                if(timer.isTimerRunning())
                 {
-                    // activate shop item power up in this code block
-                    Debug.Log("player uses item number 1 - Stop Time");
-                    StartCoroutine(StopTime());
-                    Shop_Purchase.actiatePowerUpUI("PauseTime");
-                    CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+                    if (CurrencyUtils.useShopItem("1"))
+                    {
+                        // activate shop item power up in this code block
+                        Debug.Log("player uses item number 1 - Stop Time");
+                        StartCoroutine(StopTime());
+                        Shop_Purchase.actiatePowerUpUI("PauseTime");
+                        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+                    }
+                    else
+                    {
+                        Debug.Log("player does not have item 1");
+                    }
                 }
                 else
                 {
-                    Debug.Log("player does not have item 1");
+                    Debug.Log("timer is running, you cannot activate the timer stop power up");
                 }
+
             }
 
             // extra life
