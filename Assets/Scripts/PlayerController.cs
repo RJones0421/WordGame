@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
     private float playerHeight;
     private Vector2 screenRes;
 
+    private Color greenChalk = new Color(0, 1, 0, 0.7F);
+    private Color redChalk = new Color(1, 0, 0, 0.75F);
+
     private bool bounceBackToCenter;
     private Vector3 bounceBackTargetPos;
     private float bounceBackSpeed = 15f;
@@ -233,12 +236,14 @@ public class PlayerController : MonoBehaviour
                     {
                         rightMain.gravityModifier = 0;
                         rightExternal.enabled = true;
+                        rightMain.startColor = greenChalk;
                         rightParticles.Play();
                         scoreParticles.Play(); 
                     }
                     else {
                         rightMain.gravityModifier = 5;
                         rightExternal.enabled = false;
+                        rightMain.startColor = redChalk;
                         rightParticles.Play();
                     }
                 }
@@ -259,12 +264,14 @@ public class PlayerController : MonoBehaviour
                     {
                         leftMain.gravityModifier = 0;
                         leftExternal.enabled = true;
+                        leftMain.startColor = greenChalk;
                         leftParticles.Play();
                         scoreParticles.Play();
                     }
                     else {
                         leftMain.gravityModifier = 5;
                         leftExternal.enabled = false;
+                        leftMain.startColor = redChalk;
                         leftParticles.Play();
                     }
                 }
