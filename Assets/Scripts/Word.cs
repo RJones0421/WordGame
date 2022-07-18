@@ -190,7 +190,11 @@ public class Word : MonoBehaviour
     public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
-
+        if(Anagram.isActivated()){
+            Anagram.reset();
+            Shop_Purchase.deActiatePowerUpUI("Anagram");
+            Debug.Log("Anagram reset");
+        }
         totalSubmissions++;
         totalWordLength += word.Length;
 
