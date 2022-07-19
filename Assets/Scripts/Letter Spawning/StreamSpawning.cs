@@ -41,6 +41,7 @@ public class StreamSpawning : Spawner
         word = new Queue<char>(currentWord.ToCharArray());
     	word.Enqueue(gap);
     	Debug.Log(currentWord);
+		Debug.Log(GlobalVariables.yPosChange);
         queue.Enqueue(GetWord());
     }
 	
