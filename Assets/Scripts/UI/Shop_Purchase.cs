@@ -20,6 +20,10 @@ public class Shop_Purchase : MonoBehaviour
         
     }
 
+    public static bool isPauseTimeActivated = false;
+    public static bool isScoreMultiplierActivated = false;
+    public static bool isExtraLifeActivated = false;
+
     public void onClickButton()
     {
         Debug.Log("Inside onclickButton()");
