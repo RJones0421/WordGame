@@ -107,6 +107,14 @@ public class Timer : MonoBehaviour
 
     }
 
+    public void pauseTimeActivated() {
+        timerBar.color = Color.blue;
+    }
+
+    public void pauseTimeDeactivated() {
+        timerBar.color = Color.white;
+    }
+
     public int SetValues()
     {
         Anagram.reset();

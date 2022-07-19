@@ -454,6 +454,7 @@ public class PlayerController : MonoBehaviour
 
         if (timer.isTimerRunning()) {
             timer.StopTimer();
+            timer.pauseTimeActivated();
         }
         Debug.Log("StopTime Activated, timer paused");
 
@@ -462,6 +463,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Time Returned Restarted Timer");
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
+            timer.pauseTimeDeactivated();
         }
         Shop_Purchase.deActiatePowerUpUI("PauseTime");
     }
