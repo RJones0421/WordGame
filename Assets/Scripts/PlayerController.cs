@@ -356,15 +356,29 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
             {
                 Debug.Log("Player clicked on 3");
-                if (CurrencyUtils.useShopItem("3"))
+                // if (CurrencyUtils.useShopItem("3"))
+                // activate score multiplier
+                if(word.getMultiplier() != 2)
                 {
-                    Debug.Log("player uses item number 3 - word/score multiplier");
-                    // TwoX temp_twoX = new TwoX();
-                    TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
-                    temp_twoX.Activate();
-                    Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
-                    CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+                    if(CurrencyUtils.getShopItemQuantity("3"))
+                    {
+                        Debug.Log("player uses item number 3 - word/score multiplier");
+                        // TwoX temp_twoX = new TwoX();
+                        TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
+                        temp_twoX.Activate();
+                        Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
+                        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+                    }
                 }
+                // deactivate power up
+                else
+                {
+                    Debug.Log("Score multiplier already activated score multiplier at this point: " + word.getMultiplier().ToString());
+                    word.setMultiplier(1);
+                    Debug.Log("Score multiplier post: " + word.getMultiplier().ToString());
+
+                }
+
             }
 
             // anagram

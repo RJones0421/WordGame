@@ -46,7 +46,7 @@ public class Word : MonoBehaviour
     public TMP_Text addScoreAmountLeft;
     public TMP_Text addScoreAmountRight;
     private TMP_Text addScoreAmount;
-    
+
     private int multiplier = 1;
 
     public SoundEffectSO wordSubmitSound;
@@ -82,7 +82,7 @@ public class Word : MonoBehaviour
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);
-        
+
 
         if (newLetter.Letter == '_') return false;
         if (newLetter.Letter == '?' && word.Contains('?')) return false;
@@ -194,7 +194,7 @@ public class Word : MonoBehaviour
         totalWordLength += word.Length;
 
         arrows.SetActive(false);
-        
+
         int wildcard = word.IndexOf('?');
         while (wildcard != -1) {
             char bestChar = 'A';
@@ -215,6 +215,11 @@ public class Word : MonoBehaviour
         }
 
         int score = evaluator.SubmitWord(word) * multiplier;
+        // delayed use of score multiplier power up, only deduct when the word is actually submitted
+        if (multiplier > 1)
+        {
+            CurrencyUtils.useShopItem("3");
+        }
         setMultiplier(1);
 
         scoreManagerScript.AddScore(score);
@@ -305,8 +310,13 @@ public class Word : MonoBehaviour
         return letters[index];
     }
 
-    public void setMultiplier(int multi) 
+    public void setMultiplier(int multi)
     {
         multiplier = multi;
+    }
+
+    public int getMultiplier()
+    {
+        return multiplier;
     }
 }

@@ -192,6 +192,18 @@ public class CurrencyUtils : MonoBehaviour
         }
     }
 
+    public static bool getShopItemQuantity(string item_num)
+    {
+        int item_quantity = PlayerPrefs.GetInt(item_num);
+        if (item_quantity > 0) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public static void showShopItemIcon(string item_num)
     {
         int item_quantity = PlayerPrefs.GetInt(item_num);
