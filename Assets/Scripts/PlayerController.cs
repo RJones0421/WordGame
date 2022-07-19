@@ -322,7 +322,7 @@ public class PlayerController : MonoBehaviour
                     // activate shop item power up in this code block
                     Debug.Log("player uses item number 1 - Stop Time");
                     StartCoroutine(StopTime());
-                    Shop_Purchase.actiatePowerUpUI("PauseTime");
+                    Shop_Purchase.activatePowerUpUI("PauseTime");
                     CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
                 }
                 else
@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("player uses item number 2");
                     lives++;
-                    Shop_Purchase.actiatePowerUpUI("ExtraLife");
+                    Shop_Purchase.activatePowerUpUI("ExtraLife");
                     CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
                 }
             }
@@ -354,7 +354,7 @@ public class PlayerController : MonoBehaviour
                     // TwoX temp_twoX = new TwoX();
                     TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
                     temp_twoX.Activate();
-                    Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
+                    Shop_Purchase.activatePowerUpUI("ScoreMultiplier");
                     CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
                 }
             }
@@ -366,7 +366,7 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("4"))
                 {
                     Anagram.Activate();
-                    Shop_Purchase.actiatePowerUpUI("Anagram");
+                    Shop_Purchase.activatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
                     CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
 
@@ -382,7 +382,7 @@ public class PlayerController : MonoBehaviour
                     // timer.StopTimer()
                     StartCoroutine(StopTime());
                     // timer.StartTimer();
-                    Shop_Purchase.actiatePowerUpUI("PauseTime");
+                    Shop_Purchase.activatePowerUpUI("PauseTime");
 
                     Debug.Log("player uses item number 5");
                 }
@@ -441,7 +441,7 @@ public class PlayerController : MonoBehaviour
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
         }
-        Shop_Purchase.deActiatePowerUpUI("PauseTime");
+        Shop_Purchase.deactivatePowerUpUI("PauseTime");
     }
 
     private void InitiateBounce()

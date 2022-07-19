@@ -10,6 +10,7 @@ public class Word : MonoBehaviour
     [SerializeField] private WordEvaluator evaluator;
 
     [SerializeField] private Sprite defaultSprite;
+    [SerializeField] LetterObjectArray letterArray;
 
     [SerializeField] public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
@@ -189,7 +190,11 @@ public class Word : MonoBehaviour
     public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
-
+        if(Anagram.isActivated()){
+            Anagram.reset();
+            Shop_Purchase.deactivatePowerUpUI("Anagram");
+            Debug.Log("Anagram reset");
+        }
         totalSubmissions++;
         totalWordLength += word.Length;
 
@@ -308,5 +313,26 @@ public class Word : MonoBehaviour
     public void setMultiplier(int multi) 
     {
         multiplier = multi;
+    }
+    
+    public void setWord(string newWord){
+        word = newWord;
+    }
+    public string getWord(){
+        return word;
+    }
+    public void changeWord(string newWord){
+        word = newWord;
+        string newWordLower = newWord.ToLower();
+        letters.Clear();
+        currentLetterBox = 0;
+        foreach(char c in newWordLower){
+            Debug.Log("char of anagram is " + c);
+            int index = c - 'a' + 1;
+            Debug.Log(index);
+            LetterClass newLetter = letterArray.GetLetter(c - 'a' + 1);
+            sprites[currentLetterBox].sprite = newLetter.image;
+            currentLetterBox++;
+        }
     }
 }
