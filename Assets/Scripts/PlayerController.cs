@@ -43,8 +43,6 @@ public class PlayerController : MonoBehaviour
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
-    public int extraLives;
-
     public SoundEffectSO bounceSound;
     public SoundEffectSO letterCollectSound;
     public SoundEffectSO wallBounceSound;
@@ -54,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private TextMeshProUGUI controlsTutorial;
 
-    private int lives = 0;
+    public static int lives;
 
     private void Awake()
     {
@@ -65,7 +63,8 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
-        extraLives = 0;
+
+        lives = 0;
 
         // Get Tutorial Text
         controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
@@ -262,6 +261,7 @@ public class PlayerController : MonoBehaviour
             float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
+                Debug.Log("Lives: " + lives);
                 if (lives > 0)
                 {
                     Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
@@ -270,7 +270,7 @@ public class PlayerController : MonoBehaviour
                     timer.timeLeft = timer.GetMaxTime();
                     timer.StartTimer();
 
-                    transform.position = new Vector3(0.0f, mainCamera.transform.position.y, 0.0f);
+                    transform.position = PlatformGenerator.bottomPlatform.transform.position.x * Vector3.right + mainCamera.transform.position.y * Vector3.up;
                 }
                 else
                 {
@@ -326,7 +326,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("player uses item number 1 - Stop Time");
                     StartCoroutine(StopTime());
                     Shop_Purchase.actiatePowerUpUI("PauseTime");
-                    CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+                    CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
                 }
                 else
                 {
@@ -343,7 +343,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("player uses item number 2");
                     lives++;
                     Shop_Purchase.actiatePowerUpUI("ExtraLife");
-                    CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
+                    CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
                 }
             }
 
@@ -358,7 +358,7 @@ public class PlayerController : MonoBehaviour
                     TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
                     temp_twoX.Activate();
                     Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
-                    CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+                    CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
                 }
             }
 
@@ -371,7 +371,7 @@ public class PlayerController : MonoBehaviour
                     Anagram.Activate();
                     Shop_Purchase.actiatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
-                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
 
                 }
             }
@@ -421,10 +421,10 @@ public class PlayerController : MonoBehaviour
 
     // initialization of the item count in the left hand panel
     public void UpdateShopItemCount() {
-        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
-        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
-        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
-        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
+        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
+        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
+        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
         return;
     }
 
