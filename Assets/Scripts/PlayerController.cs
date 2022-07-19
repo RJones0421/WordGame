@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem scoreParticles;
     public ParticleSystem leftParticles;
     public ParticleSystem rightParticles;
-    public ParticleSystem validWordParticles;
-    public ParticleSystem invalidWordParticles;
+    // public ParticleSystem validWordParticles;
+    // public ParticleSystem invalidWordParticles;
     public ParticleSystemForceField forceField;
 
     // private var rightMain;
@@ -241,14 +241,14 @@ public class PlayerController : MonoBehaviour
                         rightMain.startColor = greenChalk;
                         rightParticles.Play();
                         scoreParticles.Play();
-                        validWordParticles.Play(); 
+                        // validWordParticles.Play(); 
                     }
                     else {
                         rightMain.gravityModifier = 5;
                         rightExternal.enabled = false;
                         rightMain.startColor = redChalk;
                         rightParticles.Play();
-                        invalidWordParticles.Play();
+                        // invalidWordParticles.Play();
                     }
                 }
                 else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
@@ -271,14 +271,14 @@ public class PlayerController : MonoBehaviour
                         leftMain.startColor = greenChalk;
                         leftParticles.Play();
                         scoreParticles.Play();
-                        validWordParticles.Play();
+                        // validWordParticles.Play();
                     }
                     else {
                         leftMain.gravityModifier = 5;
                         leftExternal.enabled = false;
                         leftMain.startColor = redChalk;
                         leftParticles.Play();
-                        invalidWordParticles.Play();
+                        // invalidWordParticles.Play();
                     }
                 }
                 else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
