@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bounce Sound
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: fb1c1c6b5e5774c4b8cac80c459c0279, type: 3}
-  volumeRange: {x: 0.5, y: 0.5}
+  volumeRange: {x: 0.3, y: 0.3}
   pitchRange: {x: 0.8, y: 1.2}

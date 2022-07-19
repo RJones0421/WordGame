@@ -7,10 +7,10 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c847a091c5c85342aaefe3ea15b6da2, type: 3}
-  m_Name: Dictionaries
+  m_Name: Common5Letter
   m_EditorClassIdentifier: 
-  fullDictionary: {fileID: 4900000, guid: 98d8b0a80a9145843ab3fa139f5d20eb, type: 3}
-  commonDictionary: {fileID: 4900000, guid: 9d5b95b3bb625954987ae99c85010d57, type: 3}
+  wordList: {fileID: 4900000, guid: 30a5d8a3759202d439acf5e992103276, type: 3}
+  isWordCheck: 0

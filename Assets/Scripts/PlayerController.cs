@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private Renderer renderer;
 
+
     public bool allowMouseMovement;
 
     public Word word;
@@ -47,6 +48,10 @@ public class PlayerController : MonoBehaviour
     public SoundEffectSO wallBounceSound;
     public SoundEffectSO gameEndSound;
 
+    public Transform height;
+
+    private TextMeshProUGUI controlsTutorial;
+
     private int lives = 0;
 
     private void Awake()
@@ -58,6 +63,9 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+
+        // Get Tutorial Text
+        controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     // Start is called before the first frame update
@@ -77,6 +85,24 @@ public class PlayerController : MonoBehaviour
 
         // intialize the shop item objects
         ScoreMultiplier.reset();
+
+        if(PlayerPrefs.HasKey("controls")) {
+            if(PlayerPrefs.GetInt("controls") == 0) {
+                allowMouseMovement = false;
+                controlsTutorial.text = "A/D to move";
+            }
+            else {
+                allowMouseMovement = true;
+                controlsTutorial.text = "Mouse to move";
+            }
+        }
+        else {
+            allowMouseMovement = false;
+            controlsTutorial.text = "A/D to move";
+        }
+
+        // updating shop item quantity for the left hand panel
+        UpdateShopItemCount();
     }
 
     // Update is called once per frame
@@ -118,10 +144,10 @@ public class PlayerController : MonoBehaviour
         //}
 
         // Toggle Mouse Movement
-        if (Input.GetKeyDown(KeyCode.M))
+        /*if (Input.GetKeyDown(KeyCode.M))
         {
             allowMouseMovement = !allowMouseMovement;
-        }
+        }*/
 
         // Jump
         {
@@ -150,6 +176,7 @@ public class PlayerController : MonoBehaviour
 
                 Vector3 movement = new Vector3(inputX, 0, 0);
                 movement *= Time.deltaTime * keyMovementSpeed;
+                if (PlayerPrefs.HasKey("sensitivity")) movement *= PlayerPrefs.GetFloat("sensitivity");
 
                 transform.Translate(movement);
             }
@@ -157,7 +184,10 @@ public class PlayerController : MonoBehaviour
             // Mouse
             if (!isBouncingBack && allowMouseMovement)
             {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
+                if(PlayerPrefs.HasKey("sensitivity")) {
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed * PlayerPrefs.GetFloat("sensitivity"));
+                }
+                else transform.position = Vector3.MoveTowards(transform.position, new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y, 0.0f), Time.deltaTime * mouseMovementSpeed);
             }
         }
 
@@ -167,11 +197,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (started && word.GetWordLength() > 0)
                 {
+                    // chalkParticles.Emit(100);
                     InitiateBounce();
 
                     Debug.Log("SUBMIT RIGHT");
 
-                    word.submitWord();
+                    word.submitWord("right");
                 }
                 else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -184,7 +215,7 @@ public class PlayerController : MonoBehaviour
 
                     Debug.Log("SUBMIT LEFT");
 
-                    word.submitWord();
+                    word.submitWord("left");
                 }
                 else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -289,7 +320,10 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("1"))
                 {
                     // activate shop item power up in this code block
-                    Debug.Log("player uses item number 1");
+                    Debug.Log("player uses item number 1 - Stop Time");
+                    StartCoroutine(StopTime());
+                    Shop_Purchase.activatePowerUpUI("PauseTime");
+                    CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
                 }
                 else
                 {
@@ -305,7 +339,8 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("player uses item number 2");
                     lives++;
-                    Shop_Purchase.actiatePowerUpUI("ExtraLife");
+                    Shop_Purchase.activatePowerUpUI("ExtraLife");
+                    CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
                 }
             }
 
@@ -315,11 +350,12 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 3");
                 if (CurrencyUtils.useShopItem("3"))
                 {
-                    Debug.Log("player uses item number 3");
-                    ScoreMultiplier.Activate();
-                    int item_quantity = PlayerPrefs.GetInt("3");
-                    Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
-                    // Debug.Log("player uses item number 3");
+                    Debug.Log("player uses item number 3 - word/score multiplier");
+                    // TwoX temp_twoX = new TwoX();
+                    TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
+                    temp_twoX.Activate();
+                    Shop_Purchase.activatePowerUpUI("ScoreMultiplier");
+                    CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
                 }
             }
 
@@ -327,11 +363,12 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
             {
                 Debug.Log("Player clicked on 4");
-                if (CurrencyUtils.useShopItem("1"))
+                if (CurrencyUtils.useShopItem("4"))
                 {
                     Anagram.Activate();
-                    Shop_Purchase.actiatePowerUpUI("Anagram");
+                    Shop_Purchase.activatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
+                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
 
                 }
             }
@@ -345,7 +382,7 @@ public class PlayerController : MonoBehaviour
                     // timer.StopTimer()
                     StartCoroutine(StopTime());
                     // timer.StartTimer();
-                    Shop_Purchase.actiatePowerUpUI("PauseTime");
+                    Shop_Purchase.activatePowerUpUI("PauseTime");
 
                     Debug.Log("player uses item number 5");
                 }
@@ -363,8 +400,32 @@ public class PlayerController : MonoBehaviour
                     SuffixPU_score_version.Activate_function();
                 }
             }
+
+            // toggle half gravity for testing
+            if (Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Keypad7))
+            {
+                if (GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale == 1.0f)
+                {
+                    GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 0.7f;
+                }
+                else
+                {
+                    GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+                }
+            }
         }
     }
+
+    // initialization of the item count in the left hand panel
+    public void UpdateShopItemCount() {
+        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+        return;
+    }
+
+
     // stop timer for 5 seconds
     public IEnumerator StopTime()
     {
@@ -380,8 +441,7 @@ public class PlayerController : MonoBehaviour
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
         }
-
-
+        Shop_Purchase.deactivatePowerUpUI("PauseTime");
     }
 
     private void InitiateBounce()
@@ -399,7 +459,23 @@ public class PlayerController : MonoBehaviour
     {
         if (started && rb.velocity.y < 0.0f)
         {
+            // Squish and Stretch Animation
+            height.GetComponent<Animator>().SetTrigger("Bounce");
+            Transform transform = collision.transform;
+            if (transform.childCount > 0)
+            {
+                transform.GetChild(0).GetComponent<Animator>().SetTrigger("Bounce");
+            }
+
+            // Reset Gravity
+            if (Platform.activated)
+            {
+                GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+                Platform.activated = false;
+            }
+
             rb.velocity = new Vector2(rb.velocity.x, 10.0f);
+
             NewLetterPlatform letterPlatform = collision.GetComponent<NewLetterPlatform>();
             if (letterPlatform)
             {
@@ -416,6 +492,12 @@ public class PlayerController : MonoBehaviour
                 //{
                 //    timeStop.Activate();
                 //}
+            }
+
+            JumpPlatform jumpPlatform = collision.GetComponent<JumpPlatform>();
+            if (jumpPlatform)
+            {
+                jumpPlatform.Activate();
             }
 
             bounceSound.Play();

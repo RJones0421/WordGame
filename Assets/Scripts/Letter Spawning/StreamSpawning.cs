@@ -32,14 +32,7 @@ public class StreamSpawning : Spawner
 
 	private string GetWord()
 	{
-		if (isCommon)
-		{
-			return dictionaries.GetRandomCommonWord();
-		}
-		else
-		{
-			return dictionaries.GetRandomFullWord();
-		}
+		return dictionaries.GetRandomWord();
 	}
 	
 	public void setQueue()
@@ -73,5 +66,10 @@ public class StreamSpawning : Spawner
 	public override Powerup GetNextPowerup()
 	{
 		return powerupArray.GetPowerup(0);
+	}
+
+	public void UpdateDictionary(DictionaryObject dict)
+	{
+		dictionaries = dict;
 	}
 }

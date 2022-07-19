@@ -9,7 +9,7 @@ public class TwoX : Powerup
     {
         return Activate();
     }
-    
+
     public override bool Activate()
     {
         GlobalVariables.word.setMultiplier(2);

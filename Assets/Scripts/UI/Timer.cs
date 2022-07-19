@@ -23,6 +23,7 @@ public class Timer : MonoBehaviour
 
     public Word word;
 
+    public SoundEffectSO gameEndSound;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,12 @@ public class Timer : MonoBehaviour
             else {
                 if(Time.timeScale==1)
                 {
+                    foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                    {
+                        source.Stop();
+                    }
+                    gameEndSound.Play();
+
                     int score = SetValues();
                     Word word = GameObject.Find("Word").GetComponent<Word>();
 #if true
@@ -108,9 +115,9 @@ public class Timer : MonoBehaviour
         }
 
         // testing for score multiplier
-        int new_score = ScoreMultiplier.DoubleScore(finalScore);
-        finalScore = new_score;
-        Debug.Log("Current final score post Double Score " + new_score);
+        // int new_score = ScoreMultiplier.DoubleScore(finalScore);
+        // finalScore = new_score;
+        // Debug.Log("Current final score post Double Score " + new_score);
 
         int highScore = ScoreUtils.updateAndGetHighsScore(finalScore);
 

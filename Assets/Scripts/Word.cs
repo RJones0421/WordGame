@@ -10,6 +10,7 @@ public class Word : MonoBehaviour
     [SerializeField] private WordEvaluator evaluator;
 
     [SerializeField] private Sprite defaultSprite;
+    [SerializeField] LetterObjectArray letterArray;
 
     [SerializeField] public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
@@ -43,7 +44,9 @@ public class Word : MonoBehaviour
     public int totalWordLength;
     public int totalValidWordLength;
 
-    public TMP_Text addScoreAmount;
+    public TMP_Text addScoreAmountLeft;
+    public TMP_Text addScoreAmountRight;
+    private TMP_Text addScoreAmount;
     
     private int multiplier = 1;
 
@@ -65,7 +68,7 @@ public class Word : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) submitWord();
+        if (Input.GetKeyDown(KeyCode.Return)) submitWord("");
     }
 
     public void SetSidebars(List<GameObject> walls)
@@ -80,6 +83,7 @@ public class Word : MonoBehaviour
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);
+        
 
         if (newLetter.Letter == '_') return false;
         if (newLetter.Letter == '?' && word.Contains('?')) return false;
@@ -93,7 +97,7 @@ public class Word : MonoBehaviour
         // Update Sidebars
         UpdateSidebars();
 
-            return true;
+        return true;
     }
 
     public void PopLetter() {
@@ -183,10 +187,14 @@ public class Word : MonoBehaviour
         isCoroutineRunning = false;
     }
 
-    public int submitWord() {
+    public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
-
+        if(Anagram.isActivated()){
+            Anagram.reset();
+            Shop_Purchase.deactivatePowerUpUI("Anagram");
+            Debug.Log("Anagram reset");
+        }
         totalSubmissions++;
         totalWordLength += word.Length;
 
@@ -268,11 +276,17 @@ public class Word : MonoBehaviour
 
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
-
-        addScoreAmount.text = "+" + score.ToString();
-        addScoreAmount.alpha = 1;
-        StartCoroutine(Fade());
-
+        if(score != 0){
+            if(wallSide == "left"){
+                addScoreAmount = addScoreAmountLeft;
+            }
+            else{
+                addScoreAmount = addScoreAmountRight;
+            }
+            addScoreAmount.text = "+" + score.ToString();
+            addScoreAmount.alpha = 1;
+            StartCoroutine(Fade());
+        }
         StartCoroutine(sidebarBounce(15f));
 
         return score;
@@ -299,5 +313,26 @@ public class Word : MonoBehaviour
     public void setMultiplier(int multi) 
     {
         multiplier = multi;
+    }
+    
+    public void setWord(string newWord){
+        word = newWord;
+    }
+    public string getWord(){
+        return word;
+    }
+    public void changeWord(string newWord){
+        word = newWord;
+        string newWordLower = newWord.ToLower();
+        letters.Clear();
+        currentLetterBox = 0;
+        foreach(char c in newWordLower){
+            Debug.Log("char of anagram is " + c);
+            int index = c - 'a' + 1;
+            Debug.Log(index);
+            LetterClass newLetter = letterArray.GetLetter(c - 'a' + 1);
+            sprites[currentLetterBox].sprite = newLetter.image;
+            currentLetterBox++;
+        }
     }
 }
