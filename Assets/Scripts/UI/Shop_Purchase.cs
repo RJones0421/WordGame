@@ -41,12 +41,15 @@ public class Shop_Purchase : MonoBehaviour
         CurrencyUtils.displayQuantity("2");
         CurrencyUtils.displayQuantity("3");
         CurrencyUtils.displayQuantity("4");
-        CurrencyUtils.displayQuantity("5");
-        CurrencyUtils.displayQuantity("6");
     }
 
     public static void actiatePowerUpUI(String powerupName) {
         Color color = new Color(0, 128, 0);
+        actiatePowerUpUIWithColor(powerupName,color);
+    }
+
+    public static void deActiatePowerUpUI(String powerupName) {
+        Color color = new Color(242, 140, 128);
         actiatePowerUpUIWithColor(powerupName,color);
     }
 

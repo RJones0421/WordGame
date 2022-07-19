@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private TextMeshProUGUI controlsTutorial;
 
-    private int lives = 0;
+    public static int lives;
 
     private void Awake()
     {
@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+
+        lives = 0;
 
         // Get Tutorial Text
         controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
@@ -100,6 +102,9 @@ public class PlayerController : MonoBehaviour
             allowMouseMovement = false;
             controlsTutorial.text = "A/D to move";
         }
+
+        // updating shop item quantity for the left hand panel
+        UpdateShopItemCount();
     }
 
     // Update is called once per frame
@@ -256,6 +261,7 @@ public class PlayerController : MonoBehaviour
             float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
+                Debug.Log("Lives: " + lives);
                 if (lives > 0)
                 {
                     Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
@@ -264,7 +270,7 @@ public class PlayerController : MonoBehaviour
                     timer.timeLeft = timer.GetMaxTime();
                     timer.StartTimer();
 
-                    transform.position = new Vector3(0.0f, mainCamera.transform.position.y, 0.0f);
+                    transform.position = PlatformGenerator.bottomPlatform.transform.position.x * Vector3.right + mainCamera.transform.position.y * Vector3.up;
                 }
                 else
                 {
@@ -317,7 +323,10 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("1"))
                 {
                     // activate shop item power up in this code block
-                    Debug.Log("player uses item number 1");
+                    Debug.Log("player uses item number 1 - Stop Time");
+                    StartCoroutine(StopTime());
+                    Shop_Purchase.actiatePowerUpUI("PauseTime");
+                    CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
                 }
                 else
                 {
@@ -334,6 +343,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("player uses item number 2");
                     lives++;
                     Shop_Purchase.actiatePowerUpUI("ExtraLife");
+                    CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
                 }
             }
 
@@ -343,11 +353,12 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 3");
                 if (CurrencyUtils.useShopItem("3"))
                 {
-                    Debug.Log("player uses item number 3");
-                    ScoreMultiplier.Activate();
-                    int item_quantity = PlayerPrefs.GetInt("3");
+                    Debug.Log("player uses item number 3 - word/score multiplier");
+                    // TwoX temp_twoX = new TwoX();
+                    TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
+                    temp_twoX.Activate();
                     Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
-                    // Debug.Log("player uses item number 3");
+                    CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
                 }
             }
 
@@ -355,11 +366,12 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
             {
                 Debug.Log("Player clicked on 4");
-                if (CurrencyUtils.useShopItem("1"))
+                if (CurrencyUtils.useShopItem("4"))
                 {
                     Anagram.Activate();
                     Shop_Purchase.actiatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
+                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
 
                 }
             }
@@ -406,6 +418,17 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    // initialization of the item count in the left hand panel
+    public void UpdateShopItemCount() {
+        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
+        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
+        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
+        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
+        return;
+    }
+
+
     // stop timer for 5 seconds
     public IEnumerator StopTime()
     {
@@ -421,8 +444,7 @@ public class PlayerController : MonoBehaviour
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
         }
-
-
+        Shop_Purchase.deActiatePowerUpUI("PauseTime");
     }
 
     private void InitiateBounce()
@@ -442,6 +464,11 @@ public class PlayerController : MonoBehaviour
         {
             // Squish and Stretch Animation
             height.GetComponent<Animator>().SetTrigger("Bounce");
+            Transform transform = collision.transform;
+            if (transform.childCount > 0)
+            {
+                transform.GetChild(0).GetComponent<Animator>().SetTrigger("Bounce");
+            }
 
             // Reset Gravity
             if (Platform.activated)

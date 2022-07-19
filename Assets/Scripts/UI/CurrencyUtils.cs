@@ -67,10 +67,6 @@ public class CurrencyUtils : MonoBehaviour
             if(items_value.Count == 0){
                 populateCostMap();
             }
-            else
-            {
-                populateCostMap(); // used to clear the map stored in cache
-            }
 
             // haven't converted the item to cost yet
             // int cost = Convert.ToInt32(item_name);
@@ -145,6 +141,28 @@ public class CurrencyUtils : MonoBehaviour
         }
     }
 
+    public static void displayQuantityDynamic(string item_num, string gameObject_name, string display_text)
+    {
+        try
+        {
+            // Text_Item1_Quantity
+            int item_quantity = PlayerPrefs.GetInt(item_num);
+            if (item_num == "2")
+            {
+                item_quantity = PlayerController.lives;
+            }
+            Debug.Log("display quantity: " + item_quantity);
+            GameObject inputFieldGo = GameObject.Find(gameObject_name);
+            TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
+            // the text that is displayed on screen
+            inputFieldCo.text = display_text  + item_quantity.ToString();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("displayQuantity error: " + e.ToString());
+        }
+    }
+
     public static void resetCurrencyBalance() {
         PlayerPrefs.DeleteKey(currency_amount_keyname);
         PlayerPrefs.SetInt(currency_amount_keyname,0);
@@ -155,6 +173,7 @@ public class CurrencyUtils : MonoBehaviour
     public static bool useShopItem(string item_num)
     {
         int item_quantity = PlayerPrefs.GetInt(item_num);
+        // For debugging only
         item_quantity = 11;
         Debug.Log("player has x items " + item_quantity);
         if (item_quantity > 0)
@@ -168,7 +187,7 @@ public class CurrencyUtils : MonoBehaviour
             {
                 // the string here should be the name of the item's icon on line 160
                 GameObject inputFieldGo = GameObject.Find(icon_name);
-                inputFieldGo.SetActive(false);
+                // inputFieldGo.SetActive(false);
             }
             return true;
         }
