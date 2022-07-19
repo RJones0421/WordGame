@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using TMPro;
 
 public class Word : MonoBehaviour
 {
@@ -21,7 +23,7 @@ public class Word : MonoBehaviour
     public GameObject timer;
 
     private Timer timerClass;
-    
+
     public string word = "";
 
     public GameObject scoreManager;
@@ -41,6 +43,15 @@ public class Word : MonoBehaviour
     public int totalWordLength;
     public int totalValidWordLength;
 
+    public TMP_Text addScoreAmountLeft;
+    public TMP_Text addScoreAmountRight;
+    private TMP_Text addScoreAmount;
+    
+    private int multiplier = 1;
+
+    public SoundEffectSO wordSubmitSound;
+    public SoundEffectSO wordClearSound;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
@@ -53,10 +64,10 @@ public class Word : MonoBehaviour
         totalWordLength = 0;
         totalValidWordLength = 0;
     }
-    
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) submitWord();
+        if (Input.GetKeyDown(KeyCode.Return)) submitWord("");
     }
 
     public void SetSidebars(List<GameObject> walls)
@@ -64,17 +75,19 @@ public class Word : MonoBehaviour
         leftSidebar = walls[0].GetComponent<SpriteRenderer>();
         rightSidebar = walls[1].GetComponent<SpriteRenderer>();
 
-        leftSidebar.color = Color.gray;
-        rightSidebar.color = Color.gray;
+        leftSidebar.color = Color.white;
+        rightSidebar.color = Color.white;
     }
 
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);
+        
 
         if (newLetter.Letter == '_') return false;
+        if (newLetter.Letter == '?' && word.Contains('?')) return false;
         if (letters.Count >= 8) return false;
-        
+
         letters.Add(newLetter);
         word += newLetter.Letter;
         sprites[currentLetterBox].sprite = newLetter.image;
@@ -83,7 +96,7 @@ public class Word : MonoBehaviour
         // Update Sidebars
         UpdateSidebars();
 
-            return true;
+        return true;
     }
 
     public void PopLetter() {
@@ -102,7 +115,24 @@ public class Word : MonoBehaviour
     }
 
     public void UpdateSidebars() {
-        bool valid = evaluator.IsValidWord(word);
+        int wildcard = word.IndexOf('?');
+        string tempWord = word;
+        while (wildcard != -1) {
+            bool wc = false;
+            char c = 'A';
+            StringBuilder sb = new StringBuilder(word);
+            while (c <= 'Z' && !wc) {
+                sb[wildcard] = c;
+                if (evaluator.IsValidWord(sb.ToString())) {
+                    wc = true;
+                } else {
+                    c++;
+                }
+            }
+            tempWord = sb.ToString();
+            wildcard = tempWord.IndexOf('?');
+        }
+        bool valid = evaluator.IsValidWord(tempWord);
             if (valid) {
                 leftSidebar.color = Color.green;
                 rightSidebar.color = Color.green;
@@ -156,7 +186,7 @@ public class Word : MonoBehaviour
         isCoroutineRunning = false;
     }
 
-    public int submitWord() {
+    public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
 
@@ -164,13 +194,35 @@ public class Word : MonoBehaviour
         totalWordLength += word.Length;
 
         arrows.SetActive(false);
+        
+        int wildcard = word.IndexOf('?');
+        while (wildcard != -1) {
+            char bestChar = 'A';
+            int highScore = 0;
+            for (char c = 'A'; c <= 'Z'; c++) {
+                StringBuilder tempSB = new StringBuilder(word);
+                tempSB[wildcard] = c;
+                int tempScore = evaluator.SubmitWord(tempSB.ToString());
+                if (tempScore > highScore) {
+                    bestChar = c;
+                    highScore = tempScore;
+                }
+            }
+            StringBuilder sb = new StringBuilder(word);
+            sb[wildcard] = bestChar;
+            word = sb.ToString();
+            wildcard = word.IndexOf('?');
+        }
 
-        int score = evaluator.SubmitWord(word);
+        int score = evaluator.SubmitWord(word) * multiplier;
+        setMultiplier(1);
 
         scoreManagerScript.AddScore(score);
-
         if (score > 0)
         {
+            wordSubmitSound.pitchRange = new Vector2(0.8f + 1/GetWordLength(), 0.8f + 1/GetWordLength());
+            wordSubmitSound.Play(null, 0.1f);
+
             ScoreUtils.addWordToCollection(word, score);
             hasSubmitOnce = true;
 
@@ -178,9 +230,13 @@ public class Word : MonoBehaviour
             totalValidWordLength += word.Length;
         }
 
-        else if (word.Length > 3)
+        else
         {
-            hasClearedOnce = true;
+            wordClearSound.Play(null, 0.15f);
+            if (word.Length > 3)
+            {
+                hasClearedOnce = true;
+            }
         }
 
 #if true
@@ -211,17 +267,46 @@ public class Word : MonoBehaviour
         float timeGained = Mathf.Clamp(score / 50, 0, timerClass.GetMaxTime() - timerClass.GetTime());
         timerClass.AddTime(timeGained);
         Debug.Log("Time gained: " + timeGained);
+        Debug.Log("Word score: " + score);
 
         leftSidebar.color = Color.gray;
         rightSidebar.color = Color.gray;
-
+        if(score != 0){
+            if(wallSide == "left"){
+                addScoreAmount = addScoreAmountLeft;
+            }
+            else{
+                addScoreAmount = addScoreAmountRight;
+            }
+            addScoreAmount.text = "+" + score.ToString();
+            addScoreAmount.alpha = 1;
+            StartCoroutine(Fade());
+        }
         StartCoroutine(sidebarBounce(15f));
 
         return score;
+    }
+    IEnumerator Fade()
+    {
+        while(addScoreAmount.alpha >= 0f )
+        {
+            addScoreAmount.alpha -= 0.1f;
+            yield return new WaitForSeconds(.1f);
+        }
     }
 
     public int GetWordLength()
     {
         return word.Length;
+    }
+
+    public LetterClass getLetter(int index)
+    {
+        return letters[index];
+    }
+
+    public void setMultiplier(int multi) 
+    {
+        multiplier = multi;
     }
 }

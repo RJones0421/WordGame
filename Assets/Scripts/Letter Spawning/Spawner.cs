@@ -6,4 +6,5 @@ public abstract class Spawner : ScriptableObject
 {
     [Range(0, 100)] public int blankFrequency;
     public abstract LetterClass GetNextLetter();
+    public abstract Powerup GetNextPowerup();
 }
