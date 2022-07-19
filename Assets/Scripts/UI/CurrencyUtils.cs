@@ -147,7 +147,7 @@ public class CurrencyUtils : MonoBehaviour
         {
             // Text_Item1_Quantity
             int item_quantity = PlayerPrefs.GetInt(item_num);
-            if (item_nu == "2")
+            if (item_num == "2")
             {
                 item_quantity = PlayerController.lives;
             }
