@@ -37,7 +37,6 @@ public class DictionaryObject : ScriptableObject
             foreach (string word in allWords.Split("\n"[0]))
             {
                 fullList.Add(word.Trim());
-                fullListWithSortedChars.Add(GetWordWithSortedChars(word.Trim()));
             }
         }
     }
@@ -54,6 +53,7 @@ public class DictionaryObject : ScriptableObject
     
     public string GetRandomWord()
     {
+
         return fullList[Random.Range(0, fullList.Count - 1)];
     }
 
