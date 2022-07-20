@@ -24,22 +24,10 @@ public class Platform : MonoBehaviour
         animate.SetPositionAndRotation(transform.position, transform.rotation);
         animate.localScale = Vector3.one;
 
-        // Setup animator
-        //Animator animator = animate.gameObject.AddComponent<Animator>();
-        //animator.runtimeAnimatorController = Instantiate(GameObject.Find("Player").transform.GetChild(0));
-        //animator.keepAnimatorControllerStateOnDisable = true;
-
-        // Initialize and position sprite
-        //Transform coke = new GameObject("Sprite").transform;
-        //coke.parent = animate;
-        //coke.SetPositionAndRotation(animate.position, animate.rotation);
-        //coke.localScale = Vector3.one;
-
-        //// Set new sprite and disable old sprite
+        // Set new sprite and disable old sprite
         spriteRenderer = animate.GetChild(0).GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sprite ? sprite : GameObject.Find("GameManager").GetComponent<GlobalVariables>().blank;
-        //spriteRenderer = coke.gameObject.AddComponent<SpriteRenderer>();
-        //spriteRenderer.sprite = GameObject.Find("GameManager").GetComponent<GlobalVariables>().blank;
+
     }
 
     public SpriteRenderer SpriteRenderer
