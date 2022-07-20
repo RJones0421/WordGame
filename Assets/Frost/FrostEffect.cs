@@ -35,7 +35,7 @@ public class FrostEffect : MonoBehaviour
         material.SetFloat("_EdgeSharpness", EdgeSharpness);
         material.SetFloat("_SeeThroughness", seethroughness);
         material.SetFloat("_Distortion", distortion);
-        Debug.Log("_Distortion: "+ distortion);
+        // Debug.Log("_Distortion: "+ distortion);
 
 		Graphics.Blit(source, destination, material);
 	}
