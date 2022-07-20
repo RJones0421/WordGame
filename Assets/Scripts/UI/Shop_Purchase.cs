@@ -47,11 +47,27 @@ public class Shop_Purchase : MonoBehaviour
     public static void activatePowerUpUI(String powerupName) {
         Color color = new Color(0, 128, 0);
         activatePowerUpUIWithColor(powerupName,color);
+
+        if (powerupName == "ScoreMultiplier")
+        {
+            foreach (GameObject box in GameObject.FindGameObjectsWithTag("WordBox"))
+            {
+                box.GetComponent<SpriteRenderer>().color = new Color(255.0f, 255.0f, 0.0f);
+            }
+        }
     }
 
     public static void deactivatePowerUpUI(String powerupName) {
         Color color = new Color(242, 140, 128);
         activatePowerUpUIWithColor(powerupName,color);
+
+        if (powerupName == "ScoreMultiplier")
+        {
+            foreach (GameObject box in GameObject.FindGameObjectsWithTag("WordBox"))
+            {
+                box.GetComponent<SpriteRenderer>().color = new Color(195.0f, 195.0f, 195.0f);
+            }
+        }
     }
 
     public static void activatePowerUpUIWithColor(String powerupName, Color newColor) {

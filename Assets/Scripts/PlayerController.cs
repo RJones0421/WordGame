@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     private TextMeshProUGUI controlsTutorial;
 
     public static int lives;
+    private bool resurrect;
 
     public SpriteRenderer currSprite;
     public Sprite playerGround;
@@ -92,6 +93,7 @@ public class PlayerController : MonoBehaviour
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
 
         lives = 0;
+        resurrect = false;
 
         // Get Tutorial Text
         controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
@@ -304,10 +306,13 @@ public class PlayerController : MonoBehaviour
             float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
-                Debug.Log("Lives: " + lives);
-                if (lives > 0)
+                //Debug.Log("Lives: " + lives);
+                //if (lives > 0)
+                if (resurrect)
                 {
-                    Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
+                    //Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
+                    resurrect = false;
+                    Shop_Purchase.deactivatePowerUpUI("ExtraLife");
 
                     timer.StopTimer();
                     timer.timeLeft = timer.GetMaxTime();
@@ -360,7 +365,7 @@ public class PlayerController : MonoBehaviour
 
         // shop item activation
         {
-            // highlight letter
+            // pause time
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
             {
                 Debug.Log("Player clicked on 1");
@@ -370,7 +375,7 @@ public class PlayerController : MonoBehaviour
                     {
                         // activate shop item power up in this code block
                         Debug.Log("player uses item number 1 - Stop Time");
-                        StartCoroutine(StopTime(0.0f, 5.0f));
+                        StartCoroutine(StopTime(1.0f, 5.0f));
                         Shop_Purchase.activatePowerUpUI("PauseTime");
                         CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
                     }
@@ -381,22 +386,29 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("timer is running, you cannot activate the timer stop power up");
+                    Debug.Log("timer is frozen, you cannot activate the timer stop power up");
                 }
-
             }
 
             // extra life
             if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
             {
                 Debug.Log("Player clicked on 2");
-                if (CurrencyUtils.useShopItem("2"))
+                if (!resurrect)
                 {
-                    Debug.Log("player uses item number 2");
-                    lives++;
-                    Shop_Purchase.activatePowerUpUI("ExtraLife");
-                    CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
+                    if (CurrencyUtils.useShopItem("2"))
+                    {
+                        Debug.Log("player uses item number 2");
+                        Shop_Purchase.activatePowerUpUI("ExtraLife");
+                        CurrencyUtils.displayQuantityDynamic("2", "Text_ExtraLife_Qty", "x: ");
+                    }
                 }
+                else
+                {
+                    Shop_Purchase.deactivatePowerUpUI("ExtraLife");
+                }
+
+                resurrect = !resurrect;
             }
 
             // word/score multiplier

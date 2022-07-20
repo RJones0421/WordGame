@@ -161,12 +161,16 @@ public class CurrencyUtils : MonoBehaviour
     {
         int item_quantity = PlayerPrefs.GetInt(item_num);
         // For debugging only
-        //item_quantity = 11;
+#if UNITY_EDITOR
+        item_quantity = 11;
+#endif
         Debug.Log("player has x items " + item_quantity);
         if (item_quantity > 0)
         {
             item_quantity -= 1;
+#if !UNITY_EDITOR
             PlayerPrefs.SetInt(item_num, item_quantity);
+#endif
 
             // change the visablity setting for the corresponding item icon
             string icon_name = item_num + "_icon";
