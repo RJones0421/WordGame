@@ -43,6 +43,7 @@ public class WordEvaluator : MonoBehaviour
 	{
 		//if anagram powerup is activated check if word matches 
 		if(Anagram.isActivated()){
+
 			return dictionaries.VerifyWordAnagram(word);
 		}
 		return dictionaries.VerifyWord(word);
@@ -52,6 +53,7 @@ public class WordEvaluator : MonoBehaviour
 	{
 		if (IsValidWord(word))
 		{
+			Shop_Purchase.deactivatePowerUpUI("Anagram");
 			return ScoreWord(word);
 		}
 		else
