@@ -19,29 +19,15 @@ public class Platform : MonoBehaviour
         chalkParticles = GetComponent<ParticleSystem>();
 
         // Initialize and position animation
-        animate = new GameObject("Animate").transform;
+        animate = Instantiate(GameObject.Find("Player").transform.GetChild(0)).transform;
         animate.parent = transform;
         animate.SetPositionAndRotation(transform.position, transform.rotation);
         animate.localScale = Vector3.one;
 
-        // Setup animator
-        Animator animator = animate.gameObject.AddComponent<Animator>();
-#if UNITY_EDITOR
-        animator.runtimeAnimatorController = AssetDatabase.LoadAssetAtPath("Assets/Animations/Height.controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
-#endif
-        animator.keepAnimatorControllerStateOnDisable = true;
-
-        // Initialize and position sprite
-        Transform coke = new GameObject("Sprite").transform;
-        coke.parent = animate;
-        coke.SetPositionAndRotation(animate.position, animate.rotation);
-        coke.localScale = Vector3.one;
-
         // Set new sprite and disable old sprite
-        spriteRenderer = coke.gameObject.AddComponent<SpriteRenderer>();
-#if UNITY_EDITOR
-        spriteRenderer.sprite = sprite ? sprite : AssetDatabase.LoadAssetAtPath("Assets/Sprites/Handwritten_UnFilled/Letter_EMPTY.png", typeof(Sprite)) as Sprite;
-#endif
+        spriteRenderer = animate.GetChild(0).GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = sprite ? sprite : GameObject.Find("GameManager").GetComponent<GlobalVariables>().blank;
+
     }
 
     public SpriteRenderer SpriteRenderer

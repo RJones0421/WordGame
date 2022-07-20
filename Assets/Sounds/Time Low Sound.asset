@@ -15,3 +15,4 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 03cdc6c95b776d840bad6edbf3004992, type: 3}
   volumeRange: {x: 1, y: 1}
   pitchRange: {x: 1, y: 1}
+  audioMixer: {fileID: 24100000, guid: 2074533599b1bc646aa90f0886024ff5, type: 2}

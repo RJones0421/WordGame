@@ -6,6 +6,7 @@ public class GlobalVariables : MonoBehaviour
 {
     public static Word word;
     public static PlayerController player;
+    public Sprite blank;
 
     public static float yPosChange = 0f;
     public static bool updateWordChangeHeight;
