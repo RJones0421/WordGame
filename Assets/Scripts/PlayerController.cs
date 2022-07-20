@@ -320,18 +320,26 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
             {
                 Debug.Log("Player clicked on 1");
-                if (CurrencyUtils.useShopItem("1"))
+                if(timer.isTimerRunning())
                 {
-                    // activate shop item power up in this code block
-                    Debug.Log("player uses item number 1 - Stop Time");
-                    StartCoroutine(StopTime(0.0f, 5.0f));
-                    Shop_Purchase.activatePowerUpUI("PauseTime");
-                    CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+                    if (CurrencyUtils.useShopItem("1"))
+                    {
+                        // activate shop item power up in this code block
+                        Debug.Log("player uses item number 1 - Stop Time");
+                        StartCoroutine(StopTime(0.0f, 5.0f));
+                        Shop_Purchase.activatePowerUpUI("PauseTime");
+                        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+                    }
+                    else
+                    {
+                        Debug.Log("player does not have item 1");
+                    }
                 }
                 else
                 {
-                    Debug.Log("player does not have item 1");
+                    Debug.Log("timer is running, you cannot activate the timer stop power up");
                 }
+
             }
 
             // extra life
@@ -351,15 +359,29 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
             {
                 Debug.Log("Player clicked on 3");
-                if (CurrencyUtils.useShopItem("3"))
+                // if (CurrencyUtils.useShopItem("3"))
+                // activate score multiplier
+                if(word.getMultiplier() != 2)
                 {
-                    Debug.Log("player uses item number 3 - word/score multiplier");
-                    // TwoX temp_twoX = new TwoX();
-                    TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
-                    temp_twoX.Activate();
-                    Shop_Purchase.activatePowerUpUI("ScoreMultiplier");
-                    CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+                    if(CurrencyUtils.getShopItemQuantity("3"))
+                    {
+                        Debug.Log("player uses item number 3 - word/score multiplier");
+                        // TwoX temp_twoX = new TwoX();
+                        TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
+                        temp_twoX.Activate();
+                        Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
+                        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+                    }
                 }
+                // deactivate power up
+                else
+                {
+                    Debug.Log("Score multiplier already activated score multiplier at this point: " + word.getMultiplier().ToString());
+                    word.setMultiplier(1);
+                    Debug.Log("Score multiplier post: " + word.getMultiplier().ToString());
+
+                }
+
             }
 
             // anagram
@@ -436,6 +458,7 @@ public class PlayerController : MonoBehaviour
 
         if (timer.isTimerRunning()) {
             timer.StopTimer();
+            timer.pauseTimeActivated();
         }
         Debug.Log("StopTime Activated, timer paused");
 
@@ -453,6 +476,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Time Returned Restarted Timer");
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
+            timer.pauseTimeDeactivated();
         }
 
         startAmount = frostEffect.FrostAmount;
