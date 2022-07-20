@@ -43,17 +43,17 @@ public class Shop_Purchase : MonoBehaviour
         CurrencyUtils.displayQuantity("4");
     }
 
-    public static void actiatePowerUpUI(String powerupName) {
+    public static void activatePowerUpUI(String powerupName) {
         Color color = new Color(0, 128, 0);
-        actiatePowerUpUIWithColor(powerupName,color);
+        activatePowerUpUIWithColor(powerupName,color);
     }
 
-    public static void deActiatePowerUpUI(String powerupName) {
+    public static void deactivatePowerUpUI(String powerupName) {
         Color color = new Color(242, 140, 128);
-        actiatePowerUpUIWithColor(powerupName,color);
+        activatePowerUpUIWithColor(powerupName,color);
     }
 
-    public static void actiatePowerUpUIWithColor(String powerupName, Color newColor) {
+    public static void activatePowerUpUIWithColor(String powerupName, Color newColor) {
         GameObject inputFieldGo = GameObject.Find("Button_" + powerupName);
         Button inputFieldCo2 = inputFieldGo.GetComponent<Button>();
         ColorBlock  colorBlockHuman = inputFieldCo2.colors;
@@ -63,10 +63,10 @@ public class Shop_Purchase : MonoBehaviour
 
     public static void resetShopPowerUpUI() {
         Color color = new Color(242, 140, 128);
-        actiatePowerUpUIWithColor("ScoreMultiplier",color);
-        actiatePowerUpUIWithColor("ExtraLife",color);
-        actiatePowerUpUIWithColor("Anagram",color);
-        actiatePowerUpUIWithColor("PauseTime",color);
+        activatePowerUpUIWithColor("ScoreMultiplier",color);
+        activatePowerUpUIWithColor("ExtraLife",color);
+        activatePowerUpUIWithColor("Anagram",color);
+        activatePowerUpUIWithColor("PauseTime",color);
     }
 
 

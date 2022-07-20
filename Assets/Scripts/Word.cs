@@ -47,7 +47,7 @@ public class Word : MonoBehaviour
     public TMP_Text addScoreAmountLeft;
     public TMP_Text addScoreAmountRight;
     private TMP_Text addScoreAmount;
-    
+
     private int multiplier = 1;
 
     public SoundEffectSO wordSubmitSound;
@@ -76,14 +76,14 @@ public class Word : MonoBehaviour
         leftSidebar = walls[0].GetComponent<SpriteRenderer>();
         rightSidebar = walls[1].GetComponent<SpriteRenderer>();
 
-        leftSidebar.color = Color.gray;
-        rightSidebar.color = Color.gray;
+        leftSidebar.color = Color.white;
+        rightSidebar.color = Color.white;
     }
 
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);
-        
+
 
         if (newLetter.Letter == '_') return false;
         if (newLetter.Letter == '?' && word.Contains('?')) return false;
@@ -190,12 +190,16 @@ public class Word : MonoBehaviour
     public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
-
+        // if(Anagram.isActivated()){
+        //     Anagram.reset();
+        //     Shop_Purchase.deactivatePowerUpUI("Anagram");
+        //     Debug.Log("Anagram reset");
+        // }
         totalSubmissions++;
         totalWordLength += word.Length;
 
         arrows.SetActive(false);
-        
+
         int wildcard = word.IndexOf('?');
         while (wildcard != -1) {
             char bestChar = 'A';
@@ -216,7 +220,22 @@ public class Word : MonoBehaviour
         }
 
         int score = evaluator.SubmitWord(word) * multiplier;
-        setMultiplier(1);
+        // delayed use of score multiplier power up, only deduct when the word is actually submitted
+        if (multiplier > 1 && score > 0)
+        {
+            CurrencyUtils.useShopItem("3");
+            CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+            setMultiplier(1);
+            Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
+        }
+
+        if(Anagram.isActivated() && score > 0){
+            Anagram.reset();
+            CurrencyUtils.useShopItem("4");
+            Shop_Purchase.deactivatePowerUpUI("Anagram");
+            Debug.Log("Anagram reset");
+            CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+        }
 
         scoreManagerScript.AddScore(score);
         if (score > 0)
@@ -306,7 +325,7 @@ public class Word : MonoBehaviour
         return letters[index];
     }
 
-    public void setMultiplier(int multi) 
+    public void setMultiplier(int multi)
     {
         multiplier = multi;
     }
@@ -330,5 +349,10 @@ public class Word : MonoBehaviour
             sprites[currentLetterBox].sprite = newLetter.image;
             currentLetterBox++;
         }
+    }
+
+    public int getMultiplier()
+    {
+        return multiplier;
     }
 }
