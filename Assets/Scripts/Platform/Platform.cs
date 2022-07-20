@@ -26,7 +26,9 @@ public class Platform : MonoBehaviour
 
         // Setup animator
         Animator animator = animate.gameObject.AddComponent<Animator>();
+#if UNITY_EDITOR
         animator.runtimeAnimatorController = AssetDatabase.LoadAssetAtPath("Assets/Animations/Height.controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+#endif
         animator.keepAnimatorControllerStateOnDisable = true;
 
         // Initialize and position sprite
@@ -37,7 +39,9 @@ public class Platform : MonoBehaviour
 
         // Set new sprite and disable old sprite
         spriteRenderer = coke.gameObject.AddComponent<SpriteRenderer>();
+#if UNITY_EDITOR
         spriteRenderer.sprite = sprite ? sprite : AssetDatabase.LoadAssetAtPath("Assets/Sprites/Handwritten_UnFilled/Letter_EMPTY.png", typeof(Sprite)) as Sprite;
+#endif
     }
 
     public SpriteRenderer SpriteRenderer

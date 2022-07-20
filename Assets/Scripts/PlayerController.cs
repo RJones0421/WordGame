@@ -24,6 +24,19 @@ public class PlayerController : MonoBehaviour
     public GameObject wallPrefab;
     public List<GameObject> walls;
 
+    public ParticleSystem scoreParticles;
+    public ParticleSystem leftParticles;
+    public ParticleSystem rightParticles;
+    // public ParticleSystem validWordParticles;
+    // public ParticleSystem invalidWordParticles;
+    public ParticleSystemForceField forceField;
+
+    // private var rightMain;
+    // private var rightExternal;
+    // private var leftMain;
+    // private var leftExternal;
+
+
     public GameObject gameOverCanvas;
     public Timer timer;
     public GameObject tempTutroial;
@@ -33,6 +46,9 @@ public class PlayerController : MonoBehaviour
     private ScoreManager scoreManagerScript;
     private float playerHeight;
     private Vector2 screenRes;
+
+    private Color greenChalk = new Color(0, 1, 0, 0.7F);
+    private Color redChalk = new Color(1, 0, 0, 0.75F);
 
     private bool bounceBackToCenter;
     private Vector3 bounceBackTargetPos;
@@ -84,6 +100,20 @@ public class PlayerController : MonoBehaviour
         walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
+
+        leftParticles = walls[0].GetComponent<ParticleSystem>();
+        rightParticles = walls[1].GetComponent<ParticleSystem>();
+
+        // rightParticles.externalForces.enabled = true;
+        // leftParticles.externalForces.enabled = true;
+
+        rightParticles.externalForces.AddInfluence(forceField);
+        leftParticles.externalForces.AddInfluence(forceField);
+
+        // rightMain = rightParticles.main;
+        // rightExternal = rightParticles.externalForces;
+        // leftMain = leftParticles.main;
+        // leftExternal = leftParticles.externalForces;
 
         // intialize the shop item objects
         ScoreMultiplier.reset();
@@ -199,12 +229,29 @@ public class PlayerController : MonoBehaviour
             {
                 if (started && word.GetWordLength() > 0)
                 {
-                    // chalkParticles.Emit(100);
                     InitiateBounce();
+                    var rightMain = rightParticles.main;
+                    var rightExternal = rightParticles.externalForces;
+                    
 
                     Debug.Log("SUBMIT RIGHT");
 
-                    word.submitWord("right");
+                    if (word.submitWord("right") > 0)
+                    {
+                        rightMain.gravityModifier = 0;
+                        rightExternal.enabled = true;
+                        rightMain.startColor = greenChalk;
+                        rightParticles.Play();
+                        scoreParticles.Play();
+                        // validWordParticles.Play(); 
+                    }
+                    else {
+                        rightMain.gravityModifier = 5;
+                        rightExternal.enabled = false;
+                        rightMain.startColor = redChalk;
+                        rightParticles.Play();
+                        // invalidWordParticles.Play();
+                    }
                 }
                 else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -214,10 +261,27 @@ public class PlayerController : MonoBehaviour
                 if (started && word.GetWordLength() > 0)
                 {
                     InitiateBounce();
+                    var leftMain = leftParticles.main;
+                    var leftExternal = leftParticles.externalForces;
 
                     Debug.Log("SUBMIT LEFT");
 
-                    word.submitWord("left");
+                    if (word.submitWord("left") > 0)
+                    {
+                        leftMain.gravityModifier = 0;
+                        leftExternal.enabled = true;
+                        leftMain.startColor = greenChalk;
+                        leftParticles.Play();
+                        scoreParticles.Play();
+                        // validWordParticles.Play();
+                    }
+                    else {
+                        leftMain.gravityModifier = 5;
+                        leftExternal.enabled = false;
+                        leftMain.startColor = redChalk;
+                        leftParticles.Play();
+                        // invalidWordParticles.Play();
+                    }
                 }
                 else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
