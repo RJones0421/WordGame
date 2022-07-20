@@ -3504,8 +3504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f468f4ad2c473474ea3b6aa8424df70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offSprite: {fileID: 21300000, guid: 7ac09be39df57417280ce7abfbefecd5, type: 3}
-  tempSprite: {fileID: 21300000, guid: a4ced46319fb249e3a04047c90299c76, type: 3}
+  offSprite: {fileID: 21300000, guid: a4ced46319fb249e3a04047c90299c76, type: 3}
+  tempSprite: {fileID: 21300000, guid: 7ac09be39df57417280ce7abfbefecd5, type: 3}
   original: {fileID: 81364157}
   volController: {fileID: 11400000, guid: 55a4b0ff63bfb2542a1524118af32783, type: 2}
 --- !u!114 &1123134253

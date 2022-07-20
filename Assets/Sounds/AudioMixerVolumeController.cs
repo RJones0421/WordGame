@@ -9,6 +9,11 @@ public class AudioMixerVolumeController : ScriptableObject
 
     private bool muted;
 
+    public void OnEnable()
+    {
+        muted = false;
+    }
+
     public void ToggleMute()
     {
         muted = !muted;
