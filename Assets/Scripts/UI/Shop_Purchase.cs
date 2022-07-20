@@ -8,6 +8,18 @@ using System;
 
 public class Shop_Purchase : MonoBehaviour
 {
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("START OF SHOP_PURCHASE");
+        displayCurrency();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Debug.Log("UPDATE OF SHOP_PURCHASE");
+    }
 
     public void onClickButton()
     {
@@ -23,7 +35,7 @@ public class Shop_Purchase : MonoBehaviour
         GameObject inputFieldGo = GameObject.Find("Text_Shop_Currency");
         TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
         int pointsAvailable = PlayerPrefs.GetInt(CurrencyUtils.currency_amount_keyname);
-
+        Debug.Log("curreny amount display in shop opening: " + pointsAvailable);
         inputFieldCo.text = "Points Available: " + pointsAvailable;
 
         CurrencyUtils.displayQuantity("1");
