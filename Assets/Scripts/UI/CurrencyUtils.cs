@@ -174,7 +174,7 @@ public class CurrencyUtils : MonoBehaviour
     {
         int item_quantity = PlayerPrefs.GetInt(item_num);
         // For debugging only
-        item_quantity = 11;
+        //item_quantity = 11;
         Debug.Log("player has x items " + item_quantity);
         if (item_quantity > 0)
         {

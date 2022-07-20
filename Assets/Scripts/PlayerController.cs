@@ -442,6 +442,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("Score multiplier already activated score multiplier at this point: " + word.getMultiplier().ToString());
                     word.setMultiplier(1);
+                    Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
                     Debug.Log("Score multiplier post: " + word.getMultiplier().ToString());
 
                 }
@@ -452,13 +453,19 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
             {
                 Debug.Log("Player clicked on 4");
-                if (CurrencyUtils.useShopItem("4"))
+                if(!Anagram.isActivated())
                 {
-                    Anagram.Activate();
-                    Shop_Purchase.activatePowerUpUI("Anagram");
-                    Debug.Log("player uses item number 4");
-                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
+                    if (CurrencyUtils.getShopItemQuantity("4"))
+                    {
+                        Anagram.Activate();
+                        Shop_Purchase.activatePowerUpUI("Anagram");
+                        Debug.Log("player uses item number 4");
+                        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
 
+                    }
+                } else{
+                    Anagram.reset();
+                    Shop_Purchase.deactivatePowerUpUI("Anagram");
                 }
             }
 

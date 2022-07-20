@@ -190,11 +190,11 @@ public class Word : MonoBehaviour
     public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
-        if(Anagram.isActivated()){
-            Anagram.reset();
-            Shop_Purchase.deactivatePowerUpUI("Anagram");
-            Debug.Log("Anagram reset");
-        }
+        // if(Anagram.isActivated()){
+        //     Anagram.reset();
+        //     Shop_Purchase.deactivatePowerUpUI("Anagram");
+        //     Debug.Log("Anagram reset");
+        // }
         totalSubmissions++;
         totalWordLength += word.Length;
 
@@ -227,6 +227,13 @@ public class Word : MonoBehaviour
         }
         setMultiplier(1);
         Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
+
+        if(Anagram.isActivated()){
+            Anagram.reset();
+            CurrencyUtils.useShopItem("4");
+            Shop_Purchase.deactivatePowerUpUI("Anagram");
+            Debug.Log("Anagram reset");
+        }
 
         scoreManagerScript.AddScore(score);
         if (score > 0)
