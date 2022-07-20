@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
     public GameObject tempTutroial;
 
+    public LossText lossText;
+
     public GameObject wordBox;
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
@@ -321,7 +323,6 @@ public class PlayerController : MonoBehaviour
                     timer.StopTimer();
                     int score = timer.SetValues();
 
-
                     foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
                     {
                         source.Stop();
@@ -352,6 +353,7 @@ public class PlayerController : MonoBehaviour
                     });
 #endif
                 }
+                lossText.SetLossText(true);
             }
         }
 
