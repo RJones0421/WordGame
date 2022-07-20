@@ -183,6 +183,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+      propertyPath: maxHeight
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
+      propertyPath: minHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394726548556971184, guid: 5636c567e129cf74bad7db00318886e5, type: 3}
       propertyPath: letterSpawner
       value: 
       objectReference: {fileID: 11400000, guid: f455e217bc639794384c24a9bd59db06, type: 2}
@@ -2564,6 +2572,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 9f4cde07f32f00a498f484a37d51a626, type: 3}
+    - target: {fileID: 7499377894571553600, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 4921926717564082166, guid: e8dd052ef6b63fd4cb99af2896d28439, type: 2}
     - target: {fileID: 7499377894571553601, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
       propertyPath: m_Name
       value: MusicPlayer
