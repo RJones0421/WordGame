@@ -9,10 +9,10 @@ public class AudioMixerVolumeController : ScriptableObject
 
     private bool muted;
 
-    private float volume;
-
     public void ToggleMute()
     {
+        muted = !muted;
+
         if (muted)
         {
             audioMixer.SetFloat("volume", -80f);
@@ -22,7 +22,10 @@ public class AudioMixerVolumeController : ScriptableObject
         {
             audioMixer.SetFloat("volume", 0f);
         }
+    }
 
-        muted = !muted;
+    public bool IsMuted()
+    {
+        return muted;
     }
 }

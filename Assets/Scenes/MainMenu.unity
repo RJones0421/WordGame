@@ -2454,6 +2454,7 @@ MonoBehaviour:
   offSprite: {fileID: 21300000, guid: 1c67a79a27a0f416186de8808e5f51b4, type: 3}
   tempSprite: {fileID: 21300000, guid: 83d12e17f2fde466c81d9914c793c473, type: 3}
   original: {fileID: 688026226}
+  volController: {fileID: 11400000, guid: c9816dea2dffd484ba63381931a1b03d, type: 2}
 --- !u!114 &838168381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3506,6 +3507,7 @@ MonoBehaviour:
   offSprite: {fileID: 21300000, guid: 7ac09be39df57417280ce7abfbefecd5, type: 3}
   tempSprite: {fileID: 21300000, guid: a4ced46319fb249e3a04047c90299c76, type: 3}
   original: {fileID: 81364157}
+  volController: {fileID: 11400000, guid: 55a4b0ff63bfb2542a1524118af32783, type: 2}
 --- !u!114 &1123134253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5255,6 +5257,7 @@ MonoBehaviour:
   offSprite: {fileID: 21300000, guid: bdba870b066b24d2eb457c31960ec1cb, type: 3}
   tempSprite: {fileID: 21300000, guid: 3102f0f10a2464b59bbed95a88846ab9, type: 3}
   original: {fileID: 1420495606}
+  volController: {fileID: 0}
 --- !u!114 &1711189687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6164,6 +6167,7 @@ MonoBehaviour:
   offSprite: {fileID: 21300000, guid: 54b67d622a8d145c9ba8030e3470e197, type: 3}
   tempSprite: {fileID: 21300000, guid: e993308de499d448aa0df2573d0761fe, type: 3}
   original: {fileID: 220746684}
+  volController: {fileID: 0}
 --- !u!114 &2032173052
 MonoBehaviour:
   m_ObjectHideFlags: 0

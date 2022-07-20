@@ -10,6 +10,8 @@ public class Button_Music_Switch : MonoBehaviour
 	public Sprite tempSprite;
 	public Image original;
 
+	public AudioMixerVolumeController volController;
+
     private void Awake()
     {
 		if (PlayerPrefs.HasKey("controls"))
