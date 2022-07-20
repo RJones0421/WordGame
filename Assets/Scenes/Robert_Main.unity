@@ -918,6 +918,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51aa3ee68746c4cbca312a65b0fc552a, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a3a1de74a3da26f43a609c965dc11aa0, type: 2}
@@ -2640,7 +2644,7 @@ PrefabInstance:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 35fd8a5e5c4e44b6594ccd3dd6d38e5c, type: 3}
+      objectReference: {fileID: 21300000, guid: 1e209de7a39624689af2e43c6ba42440, type: 3}
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
@@ -11087,6 +11091,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51aa3ee68746c4cbca312a65b0fc552a, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a3a1de74a3da26f43a609c965dc11aa0, type: 2}
@@ -11567,6 +11575,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51aa3ee68746c4cbca312a65b0fc552a, type: 3}
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
@@ -12354,7 +12366,7 @@ PrefabInstance:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d3b4df5034e204c769ab921a5d943456, type: 3}
+      objectReference: {fileID: 21300000, guid: a324c8ce293dd4883946dbf6ddbc2e49, type: 3}
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
@@ -12523,6 +12535,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 656766484}
     m_Modifications:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 51aa3ee68746c4cbca312a65b0fc552a, type: 3}
+    - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 
       objectReference: {fileID: 11400000, guid: a3a1de74a3da26f43a609c965dc11aa0, type: 2}
@@ -12690,7 +12706,7 @@ PrefabInstance:
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300000, guid: dc1a80ff8d91e494e87dc2a101e500f6, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe1d16d7d5664b2c8b68a9a3ab33929, type: 3}
     - target: {fileID: -1459790599468135859, guid: 7e2d9559db0275d43a67451f6409e0a3, type: 3}
       propertyPath: collectible
       value: 

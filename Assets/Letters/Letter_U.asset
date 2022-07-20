@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249a9714181da624dbbc53c8e30d3c6a, type: 3}
   m_Name: Letter_U
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 00861e4b1ddda4e82aafc7e3cb3ee7f1, type: 3}
+  image: {fileID: 21300000, guid: dbc1ff17511824e38bff80d0c3500654, type: 3}
   letter: 85
   score: 1

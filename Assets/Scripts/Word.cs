@@ -134,23 +134,23 @@ public class Word : MonoBehaviour
         }
         bool valid = evaluator.IsValidWord(tempWord);
             if (valid) {
-                leftSidebar.color = Color.green;
-                rightSidebar.color = Color.green;
+                leftSidebar.color = new Color(171f/255f, 209f/255f, 110f/255f);
+                rightSidebar.color = new Color(171f/255f, 209f/255f, 110f/255f);
 
                 if (!hasSubmitOnce)
                 {
                     arrows.SetActive(true);
-                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.green);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(new Color(171f/255f, 209f/255f, 110f/255f));
                 }
             }
             else {
-                leftSidebar.color = Color.red;
-                rightSidebar.color = Color.red;
+                leftSidebar.color = new Color(232f/255f, 112f/255f, 96f/255f);
+                rightSidebar.color = new Color(232f/255f, 112f/255f, 96f/255f);
 
                 if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
-                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(new Color(232f/255f, 112f/255f, 96f/255f));
                 }
             }
     }
@@ -270,8 +270,8 @@ public class Word : MonoBehaviour
         Debug.Log("Time gained: " + timeGained);
         Debug.Log("Word score: " + score);
 
-        leftSidebar.color = Color.gray;
-        rightSidebar.color = Color.gray;
+        leftSidebar.color = Color.white;
+        rightSidebar.color = Color.white;
         if(score != 0){
             if(wallSide == "left"){
                 addScoreAmount = addScoreAmountLeft;
