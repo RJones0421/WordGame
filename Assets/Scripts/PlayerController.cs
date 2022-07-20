@@ -6,10 +6,6 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    public SpriteRenderer currSprite;
-    public Sprite playerGround;
-    public Sprite playerJump;
-    public Sprite playerSubmit;
     public float keyMovementSpeed;
     public float mouseMovementSpeed;
     private bool started = false;
@@ -18,9 +14,6 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private Renderer renderer;
 
-    public bool faceLeft;
-    public bool onGround;
-    public bool onWall;
 
     public bool allowMouseMovement;
 
@@ -31,6 +24,19 @@ public class PlayerController : MonoBehaviour
     public GameObject wallPrefab;
     public List<GameObject> walls;
 
+    public ParticleSystem scoreParticles;
+    public ParticleSystem leftParticles;
+    public ParticleSystem rightParticles;
+    // public ParticleSystem validWordParticles;
+    // public ParticleSystem invalidWordParticles;
+    public ParticleSystemForceField forceField;
+
+    // private var rightMain;
+    // private var rightExternal;
+    // private var leftMain;
+    // private var leftExternal;
+
+
     public GameObject gameOverCanvas;
     public Timer timer;
     public GameObject tempTutroial;
@@ -40,6 +46,9 @@ public class PlayerController : MonoBehaviour
     private ScoreManager scoreManagerScript;
     private float playerHeight;
     private Vector2 screenRes;
+
+    private Color greenChalk = new Color(0, 1, 0, 0.7F);
+    private Color redChalk = new Color(1, 0, 0, 0.75F);
 
     private bool bounceBackToCenter;
     private Vector3 bounceBackTargetPos;
@@ -59,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private TextMeshProUGUI controlsTutorial;
 
-    private int lives = 0;
+    public static int lives;
 
     private void Awake()
     {
@@ -70,6 +79,8 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+
+        lives = 0;
 
         // Get Tutorial Text
         controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
@@ -90,6 +101,20 @@ public class PlayerController : MonoBehaviour
 
         word.SetSidebars(walls);
 
+        leftParticles = walls[0].GetComponent<ParticleSystem>();
+        rightParticles = walls[1].GetComponent<ParticleSystem>();
+
+        // rightParticles.externalForces.enabled = true;
+        // leftParticles.externalForces.enabled = true;
+
+        rightParticles.externalForces.AddInfluence(forceField);
+        leftParticles.externalForces.AddInfluence(forceField);
+
+        // rightMain = rightParticles.main;
+        // rightExternal = rightParticles.externalForces;
+        // leftMain = leftParticles.main;
+        // leftExternal = leftParticles.externalForces;
+
         // intialize the shop item objects
         ScoreMultiplier.reset();
 
@@ -107,6 +132,9 @@ public class PlayerController : MonoBehaviour
             allowMouseMovement = false;
             controlsTutorial.text = "A/D to move";
         }
+
+        // updating shop item quantity for the left hand panel
+        UpdateShopItemCount();
     }
 
     // Update is called once per frame
@@ -201,12 +229,29 @@ public class PlayerController : MonoBehaviour
             {
                 if (started && word.GetWordLength() > 0)
                 {
-                    // chalkParticles.Emit(100);
-                    InitiateBounce("right");
+                    InitiateBounce();
+                    var rightMain = rightParticles.main;
+                    var rightExternal = rightParticles.externalForces;
+                    
 
                     Debug.Log("SUBMIT RIGHT");
 
-                    word.submitWord("right");
+                    if (word.submitWord("right") > 0)
+                    {
+                        rightMain.gravityModifier = 0;
+                        rightExternal.enabled = true;
+                        rightMain.startColor = greenChalk;
+                        rightParticles.Play();
+                        scoreParticles.Play();
+                        // validWordParticles.Play(); 
+                    }
+                    else {
+                        rightMain.gravityModifier = 5;
+                        rightExternal.enabled = false;
+                        rightMain.startColor = redChalk;
+                        rightParticles.Play();
+                        // invalidWordParticles.Play();
+                    }
                 }
                 else transform.position = new Vector3(wallDist - wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -215,11 +260,28 @@ public class PlayerController : MonoBehaviour
             {
                 if (started && word.GetWordLength() > 0)
                 {
-                    InitiateBounce("left");
+                    InitiateBounce();
+                    var leftMain = leftParticles.main;
+                    var leftExternal = leftParticles.externalForces;
 
                     Debug.Log("SUBMIT LEFT");
 
-                    word.submitWord("left");
+                    if (word.submitWord("left") > 0)
+                    {
+                        leftMain.gravityModifier = 0;
+                        leftExternal.enabled = true;
+                        leftMain.startColor = greenChalk;
+                        leftParticles.Play();
+                        scoreParticles.Play();
+                        // validWordParticles.Play();
+                    }
+                    else {
+                        leftMain.gravityModifier = 5;
+                        leftExternal.enabled = false;
+                        leftMain.startColor = redChalk;
+                        leftParticles.Play();
+                        // invalidWordParticles.Play();
+                    }
                 }
                 else transform.position = new Vector3(-wallDist + wallPrefab.GetComponent<Renderer>().bounds.size.y, transform.position.y, transform.position.z);
             }
@@ -263,6 +325,7 @@ public class PlayerController : MonoBehaviour
             float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
+                Debug.Log("Lives: " + lives);
                 if (lives > 0)
                 {
                     Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
@@ -271,7 +334,7 @@ public class PlayerController : MonoBehaviour
                     timer.timeLeft = timer.GetMaxTime();
                     timer.StartTimer();
 
-                    transform.position = new Vector3(0.0f, mainCamera.transform.position.y, 0.0f);
+                    transform.position = PlatformGenerator.bottomPlatform.transform.position.x * Vector3.right + mainCamera.transform.position.y * Vector3.up;
                 }
                 else
                 {
@@ -324,7 +387,10 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("1"))
                 {
                     // activate shop item power up in this code block
-                    Debug.Log("player uses item number 1");
+                    Debug.Log("player uses item number 1 - Stop Time");
+                    StartCoroutine(StopTime(0.0f, 5.0f));
+                    Shop_Purchase.activatePowerUpUI("PauseTime");
+                    CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
                 }
                 else
                 {
@@ -340,7 +406,8 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("player uses item number 2");
                     lives++;
-                    Shop_Purchase.actiatePowerUpUI("ExtraLife");
+                    Shop_Purchase.activatePowerUpUI("ExtraLife");
+                    CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
                 }
             }
 
@@ -350,11 +417,12 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 3");
                 if (CurrencyUtils.useShopItem("3"))
                 {
-                    Debug.Log("player uses item number 3");
-                    ScoreMultiplier.Activate();
-                    int item_quantity = PlayerPrefs.GetInt("3");
-                    Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
-                    // Debug.Log("player uses item number 3");
+                    Debug.Log("player uses item number 3 - word/score multiplier");
+                    // TwoX temp_twoX = new TwoX();
+                    TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
+                    temp_twoX.Activate();
+                    Shop_Purchase.activatePowerUpUI("ScoreMultiplier");
+                    CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
                 }
             }
 
@@ -362,11 +430,12 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
             {
                 Debug.Log("Player clicked on 4");
-                if (CurrencyUtils.useShopItem("1"))
+                if (CurrencyUtils.useShopItem("4"))
                 {
                     Anagram.Activate();
-                    Shop_Purchase.actiatePowerUpUI("Anagram");
+                    Shop_Purchase.activatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
+                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
 
                 }
             }
@@ -378,9 +447,9 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("5"))
                 {
                     // timer.StopTimer()
-                    StartCoroutine(StopTime());
+                    StartCoroutine(StopTime(1.0f, 5.0f));
                     // timer.StartTimer();
-                    Shop_Purchase.actiatePowerUpUI("PauseTime");
+                    Shop_Purchase.activatePowerUpUI("PauseTime");
 
                     Debug.Log("player uses item number 5");
                 }
@@ -413,34 +482,57 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    // initialization of the item count in the left hand panel
+    public void UpdateShopItemCount() {
+        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
+        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
+        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
+        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
+        return;
+    }
+
     // stop timer for 5 seconds
-    public IEnumerator StopTime()
+    public IEnumerator StopTime(float fadeTime, float totalTime)
     {
+        // frost component
+        FrostEffect frostEffect = GameObject.Find("Main Camera").GetComponent<FrostEffect>();
 
         if (timer.isTimerRunning()) {
             timer.StopTimer();
         }
         Debug.Log("StopTime Activated, timer paused");
 
-        yield return new WaitForSeconds(5);
+        float startAmount = frostEffect.FrostAmount;
+
+        // fade frost in
+        for (float f = 0.0f; f < fadeTime; f += Time.deltaTime)
+        {
+            frostEffect.FrostAmount = Mathf.Lerp(startAmount, 0.25f, f);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(totalTime - fadeTime * 2.0f);
 
         Debug.Log("Time Returned Restarted Timer");
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
         }
 
+        startAmount = frostEffect.FrostAmount;
 
+        // fade frost out
+        for (float f = 0.0f; f < fadeTime; f += Time.deltaTime)
+        {
+            frostEffect.FrostAmount = Mathf.Lerp(startAmount, 0.0f, f);
+            yield return null;
+        }
+
+        Shop_Purchase.deactivatePowerUpUI("PauseTime");
     }
 
-    private void InitiateBounce(string side)
+    private void InitiateBounce()
     {
-        if(side == "left"){
-            StartCoroutine("BounceLeft");
-        }
-        else{
-            currSprite.flipX = true;
-            StartCoroutine("BounceRight");
-        }
         bounceBackToCenter = true;
         bounceBackTargetPos = new Vector3(0, transform.position.y + 3f, 0);
         isBouncingBack = true;
@@ -454,11 +546,13 @@ public class PlayerController : MonoBehaviour
     {
         if (started && rb.velocity.y < 0.0f)
         {
-            StartCoroutine(AnimateJump());
-            //currSprite.sprite = playerGround;
-            //Invoke("AnimateJump", 0.1f);
             // Squish and Stretch Animation
             height.GetComponent<Animator>().SetTrigger("Bounce");
+            Transform transform = collision.transform;
+            if (transform.childCount > 0)
+            {
+                transform.GetChild(0).GetComponent<Animator>().SetTrigger("Bounce");
+            }
 
             // Reset Gravity
             if (Platform.activated)
@@ -495,24 +589,5 @@ public class PlayerController : MonoBehaviour
 
             bounceSound.Play();
         }
-    }
-
-    IEnumerator AnimateJump(){
-        currSprite.sprite = playerGround;
-        yield return new WaitForSeconds(0.3f);
-        currSprite.sprite = playerJump;
-    }
-
-    IEnumerator BounceLeft(){
-        currSprite.sprite = playerSubmit;
-        yield return new WaitForSeconds(0.3f);
-        currSprite.sprite = playerJump;
-    }
-
-    IEnumerator BounceRight(){
-        currSprite.sprite = playerSubmit;
-        yield return new WaitForSeconds(0.3f);
-        currSprite.sprite = playerJump;
-        currSprite.flipX = false;
     }
 }
