@@ -2630,7 +2630,7 @@ MonoBehaviour:
   timeLeft: 0
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
-  lossText: {fileID: 0}
+  lossText: {fileID: 2083377329}
   analyticsManager: {fileID: 719126423}
   word: {fileID: 0}
   gameEndSound: {fileID: 11400000, guid: 213bc70fd0d05d14889be19d2d915b6f, type: 2}
