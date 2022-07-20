@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Music Volume Controller
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: a5c44eb81800c8c4a881bfe25490eaa9, type: 2}
-  VolumeParameterName: Volume
+  VolumeParameterName: volume
   muted: 0

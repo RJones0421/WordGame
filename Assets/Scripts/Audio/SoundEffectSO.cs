@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Audio;
 
 [CreateAssetMenu]
 public class SoundEffectSO : ScriptableObject
@@ -11,6 +12,8 @@ public class SoundEffectSO : ScriptableObject
     public Vector2 pitchRange = new Vector2(1, 1);
 
     private GameObject storedObject;
+
+    public AudioMixer audioMixer;
 
     public AudioSource Play(AudioSource audioSourceParam = null, float delay = 0)
     {

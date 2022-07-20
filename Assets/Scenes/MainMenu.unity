@@ -454,6 +454,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 753afeb6e928b104aada6ddf0ca03d21, type: 3}
+    - target: {fileID: 7499377894571553600, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: a5c44eb81800c8c4a881bfe25490eaa9, type: 2}
     - target: {fileID: 7499377894571553601, guid: 7ecc4983d10e8644a8305ee03bd96123, type: 3}
       propertyPath: m_Name
       value: MusicPlayer
@@ -2518,6 +2522,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: c9816dea2dffd484ba63381931a1b03d, type: 2}
+        m_TargetAssemblyTypeName: AudioMixerVolumeController, Assembly-CSharp
+        m_MethodName: ToggleMute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &838168382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3560,8 +3576,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 55a4b0ff63bfb2542a1524118af32783, type: 2}
         m_TargetAssemblyTypeName: AudioMixerVolumeController, Assembly-CSharp
-        m_MethodName: set_Muted
-        m_Mode: 6
+        m_MethodName: ToggleMute
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
