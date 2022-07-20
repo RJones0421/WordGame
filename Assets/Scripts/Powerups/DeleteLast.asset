@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4198dbe7073e9784f83cb12968bbb62e, type: 3}
   m_Name: DeleteLast
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 1d6c4eb35db054479acd02e634cfdb75, type: 3}
+  image: {fileID: 21300000, guid: 928f1efbf3da24834ae62d68a6b92e6d, type: 3}
   power: 

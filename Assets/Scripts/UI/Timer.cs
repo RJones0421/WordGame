@@ -24,6 +24,8 @@ public class Timer : MonoBehaviour
     public Word word;
 
     public SoundEffectSO gameEndSound;
+    public SoundEffectSO timeLowSound;
+    private bool isTimeLowSoundPlaying;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,19 @@ public class Timer : MonoBehaviour
             if (timeLeft > 0) {
                 timeLeft -= Time.deltaTime;
                 timerBar.fillAmount = timeLeft / maxTime;
+
+                if (timeLeft <= 10 && !isTimeLowSoundPlaying)
+                {
+                    timeLowSound.Play();
+                    isTimeLowSoundPlaying = true;
+                }
+
+                else if (timeLeft > 10 && isTimeLowSoundPlaying)
+                {
+                    timeLowSound.Stop();
+                    isTimeLowSoundPlaying = false;
+                }
+
             }
             else {
                 if(Time.timeScale==1)

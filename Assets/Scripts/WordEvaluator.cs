@@ -61,6 +61,7 @@ public class WordEvaluator : MonoBehaviour
 	{
 		if (IsValidWord(word))
 		{
+			Shop_Purchase.deactivatePowerUpUI("Anagram");
 			return ScoreWord(word);
 		}
 		else

@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private TextMeshProUGUI controlsTutorial;
 
-    private int lives = 0;
+    public static int lives;
 
     private void Awake()
     {
@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         mainCamera = Camera.main;
         analyticsManagerScript = analyticsManager.GetComponent<AnalyticsManager>();
+
+        lives = 0;
 
         // Get Tutorial Text
         controlsTutorial = tempTutroial.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
@@ -259,6 +261,7 @@ public class PlayerController : MonoBehaviour
             float screenPos = mainCamera.WorldToScreenPoint(new Vector3(0.0f, currHeight - renderer.bounds.size.y * 0.5f + 1.0f, 0.0f)).y;
             if (screenPos < 0.0f)
             {
+                Debug.Log("Lives: " + lives);
                 if (lives > 0)
                 {
                     Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
@@ -267,7 +270,7 @@ public class PlayerController : MonoBehaviour
                     timer.timeLeft = timer.GetMaxTime();
                     timer.StartTimer();
 
-                    transform.position = new Vector3(0.0f, mainCamera.transform.position.y, 0.0f);
+                    transform.position = PlatformGenerator.bottomPlatform.transform.position.x * Vector3.right + mainCamera.transform.position.y * Vector3.up;
                 }
                 else
                 {
@@ -321,7 +324,7 @@ public class PlayerController : MonoBehaviour
                 {
                     // activate shop item power up in this code block
                     Debug.Log("player uses item number 1 - Stop Time");
-                    StartCoroutine(StopTime());
+                    StartCoroutine(StopTime(0.0f, 5.0f));
                     Shop_Purchase.activatePowerUpUI("PauseTime");
                     CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
                 }
@@ -368,7 +371,7 @@ public class PlayerController : MonoBehaviour
                     Anagram.Activate();
                     Shop_Purchase.activatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
-                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
 
                 }
             }
@@ -380,7 +383,7 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("5"))
                 {
                     // timer.StopTimer()
-                    StartCoroutine(StopTime());
+                    StartCoroutine(StopTime(1.0f, 5.0f));
                     // timer.StartTimer();
                     Shop_Purchase.activatePowerUpUI("PauseTime");
 
@@ -418,29 +421,49 @@ public class PlayerController : MonoBehaviour
 
     // initialization of the item count in the left hand panel
     public void UpdateShopItemCount() {
-        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
-        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
-        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
-        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
+        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
+        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
+        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
         return;
     }
 
-
     // stop timer for 5 seconds
-    public IEnumerator StopTime()
+    public IEnumerator StopTime(float fadeTime, float totalTime)
     {
+        // frost component
+        FrostEffect frostEffect = GameObject.Find("Main Camera").GetComponent<FrostEffect>();
 
         if (timer.isTimerRunning()) {
             timer.StopTimer();
         }
         Debug.Log("StopTime Activated, timer paused");
 
-        yield return new WaitForSeconds(5);
+        float startAmount = frostEffect.FrostAmount;
+
+        // fade frost in
+        for (float f = 0.0f; f < fadeTime; f += Time.deltaTime)
+        {
+            frostEffect.FrostAmount = Mathf.Lerp(startAmount, 0.25f, f);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(totalTime - fadeTime * 2.0f);
 
         Debug.Log("Time Returned Restarted Timer");
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
         }
+
+        startAmount = frostEffect.FrostAmount;
+
+        // fade frost out
+        for (float f = 0.0f; f < fadeTime; f += Time.deltaTime)
+        {
+            frostEffect.FrostAmount = Mathf.Lerp(startAmount, 0.0f, f);
+            yield return null;
+        }
+
         Shop_Purchase.deactivatePowerUpUI("PauseTime");
     }
 

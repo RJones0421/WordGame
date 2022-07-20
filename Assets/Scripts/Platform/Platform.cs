@@ -37,8 +37,7 @@ public class Platform : MonoBehaviour
 
         // Set new sprite and disable old sprite
         spriteRenderer = coke.gameObject.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprite ? sprite : AssetDatabase.LoadAssetAtPath("Assets/Letters/LetterSprites/blank.jpg", typeof(Sprite)) as Sprite;
-        GetComponent<SpriteRenderer>().enabled = false;
+        spriteRenderer.sprite = sprite ? sprite : AssetDatabase.LoadAssetAtPath("Assets/Sprites/Handwritten_UnFilled/Letter_EMPTY.png", typeof(Sprite)) as Sprite;
     }
 
     public SpriteRenderer SpriteRenderer

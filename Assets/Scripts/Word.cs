@@ -76,8 +76,8 @@ public class Word : MonoBehaviour
         leftSidebar = walls[0].GetComponent<SpriteRenderer>();
         rightSidebar = walls[1].GetComponent<SpriteRenderer>();
 
-        leftSidebar.color = Color.gray;
-        rightSidebar.color = Color.gray;
+        leftSidebar.color = Color.white;
+        rightSidebar.color = Color.white;
     }
 
     public bool addLetter(LetterClass newLetter)
@@ -221,6 +221,7 @@ public class Word : MonoBehaviour
 
         int score = evaluator.SubmitWord(word) * multiplier;
         setMultiplier(1);
+        Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
 
         scoreManagerScript.AddScore(score);
         if (score > 0)
