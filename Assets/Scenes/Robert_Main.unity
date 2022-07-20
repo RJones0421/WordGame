@@ -612,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.30008, y: 70.30002}
+  m_AnchoredPosition: {x: -304.30005, y: 70.30002}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63624879
@@ -12878,7 +12878,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.30008, y: 121.30002}
+  m_AnchoredPosition: {x: -304.30005, y: 121.30002}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1476898123
@@ -13556,9 +13556,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2061923432}
     - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: currSprite
+      value: 
+      objectReference: {fileID: 506873859}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: forceField
       value: 
       objectReference: {fileID: 1641346213}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: playerJump
+      value: 
+      objectReference: {fileID: 21300000, guid: 2516d27f5c651415db7206d349f6402a, type: 3}
     - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: wallPrefab
       value: 
@@ -13571,6 +13579,14 @@ PrefabInstance:
       propertyPath: gameEndSound
       value: 
       objectReference: {fileID: 11400000, guid: 213bc70fd0d05d14889be19d2d915b6f, type: 2}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: playerGround
+      value: 
+      objectReference: {fileID: 21300000, guid: 7e89802f631484b7791a958413e84795, type: 3}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: playerSubmit
+      value: 
+      objectReference: {fileID: 21300000, guid: 47453d0d3c74c4ea58d4d2bbfb5ce339, type: 3}
     - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: scoreManager
       value: 
@@ -16296,7 +16312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -371.10013, y: 121.30002}
+  m_AnchoredPosition: {x: -371.1001, y: 121.30002}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903825689
@@ -16880,7 +16896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -371.10013, y: 70.29999}
+  m_AnchoredPosition: {x: -371.1001, y: 70.29999}
   m_SizeDelta: {x: -770, y: -1392.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027767381
