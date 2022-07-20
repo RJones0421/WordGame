@@ -13,7 +13,7 @@ public class PlatformGenerator : MonoBehaviour
 
     /* all platforms are stored in queue */
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
-    GameObject bottomPlatform;
+    public static GameObject bottomPlatform;
 
     [SerializeField]
     private Vector3 spawnPosition;
@@ -89,7 +89,7 @@ public class PlatformGenerator : MonoBehaviour
             Platform platform = bottomPlatform.GetComponent<Platform>();
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             
-            if (letterPlatform) {
+            if (letterPlatform) {;
                 if (Random.Range(1, 101) > 10) {
                     LetterClass letterObject = GetNextLetter();
                     letterPlatform.SpriteRenderer.sprite = letterObject.image;

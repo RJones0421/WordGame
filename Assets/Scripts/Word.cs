@@ -216,6 +216,7 @@ public class Word : MonoBehaviour
 
         int score = evaluator.SubmitWord(word) * multiplier;
         setMultiplier(1);
+        Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
 
         scoreManagerScript.AddScore(score);
         if (score > 0)

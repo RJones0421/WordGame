@@ -3187,6 +3187,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 1175687567}
   analyticsManager: {fileID: 719126423}
   word: {fileID: 1263100687}
+  gameEndSound: {fileID: 11400000, guid: 213bc70fd0d05d14889be19d2d915b6f, type: 2}
 --- !u!1001 &570946561
 PrefabInstance:
   m_ObjectHideFlags: 0
