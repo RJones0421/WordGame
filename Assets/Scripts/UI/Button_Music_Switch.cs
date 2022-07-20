@@ -14,14 +14,26 @@ public class Button_Music_Switch : MonoBehaviour
 
     private void Awake()
     {
-		if (volController.IsMuted())
-        {
-			original.sprite = offSprite;
+		if (volController)
+		{
+
+			if (volController.IsMuted())
+			{
+				original.sprite = offSprite;
+			}
+
+			else
+			{
+				original.sprite = tempSprite;
+			}
 		}
 
 		else
         {
-			original.sprite = tempSprite;
+			if (PlayerPrefs.HasKey("controls"))
+			{
+				if (PlayerPrefs.GetInt("controls") != 0) ChangeImage();
+			}
 		}
 	}
 
