@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
     public GameObject tempTutroial;
 
+    public LossText lossText;
+
     public GameObject wordBox;
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
@@ -157,38 +159,6 @@ public class PlayerController : MonoBehaviour
             walls[0].transform.position = new Vector3(wallDist, walls[0].transform.position.y, 0.0f);
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
-
-        //// Test TimeStop
-        //{
-        //    if (Input.GetKeyDown(KeyCode.T))
-        //    {
-        //        TimeStop timeStop = GetComponent<TimeStop>();
-        //        if (!timeStop)
-        //        {
-        //            //timeStop = gameObject.AddComponent<TimeStop>();
-        //            timeStop.Activate();
-        //        }
-        //    }
-        //}
-
-        //// Test Swap
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Y))
-        //    {
-        //        Swap swap = GetComponent<Swap>();
-        //        if (!swap)
-        //        {
-        //            swap = gameObject.AddComponent<Swap>();
-        //        }
-        //        swap.Activate();
-        //    }
-        //}
-
-        // Toggle Mouse Movement
-        /*if (Input.GetKeyDown(KeyCode.M))
-        {
-            allowMouseMovement = !allowMouseMovement;
-        }*/
 
         // Jump
         {
@@ -353,7 +323,6 @@ public class PlayerController : MonoBehaviour
                     timer.StopTimer();
                     int score = timer.SetValues();
 
-
                     foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
                     {
                         source.Stop();
@@ -384,6 +353,7 @@ public class PlayerController : MonoBehaviour
                     });
 #endif
                 }
+                lossText.SetLossText(true);
             }
         }
 
@@ -624,12 +594,6 @@ public class PlayerController : MonoBehaviour
                 }
 
                 letterPlatform.Activate();
-
-                //TimeStop timeStop = GetComponent<TimeStop>();
-                //if (timeStop != null)
-                //{
-                //    timeStop.Activate();
-                //}
             }
 
             JumpPlatform jumpPlatform = collision.GetComponent<JumpPlatform>();

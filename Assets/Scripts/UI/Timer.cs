@@ -18,6 +18,8 @@ public class Timer : MonoBehaviour
     public GameObject canvasGroup;
     private bool timerRunning = false;
 
+    public LossText lossText;
+
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
@@ -75,6 +77,8 @@ public class Timer : MonoBehaviour
 
                     int score = SetValues();
                     Word word = GameObject.Find("Word").GetComponent<Word>();
+
+                    lossText.SetLossText(false);
 #if true
                     analyticsManagerScript.HandleEvent("death", new List<object>
                     {
