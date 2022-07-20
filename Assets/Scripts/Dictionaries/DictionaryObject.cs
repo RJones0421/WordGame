@@ -22,12 +22,11 @@ public class DictionaryObject : ScriptableObject
     {
         string allWords = wordList.text;
         fullList = new List<string>();
+        fullListWithSortedChars = new List<string>();
         Anagrams = new Dictionary<string, List<string>>();
 
         if (isWordCheck)
         {
-            
-            fullListWithSortedChars = new List<string>();
             foreach (string word in allWords.Split("\n"[0]))
             {
                 string anagram = GetWordWithSortedChars(word.Trim());

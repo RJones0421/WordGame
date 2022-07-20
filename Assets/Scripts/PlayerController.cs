@@ -433,7 +433,7 @@ public class PlayerController : MonoBehaviour
                         // TwoX temp_twoX = new TwoX();
                         TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
                         temp_twoX.Activate();
-                        Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
+                        Shop_Purchase.activatePowerUpUI("ScoreMultiplier");
                         CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
                     }
                 }
@@ -507,10 +507,10 @@ public class PlayerController : MonoBehaviour
 
     // initialization of the item count in the left hand panel
     public void UpdateShopItemCount() {
-        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
-        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
-        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
-        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
+        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
         return;
     }
 
