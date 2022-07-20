@@ -19,11 +19,15 @@ public class PauseGame : MonoBehaviour
     public void pauseGame ()
     {
         Time.timeScale = 0;
+        GameObject inputFieldGo = GameObject.Find("PowerUpManager");
+        inputFieldGo.SetActive(false);
     }
 
 	public void resumeGame ()
     {
         Time.timeScale = 1;
+        GameObject inputFieldGo = GameObject.Find("PowerUpManager");
+        inputFieldGo.SetActive(true);
     }
 
 }

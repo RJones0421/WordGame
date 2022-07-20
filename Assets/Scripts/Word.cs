@@ -225,9 +225,9 @@ public class Word : MonoBehaviour
         {
             CurrencyUtils.useShopItem("3");
             CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+            setMultiplier(1);
+            Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
         }
-        setMultiplier(1);
-        Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
 
         if(Anagram.isActivated() && score > 0){
             Anagram.reset();
