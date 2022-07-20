@@ -2630,6 +2630,7 @@ MonoBehaviour:
   timeLeft: 0
   winCanvas: {fileID: 61575929}
   canvasGroup: {fileID: 1175687567}
+  lossText: {fileID: 0}
   analyticsManager: {fileID: 719126423}
   word: {fileID: 0}
   gameEndSound: {fileID: 11400000, guid: 213bc70fd0d05d14889be19d2d915b6f, type: 2}
@@ -15124,6 +15125,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2061923432}
     - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
+      propertyPath: lossText
+      value: 
+      objectReference: {fileID: 2083377329}
+    - target: {fileID: 7884987064063499173, guid: 516c0ffd0cb41b24ab2f80235b5649bc, type: 3}
       propertyPath: currSprite
       value: 
       objectReference: {fileID: 506873859}
@@ -18817,6 +18822,7 @@ GameObject:
   - component: {fileID: 2083377326}
   - component: {fileID: 2083377328}
   - component: {fileID: 2083377327}
+  - component: {fileID: 2083377329}
   m_Layer: 5
   m_Name: Result
   m_TagString: Untagged
@@ -18941,6 +18947,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083377325}
   m_CullTransparentMesh: 1
+--- !u!114 &2083377329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083377325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee76df0960e52a244b3e0afe48a8d0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lossText: {fileID: 2083377327}
 --- !u!1 &2091284717
 GameObject:
   m_ObjectHideFlags: 0
