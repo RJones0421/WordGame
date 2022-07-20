@@ -324,8 +324,8 @@ public class PlayerController : MonoBehaviour
                 {
                     // activate shop item power up in this code block
                     Debug.Log("player uses item number 1 - Stop Time");
-                    StartCoroutine(StopTime());
-                    Shop_Purchase.actiatePowerUpUI("PauseTime");
+                    StartCoroutine(StopTime(0.0f, 5.0f));
+                    Shop_Purchase.activatePowerUpUI("PauseTime");
                     CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
                 }
                 else
@@ -342,7 +342,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("player uses item number 2");
                     lives++;
-                    Shop_Purchase.actiatePowerUpUI("ExtraLife");
+                    Shop_Purchase.activatePowerUpUI("ExtraLife");
                     CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
                 }
             }
@@ -357,7 +357,7 @@ public class PlayerController : MonoBehaviour
                     // TwoX temp_twoX = new TwoX();
                     TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
                     temp_twoX.Activate();
-                    Shop_Purchase.actiatePowerUpUI("ScoreMultiplier");
+                    Shop_Purchase.activatePowerUpUI("ScoreMultiplier");
                     CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
                 }
             }
@@ -369,7 +369,7 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("4"))
                 {
                     Anagram.Activate();
-                    Shop_Purchase.actiatePowerUpUI("Anagram");
+                    Shop_Purchase.activatePowerUpUI("Anagram");
                     Debug.Log("player uses item number 4");
                     CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
 
@@ -383,9 +383,9 @@ public class PlayerController : MonoBehaviour
                 if (CurrencyUtils.useShopItem("5"))
                 {
                     // timer.StopTimer()
-                    StartCoroutine(StopTime());
+                    StartCoroutine(StopTime(1.0f, 5.0f));
                     // timer.StartTimer();
-                    Shop_Purchase.actiatePowerUpUI("PauseTime");
+                    Shop_Purchase.activatePowerUpUI("PauseTime");
 
                     Debug.Log("player uses item number 5");
                 }
@@ -428,23 +428,43 @@ public class PlayerController : MonoBehaviour
         return;
     }
 
-
     // stop timer for 5 seconds
-    public IEnumerator StopTime()
+    public IEnumerator StopTime(float fadeTime, float totalTime)
     {
+        // frost component
+        FrostEffect frostEffect = GameObject.Find("Main Camera").GetComponent<FrostEffect>();
 
         if (timer.isTimerRunning()) {
             timer.StopTimer();
         }
         Debug.Log("StopTime Activated, timer paused");
 
-        yield return new WaitForSeconds(5);
+        float startAmount = frostEffect.FrostAmount;
+
+        // fade frost in
+        for (float f = 0.0f; f < fadeTime; f += Time.deltaTime)
+        {
+            frostEffect.FrostAmount = Mathf.Lerp(startAmount, 0.25f, f);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(totalTime - fadeTime * 2.0f);
 
         Debug.Log("Time Returned Restarted Timer");
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
         }
-        Shop_Purchase.deActiatePowerUpUI("PauseTime");
+
+        startAmount = frostEffect.FrostAmount;
+
+        // fade frost out
+        for (float f = 0.0f; f < fadeTime; f += Time.deltaTime)
+        {
+            frostEffect.FrostAmount = Mathf.Lerp(startAmount, 0.0f, f);
+            yield return null;
+        }
+
+        Shop_Purchase.deactivatePowerUpUI("PauseTime");
     }
 
     private void InitiateBounce()
