@@ -313,7 +313,8 @@ public class PlayerController : MonoBehaviour
                     timer.timeLeft = timer.GetMaxTime();
                     timer.StartTimer();
 
-                    transform.position = PlatformGenerator.bottomPlatform.transform.position.x * Vector3.right + mainCamera.transform.position.y * Vector3.up;
+                    transform.position = mainCamera.transform.position.x * Vector3.right + mainCamera.transform.position.y * Vector3.up;
+                    rb.velocity = new Vector2(0,5);
                 }
                 else
                 {

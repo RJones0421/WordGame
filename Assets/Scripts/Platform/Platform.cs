@@ -26,7 +26,7 @@ public class Platform : MonoBehaviour
 
         // Set new sprite and disable old sprite
         spriteRenderer = animate.GetChild(0).GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprite ? sprite : GameObject.Find("GameManager").GetComponent<GlobalVariables>().blank;
+        spriteRenderer.sprite = sprite ? sprite : GlobalVariables.blank;
 
     }
 
