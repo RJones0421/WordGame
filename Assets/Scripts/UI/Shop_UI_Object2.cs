@@ -25,7 +25,7 @@ public class Shop_UI_Object2 : MonoBehaviour
     public void displayCurrency_onAppear(){
         GameObject inputFieldGo = GameObject.Find("Text_Shop_Currency");
         TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
-        int pointsAvailable = PlayerPrefs.GetInt(CurrencyUtils.currency_amount_keyname);
+        int pointsAvailable = PlayerPrefs.GetInt(CurrencyUtils.currency_amount_keyname, 0);
         Debug.Log("curreny amount display in shop opening: " + pointsAvailable);
         inputFieldCo.text = "Points Available: " + pointsAvailable;
 
