@@ -1534,7 +1534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 523316568}
-  - component: {fileID: 523316567}
+  - component: {fileID: 523316569}
   m_Layer: 0
   m_Name: DictionaryBuilder
   m_TagString: Untagged
@@ -1542,18 +1542,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &523316567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523316566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621366929c869364eb87a0ba61b30817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &523316568
 Transform:
   m_ObjectHideFlags: 0
@@ -1569,6 +1557,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &523316569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523316566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0815b39f294504a94e2dbcc912ec8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dictionaries:
+  - {fileID: 11400000, guid: f8367c2ec0723df49ad864cac7d5c011, type: 2}
+  - {fileID: 11400000, guid: ac5a4e937cb790b49b98d3fa6336db62, type: 2}
+  - {fileID: 11400000, guid: e88b0d465abe31549bdb92e55c3b4e07, type: 2}
+  - {fileID: 11400000, guid: fd56c9b1863e63749ae4afb88c4f6484, type: 2}
 --- !u!1 &545966460
 GameObject:
   m_ObjectHideFlags: 0
