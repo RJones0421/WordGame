@@ -13,7 +13,7 @@ public class SoundEffectSO : ScriptableObject
 
     private GameObject storedObject;
 
-    public AudioMixer audioMixer;
+    public AudioMixerGroup audioMixer;
 
     public AudioSource Play(AudioSource audioSourceParam = null, float delay = 0)
     {
@@ -29,6 +29,8 @@ public class SoundEffectSO : ScriptableObject
             var obj = new GameObject("Sound", typeof(AudioSource));
             source = obj.GetComponent<AudioSource>();
         }
+
+        source.outputAudioMixerGroup = audioMixer;
 
         source.clip = clip;
         source.volume = Random.Range(volumeRange.x, volumeRange.y);
