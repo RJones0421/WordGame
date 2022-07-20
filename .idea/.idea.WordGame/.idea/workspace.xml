@@ -3,38 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Robert_Week8.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Robert_Week8.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dictionaries/Dictionaries.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dictionaries/Dictionaries.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dictionaries/DictionaryObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dictionaries/DictionaryObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dictionaries/GenerateDictionaries.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dictionaries/GenerateDictionaries.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level10.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level10.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level11.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level11.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level2.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level3.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level4.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level4.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level5.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level5.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level6.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level6.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level7.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level7.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level8.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level8.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level9.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/Level9.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/CommonStream.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/CommonStream.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/ExtraBlanks.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/ExtraBlanks.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/common.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/common.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/commonDict.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/commonDict.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/dictionary.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/dictionary.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/fullDict.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/fullDict.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextFiles/shortenDict.py" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextFiles/shortenDict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Word.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Word.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,8 +45,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/YoungTemp/PlatformGeneratorWeek4.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/YoungTemp/PlatformGeneratorTutorial.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Yound_temp/PlatformGenerator0611.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LetterClass.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Platform/NewLetterPlatform.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Spawner.cs" />
@@ -84,14 +53,17 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/Spawner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Dictionaries/GenerateDictionaries.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Dictionaries/DictionaryObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/ExtraBlanks.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
@@ -149,6 +121,7 @@
       <workItem from="1656363730675" duration="1577000" />
       <workItem from="1656967501990" duration="12091000" />
       <workItem from="1657594802482" duration="2056000" />
+      <workItem from="1658353519865" duration="750000" />
     </task>
     <servers />
   </component>

@@ -13,7 +13,7 @@ public class PlatformGenerator : MonoBehaviour
 
     /* all platforms are stored in queue */
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
-    public static GameObject bottomPlatform;
+    public GameObject bottomPlatform;
 
     [SerializeField]
     private Vector3 spawnPosition;

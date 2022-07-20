@@ -26,7 +26,7 @@ public class Platform : MonoBehaviour
 
         // Set new sprite and disable old sprite
         spriteRenderer = animate.GetChild(0).GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprite ? sprite : GameObject.Find("GameManager").GetComponent<GlobalVariables>().blank;
+        spriteRenderer.sprite = sprite ? sprite : GlobalVariables.blank;
 
     }
 
@@ -44,18 +44,6 @@ public class Platform : MonoBehaviour
     public virtual void ResetSprite()
     {
         spriteRenderer.color = Color.white;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public virtual void Activate()

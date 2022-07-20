@@ -29,10 +29,6 @@ public class Trie
         foreach(string product in products){
             insert(product, root);
         }
-        // for (string product:
-        //         products) {
-        //     insert(product, root);
-        // }
         return root;
 
     }
@@ -48,15 +44,6 @@ public class Trie
                 node = node.children[c - 'a'];
             }
         }
-        // for (char c: search.toCharArray()
-        //      ) {
-        //     if(node.children[c - 'a'] == null){
-        //         return res;
-        //     }
-        //     else{
-        //         node = node.children[c - 'a'];
-        //     }
-        // }
         if(node.isWord){
             res.Add(search);
         }
@@ -71,16 +58,6 @@ public class Trie
                 }
             }
         }
-        // for (TrieNode child: node.children
-        //      ) {
-        //     if (child != null){
-        //         List<String> thisRes = dfs(child, search, new ArrayList<>());
-        //         res.addAll(thisRes);
-        //         if(res.size() >= 3){
-        //             return res.subList(0,3);
-        //         }
-        //     }
-        // }
         return  res;
     }
     private List<string> dfs(TrieNode root, string word, List<string> res){
@@ -96,13 +73,6 @@ public class Trie
                 dfs(child, word + root.c, res);
             }
         }
-        // for (TrieNode child:
-        //         root.children) {
-        //     if(child != null){
-        //         dfs(child, word + root.c, res);
-        //     }
-
-        // }
         return res;
     }
    public List<List<string>> suggestedProducts(string[] products, string searchWord) {
@@ -122,10 +92,6 @@ public class Trie
         foreach(string product in products){
             insert(product, root);
         }
-        // for (string product:
-        //         products) {
-        //     insert(product, root);
-        // }
         return root;
 
     }

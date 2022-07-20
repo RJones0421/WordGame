@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     public Timer timer;
     public GameObject tempTutroial;
 
+    public LossText lossText;
+
     public GameObject wordBox;
     public GameObject scoreManager;
     private ScoreManager scoreManagerScript;
@@ -103,10 +105,7 @@ public class PlayerController : MonoBehaviour
         wallDist = wordBox.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f + wallPrefab.GetComponent<Renderer>().bounds.size.y * 1.5f;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
-        walls[0].transform.Rotate(Vector3.back * wallRotate);
-
         walls.Add(Instantiate(wallPrefab, Vector3.right * wallDist, Quaternion.identity));
-        walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
 
@@ -157,38 +156,6 @@ public class PlayerController : MonoBehaviour
             walls[0].transform.position = new Vector3(wallDist, walls[0].transform.position.y, 0.0f);
             walls[1].transform.position = new Vector3(-wallDist, walls[1].transform.position.y, 0.0f);
         }
-
-        //// Test TimeStop
-        //{
-        //    if (Input.GetKeyDown(KeyCode.T))
-        //    {
-        //        TimeStop timeStop = GetComponent<TimeStop>();
-        //        if (!timeStop)
-        //        {
-        //            //timeStop = gameObject.AddComponent<TimeStop>();
-        //            timeStop.Activate();
-        //        }
-        //    }
-        //}
-
-        //// Test Swap
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Y))
-        //    {
-        //        Swap swap = GetComponent<Swap>();
-        //        if (!swap)
-        //        {
-        //            swap = gameObject.AddComponent<Swap>();
-        //        }
-        //        swap.Activate();
-        //    }
-        //}
-
-        // Toggle Mouse Movement
-        /*if (Input.GetKeyDown(KeyCode.M))
-        {
-            allowMouseMovement = !allowMouseMovement;
-        }*/
 
         // Jump
         {
@@ -343,7 +310,8 @@ public class PlayerController : MonoBehaviour
                     timer.timeLeft = timer.GetMaxTime();
                     timer.StartTimer();
 
-                    transform.position = PlatformGenerator.bottomPlatform.transform.position.x * Vector3.right + mainCamera.transform.position.y * Vector3.up;
+                    transform.position = mainCamera.transform.position.x * Vector3.right + mainCamera.transform.position.y * Vector3.up;
+                    rb.velocity = new Vector2(0,5);
                 }
                 else
                 {
@@ -352,7 +320,6 @@ public class PlayerController : MonoBehaviour
                     gameOverCanvas.SetActive(true);
                     timer.StopTimer();
                     int score = timer.SetValues();
-
 
                     foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
                     {
@@ -384,6 +351,7 @@ public class PlayerController : MonoBehaviour
                     });
 #endif
                 }
+                lossText.SetLossText(true);
             }
         }
 
@@ -393,18 +361,26 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
             {
                 Debug.Log("Player clicked on 1");
-                if (CurrencyUtils.useShopItem("1"))
+                if(timer.isTimerRunning())
                 {
-                    // activate shop item power up in this code block
-                    Debug.Log("player uses item number 1 - Stop Time");
-                    StartCoroutine(StopTime(0.0f, 5.0f));
-                    Shop_Purchase.activatePowerUpUI("PauseTime");
-                    CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
+                    if (CurrencyUtils.useShopItem("1"))
+                    {
+                        // activate shop item power up in this code block
+                        Debug.Log("player uses item number 1 - Stop Time");
+                        StartCoroutine(StopTime(0.0f, 5.0f));
+                        Shop_Purchase.activatePowerUpUI("PauseTime");
+                        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+                    }
+                    else
+                    {
+                        Debug.Log("player does not have item 1");
+                    }
                 }
                 else
                 {
-                    Debug.Log("player does not have item 1");
+                    Debug.Log("timer is running, you cannot activate the timer stop power up");
                 }
+
             }
 
             // extra life
@@ -416,7 +392,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("player uses item number 2");
                     lives++;
                     Shop_Purchase.activatePowerUpUI("ExtraLife");
-                    CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
+                    CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
                 }
             }
 
@@ -424,28 +400,49 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
             {
                 Debug.Log("Player clicked on 3");
-                if (CurrencyUtils.useShopItem("3"))
+                // if (CurrencyUtils.useShopItem("3"))
+                // activate score multiplier
+                if(word.getMultiplier() != 2)
                 {
-                    Debug.Log("player uses item number 3 - word/score multiplier");
-                    // TwoX temp_twoX = new TwoX();
-                    TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
-                    temp_twoX.Activate();
-                    Shop_Purchase.activatePowerUpUI("ScoreMultiplier");
-                    CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
+                    if(CurrencyUtils.getShopItemQuantity("3"))
+                    {
+                        Debug.Log("player uses item number 3 - word/score multiplier");
+                        // TwoX temp_twoX = new TwoX();
+                        TwoX temp_twoX = ScriptableObject.CreateInstance<TwoX>();
+                        temp_twoX.Activate();
+                        Shop_Purchase.activatePowerUpUI("ScoreMultiplier");
+                        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+                    }
                 }
+                // deactivate power up
+                else
+                {
+                    Debug.Log("Score multiplier already activated score multiplier at this point: " + word.getMultiplier().ToString());
+                    word.setMultiplier(1);
+                    Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
+                    Debug.Log("Score multiplier post: " + word.getMultiplier().ToString());
+
+                }
+
             }
 
             // anagram
             if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
             {
                 Debug.Log("Player clicked on 4");
-                if (CurrencyUtils.useShopItem("4"))
+                if(!Anagram.isActivated())
                 {
-                    Anagram.Activate();
-                    Shop_Purchase.activatePowerUpUI("Anagram");
-                    Debug.Log("player uses item number 4");
-                    CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
+                    if (CurrencyUtils.getShopItemQuantity("4"))
+                    {
+                        Anagram.Activate();
+                        Shop_Purchase.activatePowerUpUI("Anagram");
+                        Debug.Log("player uses item number 4");
+                        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
 
+                    }
+                } else{
+                    Anagram.reset();
+                    Shop_Purchase.deactivatePowerUpUI("Anagram");
                 }
             }
 
@@ -494,10 +491,10 @@ public class PlayerController : MonoBehaviour
 
     // initialization of the item count in the left hand panel
     public void UpdateShopItemCount() {
-        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime","x: ");
-        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife","Extra lives: ");
-        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier","x: ");
-        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram","x: ");
+        CurrencyUtils.displayQuantityDynamic("1","Text_PauseTime_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("2","Text_ExtraLife_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+        CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
         return;
     }
 
@@ -509,6 +506,7 @@ public class PlayerController : MonoBehaviour
 
         if (timer.isTimerRunning()) {
             timer.StopTimer();
+            timer.pauseTimeActivated();
         }
         Debug.Log("StopTime Activated, timer paused");
 
@@ -526,6 +524,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Time Returned Restarted Timer");
         if (!timer.isTimerRunning()) {
             timer.StartTimer();
+            timer.pauseTimeDeactivated();
         }
 
         startAmount = frostEffect.FrostAmount;
@@ -593,12 +592,6 @@ public class PlayerController : MonoBehaviour
                 }
 
                 letterPlatform.Activate();
-
-                //TimeStop timeStop = GetComponent<TimeStop>();
-                //if (timeStop != null)
-                //{
-                //    timeStop.Activate();
-                //}
             }
 
             JumpPlatform jumpPlatform = collision.GetComponent<JumpPlatform>();

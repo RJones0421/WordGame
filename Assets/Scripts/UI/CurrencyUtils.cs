@@ -19,19 +19,6 @@ public class CurrencyUtils : MonoBehaviour
 
     static Dictionary<string, int> items_value = new Dictionary<string, int>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
     // average word submitted score is about 235, currency awarded will be 2
     public static void populateCostMap(){
         items_value.Add("1", 5);
@@ -147,10 +134,10 @@ public class CurrencyUtils : MonoBehaviour
         {
             // Text_Item1_Quantity
             int item_quantity = PlayerPrefs.GetInt(item_num);
-            if (item_num == "2")
-            {
-                item_quantity = PlayerController.lives;
-            }
+            // if (item_num == "2")
+            // {
+            //     item_quantity = PlayerController.lives;
+            // }
             Debug.Log("display quantity: " + item_quantity);
             GameObject inputFieldGo = GameObject.Find(gameObject_name);
             TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
@@ -174,7 +161,7 @@ public class CurrencyUtils : MonoBehaviour
     {
         int item_quantity = PlayerPrefs.GetInt(item_num);
         // For debugging only
-        item_quantity = 11;
+        //item_quantity = 11;
         Debug.Log("player has x items " + item_quantity);
         if (item_quantity > 0)
         {
@@ -189,6 +176,18 @@ public class CurrencyUtils : MonoBehaviour
                 GameObject inputFieldGo = GameObject.Find(icon_name);
                 // inputFieldGo.SetActive(false);
             }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static bool getShopItemQuantity(string item_num)
+    {
+        int item_quantity = PlayerPrefs.GetInt(item_num);
+        if (item_quantity > 0) {
             return true;
         }
         else

@@ -10,6 +10,9 @@ public class SuggestedWord : MonoBehaviour
     [SerializeField] private TMP_Text suggestedWord;
     [SerializeField] private PlayerController player;
 
+    private void Start(){
+        GlobalVariables.yPosChange=0f;
+    }
     private void Update()
     {
         if (player.transform.position.y >= GlobalVariables.yPosChange)

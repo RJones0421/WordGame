@@ -10,6 +10,7 @@ public class Word : MonoBehaviour
     [SerializeField] private WordEvaluator evaluator;
 
     [SerializeField] private Sprite defaultSprite;
+    [SerializeField] LetterObjectArray letterArray;
 
     [SerializeField] public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
@@ -17,6 +18,8 @@ public class Word : MonoBehaviour
     private SpriteRenderer rightSidebar;
 
     public List<LetterClass> letters = new List<LetterClass>();
+
+    public List<Sprite> wallSprites = new List<Sprite>();
 
     public int currentLetterBox = 0;
 
@@ -46,7 +49,7 @@ public class Word : MonoBehaviour
     public TMP_Text addScoreAmountLeft;
     public TMP_Text addScoreAmountRight;
     private TMP_Text addScoreAmount;
-    
+
     private int multiplier = 1;
 
     public SoundEffectSO wordSubmitSound;
@@ -75,14 +78,14 @@ public class Word : MonoBehaviour
         leftSidebar = walls[0].GetComponent<SpriteRenderer>();
         rightSidebar = walls[1].GetComponent<SpriteRenderer>();
 
-        leftSidebar.color = Color.white;
-        rightSidebar.color = Color.white;
+        leftSidebar.sprite = wallSprites[0];
+        rightSidebar.sprite = wallSprites[0];
     }
 
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);
-        
+
 
         if (newLetter.Letter == '_') return false;
         if (newLetter.Letter == '?' && word.Contains('?')) return false;
@@ -134,23 +137,23 @@ public class Word : MonoBehaviour
         }
         bool valid = evaluator.IsValidWord(tempWord);
             if (valid) {
-                leftSidebar.color = new Color(171f/255f, 209f/255f, 110f/255f);
-                rightSidebar.color = new Color(171f/255f, 209f/255f, 110f/255f);
+                leftSidebar.sprite = wallSprites[1];
+                rightSidebar.sprite = wallSprites[1];
 
                 if (!hasSubmitOnce)
                 {
                     arrows.SetActive(true);
-                    arrows.GetComponent<ArrowController>().RecolorArrows(new Color(171f/255f, 209f/255f, 110f/255f));
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.green);
                 }
             }
             else {
-                leftSidebar.color = new Color(232f/255f, 112f/255f, 96f/255f);
-                rightSidebar.color = new Color(232f/255f, 112f/255f, 96f/255f);
+                leftSidebar.sprite = wallSprites[2];
+                rightSidebar.sprite = wallSprites[2];
 
                 if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
-                    arrows.GetComponent<ArrowController>().RecolorArrows(new Color(232f/255f, 112f/255f, 96f/255f));
+                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
                 }
             }
     }
@@ -165,19 +168,19 @@ public class Word : MonoBehaviour
 
         Vector3 wallScale = leftWall.transform.localScale;
 
-        while(leftWall.transform.localScale.y < 3 * wallScale.y) {
-            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
-            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
+        while(leftWall.transform.localScale.x < 2.25f * wallScale.x) {
+            leftWall.transform.localScale = new Vector3(leftWall.transform.localScale.x + bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
+            rightWall.transform.localScale = new Vector3(rightWall.transform.localScale.x + bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
             yield return null;
         }
 
-        while(leftWall.transform.localScale.y > wallScale.y) {
-            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
-            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
+        while(leftWall.transform.localScale.x > wallScale.x) {
+            leftWall.transform.localScale = new Vector3(leftWall.transform.localScale.x - bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
+            rightWall.transform.localScale = new Vector3(rightWall.transform.localScale.x - bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
             yield return null;
         }
 
-        if (leftWall.transform.localScale.y < wallScale.y)
+        if (leftWall.transform.localScale.x < wallScale.x)
         {
             leftWall.transform.localScale = wallScale;
             rightWall.transform.localScale = wallScale;
@@ -189,12 +192,16 @@ public class Word : MonoBehaviour
     public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
-
+        // if(Anagram.isActivated()){
+        //     Anagram.reset();
+        //     Shop_Purchase.deactivatePowerUpUI("Anagram");
+        //     Debug.Log("Anagram reset");
+        // }
         totalSubmissions++;
         totalWordLength += word.Length;
 
         arrows.SetActive(false);
-        
+
         int wildcard = word.IndexOf('?');
         while (wildcard != -1) {
             char bestChar = 'A';
@@ -215,8 +222,22 @@ public class Word : MonoBehaviour
         }
 
         int score = evaluator.SubmitWord(word) * multiplier;
-        setMultiplier(1);
-        Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
+        // delayed use of score multiplier power up, only deduct when the word is actually submitted
+        if (multiplier > 1 && score > 0)
+        {
+            CurrencyUtils.useShopItem("3");
+            CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+            setMultiplier(1);
+            Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
+        }
+
+        if(Anagram.isActivated() && score > 0){
+            Anagram.reset();
+            CurrencyUtils.useShopItem("4");
+            Shop_Purchase.deactivatePowerUpUI("Anagram");
+            Debug.Log("Anagram reset");
+            CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+        }
 
         scoreManagerScript.AddScore(score);
         if (score > 0)
@@ -270,8 +291,8 @@ public class Word : MonoBehaviour
         Debug.Log("Time gained: " + timeGained);
         Debug.Log("Word score: " + score);
 
-        leftSidebar.color = Color.white;
-        rightSidebar.color = Color.white;
+        leftSidebar.sprite = wallSprites[0];
+        rightSidebar.sprite = wallSprites[0];
         if(score != 0){
             if(wallSide == "left"){
                 addScoreAmount = addScoreAmountLeft;
@@ -283,7 +304,7 @@ public class Word : MonoBehaviour
             addScoreAmount.alpha = 1;
             StartCoroutine(Fade());
         }
-        StartCoroutine(sidebarBounce(15f));
+        StartCoroutine(sidebarBounce(7f));
 
         return score;
     }
@@ -306,8 +327,34 @@ public class Word : MonoBehaviour
         return letters[index];
     }
 
-    public void setMultiplier(int multi) 
+    public void setMultiplier(int multi)
     {
         multiplier = multi;
+    }
+    
+    public void setWord(string newWord){
+        word = newWord;
+    }
+    public string getWord(){
+        return word;
+    }
+    public void changeWord(string newWord){
+        word = newWord;
+        string newWordLower = newWord.ToLower();
+        letters.Clear();
+        currentLetterBox = 0;
+        foreach(char c in newWordLower){
+            Debug.Log("char of anagram is " + c);
+            int index = c - 'a' + 1;
+            Debug.Log(index);
+            LetterClass newLetter = letterArray.GetLetter(c - 'a' + 1);
+            sprites[currentLetterBox].sprite = newLetter.image;
+            currentLetterBox++;
+        }
+    }
+
+    public int getMultiplier()
+    {
+        return multiplier;
     }
 }
