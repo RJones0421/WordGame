@@ -10,30 +10,49 @@ public class Button_Music_Switch : MonoBehaviour
 	public Sprite tempSprite;
 	public Image original;
 
+	public AudioMixerVolumeController volController;
+
     private void Awake()
     {
-		if (PlayerPrefs.HasKey("controls"))
+		if (volController)
+		{
+
+			if (volController.IsMuted())
+			{
+				original.sprite = offSprite;
+			}
+
+			else
+			{
+				original.sprite = tempSprite;
+			}
+		}
+
+		else
         {
-			if (PlayerPrefs.GetInt("controls") != 0) ChangeImage();
-        }
-    }
+			if (PlayerPrefs.HasKey("controls"))
+			{
+				if (PlayerPrefs.GetInt("controls") != 0) ChangeImage();
+			}
+		}
+	}
 
-    public void ChangeImage() {
-
-		if (original.sprite == tempSprite) {
+	public void ChangeImage()
+	{
+		if (original.sprite == tempSprite)
+		{
 
 			original.sprite = offSprite;
 
 		}
-		
-		else {
+
+		else
+		{
 
 			original.sprite = tempSprite;
 
 		}
-
 	}
-
 }
 
 

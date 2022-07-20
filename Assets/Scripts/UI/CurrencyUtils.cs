@@ -134,6 +134,10 @@ public class CurrencyUtils : MonoBehaviour
         {
             // Text_Item1_Quantity
             int item_quantity = PlayerPrefs.GetInt(item_num);
+            // if (item_num == "2")
+            // {
+            //     item_quantity = PlayerController.lives;
+            // }
             Debug.Log("display quantity: " + item_quantity);
             GameObject inputFieldGo = GameObject.Find(gameObject_name);
             TMP_Text inputFieldCo = inputFieldGo.GetComponent<TMP_Text>();
@@ -156,7 +160,8 @@ public class CurrencyUtils : MonoBehaviour
     public static bool useShopItem(string item_num)
     {
         int item_quantity = PlayerPrefs.GetInt(item_num);
-        // item_quantity = 11;
+        // For debugging only
+        //item_quantity = 11;
         Debug.Log("player has x items " + item_quantity);
         if (item_quantity > 0)
         {
@@ -171,6 +176,18 @@ public class CurrencyUtils : MonoBehaviour
                 GameObject inputFieldGo = GameObject.Find(icon_name);
                 // inputFieldGo.SetActive(false);
             }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static bool getShopItemQuantity(string item_num)
+    {
+        int item_quantity = PlayerPrefs.GetInt(item_num);
+        if (item_quantity > 0) {
             return true;
         }
         else
