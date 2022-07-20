@@ -67,6 +67,8 @@ public class Shop_Purchase : MonoBehaviour
         activatePowerUpUIWithColor("ExtraLife",color);
         activatePowerUpUIWithColor("Anagram",color);
         activatePowerUpUIWithColor("PauseTime",color);
+        GameObject inputFieldGo = GameObject.Find("PowerUpManager");
+        inputFieldGo.SetActive(true);
     }
 
 
