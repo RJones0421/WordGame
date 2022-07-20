@@ -221,18 +221,20 @@ public class Word : MonoBehaviour
 
         int score = evaluator.SubmitWord(word) * multiplier;
         // delayed use of score multiplier power up, only deduct when the word is actually submitted
-        if (multiplier > 1)
+        if (multiplier > 1 && score > 0)
         {
             CurrencyUtils.useShopItem("3");
+            CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
         }
         setMultiplier(1);
         Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
 
-        if(Anagram.isActivated()){
+        if(Anagram.isActivated() && score > 0){
             Anagram.reset();
             CurrencyUtils.useShopItem("4");
             Shop_Purchase.deactivatePowerUpUI("Anagram");
             Debug.Log("Anagram reset");
+            CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
         }
 
         scoreManagerScript.AddScore(score);
