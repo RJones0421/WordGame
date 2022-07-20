@@ -12,7 +12,10 @@ public class DeleteLast : Powerup
     
     public override bool Activate()
     {
-        GlobalVariables.word.PopLetter();
+        Word word = GlobalVariables.word;
+        if (word.GetWordLength() > 0) {
+            word.PopLetter();
+        }
         return true;
     }
 }
