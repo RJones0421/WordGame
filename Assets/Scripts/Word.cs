@@ -143,7 +143,7 @@ public class Word : MonoBehaviour
                 if (!hasSubmitOnce)
                 {
                     arrows.SetActive(true);
-                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.green);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(new Color(189f/255f, 223f/255f, 137f/255f));
                 }
             }
             else {
@@ -153,7 +153,7 @@ public class Word : MonoBehaviour
                 if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
-                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(new Color(232f/255f, 112f/255f, 96f/255f));
                 }
             }
     }
