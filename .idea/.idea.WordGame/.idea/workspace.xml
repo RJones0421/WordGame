@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Robert_Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Robert_Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Powerups/Powerup.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Powerups/Powerup.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Word.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Word.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +45,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/YoungTemp/PlatformGeneratorWeek4.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/YoungTemp/PlatformGeneratorTutorial.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Yound_temp/PlatformGenerator0611.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LetterClass.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Platform/NewLetterPlatform.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Spawner.cs" />
@@ -67,6 +63,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
@@ -124,6 +121,7 @@
       <workItem from="1656363730675" duration="1577000" />
       <workItem from="1656967501990" duration="12091000" />
       <workItem from="1657594802482" duration="2056000" />
+      <workItem from="1658353519865" duration="750000" />
     </task>
     <servers />
   </component>

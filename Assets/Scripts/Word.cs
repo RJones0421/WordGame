@@ -19,6 +19,8 @@ public class Word : MonoBehaviour
 
     public List<LetterClass> letters = new List<LetterClass>();
 
+    public List<Sprite> wallSprites = new List<Sprite>();
+
     public int currentLetterBox = 0;
 
     public GameObject timer;
@@ -76,8 +78,8 @@ public class Word : MonoBehaviour
         leftSidebar = walls[0].GetComponent<SpriteRenderer>();
         rightSidebar = walls[1].GetComponent<SpriteRenderer>();
 
-        leftSidebar.color = Color.white;
-        rightSidebar.color = Color.white;
+        leftSidebar.sprite = wallSprites[0];
+        rightSidebar.sprite = wallSprites[0];
     }
 
     public bool addLetter(LetterClass newLetter)
@@ -135,8 +137,8 @@ public class Word : MonoBehaviour
         }
         bool valid = evaluator.IsValidWord(tempWord);
             if (valid) {
-                leftSidebar.color = Color.green;
-                rightSidebar.color = Color.green;
+                leftSidebar.sprite = wallSprites[1];
+                rightSidebar.sprite = wallSprites[1];
 
                 if (!hasSubmitOnce)
                 {
@@ -145,8 +147,8 @@ public class Word : MonoBehaviour
                 }
             }
             else {
-                leftSidebar.color = Color.red;
-                rightSidebar.color = Color.red;
+                leftSidebar.sprite = wallSprites[2];
+                rightSidebar.sprite = wallSprites[2];
 
                 if (!hasClearedOnce && word.Length > 2)
                 {
@@ -166,19 +168,19 @@ public class Word : MonoBehaviour
 
         Vector3 wallScale = leftWall.transform.localScale;
 
-        while(leftWall.transform.localScale.y < 3 * wallScale.y) {
-            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
-            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
+        while(leftWall.transform.localScale.x < 2.25f * wallScale.x) {
+            leftWall.transform.localScale = new Vector3(leftWall.transform.localScale.x + bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
+            rightWall.transform.localScale = new Vector3(rightWall.transform.localScale.x + bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
             yield return null;
         }
 
-        while(leftWall.transform.localScale.y > wallScale.y) {
-            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
-            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
+        while(leftWall.transform.localScale.x > wallScale.x) {
+            leftWall.transform.localScale = new Vector3(leftWall.transform.localScale.x - bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
+            rightWall.transform.localScale = new Vector3(rightWall.transform.localScale.x - bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
             yield return null;
         }
 
-        if (leftWall.transform.localScale.y < wallScale.y)
+        if (leftWall.transform.localScale.x < wallScale.x)
         {
             leftWall.transform.localScale = wallScale;
             rightWall.transform.localScale = wallScale;
@@ -289,8 +291,8 @@ public class Word : MonoBehaviour
         Debug.Log("Time gained: " + timeGained);
         Debug.Log("Word score: " + score);
 
-        leftSidebar.color = Color.gray;
-        rightSidebar.color = Color.gray;
+        leftSidebar.sprite = wallSprites[0];
+        rightSidebar.sprite = wallSprites[0];
         if(score != 0){
             if(wallSide == "left"){
                 addScoreAmount = addScoreAmountLeft;
@@ -302,7 +304,7 @@ public class Word : MonoBehaviour
             addScoreAmount.alpha = 1;
             StartCoroutine(Fade());
         }
-        StartCoroutine(sidebarBounce(15f));
+        StartCoroutine(sidebarBounce(7f));
 
         return score;
     }

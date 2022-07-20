@@ -107,10 +107,7 @@ public class PlayerController : MonoBehaviour
         wallDist = wordBox.GetComponent<SpriteRenderer>().bounds.size.x * 0.5f + wallPrefab.GetComponent<Renderer>().bounds.size.y * 1.5f;
 
         walls.Add(Instantiate(wallPrefab, Vector3.left * wallDist, Quaternion.identity));
-        walls[0].transform.Rotate(Vector3.back * wallRotate);
-
         walls.Add(Instantiate(wallPrefab, Vector3.right * wallDist, Quaternion.identity));
-        walls[1].transform.Rotate(Vector3.forward, wallRotate);
 
         word.SetSidebars(walls);
 
