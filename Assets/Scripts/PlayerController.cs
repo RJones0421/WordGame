@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
                     InitiateBounce("right");
                     var rightMain = rightParticles.main;
                     var rightExternal = rightParticles.externalForces;
-                    
+
 
                     Debug.Log("SUBMIT RIGHT");
 
@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
                         rightMain.startColor = greenChalk;
                         rightParticles.Play();
                         scoreParticles.Play();
-                        // validWordParticles.Play(); 
+                        // validWordParticles.Play();
                     }
                     else {
                         rightMain.gravityModifier = 5;
@@ -400,14 +400,17 @@ public class PlayerController : MonoBehaviour
                         Debug.Log("player uses item number 2");
                         Shop_Purchase.activatePowerUpUI("ExtraLife");
                         CurrencyUtils.displayQuantityDynamic("2", "Text_ExtraLife_Qty", "x: ");
+                        resurrect = !resurrect;
+
                     }
                 }
                 else
                 {
                     Shop_Purchase.deactivatePowerUpUI("ExtraLife");
+                    resurrect = !resurrect;
+
                 }
 
-                resurrect = !resurrect;
             }
 
             // word/score multiplier
