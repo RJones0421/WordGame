@@ -239,7 +239,6 @@ draw
 left
 late
 run
-don't
 while
 press
 close
