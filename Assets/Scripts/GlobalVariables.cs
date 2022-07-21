@@ -6,6 +6,8 @@ public class GlobalVariables : MonoBehaviour
 {
     public static Word word;
     public static PlayerController player;
+    public Sprite _blank;
+    public static Sprite blank;
 
     public static float yPosChange = 0f;
     public static bool updateWordChangeHeight;
@@ -14,5 +16,6 @@ public class GlobalVariables : MonoBehaviour
     {
         word = GameObject.Find("Word").GetComponent<Word>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        blank = _blank;
     }
 }

@@ -1,9 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
-
 public class ScoreManager : MonoBehaviour
 {
     public GameObject scoreHolder;
@@ -19,12 +18,6 @@ public class ScoreManager : MonoBehaviour
         highScoreText = highScoreHolder.GetComponent<TMP_Text>();
 
         highScoreText.text = "Highscore: " + PlayerPrefs.GetInt("highscore");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void AddScore(int score)

@@ -13,21 +13,27 @@ public class Timer : MonoBehaviour
     [SerializeField]
 	private float maxTime;
 
-	float timeLeft;
+	public float timeLeft;
 	public GameObject winCanvas;
     public GameObject canvasGroup;
     private bool timerRunning = false;
+
+    public LossText lossText;
 
     public GameObject analyticsManager;
     private AnalyticsManager analyticsManagerScript;
 
     public Word word;
 
+    public SoundEffectSO gameEndSound;
+    public SoundEffectSO timeLowSound;
+    private bool isTimeLowSoundPlaying;
 
     // Start is called before the first frame update
     void Start()
     {
     	winCanvas.SetActive(false);
+        Shop_Purchase.resetShopPowerUpUI();
     	timerBar = GetComponent<Image>();
     	timeLeft = maxTime;
         Time.timeScale = 1;
@@ -46,12 +52,33 @@ public class Timer : MonoBehaviour
             if (timeLeft > 0) {
                 timeLeft -= Time.deltaTime;
                 timerBar.fillAmount = timeLeft / maxTime;
+
+                if (timeLeft <= 10 && !isTimeLowSoundPlaying)
+                {
+                    timeLowSound.Play();
+                    isTimeLowSoundPlaying = true;
+                }
+
+                else if (timeLeft > 10 && isTimeLowSoundPlaying)
+                {
+                    timeLowSound.Stop();
+                    isTimeLowSoundPlaying = false;
+                }
+
             }
             else {
                 if(Time.timeScale==1)
                 {
+                    foreach (AudioSource source in FindObjectsOfType<AudioSource>() as AudioSource[])
+                    {
+                        source.Stop();
+                    }
+                    gameEndSound.Play();
+
                     int score = SetValues();
                     Word word = GameObject.Find("Word").GetComponent<Word>();
+
+                    lossText.SetLossText(false);
 #if true
                     analyticsManagerScript.HandleEvent("death", new List<object>
                     {
@@ -84,8 +111,18 @@ public class Timer : MonoBehaviour
 
     }
 
+    public void pauseTimeActivated() {
+        timerBar.color = Color.blue;
+    }
+
+    public void pauseTimeDeactivated() {
+        timerBar.color = Color.white;
+    }
+
     public int SetValues()
     {
+        Anagram.reset();
+        Shop_Purchase.resetShopPowerUpUI();
         winCanvas.SetActive(true);
         Time.timeScale = 0;
         canvasGroup.GetComponent<CanvasGroup>().interactable = false;
@@ -104,9 +141,17 @@ public class Timer : MonoBehaviour
             Debug.Log("Unable to parse final score after game completion, considering 0 as final score");
         }
 
+        // testing for score multiplier
+        // int new_score = ScoreMultiplier.DoubleScore(finalScore);
+        // finalScore = new_score;
+        // Debug.Log("Current final score post Double Score " + new_score);
+
         int highScore = ScoreUtils.updateAndGetHighsScore(finalScore);
 
         CurrencyUtils.addCurrency(finalScore);
+
+
+
 
 
         CurrencyUtils.displayCurrency("Currency_test");
@@ -169,6 +214,11 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         timerRunning = true;
+    }
+
+    public bool isTimerRunning()
+    {
+        return timerRunning;
     }
 
 }

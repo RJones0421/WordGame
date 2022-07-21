@@ -1,18 +1,49 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 public class Platform : MonoBehaviour
 {
-    // Use this for initialization
-    void Start()
+    public static bool activated = false;
+
+    private SpriteRenderer spriteRenderer;
+    public ParticleSystem chalkParticles;
+
+    private Transform animate;
+    [SerializeField]
+    private Sprite sprite;
+
+    public virtual void Awake()
     {
+        //spriteRenderer = GetComponent<SpriteRenderer>();
+        chalkParticles = GetComponent<ParticleSystem>();
+
+        // Initialize and position animation
+        animate = Instantiate(GameObject.Find("Player").transform.GetChild(0)).transform;
+        animate.parent = transform;
+        animate.SetPositionAndRotation(transform.position, transform.rotation);
+        animate.localScale = Vector3.one;
+
+        // Set new sprite and disable old sprite
+        spriteRenderer = animate.GetChild(0).GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = sprite ? sprite : GlobalVariables.blank;
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public SpriteRenderer SpriteRenderer
     {
+        get { return spriteRenderer; }
+        set { spriteRenderer = value; }
+    }
 
+    public void DarkenSprite()
+    {
+        spriteRenderer.color = new Color(0.3f, 0.3f, 0.3f);
+    }
+
+    public virtual void ResetSprite()
+    {
+        spriteRenderer.color = Color.white;
     }
 
     public virtual void Activate()

@@ -13,7 +13,7 @@ public class PlatformGenerator : MonoBehaviour
 
     /* all platforms are stored in queue */
     private Queue<GameObject> platformQueue = new Queue<GameObject>();
-    GameObject bottomPlatform;
+    public GameObject bottomPlatform;
 
     [SerializeField]
     private Vector3 spawnPosition;
@@ -56,6 +56,7 @@ public class PlatformGenerator : MonoBehaviour
             
             /* update letter value */
             Platform platform = newPlatform.GetComponent<Platform>();
+
             LetterClass letterObject = GetNextLetter();
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             if (letterPlatform)
@@ -86,14 +87,20 @@ public class PlatformGenerator : MonoBehaviour
 
             /* update letter value */
             Platform platform = bottomPlatform.GetComponent<Platform>();
-            LetterClass letterObject = GetNextLetter();
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
-            if (letterPlatform)
-            {
-                letterPlatform.SpriteRenderer.sprite = letterObject.image;
-                letterPlatform.SetLetter(letterObject);
-                if (GlobalVariables.updateWordChangeHeight)
-                {
+            
+            if (letterPlatform) {;
+                if (Random.Range(1, 101) > 10) {
+                    LetterClass letterObject = GetNextLetter();
+                    letterPlatform.SpriteRenderer.sprite = letterObject.image;
+                    letterPlatform.SetLetter(letterObject);
+                } else {
+                    Powerup powerupObject = GetNextPowerup();
+                    letterPlatform.SpriteRenderer.sprite = powerupObject.image;
+                    letterPlatform.SetPowerup(powerupObject);
+                }
+                
+                if (GlobalVariables.updateWordChangeHeight) {
                     GlobalVariables.yPosChange = letterPlatform.transform.position.y-5f;
                     GlobalVariables.updateWordChangeHeight = false;
                 }
@@ -113,10 +120,14 @@ public class PlatformGenerator : MonoBehaviour
         return letterSpawner.GetNextLetter();
     }
 
+    public Powerup GetNextPowerup()
+    {
+        return letterSpawner.GetNextPowerup();
+    }
+
     public void UpdateDifficulty(Difficulty difficulty)
     {
         letterSpawner.blankFrequency = difficulty.GetBlankFreq();
-        spawnPositionHeightScale = difficulty.GetHeightScale();
         minHeight = difficulty.GetMinSpawnHeight();
         maxHeight = difficulty.GetMaxSpawnHeight();
     }

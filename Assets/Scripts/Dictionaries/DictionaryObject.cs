@@ -4,11 +4,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Dictionaries")]
 public class DictionaryObject : ScriptableObject
 {
-    [SerializeField] private TextAsset fullDictionary;
-    [SerializeField] private TextAsset commonDictionary;
+    [SerializeField] private TextAsset wordList;
 
     private List<string> fullList;
-    private List<string> commonList;
+
+    //List with each word sorted in alphabetical order - for matching anagrams
+    private List<string> fullListWithSortedChars;
+    [SerializeField] private bool isWordCheck = false;
+    private Dictionary<string,List<string>> Anagrams; 
 
     private void OnEnable()
     {
@@ -17,20 +20,42 @@ public class DictionaryObject : ScriptableObject
 
     public void GenerateDictionaries()
     {
-        string allWords = fullDictionary.text;
+        string allWords = wordList.text;
         fullList = new List<string>();
+        fullListWithSortedChars = new List<string>();
+        Anagrams = new Dictionary<string, List<string>>();
 
-        foreach (string word in allWords.Split("\n"[0]))
+        if (isWordCheck)
         {
-            fullList.Add(word.Trim());
+            foreach (string word in allWords.Split("\n"[0]))
+            {
+                string anagram = GetWordWithSortedChars(word.Trim());
+                fullList.Add(word.Trim());
+                if(Anagrams.ContainsKey(anagram)){
+                    
+                    Anagrams[anagram].Add(word.Trim());
+                }
+                else{
+                    Anagrams.Add(anagram,new List<string>{word.Trim()});
+                }
+                fullListWithSortedChars.Add(GetWordWithSortedChars(word.Trim()));
+            }
         }
-        
-        string commonWords = commonDictionary.text;
-        commonList = new List<string>();
-
-        foreach (string word in commonWords.Split("\n"[0]))
+        else
         {
-            commonList.Add(word.Trim());
+            foreach (string word in allWords.Split("\n"[0]))
+            {
+                string anagram = GetWordWithSortedChars(word.Trim());
+                fullList.Add(word.Trim());
+                if(Anagrams.ContainsKey(anagram)){
+                    
+                     Anagrams[anagram].Add(word.Trim());
+                }
+                else{
+                    Anagrams.Add(anagram,new List<string>{word.Trim()});
+                }
+                fullListWithSortedChars.Add(GetWordWithSortedChars(word.Trim()));
+            }
         }
     }
 
@@ -39,23 +64,34 @@ public class DictionaryObject : ScriptableObject
         return fullList;
     }
 
-    public List<string> GetCommonDictionary()
-    {
-        return commonList;
-    }
-
     public bool VerifyWord(string word)
     {
         return fullList.Contains(word.ToUpper());
     }
-
-    public string GetRandomFullWord()
+    
+    public string GetRandomWord()
     {
+
         return fullList[Random.Range(0, fullList.Count - 1)];
     }
 
-    public string GetRandomCommonWord()
+    public bool VerifyWordAnagram(string word)
     {
-        return commonList[Random.Range(0, commonList.Count - 1)];
+        string sortedWord = GetWordWithSortedChars(word.ToUpper());
+        return fullListWithSortedChars.Contains(sortedWord);
+    }
+
+    public string GetWordWithSortedChars(string input)
+    {
+        char[] characters = input.ToCharArray();
+        System.Array.Sort(characters);
+        return new string(characters);
+    }
+    public string getAnagram(string input){
+        char[] characters = input.ToCharArray();
+        System.Array.Sort(characters);
+        string anagram = new string(characters);
+        List<string> anagramWords = Anagrams.GetValueOrDefault(anagram, new List<string>{""});
+        return anagramWords[0];
     }
 }

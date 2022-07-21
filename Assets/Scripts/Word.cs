@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using TMPro;
 
 public class Word : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class Word : MonoBehaviour
     [SerializeField] private WordEvaluator evaluator;
 
     [SerializeField] private Sprite defaultSprite;
+    [SerializeField] LetterObjectArray letterArray;
 
     [SerializeField] public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
@@ -16,12 +19,14 @@ public class Word : MonoBehaviour
 
     public List<LetterClass> letters = new List<LetterClass>();
 
+    public List<Sprite> wallSprites = new List<Sprite>();
+
     public int currentLetterBox = 0;
 
     public GameObject timer;
 
     private Timer timerClass;
-    
+
     public string word = "";
 
     public GameObject scoreManager;
@@ -41,6 +46,15 @@ public class Word : MonoBehaviour
     public int totalWordLength;
     public int totalValidWordLength;
 
+    public TMP_Text addScoreAmountLeft;
+    public TMP_Text addScoreAmountRight;
+    private TMP_Text addScoreAmount;
+
+    private int multiplier = 1;
+
+    public SoundEffectSO wordSubmitSound;
+    public SoundEffectSO wordClearSound;
+
     private void Awake()
     {
         timerClass = timer.GetComponent<Timer>();
@@ -53,10 +67,10 @@ public class Word : MonoBehaviour
         totalWordLength = 0;
         totalValidWordLength = 0;
     }
-    
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) submitWord();
+        if (Input.GetKeyDown(KeyCode.Return)) submitWord("");
     }
 
     public void SetSidebars(List<GameObject> walls)
@@ -64,17 +78,19 @@ public class Word : MonoBehaviour
         leftSidebar = walls[0].GetComponent<SpriteRenderer>();
         rightSidebar = walls[1].GetComponent<SpriteRenderer>();
 
-        leftSidebar.color = Color.gray;
-        rightSidebar.color = Color.gray;
+        leftSidebar.sprite = wallSprites[0];
+        rightSidebar.sprite = wallSprites[0];
     }
 
     public bool addLetter(LetterClass newLetter)
     {
         arrows.SetActive(false);
 
+
         if (newLetter.Letter == '_') return false;
+        if (newLetter.Letter == '?' && word.Contains('?')) return false;
         if (letters.Count >= 8) return false;
-        
+
         letters.Add(newLetter);
         word += newLetter.Letter;
         sprites[currentLetterBox].sprite = newLetter.image;
@@ -83,7 +99,7 @@ public class Word : MonoBehaviour
         // Update Sidebars
         UpdateSidebars();
 
-            return true;
+        return true;
     }
 
     public void PopLetter() {
@@ -102,25 +118,42 @@ public class Word : MonoBehaviour
     }
 
     public void UpdateSidebars() {
-        bool valid = evaluator.IsValidWord(word);
+        int wildcard = word.IndexOf('?');
+        string tempWord = word;
+        while (wildcard != -1) {
+            bool wc = false;
+            char c = 'A';
+            StringBuilder sb = new StringBuilder(word);
+            while (c <= 'Z' && !wc) {
+                sb[wildcard] = c;
+                if (evaluator.IsValidWord(sb.ToString())) {
+                    wc = true;
+                } else {
+                    c++;
+                }
+            }
+            tempWord = sb.ToString();
+            wildcard = tempWord.IndexOf('?');
+        }
+        bool valid = evaluator.IsValidWord(tempWord);
             if (valid) {
-                leftSidebar.color = Color.green;
-                rightSidebar.color = Color.green;
+                leftSidebar.sprite = wallSprites[1];
+                rightSidebar.sprite = wallSprites[1];
 
                 if (!hasSubmitOnce)
                 {
                     arrows.SetActive(true);
-                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.green);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(new Color(189f/255f, 223f/255f, 137f/255f));
                 }
             }
             else {
-                leftSidebar.color = Color.red;
-                rightSidebar.color = Color.red;
+                leftSidebar.sprite = wallSprites[2];
+                rightSidebar.sprite = wallSprites[2];
 
                 if (!hasClearedOnce && word.Length > 2)
                 {
                     arrows.SetActive(true);
-                    arrows.GetComponent<ArrowController>().RecolorArrows(Color.red);
+                    arrows.GetComponent<ArrowController>().RecolorArrows(new Color(232f/255f, 112f/255f, 96f/255f));
                 }
             }
     }
@@ -135,19 +168,19 @@ public class Word : MonoBehaviour
 
         Vector3 wallScale = leftWall.transform.localScale;
 
-        while(leftWall.transform.localScale.y < 3 * wallScale.y) {
-            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
-            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y + bounceRate * Time.deltaTime, wallScale.z);
+        while(leftWall.transform.localScale.x < 2.25f * wallScale.x) {
+            leftWall.transform.localScale = new Vector3(leftWall.transform.localScale.x + bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
+            rightWall.transform.localScale = new Vector3(rightWall.transform.localScale.x + bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
             yield return null;
         }
 
-        while(leftWall.transform.localScale.y > wallScale.y) {
-            leftWall.transform.localScale = new Vector3(wallScale.x, leftWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
-            rightWall.transform.localScale = new Vector3(wallScale.x, rightWall.transform.localScale.y - bounceRate * Time.deltaTime, wallScale.z);
+        while(leftWall.transform.localScale.x > wallScale.x) {
+            leftWall.transform.localScale = new Vector3(leftWall.transform.localScale.x - bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
+            rightWall.transform.localScale = new Vector3(rightWall.transform.localScale.x - bounceRate * Time.deltaTime, wallScale.y , wallScale.z);
             yield return null;
         }
 
-        if (leftWall.transform.localScale.y < wallScale.y)
+        if (leftWall.transform.localScale.x < wallScale.x)
         {
             leftWall.transform.localScale = wallScale;
             rightWall.transform.localScale = wallScale;
@@ -156,21 +189,62 @@ public class Word : MonoBehaviour
         isCoroutineRunning = false;
     }
 
-    public int submitWord() {
+    public int submitWord(string wallSide) {
         // Check validity and get word score
         // If valid, clear list
-
+        // if(Anagram.isActivated()){
+        //     Anagram.reset();
+        //     Shop_Purchase.deactivatePowerUpUI("Anagram");
+        //     Debug.Log("Anagram reset");
+        // }
         totalSubmissions++;
         totalWordLength += word.Length;
 
         arrows.SetActive(false);
 
-        int score = evaluator.SubmitWord(word);
+        int wildcard = word.IndexOf('?');
+        while (wildcard != -1) {
+            char bestChar = 'A';
+            int highScore = 0;
+            for (char c = 'A'; c <= 'Z'; c++) {
+                StringBuilder tempSB = new StringBuilder(word);
+                tempSB[wildcard] = c;
+                int tempScore = evaluator.SubmitWord(tempSB.ToString());
+                if (tempScore > highScore) {
+                    bestChar = c;
+                    highScore = tempScore;
+                }
+            }
+            StringBuilder sb = new StringBuilder(word);
+            sb[wildcard] = bestChar;
+            word = sb.ToString();
+            wildcard = word.IndexOf('?');
+        }
+
+        int score = evaluator.SubmitWord(word) * multiplier;
+        // delayed use of score multiplier power up, only deduct when the word is actually submitted
+        if (multiplier > 1 && score > 0)
+        {
+            CurrencyUtils.useShopItem("3");
+            CurrencyUtils.displayQuantityDynamic("3","Text_ScoreMultiplier_Qty","x: ");
+            setMultiplier(1);
+            Shop_Purchase.deactivatePowerUpUI("ScoreMultiplier");
+        }
+
+        if(Anagram.isActivated() && score > 0){
+            Anagram.reset();
+            CurrencyUtils.useShopItem("4");
+            Shop_Purchase.deactivatePowerUpUI("Anagram");
+            Debug.Log("Anagram reset");
+            CurrencyUtils.displayQuantityDynamic("4","Text_Anagram_Qty","x: ");
+        }
 
         scoreManagerScript.AddScore(score);
-
         if (score > 0)
         {
+            wordSubmitSound.pitchRange = new Vector2(0.8f + 1/GetWordLength(), 0.8f + 1/GetWordLength());
+            wordSubmitSound.Play(null, 0.1f);
+
             ScoreUtils.addWordToCollection(word, score);
             hasSubmitOnce = true;
 
@@ -178,9 +252,13 @@ public class Word : MonoBehaviour
             totalValidWordLength += word.Length;
         }
 
-        else if (word.Length > 3)
+        else
         {
-            hasClearedOnce = true;
+            wordClearSound.Play(null, 0.15f);
+            if (word.Length > 3)
+            {
+                hasClearedOnce = true;
+            }
         }
 
 #if true
@@ -211,17 +289,72 @@ public class Word : MonoBehaviour
         float timeGained = Mathf.Clamp(score / 50, 0, timerClass.GetMaxTime() - timerClass.GetTime());
         timerClass.AddTime(timeGained);
         Debug.Log("Time gained: " + timeGained);
+        Debug.Log("Word score: " + score);
 
-        leftSidebar.color = Color.gray;
-        rightSidebar.color = Color.gray;
-
-        StartCoroutine(sidebarBounce(15f));
+        leftSidebar.sprite = wallSprites[0];
+        rightSidebar.sprite = wallSprites[0];
+        if(score != 0){
+            if(wallSide == "left"){
+                addScoreAmount = addScoreAmountLeft;
+            }
+            else{
+                addScoreAmount = addScoreAmountRight;
+            }
+            addScoreAmount.text = "+" + score.ToString();
+            addScoreAmount.alpha = 1;
+            StartCoroutine(Fade());
+        }
+        StartCoroutine(sidebarBounce(7f));
 
         return score;
+    }
+    IEnumerator Fade()
+    {
+        while(addScoreAmount.alpha >= 0f )
+        {
+            addScoreAmount.alpha -= 0.1f;
+            yield return new WaitForSeconds(.1f);
+        }
     }
 
     public int GetWordLength()
     {
         return word.Length;
+    }
+
+    public LetterClass getLetter(int index)
+    {
+        return letters[index];
+    }
+
+    public void setMultiplier(int multi)
+    {
+        multiplier = multi;
+    }
+    
+    public void setWord(string newWord){
+        word = newWord;
+    }
+    public string getWord(){
+        return word;
+    }
+    public void changeWord(string newWord){
+        word = newWord;
+        string newWordLower = newWord.ToLower();
+        letters.Clear();
+        currentLetterBox = 0;
+        foreach(char c in newWordLower){
+            Debug.Log("char of anagram is " + c);
+            int index = c - 'a' + 1;
+            Debug.Log(index);
+            LetterClass newLetter = letterArray.GetLetter(c - 'a' + 1);
+            sprites[currentLetterBox].sprite = newLetter.image;
+            currentLetterBox++;
+        }
+    }
+
+    public int getMultiplier()
+    {
+        return multiplier;
     }
 }

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b97197d-8cf1-414d-8eeb-5cb6e233d624" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WordGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Word.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Word.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +26,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnalyticsManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Letter Spawning/ExtraBlanks.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -41,22 +45,25 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/YoungTemp/PlatformGeneratorWeek4.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/YoungTemp/PlatformGeneratorTutorial.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Yound_temp/PlatformGenerator0611.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LetterClass.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Platform/NewLetterPlatform.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Spawner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/StreamSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/LetterSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/Spawner.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/LetterSpawning.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Dictionaries/GenerateDictionaries.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/SuggestedWord.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Dictionaries/GenerateDictionaries.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Dictionaries/DictionaryObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/Difficulty.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Difficulty/DifficultyManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/StreamSpawning.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Letter Spawning/ExtraBlanks.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/GlobalVariables.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Platform/Platform.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlatformGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Word.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2ARttD5q2g3EdWrb8HwPR6c410g" />
@@ -65,6 +72,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -74,7 +83,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -110,6 +119,9 @@
       <workItem from="1655493825609" duration="409000" />
       <workItem from="1656026367952" duration="629000" />
       <workItem from="1656363730675" duration="1577000" />
+      <workItem from="1656967501990" duration="12091000" />
+      <workItem from="1657594802482" duration="2056000" />
+      <workItem from="1658353519865" duration="750000" />
     </task>
     <servers />
   </component>
