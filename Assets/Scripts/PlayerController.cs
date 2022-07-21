@@ -310,8 +310,12 @@ public class PlayerController : MonoBehaviour
                 if (resurrect)
                 {
                     //Debug.LogFormat("YOU DIED BUT HAD {0} LIVES REMAINING", lives--);
+
                     resurrect = false;
                     Shop_Purchase.deactivatePowerUpUI("ExtraLife");
+
+                    CurrencyUtils.useShopItem("2");
+                    CurrencyUtils.displayQuantityDynamic("2", "Text_ExtraLife_Qty", "x: ");
 
                     timer.StopTimer();
                     timer.timeLeft = timer.GetMaxTime();
@@ -395,7 +399,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Player clicked on 2");
                 if (!resurrect)
                 {
-                    if (CurrencyUtils.useShopItem("2"))
+                    if (CurrencyUtils.getShopItemQuantity("2"))
                     {
                         Debug.Log("player uses item number 2");
                         Shop_Purchase.activatePowerUpUI("ExtraLife");
