@@ -32,6 +32,8 @@ public class PlatformGenerator : MonoBehaviour
     public float minHeight = 1.0f;
     public float maxHeight = 1.6f;
 
+    private int powerupFreq = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,14 +92,16 @@ public class PlatformGenerator : MonoBehaviour
             NewLetterPlatform letterPlatform = platform as NewLetterPlatform;
             
             if (letterPlatform) {
-                if (Random.Range(1, 101) > 10) {
+                if (Random.Range(1, 101) > powerupFreq) {
                     LetterClass letterObject = GetNextLetter();
                     letterPlatform.SpriteRenderer.sprite = letterObject.image;
                     letterPlatform.SetLetter(letterObject);
+                    powerupFreq++;
                 } else {
                     Powerup powerupObject = GetNextPowerup();
                     letterPlatform.SpriteRenderer.sprite = powerupObject.image;
                     letterPlatform.SetPowerup(powerupObject);
+                    powerupFreq = 2;
                 }
                 
                 if (GlobalVariables.updateWordChangeHeight) {
