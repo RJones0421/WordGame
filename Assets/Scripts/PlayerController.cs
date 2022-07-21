@@ -49,8 +49,10 @@ public class PlayerController : MonoBehaviour
     private float playerHeight;
     private Vector2 screenRes;
 
-    private Color greenChalk = new Color(189, 223, 137, 1F);
-    private Color redChalk = new Color(232, 112, 96, 1F);
+    // private Color greenChalk = new Color(189, 223, 137, 1F);
+    // private Color redChalk = new Color(232, 112, 96, 1F);
+    private Color greenChalk = new Color(0, 1, 0, 0.7F);
+    private Color redChalk = new Color(1, 0, 0, 0.75F);
 
     private bool bounceBackToCenter;
     private Vector3 bounceBackTargetPos;
