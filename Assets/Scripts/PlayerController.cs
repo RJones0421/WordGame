@@ -460,6 +460,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            /*
             // pause time
             if (Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
             {
@@ -487,6 +488,7 @@ public class PlayerController : MonoBehaviour
                     SuffixPU_score_version.Activate_function();
                 }
             }
+            */
 
             // toggle half gravity for testing
             if (Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Keypad7))

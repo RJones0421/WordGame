@@ -45,7 +45,7 @@ public class Shop_Purchase : MonoBehaviour
     }
 
     public static void activatePowerUpUI(String powerupName) {
-        Color color = new Color(0, 128, 0);
+        Color color = new Color(255, 223, 0);
         activatePowerUpUIWithColor(powerupName,color);
 
         if (powerupName == "ScoreMultiplier")
